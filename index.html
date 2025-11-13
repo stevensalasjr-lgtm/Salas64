@@ -69,6 +69,40 @@
       font-size: 0.85rem;
       color: #9ca3af;
     }
+
+    /* Search bar styles */
+    .search-bar {
+      margin-bottom: 10px;
+      display: flex;
+      gap: 8px;
+    }
+    .search-bar input {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 6px 10px;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-bar input::placeholder {
+      color: #6b7280;
+    }
+    .search-bar button {
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 6px 12px;
+      background: #1d4ed8;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .search-bar button:hover {
+      background: #2563eb;
+    }
+
     .rankings-header {
       display: grid;
       grid-template-columns: 50px 1fr 80px 70px;
@@ -88,7 +122,7 @@
       border-radius: 999px;
       font-size: 0.92rem;
       align-items: center;
-      transition: background 0.15s ease, transform 0.12s ease;
+      transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
     }
     .ranking-row:nth-child(odd) {
       background: rgba(15, 23, 42, 0.75);
@@ -99,6 +133,9 @@
     .ranking-row:hover {
       background: rgba(31, 41, 55, 0.98);
       transform: translateY(-1px);
+    }
+    .ranking-row.highlight {
+      box-shadow: 0 0 0 2px #facc15;
     }
     .rank-num {
       font-weight: 600;
@@ -194,6 +231,16 @@
       <section class="card" aria-label="Salas 64 Rankings">
         <h2>Salas 64 Rankings</h2>
         <p class="subtitle">Custom rankings based on efficiency, injuries, and March potential.</p>
+
+        <!-- Search bar for teams -->
+        <div class="search-bar">
+          <input
+            id="teamSearchInput"
+            type="text"
+            placeholder="Search team (e.g. Illinois, Kansas State)"
+          />
+          <button type="button" onclick="searchTeam()">Search</button>
+        </div>
 
         <div class="rankings-header">
           <span>#</span>
@@ -707,6 +754,8 @@
       salasRankings.forEach((item) => {
         const row = document.createElement("div");
         row.className = "ranking-row";
+        // store team name in lowercase for search
+        row.dataset.team = item.team.toLowerCase();
 
         const rankCell = document.createElement("div");
         rankCell.className = "rank-num";
@@ -764,12 +813,40 @@
       });
     }
 
+    // Search function: finds first team whose name includes the typed text,
+    // scrolls to it, and highlights the row.
+    function searchTeam() {
+      const input = document.getElementById("teamSearchInput");
+      if (!input) return;
+      const query = input.value.trim().toLowerCase();
+      if (!query) return;
+
+      const rows = Array.from(document.querySelectorAll(".ranking-row"));
+      rows.forEach(r => r.classList.remove("highlight"));
+
+      const match = rows.find(r => (r.dataset.team || "").includes(query));
+      if (match) {
+        match.classList.add("highlight");
+        match.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
     function initPage() {
       document.getElementById("asOfText").textContent = rankingsAsOf;
       document.getElementById("gamesSubtitle").textContent = gamesDayLabel;
       document.getElementById("year").textContent = new Date().getFullYear();
       renderRankings();
       renderGames();
+
+      // Allow pressing Enter in the search box to trigger search
+      const searchInput = document.getElementById("teamSearchInput");
+      if (searchInput) {
+        searchInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            searchTeam();
+          }
+        });
+      }
     }
 
     initPage();
