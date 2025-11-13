@@ -1,1 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>How the Salas 64 Rankings Work</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      color: #e5e7eb;
+      background: #020617;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
+      color: #e5e7eb;
+    }
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid #1f2933;
+      padding-bottom: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    header .subtitle {
+      margin: 6px 0 0;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+    h3 {
+      margin-top: 16px;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+    ul {
+      margin-top: 4px;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      font-size: 0.95rem;
+    }
+    li {
+      margin-bottom: 3px;
+    }
+    .section-label {
+      font-weight: 600;
+    }
+    footer {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>How the Salas 64 Rankings Work</h1>
+      <p class="subtitle">
+        A blended system combining résumé, efficiency, roster health, and March upside.
+        <br />
+        <a href="index.html">&larr; Back to rankings</a>
+      </p>
+    </header>
+
+    <section>
+      <h2>1. Results &amp; Résumé (35–45%)</h2>
+      <ul>
+        <li>Quality wins/losses by opponent strength (KenPom/EvanMiya tiers) and game site (home/away/neutral).</li>
+        <li>Margin with diminishing returns (garbage-time discount).</li>
+        <li>Schedule strength to date and balance of true road/neutral results.</li>
+        <li>Consistency: avoiding bad losses, week-over-week stability.</li>
+      </ul>
+
+      <h2>2. Team Quality &amp; Efficiency (30–40%)</h2>
+      <ul>
+        <li>KenPom: AdjO, AdjD, overall efficiency margin, tempo context.</li>
+        <li>EvanMiya: BPR/BPM-style team quality, lineup RAPM/“EVD”, on/off impact.</li>
+        <li>Four-factor profile (eFG%, TO%, ORB%, FTR) and shot profile (rim/3, transition).</li>
+        <li>Rebounding (both ends), turnover creation, free-throw rate and opponent FTA.</li>
+        <li>Pace-adjusted dominance: performance vs. top-50/top-100 efficiency teams.</li>
+      </ul>
+
+      <h2>3. Roster &amp; Availability (10–15%)</h2>
+      <ul>
+        <li>Current injuries/suspensions/returns (Covers injury report) with role-weighted impact (starters &gt; rotation &gt; depth).</li>
+        <li>Lineup continuity, guard play stability (PG/primary creator), rim protection and spacing.</li>
+        <li>Seniors/experience and usage balance (one-man reliance penalty).</li>
+      </ul>
+
+      <h2>4. Context &amp; March Outlook (5–10%)</h2>
+      <ul>
+        <li>Neutral-court readiness, close-game execution (late-game turnover/rebound/FT).</li>
+        <li>Coaching track record for adjustments, defensive floor, travel/altitude factors when relevant.</li>
+        <li>Trending form (last 2–4 games) with small decay toward older games.</li>
+      </ul>
+
+      <h2>5. Mid-Major Consideration (explicit check)</h2>
+      <ul>
+        <li>Automatic-bid likelihood, top-100 efficiency viability, veteran guard play, and upset tools (threes volume + rim defense).</li>
+        <li>Résumé protection: strong road/neutral results can lift them 3–8 spots vs. power peers with similar metrics.</li>
+      </ul>
+
+      <h2>6. Tie-Breakers (in order)</h2>
+      <ul>
+        <li>Head-to-head (if reasonably comparable contexts).</li>
+        <li>Better neutral/road résumé.</li>
+        <li>Higher defensive floor (lower AdjD).</li>
+        <li>Healthier current roster (key players active).</li>
+        <li>Stronger trend over the past week.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Salas 64 &copy; <span id="year"></span>.
+      <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+      </script>
+    </footer>
+  </div>
+</body>
+</html>
 
