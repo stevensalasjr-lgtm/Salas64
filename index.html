@@ -813,16 +813,19 @@
       });
     }
 
-    // Search function: finds first team whose name includes the typed text,
+    // Search function: called on input and on button click.
+    // Finds first team whose name includes the typed text,
     // scrolls to it, and highlights the row.
     function searchTeam() {
       const input = document.getElementById("teamSearchInput");
       if (!input) return;
       const query = input.value.trim().toLowerCase();
-      if (!query) return;
 
       const rows = Array.from(document.querySelectorAll(".ranking-row"));
+      // clear previous highlights
       rows.forEach(r => r.classList.remove("highlight"));
+
+      if (!query) return; // nothing typed: nothing highlighted
 
       const match = rows.find(r => (r.dataset.team || "").includes(query));
       if (match) {
@@ -838,9 +841,14 @@
       renderRankings();
       renderGames();
 
-      // Allow pressing Enter in the search box to trigger search
       const searchInput = document.getElementById("teamSearchInput");
       if (searchInput) {
+        // live search: runs on every keystroke, like Command+F
+        searchInput.addEventListener("input", function () {
+          searchTeam();
+        });
+
+        // still allow Enter to work if someone presses it
         searchInput.addEventListener("keydown", function (e) {
           if (e.key === "Enter") {
             searchTeam();
