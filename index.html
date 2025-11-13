@@ -60,14 +60,31 @@
       border: 1px solid rgba(55, 65, 81, 0.8);
       backdrop-filter: blur(10px);
     }
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
     .card h2 {
-      margin: 0 0 8px;
+      margin: 0;
       font-size: 1.2rem;
     }
     .card p.subtitle {
       margin: 0 0 12px;
       font-size: 0.85rem;
       color: #9ca3af;
+    }
+
+    .info-link {
+      font-size: 0.8rem;
+      color: #60a5fa;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .info-link:hover {
+      text-decoration: underline;
     }
 
     /* Search bar styles */
@@ -103,9 +120,10 @@
       background: #2563eb;
     }
 
+    /* 3-column layout now: #, Team, Record */
     .rankings-header {
       display: grid;
-      grid-template-columns: 50px 1fr 80px 70px;
+      grid-template-columns: 50px 1fr 90px;
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -117,7 +135,7 @@
     }
     .ranking-row {
       display: grid;
-      grid-template-columns: 50px 1fr 80px 70px;
+      grid-template-columns: 50px 1fr 90px;
       padding: 6px 8px;
       border-radius: 999px;
       font-size: 0.92rem;
@@ -152,20 +170,7 @@
       text-align: right;
       color: #e5e7eb;
     }
-    .movement {
-      font-variant-numeric: tabular-nums;
-      text-align: right;
-      font-size: 0.85rem;
-    }
-    .movement.up {
-      color: #4ade80;
-    }
-    .movement.down {
-      color: #f97373;
-    }
-    .movement.same {
-      color: #9ca3af;
-    }
+
     .games-list {
       display: flex;
       flex-direction: column;
@@ -229,7 +234,10 @@
 
     <div class="layout">
       <section class="card" aria-label="Salas 64 Rankings">
-        <h2>Salas 64 Rankings</h2>
+        <div class="card-header-row">
+          <h2>Salas 64 Rankings</h2>
+          <a href="how-it-works.html" class="info-link">How do the rankings work?</a>
+        </div>
         <p class="subtitle">Custom rankings based on efficiency, injuries, and March potential.</p>
 
         <!-- Search bar for teams -->
@@ -246,7 +254,6 @@
           <span>#</span>
           <span>Team</span>
           <span style="text-align:right">Record</span>
-          <span style="text-align:right">Move</span>
         </div>
         <div id="rankingsList"></div>
       </section>
@@ -271,450 +278,322 @@
       {
         "rank": 1,
         "team": "Illinois",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑3"
+        "record": "3–0"
       },
       {
         "rank": 2,
         "team": "UConn",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 3,
         "team": "Purdue",
-        "record": "2–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–0"
       },
       {
         "rank": 4,
         "team": "Arizona",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑2"
+        "record": "3–0"
       },
       {
         "rank": 5,
         "team": "Gonzaga",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑4"
+        "record": "3–0"
       },
       {
         "rank": 6,
         "team": "Duke",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑1"
+        "record": "3–0"
       },
       {
         "rank": 7,
         "team": "Iowa State",
-        "record": "3–0",
-        "movement": "down",
-        "movementText": "↓2"
+        "record": "3–0"
       },
       {
         "rank": 8,
         "team": "Michigan",
-        "record": "2–0",
-        "movement": "up",
-        "movementText": "↑2"
+        "record": "2–0"
       },
       {
         "rank": 9,
         "team": "Alabama",
-        "record": "2–0",
-        "movement": "up",
-        "movementText": "↑2"
+        "record": "2–0"
       },
       {
         "rank": 10,
         "team": "North Carolina",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑2"
+        "record": "3–0"
       },
       {
         "rank": 11,
         "team": "BYU",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑2"
+        "record": "3–0"
       },
       {
         "rank": 12,
         "team": "Houston",
-        "record": "3–0",
-        "movement": "down",
-        "movementText": "↓4"
+        "record": "3–0"
       },
       {
         "rank": 13,
         "team": "Louisville",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑4"
+        "record": "3–0"
       },
       {
         "rank": 14,
         "team": "Tennessee",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑1"
+        "record": "3–0"
       },
       {
         "rank": 15,
         "team": "Kentucky",
-        "record": "2–1",
-        "movement": "down",
-        "movementText": "↓14"
+        "record": "2–1"
       },
       {
         "rank": 16,
         "team": "Florida",
-        "record": "2–1",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–1"
       },
       {
         "rank": 17,
         "team": "Baylor",
-        "record": "2–0",
-        "movement": "up",
-        "movementText": "↑1"
+        "record": "2–0"
       },
       {
         "rank": 18,
         "team": "Texas Tech",
-        "record": "2–1",
-        "movement": "down",
-        "movementText": "↓4"
+        "record": "2–1"
       },
       {
         "rank": 19,
         "team": "Wisconsin",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 20,
         "team": "Indiana",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 21,
         "team": "Kansas",
-        "record": "2–1",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–1"
       },
       {
         "rank": 22,
         "team": "Auburn",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 23,
         "team": "UCLA",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 24,
         "team": "Michigan State",
-        "record": "2–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–0"
       },
       {
         "rank": 25,
         "team": "San Diego State",
-        "record": "2–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–0"
       },
       {
         "rank": 26,
         "team": "Clemson",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 27,
         "team": "NC State",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 28,
         "team": "Ole Miss",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 29,
         "team": "Missouri",
-        "record": "4–0",
-        "movement": "up",
-        "movementText": "↑1"
+        "record": "4–0"
       },
       {
         "rank": 30,
         "team": "Georgia",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 31,
         "team": "Vanderbilt",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 32,
         "team": "Utah State",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 33,
         "team": "Iowa",
-        "record": "2–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–0"
       },
       {
         "rank": 34,
         "team": "Northwestern",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 35,
         "team": "Ohio St",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑1"
+        "record": "3–0"
       },
       {
         "rank": 36,
         "team": "Creighton",
-        "record": "1–1",
-        "movement": "down",
-        "movementText": "↓1"
+        "record": "1–1"
       },
       {
         "rank": 37,
         "team": "LSU",
-        "record": "2–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–0"
       },
       {
         "rank": 38,
         "team": "Nebraska",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 39,
         "team": "Cincinnati",
-        "record": "3-0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 40,
         "team": "Saint Mary's",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 41,
         "team": "St. John's",
-        "record": "1–1",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "1–1"
       },
       {
         "rank": 42,
         "team": "USC",
-        "record": "2–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–0"
       },
       {
         "rank": 43,
         "team": "Mississippi State",
-        "record": "1–1",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "1–1"
       },
       {
         "rank": 44,
         "team": "Texas",
-        "record": "2–1",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–1"
       },
       {
         "rank": 45,
         "team": "Kansas State",
-        "record": "2–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–0"
       },
       {
         "rank": 46,
         "team": "Miami FL",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 47,
         "team": "Marquette",
-        "record": "3–1",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–1"
       },
       {
         "rank": 48,
         "team": "Villanova",
-        "record": "2–1",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–1"
       },
       {
         "rank": 49,
         "team": "Oregon",
-        "record": "3–0",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "3–0"
       },
       {
         "rank": 50,
         "team": "Colorado St",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑1"
+        "record": "3–0"
       },
       {
         "rank": 51,
         "team": "Washington",
-        "record": "2–1",
-        "movement": "down",
-        "movementText": "↓1"
+        "record": "2–1"
       },
       {
         "rank": 52,
         "team": "Texas A&M",
-        "record": "2–1",
-        "movement": "same",
-        "movementText": "→0"
+        "record": "2–1"
       },
       {
         "rank": 53,
         "team": "SMU",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑6"
+        "record": "3–0"
       },
       {
         "rank": 54,
         "team": "Virginia",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑7"
+        "record": "3–0"
       },
       {
         "rank": 55,
         "team": "Oklahoma",
-        "record": "2–1",
-        "movement": "up",
-        "movementText": "↑3"
+        "record": "2–1"
       },
       {
         "rank": 56,
         "team": "Syracuse",
-        "record": "2–0",
-        "movement": "up",
-        "movementText": "↑1"
+        "record": "2–0"
       },
       {
         "rank": 57,
         "team": "Maryland",
-        "record": "2–1",
-        "movement": "up",
-        "movementText": "↑3"
+        "record": "2–1"
       },
       {
         "rank": 58,
         "team": "VCU",
-        "record": "2–1",
-        "movement": "down",
-        "movementText": "↓4"
+        "record": "2–1"
       },
       {
         "rank": 59,
         "team": "Memphis",
-        "record": "1–1",
-        "movement": "down",
-        "movementText": "↓9"
+        "record": "1–1"
       },
       {
         "rank": 60,
         "team": "Oklahoma St",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑2"
+        "record": "3–0"
       },
       {
         "rank": 61,
         "team": "Pittsburgh",
-        "record": "3–0",
-        "movement": "up",
-        "movementText": "↑2"
+        "record": "3–0"
       },
       {
         "rank": 62,
         "team": "Dayton",
-        "record": "2-1",
-        "movement": "down",
-        "movementText": "↓7"
+        "record": "2–1"
       },
       {
         "rank": 63,
         "team": "Boise St",
-        "record": "2–1",
-        "movement": "down",
-        "movementText": "↓11"
+        "record": "2–1"
       },
       {
         "rank": 64,
         "team": "Providence",
-        "record": "2–1",
-        "movement": "same",
-        "movementText": "NR"
+        "record": "2–1"
       }
     ];
 
@@ -754,7 +633,6 @@
       salasRankings.forEach((item) => {
         const row = document.createElement("div");
         row.className = "ranking-row";
-        // store team name in lowercase for search
         row.dataset.team = item.team.toLowerCase();
 
         const rankCell = document.createElement("div");
@@ -769,14 +647,9 @@
         recordCell.className = "record";
         recordCell.textContent = item.record;
 
-        const moveCell = document.createElement("div");
-        moveCell.className = "movement " + (item.movement || "same");
-        moveCell.textContent = item.movementText || "→0";
-
         row.appendChild(rankCell);
         row.appendChild(teamCell);
         row.appendChild(recordCell);
-        row.appendChild(moveCell);
 
         container.appendChild(row);
       });
@@ -813,19 +686,15 @@
       });
     }
 
-    // Search function: called on input and on button click.
-    // Finds first team whose name includes the typed text,
-    // scrolls to it, and highlights the row.
     function searchTeam() {
       const input = document.getElementById("teamSearchInput");
       if (!input) return;
       const query = input.value.trim().toLowerCase();
 
       const rows = Array.from(document.querySelectorAll(".ranking-row"));
-      // clear previous highlights
       rows.forEach(r => r.classList.remove("highlight"));
 
-      if (!query) return; // nothing typed: nothing highlighted
+      if (!query) return;
 
       const match = rows.find(r => (r.dataset.team || "").includes(query));
       if (match) {
@@ -843,12 +712,9 @@
 
       const searchInput = document.getElementById("teamSearchInput");
       if (searchInput) {
-        // live search: runs on every keystroke, like Command+F
         searchInput.addEventListener("input", function () {
           searchTeam();
         });
-
-        // still allow Enter to work if someone presses it
         searchInput.addEventListener("keydown", function (e) {
           if (e.key === "Enter") {
             searchTeam();
