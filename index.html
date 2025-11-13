@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Salas 64 Rankings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      color: #0f172a;
+      background: #020617;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
+      color: #e5e7eb;
+    }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #1f2933;
+      padding-bottom: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    header .meta {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+      gap: 20px;
+    }
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 16px;
+      padding: 16px 18px 18px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      backdrop-filter: blur(10px);
+    }
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+    .card p.subtitle {
+      margin: 0 0 12px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    .rankings-header {
+      display: grid;
+      grid-template-columns: 50px 1fr 80px 70px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      padding: 6px 8px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.9);
+      margin-bottom: 4px;
+    }
+    .ranking-row {
+      display: grid;
+      grid-template-columns: 50px 1fr 80px 70px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      align-items: center;
+      transition: background 0.15s ease, transform 0.12s ease;
+    }
+    .ranking-row:nth-child(odd) {
+      background: rgba(15, 23, 42, 0.75);
+    }
+    .ranking-row:nth-child(even) {
+      background: rgba(17, 24, 39, 0.85);
+    }
+    .ranking-row:hover {
+      background: rgba(31, 41, 55, 0.98);
+      transform: translateY(-1px);
+    }
+    .rank-num {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .team-name {
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .record {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      color: #e5e7eb;
+    }
+    .movement {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      font-size: 0.85rem;
+    }
+    .movement.up {
+      color: #4ade80;
+    }
+    .movement.down {
+      color: #f97373;
+    }
+    .movement.same {
+      color: #9ca3af;
+    }
+    .games-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .game {
+      border-radius: 12px;
+      padding: 10px 11px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 64, 175, 0.7));
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+    .game-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .matchup {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .game-meta {
+      font-size: 0.8rem;
+      color: #cbd5f5;
+      text-align: right;
+    }
+    .game-body {
+      font-size: 0.83rem;
+      color: #e5e7eb;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      padding: 2px 7px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+    footer {
+      margin-top: 22px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1><strong>Salas 64</strong> — College Basketball Rankings</h1>
+      <div class="meta" id="asOfText"></div>
+    </header>
+
+    <div class="layout">
+      <section class="card" aria-label="Salas 64 Rankings">
+        <h2>Salas 64 Rankings</h2>
+        <p class="subtitle">Custom rankings based on efficiency, injuries, and March potential.</p>
+
+        <div class="rankings-header">
+          <span>#</span>
+          <span>Team</span>
+          <span style="text-align:right">Record</span>
+          <span style="text-align:right">Move</span>
+        </div>
+        <div id="rankingsList"></div>
+      </section>
+
+      <section class="card" aria-label="Top Games to Watch">
+        <h2>Top 5 Games to Watch</h2>
+        <p class="subtitle" id="gamesSubtitle"></p>
+
+        <div class="badge">Upcoming Slate</div>
+
+        <div class="games-list" id="gamesList"></div>
+      </section>
+    </div>
+
+    <footer>
+      Salas 64 &copy; <span id="year"></span>. Updated daily.
+    </footer>
+  </div>
+
+  <script>
+    const salasRankings = [
+  {
+    "rank": 1,
+    "team": "Illinois",
+    "record": "3–0",
+    "movement": "up",
+    "movementText": "↑3"
+  },
+  {
+    "rank": 2,
+    "team": "UConn",
+    "record": "3–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 3,
+    "team": "Purdue",
+    "record": "2–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 4,
+    "team": "Arizona",
+    "record": "3–0",
+    "movement": "up",
+    "movementText": "↑2"
+  },
+  {
+    "rank": 5,
+    "team": "Gonzaga",
+    "record": "3–0",
+    "movement": "up",
+    "movementText": "↑4"
+  },
+  {
+    "rank": 6,
+    "team": "Duke",
+    "record": "3–0",
+    "movement": "up",
+    "movementText": "↑1"
+  },
+  {
+    "rank": 7,
+    "team": "Iowa State",
+    "record": "3–0",
+    "movement": "down",
+    "movementText": "↓2"
+  },
+  {
+    "rank": 8,
+    "team": "Houston",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 9,
+    "team": "Michigan",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 10,
+    "team": "BYU",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 11,
+    "team": "Alabama",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 12,
+    "team": "Kentucky",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 13,
+    "team": "Florida",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 14,
+    "team": "Kansas",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 15,
+    "team": "North Carolina",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 16,
+    "team": "Michigan State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 17,
+    "team": "Tennessee",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 18,
+    "team": "Baylor",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 19,
+    "team": "Marquette",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 20,
+    "team": "Texas Tech",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 21,
+    "team": "Creighton",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 22,
+    "team": "Louisville",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 23,
+    "team": "UCLA",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 24,
+    "team": "Saint Mary's",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 25,
+    "team": "San Diego State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 26,
+    "team": "Auburn",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 27,
+    "team": "Texas",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 28,
+    "team": "Wisconsin",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 29,
+    "team": "Arkansas",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 30,
+    "team": "Ohio State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 31,
+    "team": "Colorado State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 32,
+    "team": "Villanova",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 33,
+    "team": "Miami (FL)",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 34,
+    "team": "St. John's",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 35,
+    "team": "Maryland",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 36,
+    "team": "Clemson",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 37,
+    "team": "Utah State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 38,
+    "team": "New Mexico",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 39,
+    "team": "Dayton",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 40,
+    "team": "Xavier",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 41,
+    "team": "TCU",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 42,
+    "team": "NC State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 43,
+    "team": "Providence",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 44,
+    "team": "Oklahoma",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 45,
+    "team": "Boise State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 46,
+    "team": "Iowa",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 47,
+    "team": "Indiana",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 48,
+    "team": "Mississippi State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 49,
+    "team": "Memphis",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 50,
+    "team": "UCF",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 51,
+    "team": "Virginia",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 52,
+    "team": "Texas A&M",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 53,
+    "team": "Kansas State",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 54,
+    "team": "Nevada",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 55,
+    "team": "Colorado",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 56,
+    "team": "Seton Hall",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 57,
+    "team": "Northwestern",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 58,
+    "team": "San Francisco",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 59,
+    "team": "Richmond",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 60,
+    "team": "VCU",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 61,
+    "team": "Drake",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 62,
+    "team": "Saint Louis",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 63,
+    "team": "Butler",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  },
+  {
+    "rank": 64,
+    "team": "Charleston",
+    "record": "0–0",
+    "movement": "same",
+    "movementText": "→0"
+  }
+];
+
+    const topGames = [
+  {
+    "matchup": "Purdue at Alabama",
+    "time": "Thu, Nov 13 • 7:00 PM ET",
+    "network": "ESPN2",
+    "line": "PUR -2.5",
+    "prediction": "Purdue 82–77",
+    "blurb": "Backcourt battle between Purdue’s disciplined guards and Alabama’s pace-and-space offense. Purdue’s size on the glass gives them a narrow edge late."
+  },
+  {
+    "matchup": "San José State at Michigan State",
+    "time": "Thu, Nov 13 • 6:30 PM ET",
+    "network": "BTN",
+    "line": "MSU -21.5",
+    "prediction": "Michigan State 85–62",
+    "blurb": "Tune-up spot for a ranked Michigan State squad that’s still figuring out its shooting. Defensive pressure and transition should overwhelm San José State."
+  },
+  {
+    "matchup": "California at Kansas State",
+    "time": "Thu, Nov 13 • 6:00 PM ET",
+    "network": "CBSSN",
+    "line": "KSU -5.5",
+    "prediction": "Kansas State 77–70",
+    "blurb": "Cal’s improved spacing gets a real test in the Octagon. K-State’s athletic guards and home-court energy make this a sneaky good watch."
+  },
+  {
+    "matchup": "Arizona vs UCLA (Intuit Dome)",
+    "time": "Fri, Nov 14 • 10:00 PM ET",
+    "network": "Peacock",
+    "line": "ARIZ -3.0",
+    "prediction": "Arizona 81–76",
+    "blurb": "Hall of Fame Series rivalry game in an NBA building. Arizona’s offensive versatility versus UCLA’s shot-making and defense — huge March vibes in November."
+  },
+  {
+    "matchup": "Houston vs Auburn (Birmingham)",
+    "time": "Sun, Nov 16 • 3:00 PM ET",
+    "network": "TBD",
+    "line": "HOU -4.0",
+    "prediction": "Houston 73–66",
+    "blurb": "Elite guard play and physical defenses on both sides. Houston’s half-court toughness and rebounding lean this toward the Cougars in a grinder."
+  }
+];
+
+    const rankingsAsOf = "As of Wed, Nov 12, 2025";
+    const gamesDayLabel = "Top 5 upcoming games (starting Thu, Nov 13, 2025)";
+
+    function renderRankings() {
+      const container = document.getElementById("rankingsList");
+      container.innerHTML = "";
+      salasRankings.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "ranking-row";
+
+        const rankCell = document.createElement("div");
+        rankCell.className = "rank-num";
+        rankCell.textContent = item.rank;
+
+        const teamCell = document.createElement("div");
+        teamCell.className = "team-name";
+        teamCell.textContent = item.team;
+
+        const recordCell = document.createElement("div");
+        recordCell.className = "record";
+        recordCell.textContent = item.record;
+
+        const moveCell = document.createElement("div");
+        moveCell.className = "movement " + (item.movement || "same");
+        moveCell.textContent = item.movementText || "→0";
+
+        row.appendChild(rankCell);
+        row.appendChild(teamCell);
+        row.appendChild(recordCell);
+        row.appendChild(moveCell);
+
+        container.appendChild(row);
+      });
+    }
+
+    function renderGames() {
+      const container = document.getElementById("gamesList");
+      container.innerHTML = "";
+      topGames.forEach((game, index) => {
+        const card = document.createElement("article");
+        card.className = "game";
+
+        const topline = document.createElement("div");
+        topline.className = "game-topline";
+
+        const matchup = document.createElement("div");
+        matchup.className = "matchup";
+        matchup.textContent = `#${index + 1} • ${game.matchup}`;
+
+        const meta = document.createElement("div");
+        meta.className = "game-meta";
+        meta.innerHTML = `${game.time}<br>${game.network}${game.line ? " • " + game.line : ""}`;
+
+        topline.appendChild(matchup);
+        topline.appendChild(meta);
+
+        const body = document.createElement("div");
+        body.className = "game-body";
+        body.innerHTML = `<strong>Prediction:</strong> ${game.prediction}<br>${game.blurb}`;
+
+        card.appendChild(topline);
+        card.appendChild(body);
+        container.appendChild(card);
+      });
+    }
+
+    function initPage() {
+      document.getElementById("asOfText").textContent = rankingsAsOf;
+      document.getElementById("gamesSubtitle").textContent = gamesDayLabel;
+      document.getElementById("year").textContent = new Date().getFullYear();
+      renderRankings();
+      renderGames();
+    }
+
+    initPage();
+  </script>
+</body>
+</html>
