@@ -64,13 +64,15 @@
     li {
       margin-bottom: 3px;
     }
-    .section-label {
-      font-weight: 600;
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.92rem;
     }
     footer {
       margin-top: 28px;
       font-size: 0.8rem;
       color: #6b7280;
+      text-align: center;
     }
   </style>
 </head>
@@ -79,67 +81,128 @@
     <header>
       <h1>How the Salas 64 Rankings Work</h1>
       <p class="subtitle">
-        A blended system combining résumé, efficiency, roster health, and March upside.
+        A results-driven model using opponent strength, site, margin, and mid-major adjustments.
         <br />
         <a href="index.html">&larr; Back to rankings</a>
       </p>
     </header>
 
     <section>
-      <h2>1. Results &amp; Résumé (35–45%)</h2>
+      <h2>Inputs we use</h2>
       <ul>
-        <li>Quality wins/losses by opponent strength (KenPom/EvanMiya tiers) and game site (home/away/neutral).</li>
-        <li>Margin with diminishing returns (garbage-time discount).</li>
-        <li>Schedule strength to date and balance of true road/neutral results.</li>
-        <li>Consistency: avoiding bad losses, week-over-week stability.</li>
+        <li>Final score and point margin</li>
+        <li>Site (home, away, neutral)</li>
+        <li>Opponent’s Salas rank at tip</li>
+        <li>Each team’s current record</li>
+        <li>Optional context you include (OT, back-to-back, etc.)</li>
       </ul>
 
-      <h2>2. Team Quality &amp; Efficiency (30–40%)</h2>
+      <h2>Weighting (100% total)</h2>
       <ul>
-        <li>KenPom: AdjO, AdjD, overall efficiency margin, tempo context.</li>
-        <li>EvanMiya: BPR/BPM-style team quality, lineup RAPM/“EVD”, on/off impact.</li>
-        <li>Four-factor profile (eFG%, TO%, ORB%, FTR) and shot profile (rim/3, transition).</li>
-        <li>Rebounding (both ends), turnover creation, free-throw rate and opponent FTA.</li>
-        <li>Pace-adjusted dominance: performance vs. top-50/top-100 efficiency teams.</li>
+        <li>Results &amp; Résumé Value — 55%</li>
+        <li>Consistency &amp; Form (last 2–4) — 20%</li>
+        <li>Schedule Strength to Date — 15%</li>
+        <li>March Readiness Proxies — 5%</li>
+        <li>Mid-Major Adjustment — 5%</li>
       </ul>
 
-      <h2>3. Roster &amp; Availability (10–15%)</h2>
-      <ul>
-        <li>Current injuries/suspensions/returns (Covers injury report) with role-weighted impact (starters &gt; rotation &gt; depth).</li>
-        <li>Lineup continuity, guard play stability (PG/primary creator), rim protection and spacing.</li>
-        <li>Seniors/experience and usage balance (one-man reliance penalty).</li>
+      <h2>Results &amp; Résumé Value (55%)</h2>
+
+      <h3>Opponent tier by Salas rank at tip (multiplier)</h3>
+      <ul class="mono">
+        <li>#1–5 = 1.40</li>
+        <li>#6–10 = 1.25</li>
+        <li>#11–25 = 1.10</li>
+        <li>#26–40 = 1.00</li>
+        <li>#41–64 = 0.85</li>
+        <li>Unranked (65+) = 0.70</li>
       </ul>
 
-      <h2>4. Context &amp; March Outlook (5–10%)</h2>
-      <ul>
-        <li>Neutral-court readiness, close-game execution (late-game turnover/rebound/FT).</li>
-        <li>Coaching track record for adjustments, defensive floor, travel/altitude factors when relevant.</li>
-        <li>Trending form (last 2–4 games) with small decay toward older games.</li>
+      <h3>Site multiplier</h3>
+      <ul class="mono">
+        <li>True road ×1.30</li>
+        <li>Neutral ×1.15</li>
+        <li>Home ×1.00</li>
       </ul>
 
-      <h2>5. Mid-Major Consideration (explicit check)</h2>
+      <h3>Margin with diminishing returns</h3>
       <ul>
-        <li>Automatic-bid likelihood, top-100 efficiency viability, veteran guard play, and upset tools (threes volume + rim defense).</li>
-        <li>Résumé protection: strong road/neutral results can lift them 3–8 spots vs. power peers with similar metrics.</li>
+        <li>Use <span class="mono">min(22, margin)</span> for value; blowouts past 22 are capped.</li>
+        <li>OT wins count as +2.</li>
+        <li>One-possession losses (≤3) to a higher-ranked team are softened.</li>
       </ul>
 
-      <h2>6. Tie-Breakers (in order)</h2>
+      <h3>Single-game Résumé Score</h3>
+      <p class="mono">
+        Score = OpponentTier × Site × MarginFactor
+      </p>
       <ul>
-        <li>Head-to-head (if reasonably comparable contexts).</li>
-        <li>Better neutral/road résumé.</li>
-        <li>Higher defensive floor (lower AdjD).</li>
-        <li>Healthier current roster (key players active).</li>
-        <li>Stronger trend over the past week.</li>
+        <li>MarginFactor is built from the capped margin and OT/close-game rules above.</li>
+      </ul>
+
+      <h3>Additional penalty</h3>
+      <ul>
+        <li>Home losses to lower-ranked teams receive a −25% penalty on that game.</li>
+      </ul>
+
+      <h3>Season Résumé Sum with light recency</h3>
+      <ul class="mono">
+        <li>Last 2 games ×1.20</li>
+        <li>Previous 3 ×1.00</li>
+        <li>Older ×0.90</li>
+      </ul>
+
+      <h2>Consistency &amp; Form (20%)</h2>
+      <ul>
+        <li><strong>Consistency (10%)</strong>: lower spread of normalized margins across games is better.</li>
+        <li><strong>Form (10%)</strong>: average normalized margin over last 3 games; road/neutral weighted slightly higher.</li>
+      </ul>
+
+      <h2>Schedule Strength to Date (15%)</h2>
+      <ul>
+        <li>Average opponent tier faced plus site mix bonus.</li>
+        <li>Road/neutral share ≥40%: +10% to this subscore.</li>
+        <li>Road/neutral share ≤20%: −10% to this subscore.</li>
+        <li>If no games vs top-25, this subscore is capped at 60% of max.</li>
+      </ul>
+
+      <h2>March Readiness Proxies (5%)</h2>
+      <ul>
+        <li>Close-game record (decided by ≤5 or OT), road/neutral emphasized.</li>
+        <li>Neutral-court log bonus.</li>
+        <li>If provided, positive second-half differential adds a small bump.</li>
+      </ul>
+
+      <h2>Mid-Major Adjustment (5%)</h2>
+      <ul>
+        <li>Mid-majors with multiple road/neutral wins vs #1–50 can gain about +3 to +8 rank places relative to similar power-conference profiles.</li>
+        <li>A true road top-40 win can offset one “bad” home slip more than it would for power teams.</li>
+      </ul>
+
+      <h2>Tie-Breakers (in order)</h2>
+      <ul>
+        <li>Head-to-head (in reasonably comparable contexts).</li>
+        <li>Better road/neutral résumé.</li>
+        <li>Higher total Résumé Value (section 1).</li>
+        <li>Better short-term form (last 3).</li>
+        <li>Fewer bad losses (home loss to #41+ or any loss to 65+).</li>
+      </ul>
+
+      <h2>What moves teams</h2>
+      <ul>
+        <li><strong>Big jumps:</strong> road/neutral wins vs higher-ranked opponents by multiple possessions; stacking two quality results in a week.</li>
+        <li><strong>Small climbs:</strong> clean home wins while peers stumble; balanced road/neutral mix.</li>
+        <li><strong>Drops:</strong> home losses to lower-ranked teams; non-competitive losses vs peers; repeated narrow escapes vs low opponents.</li>
       </ul>
     </section>
 
     <footer>
       Salas 64 &copy; <span id="year"></span>.
-      <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-      </script>
     </footer>
   </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-
