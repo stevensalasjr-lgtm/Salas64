@@ -89,11 +89,9 @@
 
     /* Search bar styles */
     .search-bar {
-      margin-bottom: 4px;
+      margin-bottom: 10px;
       display: flex;
       gap: 8px;
-      position: relative;
-      z-index: 20;
     }
     .search-bar input {
       flex: 1;
@@ -122,44 +120,7 @@
       background: #2563eb;
     }
 
-    /* Suggestions dropdown */
-    .search-suggestions {
-      margin-top: 4px;
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      max-height: 220px;
-      overflow-y: auto;
-      font-size: 0.85rem;
-      display: none;
-    }
-    .search-suggestions.visible {
-      display: block;
-    }
-    .suggestion-item {
-      padding: 6px 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-    }
-    .suggestion-item span.team {
-      flex: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .suggestion-item span.rank {
-      font-variant-numeric: tabular-nums;
-      color: #9ca3af;
-      font-size: 0.78rem;
-    }
-    .suggestion-item:hover {
-      background: rgba(31, 41, 55, 0.98);
-    }
-
-    /* 3-column layout now: #, Team, Record */
+    /* Rankings header & rows */
     .rankings-header {
       display: grid;
       grid-template-columns: 50px 1fr 90px;
@@ -170,7 +131,6 @@
       padding: 6px 8px;
       border-radius: 8px;
       background: rgba(15, 23, 42, 0.9);
-      margin-top: 6px;
       margin-bottom: 4px;
     }
     .ranking-row {
@@ -209,6 +169,11 @@
       font-variant-numeric: tabular-nums;
       text-align: right;
       color: #e5e7eb;
+    }
+
+    .sortable {
+      cursor: pointer;
+      user-select: none;
     }
 
     .games-list {
@@ -257,6 +222,11 @@
       color: #e5e7eb;
       margin-bottom: 6px;
     }
+
+    .about-card {
+      margin-top: 22px;
+    }
+
     footer {
       margin-top: 22px;
       font-size: 0.75rem;
@@ -278,7 +248,7 @@
           <h2>Salas 64 Rankings</h2>
           <a href="how-it-works.html" class="info-link">How do the rankings work?</a>
         </div>
-        <p class="subtitle">Custom rankings based on efficiency, injuries, and March potential.</p>
+        <p class="subtitle">Daily rankings of the top teams in the country to help you build a smarter March Madness bracket.</p>
 
         <!-- Search bar for teams -->
         <div class="search-bar">
@@ -286,17 +256,14 @@
             id="teamSearchInput"
             type="text"
             placeholder="Search team (e.g. Illinois, Kansas State)"
-            autocomplete="off"
           />
           <button type="button" onclick="searchTeam()">Search</button>
         </div>
-        <!-- Dropdown suggestions -->
-        <div id="searchSuggestions" class="search-suggestions"></div>
 
         <div class="rankings-header">
-          <span>#</span>
-          <span>Team</span>
-          <span style="text-align:right">Record</span>
+          <span id="sortRank" class="sortable">#</span>
+          <span id="sortTeam" class="sortable">Team</span>
+          <span id="sortRecord" class="sortable" style="text-align:right">Record</span>
         </div>
         <div id="rankingsList"></div>
       </section>
@@ -311,6 +278,17 @@
       </section>
     </div>
 
+    <!-- About section -->
+    <section class="card about-card" aria-label="About Salas 64">
+      <h2>About Salas 64</h2>
+      <p>
+        Salas 64 is created and run by Steven Salas, a 16-year-old from Pasadena, California.
+        The rankings are updated every day during the season to track the top teams in the country.
+        The goal is to give fans a clear, bracket-focused view of who’s rising, who’s slipping,
+        and which teams you should trust when you build your March Madness bracket.
+      </p>
+    </section>
+
     <footer>
       Salas 64 &copy; <span id="year"></span>. Updated daily.
     </footer>
@@ -318,326 +296,70 @@
 
   <script>
     const salasRankings = [
-      {
-        "rank": 1,
-        "team": "Purdue",
-        "record": "3–0"
-      },
-      {
-        "rank": 2,
-        "team": "Illinois",
-        "record": "4–0"
-      },
-      {
-        "rank": 3,
-        "team": "Uconn",
-        "record": "3–0"
-      },
-      {
-        "rank": 4,
-        "team": "Arizona",
-        "record": "4–0"
-      },
-      {
-        "rank": 5,
-        "team": "Gonzaga",
-        "record": "4–0"
-      },
-      {
-        "rank": 6,
-        "team": "Duke",
-        "record": "4–0"
-      },
-      {
-        "rank": 7,
-        "team": "Michigan",
-        "record": "3–0"
-      },
-      {
-        "rank": 8,
-        "team": "Iowa State",
-        "record": "3–0"
-      },
-      {
-        "rank": 9,
-        "team": "North Carolina",
-        "record": "4–0"
-      },
-      {
-        "rank": 10,
-        "team": "BYU",
-        "record": "3–0"
-      },
-      {
-        "rank": 11,
-        "team": "Houston",
-        "record": "3–0"
-      },
-      {
-        "rank": 12,
-        "team": "Louisville",
-        "record": "3–0"
-      },
-      {
-        "rank": 13,
-        "team": "Tennessee",
-        "record": "3–0"
-      },
-      {
-        "rank": 14,
-        "team": "Alabama",
-        "record": "2–1"
-      },
-      {
-        "rank": 15,
-        "team": "Kentucky",
-        "record": "3–1"
-      },
-      {
-        "rank": 16,
-        "team": "Florida",
-        "record": "2–1"
-      },
-      {
-        "rank": 17,
-        "team": "Baylor",
-        "record": "3–0"
-      },
-      {
-        "rank": 18,
-        "team": "Texas Tech",
-        "record": "3–1"
-      },
-      {
-        "rank": 19,
-        "team": "Wisconsin",
-        "record": "3–0"
-      },
-      {
-        "rank": 20,
-        "team": "Indiana",
-        "record": "3–0"
-      },
-      {
-        "rank": 21,
-        "team": "Kansas",
-        "record": "2–1"
-      },
-      {
-        "rank": 22,
-        "team": "Auburn",
-        "record": "3–0"
-      },
-      {
-        "rank": 23,
-        "team": "UCLA",
-        "record": "3–1"
-      },
-      {
-        "rank": 24,
-        "team": "Michigan State",
-        "record": "3–0"
-      },
-      {
-        "rank": 25,
-        "team": "San Diego State",
-        "record": "2–0"
-      },
-      {
-        "rank": 26,
-        "team": "Clemson",
-        "record": "3–0"
-      },
-      {
-        "rank": 27,
-        "team": "NC State",
-        "record": "3–0"
-      },
-      {
-        "rank": 28,
-        "team": "Ole Miss",
-        "record": "4–0"
-      },
-      {
-        "rank": 29,
-        "team": "Missouri",
-        "record": "4–0"
-      },
-      {
-        "rank": 30,
-        "team": "Georgia",
-        "record": "4–0"
-      },
-      {
-        "rank": 31,
-        "team": "Vanderbilt",
-        "record": "3–0"
-      },
-      {
-        "rank": 32,
-        "team": "Utah State",
-        "record": "3–0"
-      },
-      {
-        "rank": 33,
-        "team": "Iowa",
-        "record": "3–0"
-      },
-      {
-        "rank": 34,
-        "team": "Northwestern",
-        "record": "4–0"
-      },
-      {
-        "rank": 35,
-        "team": "Ohio State",
-        "record": "3–0"
-      },
-      {
-        "rank": 36,
-        "team": "Creighton",
-        "record": "2–1"
-      },
-      {
-        "rank": 37,
-        "team": "LSU",
-        "record": "3–0"
-      },
-      {
-        "rank": 38,
-        "team": "Nebraska",
-        "record": "3–0"
-      },
-      {
-        "rank": 39,
-        "team": "Cincinnati",
-        "record": "3–0"
-      },
-      {
-        "rank": 40,
-        "team": "Saint Mary's",
-        "record": "4–0"
-      },
-      {
-        "rank": 41,
-        "team": "St. John's",
-        "record": "1–1"
-      },
-      {
-        "rank": 42,
-        "team": "USC",
-        "record": "3–0"
-      },
-      {
-        "rank": 43,
-        "team": "Mississippi State",
-        "record": "1–1"
-      },
-      {
-        "rank": 44,
-        "team": "Texas",
-        "record": "2–1"
-      },
-      {
-        "rank": 45,
-        "team": "Kansas State",
-        "record": "3–0"
-      },
-      {
-        "rank": 46,
-        "team": "Miami FL",
-        "record": "3–0"
-      },
-      {
-        "rank": 47,
-        "team": "Marquette",
-        "record": "3–1"
-      },
-      {
-        "rank": 48,
-        "team": "Washington",
-        "record": "3–1"
-      },
-      {
-        "rank": 49,
-        "team": "Villanova",
-        "record": "2–1"
-      },
-      {
-        "rank": 50,
-        "team": "Oregon",
-        "record": "3–0"
-      },
-      {
-        "rank": 51,
-        "team": "Colorado State",
-        "record": "3-0"
-      },
-      {
-        "rank": 52,
-        "team": "Texas A&M",
-        "record": "2–2"
-      },
-      {
-        "rank": 53,
-        "team": "SMU",
-        "record": "3–0"
-      },
-      {
-        "rank": 54,
-        "team": "Virginia",
-        "record": "3–0"
-      },
-      {
-        "rank": 55,
-        "team": "Oklahoma",
-        "record": "2–1"
-      },
-      {
-        "rank": 56,
-        "team": "Syracuse",
-        "record": "2–0"
-      },
-      {
-        "rank": 57,
-        "team": "Maryland",
-        "record": "2–1"
-      },
-      {
-        "rank": 58,
-        "team": "VCU",
-        "record": "2–1"
-      },
-      {
-        "rank": 59,
-        "team": "Memphis",
-        "record": "1–1"
-      },
-      {
-        "rank": 60,
-        "team": "Oklahoma St",
-        "record": "3–0"
-      },
-      {
-        "rank": 61,
-        "team": "West Virginia",
-        "record": "4-0"
-      },
-      {
-        "rank": 62,
-        "team": "Dayton",
-        "record": "2–1"
-      },
-      {
-        "rank": 63,
-        "team": "Boise St",
-        "record": "2–1"
-      },
-      {
-        "rank": 64,
-        "team": "Colorado",
-        "record": "4-0"
-      }
+      { "rank": 1,  "team": "Purdue",          "record": "3–0" },
+      { "rank": 2,  "team": "Illinois",        "record": "4–0" },
+      { "rank": 3,  "team": "Uconn",           "record": "3–0" },
+      { "rank": 4,  "team": "Arizona",         "record": "4–0" },
+      { "rank": 5,  "team": "Gonzaga",         "record": "4–0" },
+      { "rank": 6,  "team": "Duke",            "record": "4–0" },
+      { "rank": 7,  "team": "Michigan",        "record": "3–0" },
+      { "rank": 8,  "team": "Iowa State",      "record": "3–0" },
+      { "rank": 9,  "team": "North Carolina",  "record": "4–0" },
+      { "rank": 10, "team": "BYU",             "record": "3–0" },
+      { "rank": 11, "team": "Houston",         "record": "3–0" },
+      { "rank": 12, "team": "Louisville",      "record": "3–0" },
+      { "rank": 13, "team": "Tennessee",       "record": "3–0" },
+      { "rank": 14, "team": "Alabama",         "record": "2–1" },
+      { "rank": 15, "team": "Kentucky",        "record": "3–1" },
+      { "rank": 16, "team": "Florida",         "record": "2–1" },
+      { "rank": 17, "team": "Baylor",          "record": "3–0" },
+      { "rank": 18, "team": "Texas Tech",      "record": "3–1" },
+      { "rank": 19, "team": "Wisconsin",       "record": "3–0" },
+      { "rank": 20, "team": "Indiana",         "record": "3–0" },
+      { "rank": 21, "team": "Kansas",          "record": "2–1" },
+      { "rank": 22, "team": "Auburn",          "record": "3–0" },
+      { "rank": 23, "team": "UCLA",            "record": "3–1" },
+      { "rank": 24, "team": "Michigan State",  "record": "3–0" },
+      { "rank": 25, "team": "San Diego State", "record": "2–0" },
+      { "rank": 26, "team": "Clemson",         "record": "3–0" },
+      { "rank": 27, "team": "NC State",        "record": "3–0" },
+      { "rank": 28, "team": "Ole Miss",        "record": "4–0" },
+      { "rank": 29, "team": "Missouri",        "record": "4–0" },
+      { "rank": 30, "team": "Georgia",         "record": "4–0" },
+      { "rank": 31, "team": "Vanderbilt",      "record": "3–0" },
+      { "rank": 32, "team": "Utah State",      "record": "3–0" },
+      { "rank": 33, "team": "Iowa",            "record": "3–0" },
+      { "rank": 34, "team": "Northwestern",    "record": "4–0" },
+      { "rank": 35, "team": "Ohio State",      "record": "3–0" },
+      { "rank": 36, "team": "Creighton",       "record": "2–1" },
+      { "rank": 37, "team": "LSU",             "record": "3–0" },
+      { "rank": 38, "team": "Nebraska",        "record": "3–0" },
+      { "rank": 39, "team": "Cincinnati",      "record": "3–0" },
+      { "rank": 40, "team": "Saint Mary's",    "record": "4–0" },
+      { "rank": 41, "team": "St. John's",      "record": "1–1" },
+      { "rank": 42, "team": "USC",             "record": "3–0" },
+      { "rank": 43, "team": "Mississippi State","record": "1–1" },
+      { "rank": 44, "team": "Texas",           "record": "2–1" },
+      { "rank": 45, "team": "Kansas State",    "record": "3–0" },
+      { "rank": 46, "team": "Miami FL",        "record": "3–0" },
+      { "rank": 47, "team": "Marquette",       "record": "3–1" },
+      { "rank": 48, "team": "Washington",      "record": "3–1" },
+      { "rank": 49, "team": "Villanova",       "record": "2–1" },
+      { "rank": 50, "team": "Oregon",          "record": "3–0" },
+      { "rank": 51, "team": "Colorado State",  "record": "3–0" },
+      { "rank": 52, "team": "Texas A&M",       "record": "2–2" },
+      { "rank": 53, "team": "SMU",             "record": "3–0" },
+      { "rank": 54, "team": "Virginia",        "record": "3–0" },
+      { "rank": 55, "team": "Oklahoma",        "record": "2–1" },
+      { "rank": 56, "team": "Syracuse",        "record": "2–0" },
+      { "rank": 57, "team": "Maryland",        "record": "2–1" },
+      { "rank": 58, "team": "VCU",             "record": "2–1" },
+      { "rank": 59, "team": "Memphis",         "record": "1–1" },
+      { "rank": 60, "team": "Oklahoma St",     "record": "3–0" },
+      { "rank": 61, "team": "West Virginia",   "record": "4–0" },
+      { "rank": 62, "team": "Dayton",          "record": "2–1" },
+      { "rank": 63, "team": "Boise St",        "record": "2–1" },
+      { "rank": 64, "team": "Colorado",        "record": "4–0" }
     ];
 
     const topGames = [
@@ -670,14 +392,75 @@
     const rankingsAsOf = "As of Fri, Nov 14, 2025";
     const gamesDayLabel = "Top 3 upcoming games (Sat, Nov 15, 2025)";
 
+    let currentSort = { column: 'rank', direction: 'asc' };
+
+    function parseRecord(record) {
+      if (!record) return { wins: 0, losses: 0 };
+      const clean = record.replace(/[–—]/g, '-').trim();
+      const m = clean.match(/^(\d+)\s*-\s*(\d+)/);
+      if (!m) return { wins: 0, losses: 0 };
+      return {
+        wins: parseInt(m[1], 10),
+        losses: parseInt(m[2], 10)
+      };
+    }
+
+    function getSortedRankings() {
+      const data = [...salasRankings];
+      data.sort((a, b) => {
+        if (currentSort.column === 'rank') {
+          const diff = a.rank - b.rank;
+          return currentSort.direction === 'asc' ? diff : -diff;
+        }
+
+        if (currentSort.column === 'team') {
+          const nameA = a.team.toLowerCase();
+          const nameB = b.team.toLowerCase();
+          if (nameA < nameB) return currentSort.direction === 'asc' ? -1 : 1;
+          if (nameA > nameB) return currentSort.direction === 'asc' ? 1 : -1;
+          return 0;
+        }
+
+        if (currentSort.column === 'record') {
+          const ra = parseRecord(a.record);
+          const rb = parseRecord(b.record);
+          const gamesA = ra.wins + ra.losses;
+          const gamesB = rb.wins + rb.losses;
+          const pctA = gamesA > 0 ? ra.wins / gamesA : 0;
+          const pctB = gamesB > 0 ? rb.wins / gamesB : 0;
+
+          if (pctA !== pctB) {
+            const diff = pctA - pctB;
+            return currentSort.direction === 'asc' ? diff : -diff;
+          }
+
+          // tie-breaker: more wins, then team name
+          if (ra.wins !== rb.wins) {
+            const diffWins = ra.wins - rb.wins;
+            return currentSort.direction === 'asc' ? diffWins : -diffWins;
+          }
+
+          const nameA = a.team.toLowerCase();
+          const nameB = b.team.toLowerCase();
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
+          return 0;
+        }
+
+        return 0;
+      });
+      return data;
+    }
+
     function renderRankings() {
       const container = document.getElementById("rankingsList");
       container.innerHTML = "";
-      salasRankings.forEach((item) => {
+      const data = getSortedRankings();
+
+      data.forEach((item) => {
         const row = document.createElement("div");
         row.className = "ranking-row";
         row.dataset.team = item.team.toLowerCase();
-        row.dataset.rank = item.rank;
 
         const rankCell = document.createElement("div");
         rankCell.className = "rank-num";
@@ -730,94 +513,36 @@
       });
     }
 
-    function clearHighlights() {
-      const rows = Array.from(document.querySelectorAll(".ranking-row"));
-      rows.forEach(r => r.classList.remove("highlight"));
-    }
-
-    function goToTeam(teamName) {
-      const rows = Array.from(document.querySelectorAll(".ranking-row"));
-      clearHighlights();
-      const target = rows.find(r => (r.dataset.team || "") === teamName.toLowerCase());
-      if (target) {
-        target.classList.add("highlight");
-        target.scrollIntoView({ behavior: "smooth", block: "center" });
-        const input = document.getElementById("teamSearchInput");
-        if (input) {
-          input.value = teamName;
-        }
-      }
-    }
-
-    function updateSuggestions(query) {
-      const box = document.getElementById("searchSuggestions");
-      box.innerHTML = "";
-
-      if (!query) {
-        box.classList.remove("visible");
-        return;
-      }
-
-      const q = query.toLowerCase();
-
-      // Teams whose names START with the typed text
-      const matches = salasRankings.filter(item =>
-        item.team.toLowerCase().startsWith(q)
-      );
-
-      if (matches.length === 0) {
-        box.classList.remove("visible");
-        return;
-      }
-
-      matches.slice(0, 12).forEach(item => {
-        const div = document.createElement("div");
-        div.className = "suggestion-item";
-
-        const teamSpan = document.createElement("span");
-        teamSpan.className = "team";
-        teamSpan.textContent = item.team;
-
-        const rankSpan = document.createElement("span");
-        rankSpan.className = "rank";
-        rankSpan.textContent = `#${item.rank}`;
-
-        div.appendChild(teamSpan);
-        div.appendChild(rankSpan);
-
-        div.addEventListener("click", () => {
-          goToTeam(item.team);
-          box.classList.remove("visible");
-        });
-
-        box.appendChild(div);
-      });
-
-      box.classList.add("visible");
-    }
-
-    // Search button: go to the first matching team (startsWith, then includes)
     function searchTeam() {
       const input = document.getElementById("teamSearchInput");
       if (!input) return;
       const query = input.value.trim().toLowerCase();
+
+      const rows = Array.from(document.querySelectorAll(".ranking-row"));
+      rows.forEach(r => r.classList.remove("highlight"));
+
       if (!query) return;
 
-      // First try startsWith
-      let match = salasRankings.find(item =>
-        item.team.toLowerCase().startsWith(query)
-      );
-
-      // If no startsWith match, fall back to includes
-      if (!match) {
-        match = salasRankings.find(item =>
-          item.team.toLowerCase().includes(query)
-        );
-      }
-
+      const match = rows.find(r => (r.dataset.team || "").includes(query));
       if (match) {
-        goToTeam(match.team);
+        match.classList.add("highlight");
+        match.scrollIntoView({ behavior: "smooth", block: "center" });
       }
+    }
+
+    function setSort(column) {
+      if (currentSort.column === column) {
+        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSort.column = column;
+        // sensible defaults: rank asc, team asc, record desc
+        if (column === 'record') {
+          currentSort.direction = 'desc';
+        } else {
+          currentSort.direction = 'asc';
+        }
+      }
+      renderRankings();
     }
 
     function initPage() {
@@ -828,13 +553,10 @@
       renderGames();
 
       const searchInput = document.getElementById("teamSearchInput");
-      const suggestionsBox = document.getElementById("searchSuggestions");
-
       if (searchInput) {
         searchInput.addEventListener("input", function () {
-          updateSuggestions(this.value.trim());
+          searchTeam();
         });
-
         searchInput.addEventListener("keydown", function (e) {
           if (e.key === "Enter") {
             searchTeam();
@@ -842,14 +564,13 @@
         });
       }
 
-      // Hide suggestions when clicking outside
-      document.addEventListener("click", function (e) {
-        const isInsideSearch =
-          e.target.closest(".search-bar") || e.target.closest("#searchSuggestions");
-        if (!isInsideSearch) {
-          suggestionsBox.classList.remove("visible");
-        }
-      });
+      const sortRank = document.getElementById("sortRank");
+      const sortTeam = document.getElementById("sortTeam");
+      const sortRecord = document.getElementById("sortRecord");
+
+      if (sortRank) sortRank.addEventListener("click", () => setSort('rank'));
+      if (sortTeam) sortTeam.addEventListener("click", () => setSort('team'));
+      if (sortRecord) sortRecord.addEventListener("click", () => setSort('record'));
     }
 
     initPage();
