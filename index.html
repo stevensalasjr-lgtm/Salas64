@@ -618,11 +618,13 @@
         const teamSpan = document.createElement("span");
         teamSpan.className = "team";
         teamSpan.textContent = team.team;
-        const recordSpan = document.createElement("span");
-        recordSpan.className = "record";
-        recordSpan.textContent = team.record;
+
+        const metaSpan = document.createElement("span");
+        metaSpan.className = "record"; // reuse style; now shows rank
+        metaSpan.textContent = `#${team.rank}`;
+
         item.appendChild(teamSpan);
-        item.appendChild(recordSpan);
+        item.appendChild(metaSpan);
         item.addEventListener("click", () => {
           input.value = team.team;
           dropdown.style.display = "none";
@@ -692,7 +694,6 @@
       if (sortTeam) sortTeam.addEventListener("click", () => setSort('team'));
       if (sortRecord) sortRecord.addEventListener("click", () => setSort('record'));
 
-      // hide dropdown if you click anywhere else
       document.addEventListener("click", (e) => {
         const dropdown = document.getElementById("searchDropdown");
         const searchBar = document.querySelector(".search-bar");
