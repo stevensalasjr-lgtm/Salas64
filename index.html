@@ -87,11 +87,13 @@
       text-decoration: underline;
     }
 
-    /* Search bar styles */
+    /* Search bar + dropdown */
     .search-bar {
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       display: flex;
       gap: 8px;
+      position: relative;
+      z-index: 5;
     }
     .search-bar input {
       flex: 1;
@@ -120,6 +122,34 @@
       background: #2563eb;
     }
 
+    .search-dropdown {
+      margin-top: 2px;
+      border-radius: 12px;
+      border: 1px solid #4b5563;
+      background: #020617;
+      max-height: 220px;
+      overflow-y: auto;
+      display: none;
+      font-size: 0.85rem;
+    }
+    .search-dropdown-item {
+      padding: 6px 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .search-dropdown-item span.team {
+      font-weight: 500;
+    }
+    .search-dropdown-item span.record {
+      font-variant-numeric: tabular-nums;
+      color: #9ca3af;
+    }
+    .search-dropdown-item:hover {
+      background: #111827;
+    }
+
     /* Rankings header & rows */
     .rankings-header {
       display: grid;
@@ -131,6 +161,7 @@
       padding: 6px 8px;
       border-radius: 8px;
       background: rgba(15, 23, 42, 0.9);
+      margin-top: 6px;
       margin-bottom: 4px;
     }
     .ranking-row {
@@ -174,6 +205,11 @@
     .sortable {
       cursor: pointer;
       user-select: none;
+    }
+    .sort-indicator {
+      font-size: 0.75rem;
+      opacity: 0.7;
+      margin-left: 4px;
     }
 
     .games-list {
@@ -250,7 +286,7 @@
         </div>
         <p class="subtitle">Daily rankings of the top teams in the country to help you build a smarter March Madness bracket.</p>
 
-        <!-- Search bar for teams -->
+        <!-- Search bar + dropdown -->
         <div class="search-bar">
           <input
             id="teamSearchInput"
@@ -259,11 +295,18 @@
           />
           <button type="button" onclick="searchTeam()">Search</button>
         </div>
+        <div id="searchDropdown" class="search-dropdown"></div>
 
         <div class="rankings-header">
-          <span id="sortRank" class="sortable">#</span>
-          <span id="sortTeam" class="sortable">Team</span>
-          <span id="sortRecord" class="sortable" style="text-align:right">Record</span>
+          <span id="sortRank" class="sortable">
+            #<span id="sortRankIndicator" class="sort-indicator"></span>
+          </span>
+          <span id="sortTeam" class="sortable">
+            Team<span id="sortTeamIndicator" class="sort-indicator"></span>
+          </span>
+          <span id="sortRecord" class="sortable" style="text-align:right">
+            Record<span id="sortRecordIndicator" class="sort-indicator"></span>
+          </span>
         </div>
         <div id="rankingsList"></div>
       </section>
@@ -346,7 +389,7 @@
       { "rank": 48, "team": "Washington",      "record": "3–1" },
       { "rank": 49, "team": "Villanova",       "record": "2–1" },
       { "rank": 50, "team": "Oregon",          "record": "3–0" },
-      { "rank": 51, "team": "Colorado State",  "record": "3–0" },
+      { "rank": 51, "team": "Colorado State",  "record": "3-0" },
       { "rank": 52, "team": "Texas A&M",       "record": "2–2" },
       { "rank": 53, "team": "SMU",             "record": "3–0" },
       { "rank": 54, "team": "Virginia",        "record": "3–0" },
@@ -356,10 +399,10 @@
       { "rank": 58, "team": "VCU",             "record": "2–1" },
       { "rank": 59, "team": "Memphis",         "record": "1–1" },
       { "rank": 60, "team": "Oklahoma St",     "record": "3–0" },
-      { "rank": 61, "team": "West Virginia",   "record": "4–0" },
+      { "rank": 61, "team": "West Virginia",   "record": "4-0" },
       { "rank": 62, "team": "Dayton",          "record": "2–1" },
       { "rank": 63, "team": "Boise St",        "record": "2–1" },
-      { "rank": 64, "team": "Colorado",        "record": "4–0" }
+      { "rank": 64, "team": "Colorado",        "record": "4-0" }
     ];
 
     const topGames = [
@@ -434,7 +477,6 @@
             return currentSort.direction === 'asc' ? diff : -diff;
           }
 
-          // tie-breaker: more wins, then team name
           if (ra.wins !== rb.wins) {
             const diffWins = ra.wins - rb.wins;
             return currentSort.direction === 'asc' ? diffWins : -diffWins;
@@ -450,6 +492,23 @@
         return 0;
       });
       return data;
+    }
+
+    function updateSortIndicators() {
+      const rankInd = document.getElementById("sortRankIndicator");
+      const teamInd = document.getElementById("sortTeamIndicator");
+      const recordInd = document.getElementById("sortRecordIndicator");
+      if (!rankInd || !teamInd || !recordInd) return;
+
+      rankInd.textContent = "";
+      teamInd.textContent = "";
+      recordInd.textContent = "";
+
+      const arrow = currentSort.direction === "asc" ? "▲" : "▼";
+
+      if (currentSort.column === "rank") rankInd.textContent = arrow;
+      if (currentSort.column === "team") teamInd.textContent = arrow;
+      if (currentSort.column === "record") recordInd.textContent = arrow;
     }
 
     function renderRankings() {
@@ -513,21 +572,79 @@
       });
     }
 
+    function clearHighlight() {
+      const rows = Array.from(document.querySelectorAll(".ranking-row"));
+      rows.forEach(r => r.classList.remove("highlight"));
+    }
+
+    function scrollToTeamByName(teamName) {
+      const rows = Array.from(document.querySelectorAll(".ranking-row"));
+      const target = rows.find(r => (r.dataset.team || "") === teamName.toLowerCase());
+      if (target) {
+        clearHighlight();
+        target.classList.add("highlight");
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    function getMatches(query) {
+      if (!query) return [];
+      const q = query.toLowerCase();
+      return salasRankings.filter(t => t.team.toLowerCase().startsWith(q));
+    }
+
+    function updateSearchDropdown() {
+      const input = document.getElementById("teamSearchInput");
+      const dropdown = document.getElementById("searchDropdown");
+      if (!input || !dropdown) return;
+
+      const query = input.value.trim();
+      dropdown.innerHTML = "";
+
+      if (!query) {
+        dropdown.style.display = "none";
+        return;
+      }
+
+      const matches = getMatches(query).slice(0, 8);
+      if (matches.length === 0) {
+        dropdown.style.display = "none";
+        return;
+      }
+
+      matches.forEach((team) => {
+        const item = document.createElement("div");
+        item.className = "search-dropdown-item";
+        const teamSpan = document.createElement("span");
+        teamSpan.className = "team";
+        teamSpan.textContent = team.team;
+        const recordSpan = document.createElement("span");
+        recordSpan.className = "record";
+        recordSpan.textContent = team.record;
+        item.appendChild(teamSpan);
+        item.appendChild(recordSpan);
+        item.addEventListener("click", () => {
+          input.value = team.team;
+          dropdown.style.display = "none";
+          scrollToTeamByName(team.team);
+        });
+        dropdown.appendChild(item);
+      });
+
+      dropdown.style.display = "block";
+    }
+
     function searchTeam() {
       const input = document.getElementById("teamSearchInput");
       if (!input) return;
-      const query = input.value.trim().toLowerCase();
-
-      const rows = Array.from(document.querySelectorAll(".ranking-row"));
-      rows.forEach(r => r.classList.remove("highlight"));
-
+      const query = input.value.trim();
       if (!query) return;
 
-      const match = rows.find(r => (r.dataset.team || "").includes(query));
-      if (match) {
-        match.classList.add("highlight");
-        match.scrollIntoView({ behavior: "smooth", block: "center" });
+      const matches = getMatches(query);
+      if (matches.length > 0) {
+        scrollToTeamByName(matches[0].team);
       }
+      updateSearchDropdown();
     }
 
     function setSort(column) {
@@ -535,7 +652,6 @@
         currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
       } else {
         currentSort.column = column;
-        // sensible defaults: rank asc, team asc, record desc
         if (column === 'record') {
           currentSort.direction = 'desc';
         } else {
@@ -543,22 +659,26 @@
         }
       }
       renderRankings();
+      updateSortIndicators();
     }
 
     function initPage() {
       document.getElementById("asOfText").textContent = rankingsAsOf;
       document.getElementById("gamesSubtitle").textContent = gamesDayLabel;
       document.getElementById("year").textContent = new Date().getFullYear();
+
       renderRankings();
       renderGames();
+      updateSortIndicators();
 
       const searchInput = document.getElementById("teamSearchInput");
       if (searchInput) {
         searchInput.addEventListener("input", function () {
-          searchTeam();
+          updateSearchDropdown();
         });
         searchInput.addEventListener("keydown", function (e) {
           if (e.key === "Enter") {
+            e.preventDefault();
             searchTeam();
           }
         });
@@ -571,6 +691,16 @@
       if (sortRank) sortRank.addEventListener("click", () => setSort('rank'));
       if (sortTeam) sortTeam.addEventListener("click", () => setSort('team'));
       if (sortRecord) sortRecord.addEventListener("click", () => setSort('record'));
+
+      // hide dropdown if you click anywhere else
+      document.addEventListener("click", (e) => {
+        const dropdown = document.getElementById("searchDropdown");
+        const searchBar = document.querySelector(".search-bar");
+        if (!dropdown || !searchBar) return;
+        if (!searchBar.contains(e.target)) {
+          dropdown.style.display = "none";
+        }
+      });
     }
 
     initPage();
