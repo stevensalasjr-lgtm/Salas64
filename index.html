@@ -89,9 +89,11 @@
 
     /* Search bar styles */
     .search-bar {
-      margin-bottom: 10px;
+      margin-bottom: 4px;
       display: flex;
       gap: 8px;
+      position: relative;
+      z-index: 20;
     }
     .search-bar input {
       flex: 1;
@@ -120,6 +122,43 @@
       background: #2563eb;
     }
 
+    /* Suggestions dropdown */
+    .search-suggestions {
+      margin-top: 4px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      max-height: 220px;
+      overflow-y: auto;
+      font-size: 0.85rem;
+      display: none;
+    }
+    .search-suggestions.visible {
+      display: block;
+    }
+    .suggestion-item {
+      padding: 6px 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .suggestion-item span.team {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .suggestion-item span.rank {
+      font-variant-numeric: tabular-nums;
+      color: #9ca3af;
+      font-size: 0.78rem;
+    }
+    .suggestion-item:hover {
+      background: rgba(31, 41, 55, 0.98);
+    }
+
     /* 3-column layout now: #, Team, Record */
     .rankings-header {
       display: grid;
@@ -131,6 +170,7 @@
       padding: 6px 8px;
       border-radius: 8px;
       background: rgba(15, 23, 42, 0.9);
+      margin-top: 6px;
       margin-bottom: 4px;
     }
     .ranking-row {
@@ -246,9 +286,12 @@
             id="teamSearchInput"
             type="text"
             placeholder="Search team (e.g. Illinois, Kansas State)"
+            autocomplete="off"
           />
           <button type="button" onclick="searchTeam()">Search</button>
         </div>
+        <!-- Dropdown suggestions -->
+        <div id="searchSuggestions" class="search-suggestions"></div>
 
         <div class="rankings-header">
           <span>#</span>
@@ -634,6 +677,7 @@
         const row = document.createElement("div");
         row.className = "ranking-row";
         row.dataset.team = item.team.toLowerCase();
+        row.dataset.rank = item.rank;
 
         const rankCell = document.createElement("div");
         rankCell.className = "rank-num";
@@ -686,20 +730,93 @@
       });
     }
 
+    function clearHighlights() {
+      const rows = Array.from(document.querySelectorAll(".ranking-row"));
+      rows.forEach(r => r.classList.remove("highlight"));
+    }
+
+    function goToTeam(teamName) {
+      const rows = Array.from(document.querySelectorAll(".ranking-row"));
+      clearHighlights();
+      const target = rows.find(r => (r.dataset.team || "") === teamName.toLowerCase());
+      if (target) {
+        target.classList.add("highlight");
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        const input = document.getElementById("teamSearchInput");
+        if (input) {
+          input.value = teamName;
+        }
+      }
+    }
+
+    function updateSuggestions(query) {
+      const box = document.getElementById("searchSuggestions");
+      box.innerHTML = "";
+
+      if (!query) {
+        box.classList.remove("visible");
+        return;
+      }
+
+      const q = query.toLowerCase();
+
+      // Teams whose names START with the typed text
+      const matches = salasRankings.filter(item =>
+        item.team.toLowerCase().startsWith(q)
+      );
+
+      if (matches.length === 0) {
+        box.classList.remove("visible");
+        return;
+      }
+
+      matches.slice(0, 12).forEach(item => {
+        const div = document.createElement("div");
+        div.className = "suggestion-item";
+
+        const teamSpan = document.createElement("span");
+        teamSpan.className = "team";
+        teamSpan.textContent = item.team;
+
+        const rankSpan = document.createElement("span");
+        rankSpan.className = "rank";
+        rankSpan.textContent = `#${item.rank}`;
+
+        div.appendChild(teamSpan);
+        div.appendChild(rankSpan);
+
+        div.addEventListener("click", () => {
+          goToTeam(item.team);
+          box.classList.remove("visible");
+        });
+
+        box.appendChild(div);
+      });
+
+      box.classList.add("visible");
+    }
+
+    // Search button: go to the first matching team (startsWith, then includes)
     function searchTeam() {
       const input = document.getElementById("teamSearchInput");
       if (!input) return;
       const query = input.value.trim().toLowerCase();
-
-      const rows = Array.from(document.querySelectorAll(".ranking-row"));
-      rows.forEach(r => r.classList.remove("highlight"));
-
       if (!query) return;
 
-      const match = rows.find(r => (r.dataset.team || "").includes(query));
+      // First try startsWith
+      let match = salasRankings.find(item =>
+        item.team.toLowerCase().startsWith(query)
+      );
+
+      // If no startsWith match, fall back to includes
+      if (!match) {
+        match = salasRankings.find(item =>
+          item.team.toLowerCase().includes(query)
+        );
+      }
+
       if (match) {
-        match.classList.add("highlight");
-        match.scrollIntoView({ behavior: "smooth", block: "center" });
+        goToTeam(match.team);
       }
     }
 
@@ -711,16 +828,28 @@
       renderGames();
 
       const searchInput = document.getElementById("teamSearchInput");
+      const suggestionsBox = document.getElementById("searchSuggestions");
+
       if (searchInput) {
         searchInput.addEventListener("input", function () {
-          searchTeam();
+          updateSuggestions(this.value.trim());
         });
+
         searchInput.addEventListener("keydown", function (e) {
           if (e.key === "Enter") {
             searchTeam();
           }
         });
       }
+
+      // Hide suggestions when clicking outside
+      document.addEventListener("click", function (e) {
+        const isInsideSearch =
+          e.target.closest(".search-bar") || e.target.closest("#searchSuggestions");
+        if (!isInsideSearch) {
+          suggestionsBox.classList.remove("visible");
+        }
+      });
     }
 
     initPage();
