@@ -122,19 +122,6 @@
     .search-bar input::placeholder {
       color: #6b7280;
     }
-    .search-bar button {
-      border-radius: 999px;
-      border: 1px solid #4b5563;
-      padding: 6px 12px;
-      background: #1d4ed8;
-      color: #e5e7eb;
-      font-size: 0.8rem;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .search-bar button:hover {
-      background: #2563eb;
-    }
     .search-results {
       position: absolute;
       top: 110%;
@@ -327,7 +314,6 @@
             />
             <div id="searchResults" class="search-results"></div>
           </div>
-          <button type="button" id="clearSearchBtn">Clear</button>
         </div>
 
         <!-- Sort dropdown -->
@@ -506,7 +492,7 @@
     const gamesDayLabel = "Games involving Salas 64 teams (Sun, Nov 16, 2025)";
 
     let currentSortKey = "rank";
-    let currentSortDir = "asc"; // always ascending for now
+    let currentSortDir = "asc"; // rank/team ascending; record uses win% best->worst
 
     function parseRecord(rec) {
       const cleaned = rec.replace(/–/g, "-");
@@ -534,10 +520,13 @@
         if (currentSortKey === "record") {
           const ar = parseRecord(a.record);
           const br = parseRecord(b.record);
-          if (ar.wins !== br.wins) {
-            return currentSortDir === "asc" ? ar.wins - br.wins : br.wins - ar.wins;
-          }
-          return currentSortDir === "asc" ? ar.losses - br.losses : br.losses - ar.losses;
+          const pa = (ar.wins + ar.losses) > 0 ? ar.wins / (ar.wins + ar.losses) : 0;
+          const pb = (br.wins + br.losses) > 0 ? br.wins / (br.wins + br.losses) : 0;
+
+          // Best win% FIRST, then more wins, then fewer losses
+          if (pa !== pb) return pb - pa;
+          if (ar.wins !== br.wins) return br.wins - ar.wins;
+          return ar.losses - br.losses;
         }
         return 0;
       });
@@ -703,18 +692,6 @@
       resultsBox.style.display = "block";
     }
 
-    function clearSearch() {
-      const input = document.getElementById("teamSearchInput");
-      const resultsBox = document.getElementById("searchResults");
-      if (input) input.value = "";
-      if (resultsBox) {
-        resultsBox.innerHTML = "";
-        resultsBox.style.display = "none";
-      }
-      const rows = Array.from(document.querySelectorAll(".ranking-row"));
-      rows.forEach(r => r.classList.remove("highlight"));
-    }
-
     function initPage() {
       document.getElementById("asOfText").textContent = rankingsAsOf;
       document.getElementById("gamesSubtitle").textContent = gamesDayLabel;
@@ -749,11 +726,6 @@
             }
           }
         });
-      }
-
-      const clearBtn = document.getElementById("clearSearchBtn");
-      if (clearBtn) {
-        clearBtn.addEventListener("click", clearSearch);
       }
 
       // Hide dropdown when clicking outside
