@@ -168,6 +168,26 @@
       background: #111827;
     }
 
+    /* Sort row */
+    .sort-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    .sort-select {
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 4px 10px;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      outline: none;
+    }
+
     /* Rankings table */
     .rankings-header {
       display: grid;
@@ -180,13 +200,6 @@
       border-radius: 8px;
       background: rgba(15, 23, 42, 0.9);
       margin-bottom: 4px;
-    }
-    .rankings-header span[data-sort] {
-      cursor: pointer;
-      user-select: none;
-    }
-    .rankings-header span[data-sort]:hover {
-      color: #e5e7eb;
     }
     .ranking-row {
       display: grid;
@@ -317,10 +330,20 @@
           <button type="button" id="clearSearchBtn">Clear</button>
         </div>
 
+        <!-- Sort dropdown -->
+        <div class="sort-row">
+          <span>Sort by:</span>
+          <select id="sortSelect" class="sort-select">
+            <option value="rank">Rank</option>
+            <option value="team">Team (A–Z)</option>
+            <option value="record">Record</option>
+          </select>
+        </div>
+
         <div class="rankings-header">
-          <span data-sort="rank">#</span>
-          <span data-sort="team">Team</span>
-          <span style="text-align:right" data-sort="record">Record</span>
+          <span>#</span>
+          <span>Team</span>
+          <span style="text-align:right">Record</span>
         </div>
         <div id="rankingsList"></div>
       </section>
@@ -483,7 +506,7 @@
     const gamesDayLabel = "Games involving Salas 64 teams (Sun, Nov 16, 2025)";
 
     let currentSortKey = "rank";
-    let currentSortDir = "asc";
+    let currentSortDir = "asc"; // always ascending for now
 
     function parseRecord(rec) {
       const cleaned = rec.replace(/–/g, "-");
@@ -643,7 +666,7 @@
         return;
       }
 
-      // IMPORTANT CHANGE: only teams that START WITH the query
+      // only teams that START WITH the query
       const matches = allTeams.filter(t =>
         t.name.toLowerCase().startsWith(query)
       );
@@ -700,21 +723,15 @@
       renderRankings();
       renderGames();
 
-      // Sorting click handlers
-      document
-        .querySelectorAll(".rankings-header span[data-sort]")
-        .forEach((el) => {
-          el.addEventListener("click", () => {
-            const key = el.dataset.sort;
-            if (key === currentSortKey) {
-              currentSortDir = currentSortDir === "asc" ? "desc" : "asc";
-            } else {
-              currentSortKey = key;
-              currentSortDir = "asc";
-            }
-            renderRankings();
-          });
+      // Sort dropdown handler
+      const sortSelect = document.getElementById("sortSelect");
+      if (sortSelect) {
+        sortSelect.addEventListener("change", () => {
+          currentSortKey = sortSelect.value; // "rank", "team", or "record"
+          currentSortDir = "asc";
+          renderRankings();
         });
+      }
 
       // Search handlers
       const searchInput = document.getElementById("teamSearchInput");
