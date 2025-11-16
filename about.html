@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Salas 64</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      color: #e5e7eb;
+      background: #020617;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
+      color: #e5e7eb;
+    }
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid #1f2933;
+      padding-bottom: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    header .subtitle {
+      margin: 6px 0 0;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+    p {
+      font-size: 0.95rem;
+      margin-top: 4px;
+      margin-bottom: 10px;
+    }
+    ul {
+      margin-top: 4px;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      font-size: 0.95rem;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    footer {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>About Salas 64</h1>
+      <p class="subtitle">
+        Who makes the rankings and what they’re for.
+        <br />
+        <a href="index.html">&larr; Back to rankings</a>
+      </p>
+    </header>
+
+    <section>
+      <h2>Who runs Salas 64?</h2>
+      <p>
+        My name is <strong>Steven Salas</strong>. I’m a 16-year-old from Pasadena, California,
+        and I update the Salas 64 rankings every day during the college basketball season.
+      </p>
+
+      <h2>What is Salas 64?</h2>
+      <p>
+        Salas 64 is my own top-64 ranking of college basketball teams. It’s built to track the
+        teams I believe matter most for March – not just by record, but by how good they really
+        are and who they’ve beaten.
+      </p>
+
+      <h2>Why I made these rankings</h2>
+      <p>
+        The main goal is to <strong>help people build better March Madness brackets</strong>.
+        By following a daily updated top-64, you can:
+      </p>
+      <ul>
+        <li>See which teams are truly trending up or down before the bracket is picked.</li>
+        <li>Spot underrated teams that might be better than their seed line.</li>
+        <li>Get a clearer picture of which wins and losses actually matter.</li>
+      </ul>
+
+      <h2>How to use Salas 64</h2>
+      <ul>
+        <li>Check the daily rankings to see where your team stands and who’s moving.</li>
+        <li>Use the list as a guide when you’re filling out your March Madness bracket.</li>
+        <li>Follow the game listings and predictions to keep track of key matchups for ranked teams.</li>
+      </ul>
+
+      <h2>Update schedule</h2>
+      <p>
+        I aim to <strong>update the rankings every day</strong>, especially after busy slates
+        and big results that affect the top of the board or bubble-type teams.
+      </p>
+    </section>
+
+    <footer>
+      Salas 64 &copy; <span id="year"></span>.
+      <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+      </script>
+    </footer>
+  </div>
+</body>
+</html>
