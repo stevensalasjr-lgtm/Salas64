@@ -412,7 +412,7 @@
       { "rank": 64, "team": "Colorado",      "record": "3–0" }
     ];
 
-    // Games you gave
+    // Games
     const games = [
       {
         matchup: "Notre Dame at Ohio State",
@@ -511,7 +511,6 @@
         if (currentSortKey === "record") {
           const ar = parseRecord(a.record);
           const br = parseRecord(b.record);
-          // more wins first, then fewer losses
           if (ar.wins !== br.wins) {
             return currentSortDir === "asc" ? ar.wins - br.wins : br.wins - ar.wins;
           }
@@ -644,8 +643,9 @@
         return;
       }
 
+      // IMPORTANT CHANGE: only teams that START WITH the query
       const matches = allTeams.filter(t =>
-        t.name.toLowerCase().includes(query)
+        t.name.toLowerCase().startsWith(query)
       );
 
       if (!matches.length) {
@@ -710,7 +710,7 @@
               currentSortDir = currentSortDir === "asc" ? "desc" : "asc";
             } else {
               currentSortKey = key;
-              currentSortDir = key === "rank" ? "asc" : "asc";
+              currentSortDir = "asc";
             }
             renderRankings();
           });
