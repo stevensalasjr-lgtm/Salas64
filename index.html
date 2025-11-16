@@ -67,13 +67,6 @@
       gap: 8px;
       margin-bottom: 4px;
     }
-    .card-links {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
     .card h2 {
       margin: 0;
       font-size: 1.2rem;
@@ -94,14 +87,22 @@
       text-decoration: underline;
     }
 
+    /* Search + sort row */
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
     /* Search bar styles */
     .search-bar {
-      margin-bottom: 10px;
-      display: flex;
-      gap: 8px;
+      flex: 1;
+      position: relative;
     }
     .search-bar input {
-      flex: 1;
+      width: 100%;
       border-radius: 999px;
       border: 1px solid #4b5563;
       padding: 6px 10px;
@@ -113,21 +114,61 @@
     .search-bar input::placeholder {
       color: #6b7280;
     }
-    .search-bar button {
-      border-radius: 999px;
-      border: 1px solid #4b5563;
-      padding: 6px 12px;
-      background: #1d4ed8;
-      color: #e5e7eb;
-      font-size: 0.8rem;
-      cursor: pointer;
-      white-space: nowrap;
+
+    /* Dropdown suggestions */
+    .search-suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 4px;
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 12px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      max-height: 220px;
+      overflow-y: auto;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+      z-index: 20;
+      display: none;
     }
-    .search-bar button:hover {
-      background: #2563eb;
+    .suggestion-item {
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .suggestion-item span.team {
+      font-weight: 500;
+    }
+    .suggestion-item span.rank {
+      color: #9ca3af;
+      font-variant-numeric: tabular-nums;
+    }
+    .suggestion-item:hover {
+      background: rgba(31, 41, 55, 0.98);
     }
 
-    /* rankings layout: #, Team, Record */
+    /* Sort control */
+    .sort-control {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    .sort-control select {
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 4px 8px;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    /* 3-column layout: #, Team, Record */
     .rankings-header {
       display: grid;
       grid-template-columns: 50px 1fr 90px;
@@ -183,11 +224,6 @@
       flex-direction: column;
       gap: 10px;
       margin-top: 4px;
-    }
-    .games-group-title {
-      margin: 8px 0 6px;
-      font-size: 0.9rem;
-      color: #9ca3af;
     }
     .game {
       border-radius: 12px;
@@ -248,21 +284,31 @@
       <section class="card" aria-label="Salas 64 Rankings">
         <div class="card-header-row">
           <h2>Salas 64 Rankings</h2>
-          <div class="card-links">
-            <a href="how-it-works.html" class="info-link">How do the rankings work?</a>
-            <a href="about.html" class="info-link">About Salas 64</a>
-          </div>
+          <a href="how-it-works.html" class="info-link">How do the rankings work?</a>
         </div>
         <p class="subtitle">Custom rankings based on efficiency, injuries, and March potential.</p>
 
-        <!-- Search bar for teams -->
-        <div class="search-bar">
-          <input
-            id="teamSearchInput"
-            type="text"
-            placeholder="Search team (e.g. Illinois, Kansas State)"
-          />
-          <button type="button" onclick="searchTeam()">Search</button>
+        <div class="controls-row">
+          <!-- Search bar with dropdown suggestions -->
+          <div class="search-bar">
+            <input
+              id="teamSearchInput"
+              type="text"
+              placeholder="Search team (e.g. Kansas, Alabama)"
+              autocomplete="off"
+            />
+            <div id="searchSuggestions" class="search-suggestions"></div>
+          </div>
+
+          <!-- Sort control -->
+          <div class="sort-control">
+            <span>Sort by:</span>
+            <select id="sortSelect">
+              <option value="rank">Rank</option>
+              <option value="team">Team (A–Z)</option>
+              <option value="record">Record</option>
+            </select>
+          </div>
         </div>
 
         <div class="rankings-header">
@@ -273,8 +319,8 @@
         <div id="rankingsList"></div>
       </section>
 
-      <section class="card" aria-label="Top Games to Watch">
-        <h2>Salas 64 Games & Predictions</h2>
+      <section class="card" aria-label="Games Involving Salas 64 Teams">
+        <h2>Games Involving Salas 64 Teams</h2>
         <p class="subtitle" id="gamesSubtitle"></p>
 
         <div class="badge">Today's Slate</div>
@@ -289,146 +335,132 @@
   </div>
 
   <script>
+    // Latest Salas 64 list
     const salasRankings = [
-  { "rank": 1,  "team": "Purdue",          "record": "3–0" },
-  { "rank": 2,  "team": "Illinois",        "record": "4–0" },
-  { "rank": 3,  "team": "UConn",           "record": "4–0" },
-  { "rank": 4,  "team": "Arizona",         "record": "4–0" },
-  { "rank": 5,  "team": "Gonzaga",         "record": "4–0" },
-  { "rank": 6,  "team": "Duke",            "record": "4–0" },
-  { "rank": 7,  "team": "Michigan",        "record": "3–0" },
-  { "rank": 8,  "team": "Iowa State",      "record": "3–0" },
-  { "rank": 9,  "team": "North Carolina",  "record": "4–0" },
-  { "rank": 10, "team": "Houston",         "record": "3–0" },
-  { "rank": 11, "team": "Louisville",      "record": "4–0" },
-  { "rank": 12, "team": "BYU",             "record": "3–1" },
-  { "rank": 13, "team": "Tennessee",       "record": "3–0" },
-  { "rank": 14, "team": "Alabama",         "record": "2–1" },
-  { "rank": 15, "team": "Kentucky",        "record": "3–1" },
-  { "rank": 16, "team": "Florida",         "record": "2–1" },
-  { "rank": 17, "team": "Baylor",          "record": "4–0" },
-  { "rank": 18, "team": "Texas Tech",      "record": "3–1" },
-  { "rank": 19, "team": "Wisconsin",       "record": "3–0" },
-  { "rank": 20, "team": "Indiana",         "record": "3–0" },
-  { "rank": 21, "team": "Kansas",          "record": "3–1" },
-  { "rank": 22, "team": "Auburn",          "record": "3–0" },
-  { "rank": 23, "team": "UCLA",            "record": "3–1" },
-  { "rank": 24, "team": "Michigan State",  "record": "3–0" },
-  { "rank": 25, "team": "San Diego State", "record": "2–0" },
-  { "rank": 26, "team": "NC State",        "record": "3–0" },
-  { "rank": 27, "team": "Ole Miss",        "record": "4–0" },
-  { "rank": 28, "team": "Missouri",        "record": "4–0" },
-  { "rank": 29, "team": "Georgia",         "record": "4–0" },
-  { "rank": 30, "team": "Vanderbilt",      "record": "4–0" },
-  { "rank": 31, "team": "Utah State",      "record": "4–0" },
-  { "rank": 32, "team": "Iowa",            "record": "3–0" },
-  { "rank": 33, "team": "Northwestern",    "record": "4–0" },
-  { "rank": 34, "team": "Nebraska",        "record": "4–0" },
-  { "rank": 35, "team": "Ohio State",      "record": "3–0" },
-  { "rank": 36, "team": "Creighton",       "record": "2–1" },
-  { "rank": 37, "team": "LSU",             "record": "3–0" },
-  { "rank": 38, "team": "Clemson",         "record": "3–1" },
-  { "rank": 39, "team": "Cincinnati",      "record": "3–0" },
-  { "rank": 40, "team": "Saint Mary’s",    "record": "4–0" },
-  { "rank": 41, "team": "St. John’s",      "record": "2–1" },
-  { "rank": 42, "team": "USC",             "record": "3–0" },
-  { "rank": 43, "team": "Mississippi State","record": "2–1" },
-  { "rank": 44, "team": "Texas",           "record": "3–1" },
-  { "rank": 45, "team": "Kansas State",    "record": "3–0" },
-  { "rank": 46, "team": "Miami FL",        "record": "3–0" },
-  { "rank": 47, "team": "Washington",      "record": "3–1" },
-  { "rank": 48, "team": "Villanova",       "record": "3–1" },
-  { "rank": 49, "team": "Maryland",        "record": "3–1" },
-  { "rank": 50, "team": "Colorado State",  "record": "3–0" },
-  { "rank": 51, "team": "Oregon",          "record": "3–0" },
-  { "rank": 52, "team": "SMU",             "record": "4–0" },
-  { "rank": 53, "team": "Virginia",        "record": "4–0" },
-  { "rank": 54, "team": "Syracuse",        "record": "3–0" },
-  { "rank": 55, "team": "Marquette",       "record": "3–2" },
-  { "rank": 56, "team": "Texas A&M",       "record": "2–2" },
-  { "rank": 57, "team": "VCU",             "record": "2–1" },
-  { "rank": 58, "team": "Memphis",         "record": "1–1" },
-  { "rank": 59, "team": "Oklahoma",        "record": "2–2" },
-  { "rank": 60, "team": "Oklahoma State",  "record": "3–0" },
-  { "rank": 61, "team": "West Virginia",   "record": "4–0" },
-  { "rank": 62, "team": "Dayton",          "record": "3–1" },
-  { "rank": 63, "team": "Boise State",     "record": "3–1" },
-  { "rank": 64, "team": "Colorado",        "record": "3–0" }
-];
-    // All Salas 64 games for the day
-    const topGames = [
+      { "rank": 1,  "team": "Purdue",          "record": "3–0" },
+      { "rank": 2,  "team": "Illinois",        "record": "4–0" },
+      { "rank": 3,  "team": "UConn",           "record": "4–0" },
+      { "rank": 4,  "team": "Arizona",         "record": "4–0" },
+      { "rank": 5,  "team": "Gonzaga",         "record": "4–0" },
+      { "rank": 6,  "team": "Duke",            "record": "4–0" },
+      { "rank": 7,  "team": "Michigan",        "record": "3–0" },
+      { "rank": 8,  "team": "Iowa State",      "record": "3–0" },
+      { "rank": 9,  "team": "North Carolina",  "record": "4–0" },
+      { "rank": 10, "team": "Houston",         "record": "3–0" },
+      { "rank": 11, "team": "Louisville",      "record": "4–0" },
+      { "rank": 12, "team": "BYU",             "record": "3–1" },
+      { "rank": 13, "team": "Tennessee",       "record": "3–0" },
+      { "rank": 14, "team": "Alabama",         "record": "2–1" },
+      { "rank": 15, "team": "Kentucky",        "record": "3–1" },
+      { "rank": 16, "team": "Florida",         "record": "2–1" },
+      { "rank": 17, "team": "Baylor",          "record": "4–0" },
+      { "rank": 18, "team": "Texas Tech",      "record": "3–1" },
+      { "rank": 19, "team": "Wisconsin",       "record": "3–0" },
+      { "rank": 20, "team": "Indiana",         "record": "3–0" },
+      { "rank": 21, "team": "Kansas",          "record": "3–1" },
+      { "rank": 22, "team": "Auburn",          "record": "3–0" },
+      { "rank": 23, "team": "UCLA",            "record": "3–1" },
+      { "rank": 24, "team": "Michigan State",  "record": "3–0" },
+      { "rank": 25, "team": "San Diego State", "record": "2–0" },
+      { "rank": 26, "team": "NC State",        "record": "3–0" },
+      { "rank": 27, "team": "Ole Miss",        "record": "4–0" },
+      { "rank": 28, "team": "Missouri",        "record": "4–0" },
+      { "rank": 29, "team": "Georgia",         "record": "4–0" },
+      { "rank": 30, "team": "Vanderbilt",      "record": "4–0" },
+      { "rank": 31, "team": "Utah State",      "record": "4–0" },
+      { "rank": 32, "team": "Iowa",            "record": "3–0" },
+      { "rank": 33, "team": "Northwestern",    "record": "4–0" },
+      { "rank": 34, "team": "Nebraska",        "record": "4–0" },
+      { "rank": 35, "team": "Ohio State",      "record": "3–0" },
+      { "rank": 36, "team": "Creighton",       "record": "2–1" },
+      { "rank": 37, "team": "LSU",             "record": "3–0" },
+      { "rank": 38, "team": "Clemson",         "record": "3–1" },
+      { "rank": 39, "team": "Cincinnati",      "record": "3–0" },
+      { "rank": 40, "team": "Saint Mary’s",    "record": "4–0" },
+      { "rank": 41, "team": "St. John’s",      "record": "2–1" },
+      { "rank": 42, "team": "USC",             "record": "3–0" },
+      { "rank": 43, "team": "Mississippi State","record": "2–1" },
+      { "rank": 44, "team": "Texas",           "record": "3–1" },
+      { "rank": 45, "team": "Kansas State",    "record": "3–0" },
+      { "rank": 46, "team": "Miami FL",        "record": "3–0" },
+      { "rank": 47, "team": "Washington",      "record": "3–1" },
+      { "rank": 48, "team": "Villanova",       "record": "3–1" },
+      { "rank": 49, "team": "Maryland",        "record": "3–1" },
+      { "rank": 50, "team": "Colorado State",  "record": "3–0" },
+      { "rank": 51, "team": "Oregon",          "record": "3–0" },
+      { "rank": 52, "team": "SMU",             "record": "4–0" },
+      { "rank": 53, "team": "Virginia",        "record": "4–0" },
+      { "rank": 54, "team": "Syracuse",        "record": "3–0" },
+      { "rank": 55, "team": "Marquette",       "record": "3–2" },
+      { "rank": 56, "team": "Texas A&M",       "record": "2–2" },
+      { "rank": 57, "team": "VCU",             "record": "2–1" },
+      { "rank": 58, "team": "Memphis",         "record": "1–1" },
+      { "rank": 59, "team": "Oklahoma",        "record": "2–2" },
+      { "rank": 60, "team": "Oklahoma State",  "record": "3–0" },
+      { "rank": 61, "team": "West Virginia",   "record": "4–0" },
+      { "rank": 62, "team": "Dayton",          "record": "3–1" },
+      { "rank": 63, "team": "Boise State",     "record": "3–1" },
+      { "rank": 64, "team": "Colorado",        "record": "3–0" }
+    ];
+
+    // Games you gave for tomorrow
+    const games = [
       {
         matchup: "Notre Dame at Ohio State",
-        team1: "Notre Dame",
-        team2: "Ohio State",
-        time: "9:30 AM PT",
+        time: "Sat, Nov 15 • 9:30 AM PT",
         prediction: "Ohio State 78–70"
       },
       {
         matchup: "Texas A&M–Corpus Christi at Oklahoma State",
-        team1: "Texas A&M–Corpus Christi",
-        team2: "Oklahoma St",
-        time: "11:00 AM PT",
+        time: "Sat, Nov 15 • 11:00 AM PT",
         prediction: "Oklahoma State 88–68"
       },
       {
         matchup: "Houston vs Auburn (neutral)",
-        team1: "Houston",
-        team2: "Auburn",
-        time: "12:00 PM PT",
+        time: "Sat, Nov 15 • 12:00 PM PT",
         prediction: "Houston 74–68"
       },
       {
         matchup: "UNLV at Memphis",
-        team1: "UNLV",
-        team2: "Memphis",
-        time: "2:00 PM PT",
+        time: "Sat, Nov 15 • 2:00 PM PT",
         prediction: "Memphis 82–72"
       },
       {
         matchup: "Colorado State at Loyola Chicago",
-        team1: "Colorado State",
-        team2: "Loyola Chicago",
-        time: "2:00 PM PT",
+        time: "Sat, Nov 15 • 2:00 PM PT",
         prediction: "Colorado State 75–71"
       },
       {
         matchup: "Incarnate Word at Indiana",
-        team1: "Incarnate Word",
-        team2: "Indiana",
-        time: "2:30 PM PT",
+        time: "Sat, Nov 15 • 2:30 PM PT",
         prediction: "Indiana 90–62"
       },
       {
         matchup: "Mount St. Mary’s at Cincinnati",
-        team1: "Mount St. Mary’s",
-        team2: "Cincinnati",
-        time: "3:00 PM PT",
+        time: "Sat, Nov 15 • 3:00 PM PT",
         prediction: "Cincinnati 84–60"
       },
       {
         matchup: "Akron at Purdue",
-        team1: "Akron",
-        team2: "Purdue",
-        time: "4:30 PM PT",
+        time: "Sat, Nov 15 • 4:30 PM PT",
         prediction: "Purdue 85–64"
       },
       {
         matchup: "Miami vs Florida (neutral)",
-        team1: "Miami FL",
-        team2: "Florida",
-        time: "5:30 PM PT",
+        time: "Sat, Nov 15 • 5:30 PM PT",
         prediction: "Florida 81–77"
       }
     ];
 
-    const rankingsAsOf = "As of Sat, Nov 15, 2025";
-    const gamesDayLabel = "All games today involving Salas 64 teams";
+    const rankingsAsOf = "As of Fri, Nov 14, 2025";
+    const gamesDayLabel = "All games involving Salas 64 teams (Sat, Nov 15, 2025)";
+
+    let currentRankings = [...salasRankings];
 
     function renderRankings() {
       const container = document.getElementById("rankingsList");
       container.innerHTML = "";
-      salasRankings.forEach((item) => {
+      currentRankings.forEach((item) => {
         const row = document.createElement("div");
         row.className = "ranking-row";
         row.dataset.team = item.team.toLowerCase();
@@ -456,120 +488,156 @@
     function renderGames() {
       const container = document.getElementById("gamesList");
       container.innerHTML = "";
+      games.forEach((game, index) => {
+        const card = document.createElement("article");
+        card.className = "game";
 
-      // build quick map from team -> rank
-      const teamRankMap = {};
-      salasRankings.forEach(t => {
-        teamRankMap[t.team] = t.rank;
+        const topline = document.createElement("div");
+        topline.className = "game-topline";
+
+        const matchup = document.createElement("div");
+        matchup.className = "matchup";
+        matchup.textContent = `#${index + 1} • ${game.matchup}`;
+
+        const meta = document.createElement("div");
+        meta.className = "game-meta";
+        meta.textContent = game.time;
+
+        topline.appendChild(matchup);
+        topline.appendChild(meta);
+
+        const body = document.createElement("div");
+        body.className = "game-body";
+        body.innerHTML = `<strong>Prediction:</strong> ${game.prediction}`;
+
+        card.appendChild(topline);
+        card.appendChild(body);
+        container.appendChild(card);
       });
-
-      const gamesWithBothRanked = [];
-      const gamesWithOneRanked = [];
-
-      topGames.forEach(game => {
-        const rank1 = teamRankMap[game.team1] || null;
-        const rank2 = teamRankMap[game.team2] || null;
-        const rankedCount = (rank1 ? 1 : 0) + (rank2 ? 1 : 0);
-
-        const enhanced = {
-          ...game,
-          rank1,
-          rank2
-        };
-
-        if (rankedCount === 2) {
-          gamesWithBothRanked.push(enhanced);
-        } else if (rankedCount === 1) {
-          gamesWithOneRanked.push(enhanced);
-        }
-      });
-
-      function addGroup(title, games) {
-        if (!games.length) return;
-
-        const groupTitle = document.createElement("div");
-        groupTitle.className = "games-group-title";
-        groupTitle.textContent = title;
-        container.appendChild(groupTitle);
-
-        games.forEach((game) => {
-          const card = document.createElement("article");
-          card.className = "game";
-
-          const topline = document.createElement("div");
-          topline.className = "game-topline";
-
-          const matchup = document.createElement("div");
-          matchup.className = "matchup";
-
-          const labelParts = [];
-          if (game.rank1) {
-            labelParts.push(`#${game.rank1} ${game.team1}`);
-          } else {
-            labelParts.push(game.team1);
-          }
-          if (game.rank2) {
-            labelParts.push(`#${game.rank2} ${game.team2}`);
-          } else {
-            labelParts.push(game.team2);
-          }
-          matchup.textContent = labelParts.join(" vs ");
-
-          const meta = document.createElement("div");
-          meta.className = "game-meta";
-          meta.textContent = game.time;
-
-          topline.appendChild(matchup);
-          topline.appendChild(meta);
-
-          const body = document.createElement("div");
-          body.className = "game-body";
-          body.innerHTML = `<strong>Prediction:</strong> ${game.prediction}`;
-
-          card.appendChild(topline);
-          card.appendChild(body);
-          container.appendChild(card);
-        });
-      }
-
-      addGroup("Games with both teams in the Salas 64", gamesWithBothRanked);
-      addGroup("Games with one Salas 64 team", gamesWithOneRanked);
     }
 
-    function searchTeam() {
+    // Build dropdown suggestions from search input
+    function updateSuggestions() {
       const input = document.getElementById("teamSearchInput");
-      if (!input) return;
-      const query = input.value.trim().toLowerCase();
+      const box = document.getElementById("searchSuggestions");
+      if (!input || !box) return;
 
+      const query = input.value.trim().toLowerCase();
+      box.innerHTML = "";
+
+      if (!query) {
+        box.style.display = "none";
+        return;
+      }
+
+      const matches = salasRankings
+        .filter(item => item.team.toLowerCase().includes(query))
+        .slice(0, 10); // limit results
+
+      if (matches.length === 0) {
+        box.style.display = "none";
+        return;
+      }
+
+      matches.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "suggestion-item";
+        div.dataset.team = item.team.toLowerCase();
+
+        const teamSpan = document.createElement("span");
+        teamSpan.className = "team";
+        teamSpan.textContent = item.team;
+
+        const rankSpan = document.createElement("span");
+        rankSpan.className = "rank";
+        rankSpan.textContent = `#${item.rank}`;
+
+        div.appendChild(teamSpan);
+        div.appendChild(rankSpan);
+
+        div.addEventListener("click", () => {
+          scrollToTeam(item.team);
+          box.style.display = "none";
+        });
+
+        box.appendChild(div);
+      });
+
+      box.style.display = "block";
+    }
+
+    // Scroll to and highlight a given team
+    function scrollToTeam(teamName) {
       const rows = Array.from(document.querySelectorAll(".ranking-row"));
       rows.forEach(r => r.classList.remove("highlight"));
 
-      if (!query) return;
-
-      const match = rows.find(r => (r.dataset.team || "").includes(query));
-      if (match) {
-        match.classList.add("highlight");
-        match.scrollIntoView({ behavior: "smooth", block: "center" });
+      const target = rows.find(r => (r.dataset.team || "") === teamName.toLowerCase());
+      if (target) {
+        target.classList.add("highlight");
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
       }
+    }
+
+    // Sort control
+    function applySort() {
+      const select = document.getElementById("sortSelect");
+      if (!select) return;
+      const value = select.value;
+
+      if (value === "rank") {
+        currentRankings = [...salasRankings].sort((a, b) => a.rank - b.rank);
+      } else if (value === "team") {
+        currentRankings = [...salasRankings].sort((a, b) =>
+          a.team.localeCompare(b.team)
+        );
+      } else if (value === "record") {
+        // naive record sort: wins minus losses; if tie, fall back to rank
+        function parseRecord(rec) {
+          const cleaned = rec.replace(/\s/g, "").replace("–", "-");
+          const [w, l] = cleaned.split("-").map(Number);
+          if (isNaN(w) || isNaN(l)) return 0;
+          return w - l;
+        }
+        currentRankings = [...salasRankings].sort((a, b) => {
+          const diff = parseRecord(b.record) - parseRecord(a.record);
+          if (diff !== 0) return diff;
+          return a.rank - b.rank;
+        });
+      }
+
+      renderRankings();
     }
 
     function initPage() {
       document.getElementById("asOfText").textContent = rankingsAsOf;
       document.getElementById("gamesSubtitle").textContent = gamesDayLabel;
       document.getElementById("year").textContent = new Date().getFullYear();
-      renderRankings();
+
+      applySort();     // default sort = rank
       renderGames();
 
       const searchInput = document.getElementById("teamSearchInput");
+      const suggestionsBox = document.getElementById("searchSuggestions");
+      const sortSelect = document.getElementById("sortSelect");
+
       if (searchInput) {
-        searchInput.addEventListener("input", function () {
-          searchTeam();
-        });
-        searchInput.addEventListener("keydown", function (e) {
-          if (e.key === "Enter") {
-            searchTeam();
+        searchInput.addEventListener("input", updateSuggestions);
+        searchInput.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            suggestionsBox.style.display = "none";
           }
         });
+      }
+
+      // Click outside to close suggestions
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-bar")) {
+          if (suggestionsBox) suggestionsBox.style.display = "none";
+        }
+      });
+
+      if (sortSelect) {
+        sortSelect.addEventListener("change", applySort);
       }
     }
 
