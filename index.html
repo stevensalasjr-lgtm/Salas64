@@ -345,20 +345,21 @@
   </div>
 
   <script>
+    // Updated Salas 64 rankings (Mon, Nov 24, 2025)
     const salasRankings = [
       { "rank": 1,  "team": "Purdue",          "record": "6–0" },
       { "rank": 2,  "team": "Arizona",         "record": "5–0" },
-      { "rank": 3,  "team": "Duke",            "record": "6–0" },
+      { "rank": 3,  "team": "Duke",            "record": "7–0" },
       { "rank": 4,  "team": "Gonzaga",         "record": "5–0" },
-      { "rank": 5,  "team": "Illinois",        "record": "4–1" },
-      { "rank": 6,  "team": "UConn",           "record": "4–1" },
+      { "rank": 5,  "team": "Illinois",        "record": "5–1" },
+      { "rank": 6,  "team": "UConn",           "record": "5–1" },
       { "rank": 7,  "team": "Iowa State",      "record": "4–0" },
       { "rank": 8,  "team": "Michigan",        "record": "4–0" },
       { "rank": 9,  "team": "BYU",             "record": "4–1" },
       { "rank": 10, "team": "Alabama",         "record": "3–1" },
       { "rank": 11, "team": "North Carolina",  "record": "5–0" },
       { "rank": 12, "team": "Houston",         "record": "5–0" },
-      { "rank": 13, "team": "Tennessee",       "record": "5–0" },
+      { "rank": 13, "team": "Tennessee",       "record": "6–0" },
       { "rank": 14, "team": "Michigan State",  "record": "5–0" },
       { "rank": 15, "team": "Louisville",      "record": "5–0" },
       { "rank": 16, "team": "Florida",         "record": "4–1" },
@@ -372,94 +373,164 @@
       { "rank": 24, "team": "Kentucky",        "record": "4–2" },
       { "rank": 25, "team": "Ole Miss",        "record": "5–0" },
       { "rank": 26, "team": "Texas Tech",      "record": "4–2" },
-      { "rank": 27, "team": "Missouri",        "record": "6–0" },
-      { "rank": 28, "team": "Georgia",         "record": "6–0" },
+      { "rank": 27, "team": "Utah State",      "record": "6–0" },
+      { "rank": 28, "team": "Missouri",        "record": "6–0" },
       { "rank": 29, "team": "Vanderbilt",      "record": "5–0" },
-      { "rank": 30, "team": "Utah State",      "record": "5–0" },
-      { "rank": 31, "team": "Iowa",            "record": "5–0" },
-      { "rank": 32, "team": "Ohio State",      "record": "5–0" },
-      { "rank": 33, "team": "Nebraska",        "record": "6–0" },
-      { "rank": 34, "team": "Northwestern",    "record": "4–1" },
+      { "rank": 30, "team": "Iowa",            "record": "5–0" },
+      { "rank": 31, "team": "Ohio State",      "record": "5–0" },
+      { "rank": 32, "team": "Nebraska",        "record": "6–0" },
+      { "rank": 33, "team": "Georgia",         "record": "6–1" },
+      { "rank": 34, "team": "Northwestern",    "record": "5–1" },
       { "rank": 35, "team": "LSU",             "record": "5–0" },
-      { "rank": 36, "team": "Kansas",          "record": "5–1" },
+      { "rank": 36, "team": "Kansas State",    "record": "5–1" },
       { "rank": 37, "team": "San Diego State", "record": "2–1" },
       { "rank": 38, "team": "Creighton",       "record": "3–1" },
       { "rank": 39, "team": "Cincinnati",      "record": "4–1" },
-      { "rank": 40, "team": "Saint Mary’s",    "record": "5–0" },
+      { "rank": 40, "team": "Saint Mary’s",    "record": "6–0" },
       { "rank": 41, "team": "St. John’s",      "record": "3–1" },
       { "rank": 42, "team": "USC",             "record": "4–0" },
       { "rank": 43, "team": "Texas",           "record": "4–1" },
       { "rank": 44, "team": "Oregon",          "record": "4–0" },
-      { "rank": 45, "team": "Virginia",        "record": "5–0" },
-      { "rank": 46, "team": "Villanova",       "record": "4–1" },
-      { "rank": 47, "team": "SMU",             "record": "6–0" },
-      { "rank": 48, "team": "Washington",      "record": "5–1" },
+      { "rank": 45, "team": "Villanova",       "record": "4–1" },
+      { "rank": 46, "team": "SMU",             "record": "6–0" },
+      { "rank": 47, "team": "Washington",      "record": "5–1" },
+      { "rank": 48, "team": "Georgetown",      "record": "6–0" },
       { "rank": 49, "team": "Utah",            "record": "5–1" },
-      { "rank": 50, "team": "Dayton",          "record": "4–1" },
-      { "rank": 51, "team": "Syracuse",        "record": "4–0" },
-      { "rank": 52, "team": "Georgetown",      "record": "4–0" },
+      { "rank": 50, "team": "Virginia",        "record": "5–1" },
+      { "rank": 51, "team": "Dayton",          "record": "5–1" },
+      { "rank": 52, "team": "Syracuse",        "record": "4–0" },
       { "rank": 53, "team": "Maryland",        "record": "4–1" },
-      { "rank": 54, "team": "Miami FL",        "record": "4–1" },
+      { "rank": 54, "team": "Miami FL",        "record": "5–1" },
       { "rank": 55, "team": "Santa Clara",     "record": "6–0" },
       { "rank": 56, "team": "Colorado",        "record": "5–0" },
-      { "rank": 57, "team": "West Virginia",   "record": "5–1" },
-      { "rank": 58, "team": "Oklahoma State",  "record": "5–0" },
-      { "rank": 59, "team": "Loyola Marymount","record": "6–0" },
-      { "rank": 60, "team": "Boise State",     "record": "4–1" },
-      { "rank": 61, "team": "Colorado State",  "record": "4–1" },
-      { "rank": 62, "team": "Penn State",      "record": "5–0" },
-      { "rank": 63, "team": "UCF",             "record": "5–1" },
-      { "rank": 64, "team": "St. Louis",       "record": "5–0" }
+      { "rank": 57, "team": "Oklahoma State",  "record": "6–0" },
+      { "rank": 58, "team": "Loyola Marymount","record": "6–0" },
+      { "rank": 59, "team": "Boise State",     "record": "4–1" },
+      { "rank": 60, "team": "Colorado State",  "record": "4–1" },
+      { "rank": 61, "team": "Richmond",        "record": "5–0" },
+      { "rank": 62, "team": "UCF",             "record": "5–1" },
+      { "rank": 63, "team": "Clemson",         "record": "6–1" },
+      { "rank": 64, "team": "Saint Louis",     "record": "5–0" }
     ];
 
-    // Games – Sat slate (only games with at least one Salas 64 team)
+    // Games for Mon, Nov 24, 2025 (only games with at least one Salas 64 team)
     const games = [
       {
-        matchup: "Wagner (0–4) at Georgetown (4–0)",
-        team1: "Wagner",
-        team2: "Georgetown",
-        time: "Sat 9:00 AM (ESPN+)",
-        prediction: "Georgetown 81–57"
+        matchup: "Creighton (3–1) vs Baylor (3–0)",
+        team1: "Creighton",
+        team2: "Baylor",
+        time: "Mon 11:00 AM (truTV) — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Baylor 78–72"
       },
       {
-        matchup: "Long Island University (3–2) at Illinois (4–1)",
-        team1: "Long Island University",
+        matchup: "Iowa State (4–0) vs St. John’s (3–1)",
+        team1: "Iowa State",
+        team2: "St. John's",
+        time: "Mon 1:30 PM (truTV) — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Iowa State 84–79"
+      },
+      {
+        matchup: "Syracuse (4–0) vs Houston (5–0)",
+        team1: "Syracuse",
+        team2: "Houston",
+        time: "Mon 3:00 PM (TNT) — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Houston 80–66"
+      },
+      {
+        matchup: "Auburn (4–1) vs Oregon (4–0)",
+        team1: "Auburn",
+        team2: "Oregon",
+        time: "Mon 5:00 PM (truTV) — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Auburn 77–73"
+      },
+      {
+        matchup: "Gonzaga (5–0) vs Alabama (3–1)",
+        team1: "Gonzaga",
+        team2: "Alabama",
+        time: "Mon 6:30 PM (TNT) — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Gonzaga 89–84"
+      },
+      {
+        matchup: "San Diego State (2–1) vs Michigan (4–0)",
+        team1: "San Diego State",
+        team2: "Michigan",
+        time: "Mon 7:30 PM (truTV) — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Michigan 74–68"
+      },
+      {
+        matchup: "Denver (2–3) at Arizona (5–0)",
+        team1: "Denver",
+        team2: "Arizona",
+        time: "Mon 7:30 PM (CBSSN) — Tucson (home)",
+        prediction: "Arizona 92–61"
+      },
+      {
+        matchup: "UT Rio Grande Valley (2–3) at Illinois (5–1)",
+        team1: "UT Rio Grande Valley",
         team2: "Illinois",
-        time: "Sat 11:00 AM (B1G+)",
-        prediction: "Illinois 99–64"
+        time: "Mon 5:00 PM (BTN) — Champaign (home)",
+        prediction: "Illinois 96–66"
       },
       {
-        matchup: "North Carolina Central (2–4) at Dayton (4–1)",
-        team1: "North Carolina Central",
-        team2: "Dayton",
-        time: "Sat 11:00 AM (ESPN+)",
-        prediction: "Dayton 89–60"
+        matchup: "Eastern Michigan (3–2) at Louisville (5–0)",
+        team1: "Eastern Michigan",
+        team2: "Louisville",
+        time: "Mon 4:00 PM (ACC Network) — Louisville (home)",
+        prediction: "Louisville 95–63"
       },
       {
-        matchup: "Nicholls (0–4) at Oklahoma State (5–0)",
-        team1: "Nicholls",
-        team2: "Oklahoma State",
-        time: "Sat 11:00 AM (ESPN+)",
-        prediction: "Oklahoma State 93–69"
+        matchup: "Notre Dame (4–1) vs Kansas (3–2)",
+        team1: "Notre Dame",
+        team2: "Kansas",
+        time: "Mon 12:30 PM (TNT) — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Kansas 82–74"
       },
       {
-        matchup: "Providence (3–2) vs Penn State (5–0)",
-        team1: "Providence",
-        team2: "Penn State",
-        time: "Sat 1:00 PM (truTV) — Mohegan Sun (neutral)",
-        prediction: "Providence 82–79"
+        matchup: "USC (4–0) vs Boise State (4–1)",
+        team1: "USC",
+        team2: "Boise State",
+        time: "Mon 2:00 PM (ESPN2) — Maui Invitational (neutral)",
+        prediction: "USC 79–72"
       },
       {
-        matchup: "UC Merced at Saint Mary’s (5–0)",
-        team1: "UC Merced",
-        team2: "Saint Mary’s",
-        time: "Sat 7:30 PM (ESPN+)",
-        prediction: "Saint Mary’s 84–52"
+        matchup: "Arizona State (4–1) vs Texas (4–1)",
+        team1: "Arizona State",
+        team2: "Texas",
+        time: "Mon 8:30 PM (ESPN2) — Maui Invitational (neutral)",
+        prediction: "Texas 76–71"
+      },
+      {
+        matchup: "UNLV (3–2) vs Maryland (4–1)",
+        team1: "UNLV",
+        team2: "Maryland",
+        time: "Mon 8:59 PM (TNT) — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Maryland 78–75"
+      },
+      {
+        matchup: "Seton Hall (5–0) vs NC State (4–0)",
+        team1: "Seton Hall",
+        team2: "NC State",
+        time: "Mon (in progress) — Maui Invitational (neutral)",
+        prediction: "NC State 76–73"
+      },
+      {
+        matchup: "Loyola Marymount (6–0) vs Florida Atlantic (4–1)",
+        team1: "Loyola Marymount",
+        team2: "Florida Atlantic",
+        time: "Mon 6:00 PM (CBSSN) — Sunshine Slam, Fort Myers (neutral)",
+        prediction: "Loyola Marymount 74–70"
+      },
+      {
+        matchup: "Rutgers (4–2) vs Tennessee (6–0)",
+        team1: "Rutgers",
+        team2: "Tennessee",
+        time: "Final — Players Era Festival, Las Vegas (neutral)",
+        prediction: "Final: Tennessee 85–60"
       }
     ];
 
-    const rankingsAsOf = "As of Sat, Nov 22, 2025";
-    const gamesDayLabel = "Games involving Salas 64 teams (Sat, Nov 22, 2025)";
+    const rankingsAsOf = "As of Mon, Nov 24, 2025";
+    const gamesDayLabel = "Games involving Salas 64 teams (Mon, Nov 24, 2025)";
 
     let currentSortKey = "rank";
     let currentSortDir = "asc";
