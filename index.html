@@ -345,7 +345,7 @@
   </div>
 
   <script>
-    // Updated Salas 64 rankings (Mon, Dec 1, 2025)
+    // Updated Salas 64 rankings (Tue, Dec 2, 2025)
     const salasRankings = [
       { "rank": 1,  "team": "Michigan",       "record": "7–0" },
       { "rank": 2,  "team": "Purdue",         "record": "7–0" },
@@ -385,18 +385,18 @@
       { "rank": 33, "team": "NC State",       "record": "5–2" },
       { "rank": 34, "team": "Georgia",        "record": "7–1" },
       { "rank": 35, "team": "LSU",            "record": "7–0" },
-      { "rank": 36, "team": "Kansas State",   "record": "5–2" },
-      { "rank": 37, "team": "Cincinnati",     "record": "5–2" },
+      { "rank": 36, "team": "Cincinnati",     "record": "6–2" },
+      { "rank": 37, "team": "Villanova",      "record": "6–1" },
       { "rank": 38, "team": "St. John’s",     "record": "4–3" },
-      { "rank": 39, "team": "Villanova",      "record": "5–1" },
+      { "rank": 39, "team": "Colorado",       "record": "8–0" },
       { "rank": 40, "team": "Saint Mary’s",   "record": "8–1" },
 
       { "rank": 41, "team": "SMU",            "record": "8–0" },
-      { "rank": 42, "team": "Colorado",       "record": "7–0" },
-      { "rank": 43, "team": "Washington",     "record": "5–2" },
-      { "rank": 44, "team": "Northwestern",   "record": "5–2" },
-      { "rank": 45, "team": "Texas",          "record": "6–2" },
-      { "rank": 46, "team": "Creighton",      "record": "4–3" },
+      { "rank": 42, "team": "Washington",     "record": "5–2" },
+      { "rank": 43, "team": "Northwestern",   "record": "5–2" },
+      { "rank": 44, "team": "Texas",          "record": "6–2" },
+      { "rank": 45, "team": "Creighton",      "record": "4–3" },
+      { "rank": 46, "team": "Kansas State",   "record": "5–3" },
       { "rank": 47, "team": "San Diego State","record": "3–3" },
       { "rank": 48, "team": "Oregon",         "record": "4–3" },
       { "rank": 49, "team": "Utah",           "record": "6–2" },
@@ -419,40 +419,131 @@
       { "rank": 64, "team": "Georgetown",     "record": "5–2" }
     ];
 
-    // Games for Mon, Dec 1, 2025 (only games with at least one Salas 64 team)
+    // Games for Tue, Dec 2, 2025 (only games with at least one Salas 64 team)
     const games = [
       {
-        matchup: "Temple (4–3) at Villanova (5–1)",
-        team1: "Villanova",
-        team2: "Temple",
-        time: "Mon 3:30 PM (FS1) — Finneran Pavilion, Villanova (home)",
-        prediction: "Villanova 81–66"
+        matchup: "Iowa (7–0) at Michigan State (7–0)",
+        team1: "Iowa",
+        team2: "Michigan State",
+        time: "Tue 4:00 PM — Breslin Center, East Lansing (home)",
+        prediction: "Michigan State 78–71"
       },
       {
-        matchup: "Tarleton State (5–3) at Cincinnati (5–2)",
-        team1: "Cincinnati",
-        team2: "Tarleton State",
-        time: "Mon 4:00 PM (ESPN+) — Fifth Third Arena, Cincinnati (home)",
-        prediction: "Cincinnati 82–63"
+        matchup: "Tennessee (7–1) at Syracuse (4–3)",
+        team1: "Tennessee",
+        team2: "Syracuse",
+        time: "Tue 4:00 PM — JMA Wireless Dome, Syracuse (home)",
+        prediction: "Tennessee 80–72"
       },
       {
-        matchup: "Bowling Green (5–2) at Kansas State (5–2)",
-        team1: "Kansas State",
-        team2: "Bowling Green",
-        time: "Mon 5:00 PM (ESPN+) — Bramlage Coliseum, Manhattan (home)",
-        prediction: "Kansas State 86–70"
+        matchup: "Cornell (5–2) at George Mason (8–0)",
+        team1: "George Mason",
+        team2: "Cornell",
+        time: "Tue 4:00 PM — EagleBank Arena, Fairfax (home)",
+        prediction: "George Mason 83–68"
       },
       {
-        matchup: "California Baptist (7–0) at Colorado (7–0)",
-        team1: "Colorado",
-        team2: "California Baptist",
-        time: "Mon 6:00 PM (ESPN+) — CU Events Center, Boulder (home)",
-        prediction: "Colorado 79–70"
+        matchup: "East Tennessee State (6–1) at Dayton (6–2)",
+        team1: "Dayton",
+        team2: "East Tennessee State",
+        time: "Tue 4:00 PM — UD Arena, Dayton (home)",
+        prediction: "Dayton 77–66"
+      },
+      {
+        matchup: "Florida (5–2) at Duke (8–0)",
+        team1: "Florida",
+        team2: "Duke",
+        time: "Tue 4:30 PM — Cameron Indoor Stadium, Durham (home)",
+        prediction: "Duke 84–74"
+      },
+      {
+        matchup: "Purdue (7–0) at Rutgers (5–3)",
+        team1: "Purdue",
+        team2: "Rutgers",
+        time: "Tue 5:00 PM — Jersey Mike’s Arena, Piscataway (home)",
+        prediction: "Purdue 82–62"
+      },
+      {
+        matchup: "Wagner (1–5) at Maryland (5–3)",
+        team1: "Maryland",
+        team2: "Wagner",
+        time: "Tue 5:00 PM — XFINITY Center, College Park (home)",
+        prediction: "Maryland 85–60"
+      },
+      {
+        matchup: "Sam Houston (5–2) at Oklahoma State (7–0)",
+        team1: "Oklahoma State",
+        team2: "Sam Houston",
+        time: "Tue 5:00 PM — Gallagher-Iba Arena, Stillwater (home)",
+        prediction: "Oklahoma State 79–63"
+      },
+      {
+        matchup: "Sacramento State (4–5) at Baylor (5–1)",
+        team1: "Baylor",
+        team2: "Sacramento State",
+        time: "Tue 5:00 PM — Foster Pavilion, Waco (home)",
+        prediction: "Baylor 90–62"
+      },
+      {
+        matchup: "UConn (6–1) at Kansas (6–2)",
+        team1: "UConn",
+        team2: "Kansas",
+        time: "Tue 6:00 PM — Allen Fieldhouse, Lawrence (home)",
+        prediction: "Kansas 74–71"
+      },
+      {
+        matchup: "Miami (FL) (6–2) at Ole Miss (5–2)",
+        team1: "Miami FL",
+        team2: "Ole Miss",
+        time: "Tue 6:00 PM — The Sandy and John Black Pavilion, Oxford (home)",
+        prediction: "Ole Miss 77–73"
+      },
+      {
+        matchup: "Georgia (7–1) at Florida State (5–2)",
+        team1: "Georgia",
+        team2: "Florida State",
+        time: "Tue 6:00 PM — Tucker Center, Tallahassee (home)",
+        prediction: "Georgia 82–78"
+      },
+      {
+        matchup: "Missouri (8–0) at Notre Dame (5–3)",
+        team1: "Missouri",
+        team2: "Notre Dame",
+        time: "Tue 6:00 PM — Purcell Pavilion, South Bend (home)",
+        prediction: "Missouri 76–72"
+      },
+      {
+        matchup: "North Carolina (6–1) at Kentucky (5–2)",
+        team1: "North Carolina",
+        team2: "Kentucky",
+        time: "Tue 6:30 PM — Rupp Arena, Lexington (home)",
+        prediction: "Kentucky 83–79"
+      },
+      {
+        matchup: "USC (7–0) at Oregon (4–3)",
+        team1: "USC",
+        team2: "Oregon",
+        time: "Tue 7:00 PM — Matthew Knight Arena, Eugene (home)",
+        prediction: "USC 79–75"
+      },
+      {
+        matchup: "UC San Diego (7–0) at Nevada (5–3)",
+        team1: "UC San Diego",
+        team2: "Nevada",
+        time: "Tue 7:00 PM — Lawlor Events Center, Reno (home)",
+        prediction: "Nevada 72–67"
+      },
+      {
+        matchup: "Utah (6–2) at California (6–1)",
+        team1: "Utah",
+        team2: "California",
+        time: "Tue 7:00 PM — Haas Pavilion, Berkeley (home)",
+        prediction: "California 75–70"
       }
     ];
 
-    const rankingsAsOf = "As of Mon, Dec 1, 2025";
-    const gamesDayLabel = "Games involving Salas 64 teams (Mon, Dec 1, 2025)";
+    const rankingsAsOf = "As of Tue, Dec 2, 2025";
+    const gamesDayLabel = "Games involving Salas 64 teams (Tue, Dec 2, 2025)";
 
     let currentSortKey = "rank";
     let currentSortDir = "asc";
