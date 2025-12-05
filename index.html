@@ -345,7 +345,7 @@
   </div>
 
   <script>
-    // Updated Salas 64 rankings (Thu, Dec 4)
+    // Updated Salas 64 rankings (Fri, Dec 5)
     const salasRankings = [
       { "rank": 1,  "team": "Michigan",       "record": "7–0" },
       { "rank": 2,  "team": "Purdue",         "record": "8–0" },
@@ -357,6 +357,7 @@
       { "rank": 8,  "team": "Houston",        "record": "7–1" },
       { "rank": 9,  "team": "Kansas",         "record": "6–3" },
       { "rank": 10, "team": "Gonzaga",        "record": "7–1" },
+
       { "rank": 11, "team": "BYU",            "record": "7–1" },
       { "rank": 12, "team": "North Carolina", "record": "7–1" },
       { "rank": 13, "team": "Alabama",        "record": "6–2" },
@@ -367,18 +368,20 @@
       { "rank": 18, "team": "Baylor",         "record": "6–1" },
       { "rank": 19, "team": "USC",            "record": "8–0" },
       { "rank": 20, "team": "Iowa",           "record": "7–1" },
+
       { "rank": 21, "team": "Nebraska",       "record": "8–0" },
       { "rank": 22, "team": "Auburn",         "record": "7–1" },
       { "rank": 23, "team": "Ohio State",     "record": "6–1" },
       { "rank": 24, "team": "UCLA",           "record": "6–2" },
-      { "rank": 25, "team": "Utah State",     "record": "7–0" },
-      { "rank": 26, "team": "Indiana",        "record": "7–1" },
-      { "rank": 27, "team": "Missouri",       "record": "8–1" },
-      { "rank": 28, "team": "Florida",        "record": "5–3" },
-      { "rank": 29, "team": "Wisconsin",      "record": "5–2" },
-      { "rank": 30, "team": "Georgia",        "record": "8–1" },
-      { "rank": 31, "team": "LSU",            "record": "8–0" },
-      { "rank": 32, "team": "Texas Tech",     "record": "6–2" },
+      { "rank": 25, "team": "Indiana",        "record": "7–1" },
+      { "rank": 26, "team": "Missouri",       "record": "8–1" },
+      { "rank": 27, "team": "Florida",        "record": "5–3" },
+      { "rank": 28, "team": "Wisconsin",      "record": "5–2" },
+      { "rank": 29, "team": "Georgia",        "record": "8–1" },
+      { "rank": 30, "team": "LSU",            "record": "8–0" },
+
+      { "rank": 31, "team": "Texas Tech",     "record": "6–2" },
+      { "rank": 32, "team": "Utah State",     "record": "7–1" },
       { "rank": 33, "team": "NC State",       "record": "5–3" },
       { "rank": 34, "team": "Cincinnati",     "record": "6–2" },
       { "rank": 35, "team": "Kentucky",       "record": "5–3" },
@@ -387,6 +390,7 @@
       { "rank": 38, "team": "Colorado",       "record": "8–0" },
       { "rank": 39, "team": "Saint Mary’s",   "record": "8–1" },
       { "rank": 40, "team": "Virginia",       "record": "7–1" },
+
       { "rank": 41, "team": "SMU",            "record": "8–1" },
       { "rank": 42, "team": "Ole Miss",       "record": "5–3" },
       { "rank": 43, "team": "Miami FL",       "record": "7–2" },
@@ -397,6 +401,7 @@
       { "rank": 48, "team": "Kansas State",   "record": "5–3" },
       { "rank": 49, "team": "Oregon",         "record": "4–4" },
       { "rank": 50, "team": "Utah",           "record": "6–3" },
+
       { "rank": 51, "team": "Dayton",         "record": "7–2" },
       { "rank": 52, "team": "Syracuse",       "record": "5–3" },
       { "rank": 53, "team": "George Mason",   "record": "9–0" },
@@ -407,25 +412,40 @@
       { "rank": 58, "team": "Colorado State", "record": "6–2" },
       { "rank": 59, "team": "Clemson",        "record": "7–2" },
       { "rank": 60, "team": "Santa Clara",    "record": "8–1" },
+
       { "rank": 61, "team": "Texas",          "record": "6–3" },
       { "rank": 62, "team": "UCF",            "record": "7–1" },
       { "rank": 63, "team": "Georgetown",     "record": "6–2" },
       { "rank": 64, "team": "Saint Louis",    "record": "7–1" }
     ];
 
-    // Games for Thu, Dec 4 (only games with at least one Salas 64 team)
+    // Games for Fri, Dec 5 (only games with at least one Salas 64 team)
     const games = [
       {
-        matchup: "Utah State (7–0) at South Florida (4–4)",
-        team1: "Utah State",
-        team2: "South Florida",
-        time: "Thu 4:00 PM — Yuengling Center, Tampa (road)",
-        prediction: "Utah State 82–76"
+        matchup: "Gonzaga (7–1) vs Kentucky (5–3)",
+        team1: "Gonzaga",
+        team2: "Kentucky",
+        time: "Fri 4:00 PM — Rupp Arena, Lexington (event)",
+        prediction: "Gonzaga 84–79"
+      },
+      {
+        matchup: "UConn (7–1) vs East Texas A&M",
+        team1: "UConn",
+        team2: "East Texas A&M",
+        time: "Fri 4:30 PM — Gampel Pavilion, Storrs (home)",
+        prediction: "UConn 88–61"
+      },
+      {
+        matchup: "Cincinnati (6–2) at Xavier (6–3)",
+        team1: "Cincinnati",
+        team2: "Xavier",
+        time: "Fri 4:30 PM — Cintas Center, Cincinnati (road)",
+        prediction: "Xavier 77–74"
       }
     ];
 
-    const rankingsAsOf = "As of Thu, Dec 4";
-    const gamesDayLabel = "Games involving Salas 64 teams (Thu, Dec 4)";
+    const rankingsAsOf = "As of Fri, Dec 5";
+    const gamesDayLabel = "Games involving Salas 64 teams (Fri, Dec 5)";
 
     let currentSortKey = "rank";
     let currentSortDir = "asc";
