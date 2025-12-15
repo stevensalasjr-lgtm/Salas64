@@ -1,325 +1,663 @@
-<script>
-  // Salas 64 rankings (Mon, Dec 15)
-  const salasRankings = [
-    { "rank": 1,  "team": "Iowa State",     "record": "11–0" },
-    { "rank": 2,  "team": "Arizona",        "record": "9–0" },
-    { "rank": 3,  "team": "Michigan",       "record": "10–0" },
-    { "rank": 4,  "team": "Duke",           "record": "10–0" },
-    { "rank": 5,  "team": "UConn",          "record": "10–1" },
-    { "rank": 6,  "team": "Houston",        "record": "10–1" },
-    { "rank": 7,  "team": "Purdue",         "record": "10–1" },
-    { "rank": 8,  "team": "Gonzaga",        "record": "10–1" },
-    { "rank": 9,  "team": "Michigan State", "record": "9–1" },
-    { "rank": 10, "team": "BYU",            "record": "9–1" },
-
-    { "rank": 11, "team": "Kansas",         "record": "8–3" },
-    { "rank": 12, "team": "North Carolina", "record": "9–1" },
-    { "rank": 13, "team": "Nebraska",       "record": "11–0" },
-    { "rank": 14, "team": "Illinois",       "record": "8–3" },
-    { "rank": 15, "team": "Alabama",        "record": "7–3" },
-    { "rank": 16, "team": "Vanderbilt",     "record": "10–0" },
-    { "rank": 17, "team": "Tennessee",      "record": "7–3" },
-    { "rank": 18, "team": "Louisville",     "record": "9–1" },
-    { "rank": 19, "team": "USC",            "record": "10–1" },
-    { "rank": 20, "team": "Iowa",           "record": "9–2" },
-
-    { "rank": 21, "team": "Baylor",         "record": "7–2" },
-    { "rank": 22, "team": "Auburn",         "record": "8–3" },
-    { "rank": 23, "team": "Texas Tech",     "record": "7–3" },
-    { "rank": 24, "team": "Georgia",        "record": "9–1" },
-    { "rank": 25, "team": "Ohio State",     "record": "9–2" },
-    { "rank": 26, "team": "UCLA",           "record": "7–3" },
-    { "rank": 27, "team": "Missouri",       "record": "10–2" },
-    { "rank": 28, "team": "Indiana",        "record": "8–3" },
-    { "rank": 29, "team": "Utah State",     "record": "9–1" },
-    { "rank": 30, "team": "NC State",       "record": "7–4" },
-
-    { "rank": 31, "team": "Florida",        "record": "6–4" },
-    { "rank": 32, "team": "Villanova",      "record": "8–2" },
-    { "rank": 33, "team": "St. John’s",     "record": "6–3" },
-    { "rank": 34, "team": "Colorado",       "record": "9–1" },
-    { "rank": 35, "team": "Saint Mary’s",   "record": "9–2" },
-    { "rank": 36, "team": "Virginia",       "record": "9–1" },
-    { "rank": 37, "team": "LSU",            "record": "9–1" },
-    { "rank": 38, "team": "SMU",            "record": "9–2" },
-    { "rank": 39, "team": "Miami FL",       "record": "9–2" },
-    { "rank": 40, "team": "Wisconsin",      "record": "7–3" },
-
-    { "rank": 41, "team": "Ole Miss",       "record": "6–4" },
-    { "rank": 42, "team": "Cincinnati",     "record": "6–4" },
-    { "rank": 43, "team": "Washington",     "record": "8–3" },
-    { "rank": 44, "team": "Kentucky",       "record": "7–4" },
-    { "rank": 45, "team": "Northwestern",   "record": "6–4" },
-    { "rank": 46, "team": "Creighton",      "record": "5–5" },
-    { "rank": 47, "team": "San Diego State","record": "5–3" },
-    { "rank": 48, "team": "Kansas State",   "record": "7–4" },
-    { "rank": 49, "team": "Oregon",         "record": "5–5" },
-    { "rank": 50, "team": "Utah",           "record": "7–4" },
-
-    { "rank": 51, "team": "Dayton",         "record": "8–3" },
-    { "rank": 52, "team": "Syracuse",       "record": "6–4" },
-    { "rank": 53, "team": "George Mason",   "record": "10–1" },
-    { "rank": 54, "team": "Maryland",       "record": "6–5" },
-    { "rank": 55, "team": "Arkansas",       "record": "8–2" },
-    { "rank": 56, "team": "Oklahoma",       "record": "7–3" },
-    { "rank": 57, "team": "Liberty",        "record": "6–3" },
-    { "rank": 58, "team": "Seton Hall",     "record": "10–1" },
-    { "rank": 59, "team": "Colorado State", "record": "9–2" },
-    { "rank": 60, "team": "Clemson",        "record": "8–3" },
-
-    { "rank": 61, "team": "UC San Diego",   "record": "10–1" },
-    { "rank": 62, "team": "Saint Louis",    "record": "10–1" },
-    { "rank": 63, "team": "UCF",            "record": "8–1" },
-    { "rank": 64, "team": "Georgetown",     "record": "7–3" }
-  ];
-
-  // No Salas 64 teams play on Mon, Dec 15 → no prediction cards
-  const games = [];
-
-  const rankingsAsOf = "As of Mon, Dec 15";
-  const gamesDayLabel = "Games involving Salas 64 teams (Mon, Dec 15)";
-
-  let currentSortKey = "rank";
-  let currentSortDir = "asc";
-
-  function parseRecord(rec) {
-    const cleaned = rec.replace(/–/g, "-");
-    const parts = cleaned.split("-");
-    const wins = parseInt(parts[0], 10) || 0;
-    const losses = parseInt(parts[1], 10) || 0;
-    return { wins, losses };
-  }
-
-  function renderRankings() {
-    const container = document.getElementById("rankingsList");
-    container.innerHTML = "";
-
-    const data = [].concat(salasRankings).sort((a, b) => {
-      if (currentSortKey === "rank") {
-        return currentSortDir === "asc" ? a.rank - b.rank : b.rank - a.rank;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Salas 64 Rankings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      color: #0f172a;
+      background: #020617;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
+      color: #e5e7eb;
+    }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #1f2933;
+      padding-bottom: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    header .meta {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+      gap: 20px;
+    }
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
       }
-      if (currentSortKey === "team") {
-        const an = a.team.toLowerCase();
-        const bn = b.team.toLowerCase();
-        if (an < bn) return currentSortDir === "asc" ? -1 : 1;
-        if (an > bn) return currentSortDir === "asc" ? 1 : -1;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 16px;
+      padding: 16px 18px 18px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      backdrop-filter: blur(10px);
+    }
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .card h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    .card p.subtitle {
+      margin: 0 0 12px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    .card-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 0.8rem;
+    }
+    .info-link {
+      color: #60a5fa;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .info-link:hover {
+      text-decoration: underline;
+    }
+    .link-divider {
+      color: #4b5563;
+    }
+    .search-bar {
+      margin-bottom: 10px;
+      display: flex;
+      gap: 8px;
+      position: relative;
+      z-index: 5;
+    }
+    .search-wrapper {
+      position: relative;
+      flex: 1;
+    }
+    .search-bar input {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 6px 10px;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-bar input::placeholder {
+      color: #6b7280;
+    }
+    .search-results {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      right: 0;
+      background: #020617;
+      border-radius: 12px;
+      border: 1px solid #4b5563;
+      max-height: 220px;
+      overflow-y: auto;
+      padding: 4px 0;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.7);
+      display: none;
+    }
+    .search-result-item {
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .search-result-item span.team {
+      font-weight: 500;
+    }
+    .search-result-item span.rank {
+      color: #9ca3af;
+      font-variant-numeric: tabular-nums;
+    }
+    .search-result-item:hover {
+      background: #111827;
+    }
+    .sort-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    .sort-select {
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 4px 10px;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      outline: none;
+    }
+    .rankings-header {
+      display: grid;
+      grid-template-columns: 50px 1fr 90px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      padding: 6px 8px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.9);
+      margin-bottom: 4px;
+    }
+    .ranking-row {
+      display: grid;
+      grid-template-columns: 50px 1fr 90px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      align-items: center;
+      transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .ranking-row:nth-child(odd) {
+      background: rgba(15, 23, 42, 0.75);
+    }
+    .ranking-row:nth-child(even) {
+      background: rgba(17, 24, 39, 0.85);
+    }
+    .ranking-row:hover {
+      background: rgba(31, 41, 55, 0.98);
+      transform: translateY(-1px);
+    }
+    .ranking-row.highlight {
+      box-shadow: 0 0 0 2px #facc15;
+    }
+    .rank-num {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+    .team-name {
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .record {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      color: #e5e7eb;
+    }
+    .games-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .games-subheading {
+      margin: 12px 0 4px;
+      font-size: 0.9rem;
+      color: #cbd5f5;
+    }
+    .game {
+      border-radius: 12px;
+      padding: 10px 11px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 64, 175, 0.7));
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+    .game-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .matchup {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .game-meta {
+      font-size: 0.8rem;
+      color: #cbd5f5;
+      text-align: right;
+    }
+    .game-body {
+      font-size: 0.83rem;
+      color: #e5e7eb;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      padding: 2px 7px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+    footer {
+      margin-top: 22px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1><strong>Salas 64</strong> — College Basketball Rankings</h1>
+      <div class="meta" id="asOfText"></div>
+    </header>
+
+    <div class="layout">
+      <section class="card" aria-label="Salas 64 Rankings">
+        <div class="card-header-row">
+          <h2>Salas 64 Rankings</h2>
+          <div class="card-links">
+            <a href="how-it-works.html" class="info-link">How do the rankings work?</a>
+            <span class="link-divider">•</span>
+            <a href="about.html" class="info-link">About Salas 64</a>
+          </div>
+        </div>
+        <p class="subtitle">Custom rankings based on efficiency, résumé, and March potential.</p>
+
+        <div class="search-bar">
+          <div class="search-wrapper">
+            <input id="teamSearchInput" type="text" placeholder="Search team (e.g. Kansas, Colorado State)" />
+            <div id="searchResults" class="search-results"></div>
+          </div>
+        </div>
+
+        <div class="sort-row">
+          <span>Sort by:</span>
+          <select id="sortSelect" class="sort-select">
+            <option value="rank">Rank</option>
+            <option value="team">Team (A–Z)</option>
+            <option value="record">Record</option>
+          </select>
+        </div>
+
+        <div class="rankings-header">
+          <span>#</span>
+          <span>Team</span>
+          <span style="text-align:right">Record</span>
+        </div>
+        <div id="rankingsList"></div>
+      </section>
+
+      <section class="card" aria-label="Games involving Salas 64 teams">
+        <h2>Games with Salas 64 Teams</h2>
+        <p class="subtitle" id="gamesSubtitle"></p>
+
+        <div class="badge">Prediction Board</div>
+
+        <h3 class="games-subheading">Games between two Salas 64 teams</h3>
+        <div class="games-list" id="gamesBothList"></div>
+
+        <h3 class="games-subheading">Games with one Salas 64 team</h3>
+        <div class="games-list" id="gamesOneList"></div>
+      </section>
+    </div>
+
+    <footer>
+      Salas 64 &copy; <span id="year"></span>. Updated daily.
+    </footer>
+  </div>
+
+  <script>
+    // Salas 64 rankings (Mon, Dec 15)
+    const salasRankings = [
+      { "rank": 1,  "team": "Iowa State",     "record": "11-0" },
+      { "rank": 2,  "team": "Arizona",        "record": "9-0" },
+      { "rank": 3,  "team": "Michigan",       "record": "10-0" },
+      { "rank": 4,  "team": "Duke",           "record": "10-0" },
+      { "rank": 5,  "team": "UConn",          "record": "10-1" },
+      { "rank": 6,  "team": "Houston",        "record": "10-1" },
+      { "rank": 7,  "team": "Purdue",         "record": "10-1" },
+      { "rank": 8,  "team": "Gonzaga",        "record": "10-1" },
+      { "rank": 9,  "team": "Michigan State", "record": "9-1" },
+      { "rank": 10, "team": "BYU",            "record": "9-1" },
+
+      { "rank": 11, "team": "Kansas",         "record": "8-3" },
+      { "rank": 12, "team": "North Carolina", "record": "9-1" },
+      { "rank": 13, "team": "Nebraska",       "record": "11-0" },
+      { "rank": 14, "team": "Illinois",       "record": "8-3" },
+      { "rank": 15, "team": "Alabama",        "record": "7-3" },
+      { "rank": 16, "team": "Vanderbilt",     "record": "10-0" },
+      { "rank": 17, "team": "Tennessee",      "record": "7-3" },
+      { "rank": 18, "team": "Louisville",     "record": "9-1" },
+      { "rank": 19, "team": "USC",            "record": "10-1" },
+      { "rank": 20, "team": "Iowa",           "record": "9-2" },
+
+      { "rank": 21, "team": "Baylor",         "record": "7-2" },
+      { "rank": 22, "team": "Auburn",         "record": "8-3" },
+      { "rank": 23, "team": "Texas Tech",     "record": "7-3" },
+      { "rank": 24, "team": "Georgia",        "record": "9-1" },
+      { "rank": 25, "team": "Ohio State",     "record": "9-2" },
+      { "rank": 26, "team": "UCLA",           "record": "7-3" },
+      { "rank": 27, "team": "Missouri",       "record": "10-2" },
+      { "rank": 28, "team": "Indiana",        "record": "8-3" },
+      { "rank": 29, "team": "Utah State",     "record": "9-1" },
+      { "rank": 30, "team": "NC State",       "record": "7-4" },
+
+      { "rank": 31, "team": "Florida",        "record": "6-4" },
+      { "rank": 32, "team": "Villanova",      "record": "8-2" },
+      { "rank": 33, "team": "St. John’s",     "record": "6-3" },
+      { "rank": 34, "team": "Colorado",       "record": "9-1" },
+      { "rank": 35, "team": "Saint Mary’s",   "record": "9-2" },
+      { "rank": 36, "team": "Virginia",       "record": "9-1" },
+      { "rank": 37, "team": "LSU",            "record": "9-1" },
+      { "rank": 38, "team": "SMU",            "record": "9-2" },
+      { "rank": 39, "team": "Miami FL",       "record": "9-2" },
+      { "rank": 40, "team": "Wisconsin",      "record": "7-3" },
+
+      { "rank": 41, "team": "Ole Miss",       "record": "6-4" },
+      { "rank": 42, "team": "Cincinnati",     "record": "6-4" },
+      { "rank": 43, "team": "Washington",     "record": "8-3" },
+      { "rank": 44, "team": "Kentucky",       "record": "7-4" },
+      { "rank": 45, "team": "Northwestern",   "record": "6-4" },
+      { "rank": 46, "team": "Creighton",      "record": "5-5" },
+      { "rank": 47, "team": "San Diego State","record": "5-3" },
+      { "rank": 48, "team": "Kansas State",   "record": "7-4" },
+      { "rank": 49, "team": "Oregon",         "record": "5-5" },
+      { "rank": 50, "team": "Utah",           "record": "7-4" },
+
+      { "rank": 51, "team": "Dayton",         "record": "8-3" },
+      { "rank": 52, "team": "Syracuse",       "record": "6-4" },
+      { "rank": 53, "team": "George Mason",   "record": "10-1" },
+      { "rank": 54, "team": "Maryland",       "record": "6-5" },
+      { "rank": 55, "team": "Arkansas",       "record": "8-2" },
+      { "rank": 56, "team": "Oklahoma",       "record": "7-3" },
+      { "rank": 57, "team": "Liberty",        "record": "6-3" },
+      { "rank": 58, "team": "Seton Hall",     "record": "10-1" },
+      { "rank": 59, "team": "Colorado State", "record": "9-2" },
+      { "rank": 60, "team": "Clemson",        "record": "8-3" },
+
+      { "rank": 61, "team": "UC San Diego",   "record": "10-1" },
+      { "rank": 62, "team": "Saint Louis",    "record": "10-1" },
+      { "rank": 63, "team": "UCF",            "record": "8-1" },
+      { "rank": 64, "team": "Georgetown",     "record": "7-3" }
+    ];
+
+    // No Salas 64 teams play on Mon, Dec 15
+    const games = [];
+
+    const rankingsAsOf = "As of Mon, Dec 15";
+    const gamesDayLabel = "Games involving Salas 64 teams (Mon, Dec 15)";
+
+    let currentSortKey = "rank";
+    let currentSortDir = "asc";
+
+    function parseRecord(rec) {
+      const cleaned = rec.replace(/–/g, "-");
+      const parts = cleaned.split("-");
+      const wins = parseInt(parts[0], 10) || 0;
+      const losses = parseInt(parts[1], 10) || 0;
+      return { wins, losses };
+    }
+
+    function renderRankings() {
+      const container = document.getElementById("rankingsList");
+      container.innerHTML = "";
+
+      const data = [...salasRankings].sort((a, b) => {
+        if (currentSortKey === "rank") {
+          return currentSortDir === "asc" ? a.rank - b.rank : b.rank - a.rank;
+        }
+        if (currentSortKey === "team") {
+          const an = a.team.toLowerCase();
+          const bn = b.team.toLowerCase();
+          if (an < bn) return currentSortDir === "asc" ? -1 : 1;
+          if (an > bn) return currentSortDir === "asc" ? 1 : -1;
+          return 0;
+        }
+        if (currentSortKey === "record") {
+          const ar = parseRecord(a.record);
+          const br = parseRecord(b.record);
+          const pa = (ar.wins + ar.losses) > 0 ? ar.wins / (ar.wins + ar.losses) : 0;
+          const pb = (br.wins + br.losses) > 0 ? br.wins / (br.wins + br.losses) : 0;
+          if (pa !== pb) return pb - pa;
+          if (ar.wins !== br.wins) return br.wins - ar.wins;
+          return ar.losses - br.losses;
+        }
         return 0;
-      }
-      if (currentSortKey === "record") {
-        const ar = parseRecord(a.record);
-        const br = parseRecord(b.record);
-        const pa = (ar.wins + ar.losses) > 0 ? ar.wins / (ar.wins + ar.losses) : 0;
-        const pb = (br.wins + br.losses) > 0 ? br.wins / (br.wins + br.losses) : 0;
+      });
 
-        if (pa !== pb) return pb - pa;
-        if (ar.wins !== br.wins) return br.wins - ar.wins;
-        return ar.losses - br.losses;
-      }
-      return 0;
-    });
+      data.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "ranking-row";
+        row.dataset.team = item.team.toLowerCase();
 
-    data.forEach((item) => {
-      const row = document.createElement("div");
-      row.className = "ranking-row";
-      row.dataset.team = item.team.toLowerCase();
+        const rankCell = document.createElement("div");
+        rankCell.className = "rank-num";
+        rankCell.textContent = item.rank;
 
-      const rankCell = document.createElement("div");
-      rankCell.className = "rank-num";
-      rankCell.textContent = item.rank;
+        const teamCell = document.createElement("div");
+        teamCell.className = "team-name";
+        teamCell.textContent = item.team;
 
-      const teamCell = document.createElement("div");
-      teamCell.className = "team-name";
-      teamCell.textContent = item.team;
+        const recordCell = document.createElement("div");
+        recordCell.className = "record";
+        recordCell.textContent = item.record;
 
-      const recordCell = document.createElement("div");
-      recordCell.className = "record";
-      recordCell.textContent = item.record;
+        row.appendChild(rankCell);
+        row.appendChild(teamCell);
+        row.appendChild(recordCell);
 
-      row.appendChild(rankCell);
-      row.appendChild(teamCell);
-      row.appendChild(recordCell);
-
-      container.appendChild(row);
-    });
-  }
-
-  function makeGameCard(game) {
-    const card = document.createElement("article");
-    card.className = "game";
-
-    const topline = document.createElement("div");
-    topline.className = "game-topline";
-
-    const matchup = document.createElement("div");
-    matchup.className = "matchup";
-    matchup.textContent = game.matchup;
-
-    const meta = document.createElement("div");
-    meta.className = "game-meta";
-    meta.textContent = game.time;
-
-    topline.appendChild(matchup);
-    topline.appendChild(meta);
-
-    const body = document.createElement("div");
-    body.className = "game-body";
-    body.textContent = "Prediction: " + game.prediction;
-
-    card.appendChild(topline);
-    card.appendChild(body);
-    return card;
-  }
-
-  function renderGames() {
-    const bothContainer = document.getElementById("gamesBothList");
-    const oneContainer = document.getElementById("gamesOneList");
-    bothContainer.innerHTML = "";
-    oneContainer.innerHTML = "";
-
-    const salasSet = new Set(salasRankings.map(function (t) { return t.team.toLowerCase(); }));
-
-    const gamesWithTwo = [];
-    const gamesWithOne = [];
-
-    games.forEach(function (g) {
-      const in1 = salasSet.has((g.team1 || "").toLowerCase());
-      const in2 = salasSet.has((g.team2 || "").toLowerCase());
-      if (in1 && in2) {
-        gamesWithTwo.push(g);
-      } else if (in1 || in2) {
-        gamesWithOne.push(g);
-      }
-    });
-
-    if (gamesWithTwo.length === 0) {
-      const empty = document.createElement("div");
-      empty.className = "game-body";
-      empty.textContent = "No games today with two Salas 64 teams.";
-      bothContainer.appendChild(empty);
-    } else {
-      gamesWithTwo.forEach(function (g) {
-        bothContainer.appendChild(makeGameCard(g));
+        container.appendChild(row);
       });
     }
 
-    if (gamesWithOne.length === 0) {
-      const empty = document.createElement("div");
-      empty.className = "game-body";
-      empty.textContent = "No games today with one Salas 64 team.";
-      oneContainer.appendChild(empty);
-    } else {
-      gamesWithOne.forEach(function (g) {
-        oneContainer.appendChild(makeGameCard(g));
+    function makeGameCard(game) {
+      const card = document.createElement("article");
+      card.className = "game";
+
+      const topline = document.createElement("div");
+      topline.className = "game-topline";
+
+      const matchup = document.createElement("div");
+      matchup.className = "matchup";
+      matchup.textContent = game.matchup;
+
+      const meta = document.createElement("div");
+      meta.className = "game-meta";
+      meta.textContent = game.time;
+
+      topline.appendChild(matchup);
+      topline.appendChild(meta);
+
+      const body = document.createElement("div");
+      body.className = "game-body";
+      body.textContent = "Prediction: " + game.prediction;
+
+      card.appendChild(topline);
+      card.appendChild(body);
+      return card;
+    }
+
+    function renderGames() {
+      const bothContainer = document.getElementById("gamesBothList");
+      const oneContainer = document.getElementById("gamesOneList");
+      bothContainer.innerHTML = "";
+      oneContainer.innerHTML = "";
+
+      const salasSet = new Set(salasRankings.map((t) => t.team.toLowerCase()));
+
+      const gamesWithTwo = [];
+      const gamesWithOne = [];
+
+      games.forEach((g) => {
+        const in1 = salasSet.has((g.team1 || "").toLowerCase());
+        const in2 = salasSet.has((g.team2 || "").toLowerCase());
+        if (in1 && in2) {
+          gamesWithTwo.push(g);
+        } else if (in1 || in2) {
+          gamesWithOne.push(g);
+        }
       });
-    }
-  }
 
-  const allTeams = salasRankings.map(function (t) { return { name: t.team, rank: t.rank }; });
+      if (gamesWithTwo.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "game-body";
+        empty.textContent = "No games today with two Salas 64 teams.";
+        bothContainer.appendChild(empty);
+      } else {
+        gamesWithTwo.forEach((g) => bothContainer.appendChild(makeGameCard(g)));
+      }
 
-  function scrollToTeam(teamName) {
-    const rows = Array.prototype.slice.call(document.querySelectorAll(".ranking-row"));
-    rows.forEach(function (r) { r.classList.remove("highlight"); });
-    const target = rows.find(function (r) {
-      return (r.dataset.team || "").toLowerCase() === teamName.toLowerCase();
-    });
-    if (target) {
-      target.classList.add("highlight");
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }
-
-  function updateSearchResults() {
-    const input = document.getElementById("teamSearchInput");
-    const resultsBox = document.getElementById("searchResults");
-    if (!input || !resultsBox) return;
-
-    const query = input.value.trim().toLowerCase();
-    resultsBox.innerHTML = "";
-
-    if (!query) {
-      resultsBox.style.display = "none";
-      return;
+      if (gamesWithOne.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "game-body";
+        empty.textContent = "No games today with one Salas 64 team.";
+        oneContainer.appendChild(empty);
+      } else {
+        gamesWithOne.forEach((g) => oneContainer.appendChild(makeGameCard(g)));
+      }
     }
 
-    const matches = allTeams.filter(function (t) {
-      return t.name.toLowerCase().startsWith(query);
-    });
+    const allTeams = salasRankings.map((t) => ({ name: t.team, rank: t.rank }));
 
-    if (!matches.length) {
-      resultsBox.style.display = "none";
-      return;
+    function scrollToTeam(teamName) {
+      const rows = Array.from(document.querySelectorAll(".ranking-row"));
+      rows.forEach((r) => r.classList.remove("highlight"));
+      const target = rows.find(
+        (r) => (r.dataset.team || "").toLowerCase() === teamName.toLowerCase()
+      );
+      if (target) {
+        target.classList.add("highlight");
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
     }
 
-    matches.slice(0, 10).forEach(function (t) {
-      const item = document.createElement("div");
-      item.className = "search-result-item";
+    function updateSearchResults() {
+      const input = document.getElementById("teamSearchInput");
+      const resultsBox = document.getElementById("searchResults");
+      if (!input || !resultsBox) return;
 
-      const spanTeam = document.createElement("span");
-      spanTeam.className = "team";
-      spanTeam.textContent = t.name;
+      const query = input.value.trim().toLowerCase();
+      resultsBox.innerHTML = "";
 
-      const spanRank = document.createElement("span");
-      spanRank.className = "rank";
-      spanRank.textContent = "#" + t.rank;
-
-      item.appendChild(spanTeam);
-      item.appendChild(spanRank);
-
-      item.addEventListener("click", function () {
-        input.value = t.name;
+      if (!query) {
         resultsBox.style.display = "none";
-        scrollToTeam(t.name);
+        return;
+      }
+
+      const matches = allTeams.filter((t) =>
+        t.name.toLowerCase().startsWith(query)
+      );
+
+      if (!matches.length) {
+        resultsBox.style.display = "none";
+        return;
+      }
+
+      matches.slice(0, 10).forEach((t) => {
+        const item = document.createElement("div");
+        item.className = "search-result-item";
+
+        const spanTeam = document.createElement("span");
+        spanTeam.className = "team";
+        spanTeam.textContent = t.name;
+
+        const spanRank = document.createElement("span");
+        spanRank.className = "rank";
+        spanRank.textContent = `#${t.rank}`;
+
+        item.appendChild(spanTeam);
+        item.appendChild(spanRank);
+
+        item.addEventListener("click", () => {
+          input.value = t.name;
+          resultsBox.style.display = "none";
+          scrollToTeam(t.name);
+        });
+
+        resultsBox.appendChild(item);
       });
 
-      resultsBox.appendChild(item);
-    });
-
-    resultsBox.style.display = "block";
-  }
-
-  function initPage() {
-    document.getElementById("asOfText").textContent = rankingsAsOf;
-    document.getElementById("gamesSubtitle").textContent = gamesDayLabel;
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    renderRankings();
-    renderGames();
-
-    const sortSelect = document.getElementById("sortSelect");
-    if (sortSelect) {
-      sortSelect.addEventListener("change", function () {
-        currentSortKey = sortSelect.value;
-        currentSortDir = "asc";
-        renderRankings();
-      });
+      resultsBox.style.display = "block";
     }
 
-    const searchInput = document.getElementById("teamSearchInput");
-    if (searchInput) {
-      searchInput.addEventListener("input", updateSearchResults);
-      searchInput.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-          const resultsBox = document.getElementById("searchResults");
-          const firstItem = resultsBox
-            ? resultsBox.querySelector(".search-result-item span.team")
-            : null;
-          if (firstItem) {
-            scrollToTeam(firstItem.textContent || "");
-            resultsBox.style.display = "none";
+    function initPage() {
+      document.getElementById("asOfText").textContent = rankingsAsOf;
+      document.getElementById("gamesSubtitle").textContent = gamesDayLabel;
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      renderRankings();
+      renderGames();
+
+      const sortSelect = document.getElementById("sortSelect");
+      if (sortSelect) {
+        sortSelect.addEventListener("change", () => {
+          currentSortKey = sortSelect.value;
+          currentSortDir = "asc";
+          renderRankings();
+        });
+      }
+
+      const searchInput = document.getElementById("teamSearchInput");
+      if (searchInput) {
+        searchInput.addEventListener("input", updateSearchResults);
+        searchInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            const resultsBox = document.getElementById("searchResults");
+            const firstItem = resultsBox
+              ? resultsBox.querySelector(".search-result-item span.team")
+              : null;
+            if (firstItem) {
+              scrollToTeam(firstItem.textContent || "");
+              resultsBox.style.display = "none";
+            }
           }
+        });
+      }
+
+      document.addEventListener("click", (e) => {
+        const wrapper = document.querySelector(".search-wrapper");
+        const resultsBox = document.getElementById("searchResults");
+        if (!wrapper || !resultsBox) return;
+        if (!wrapper.contains(e.target)) {
+          resultsBox.style.display = "none";
         }
       });
     }
 
-    document.addEventListener("click", function (e) {
-      const wrapper = document.querySelector(".search-wrapper");
-      const resultsBox = document.getElementById("searchResults");
-      if (!wrapper || !resultsBox) return;
-      if (!wrapper.contains(e.target)) {
-        resultsBox.style.display = "none";
-      }
-    });
-  }
-
-  initPage();
-</script>
+    initPage();
+  </script>
+</body>
+</html>
