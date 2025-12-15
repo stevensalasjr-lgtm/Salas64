@@ -1,5 +1,5 @@
 <script>
-  // Updated Salas 64 rankings (Mon, Dec 15)
+  // Salas 64 rankings (Mon, Dec 15)
   const salasRankings = [
     { "rank": 1,  "team": "Iowa State",     "record": "11–0" },
     { "rank": 2,  "team": "Arizona",        "record": "9–0" },
@@ -73,7 +73,7 @@
     { "rank": 64, "team": "Georgetown",     "record": "7–3" }
   ];
 
-  // Games for Mon, Dec 15 — none involve Salas 64 teams
+  // No Salas 64 teams play on Mon, Dec 15 → no prediction cards
   const games = [];
 
   const rankingsAsOf = "As of Mon, Dec 15";
@@ -94,7 +94,7 @@
     const container = document.getElementById("rankingsList");
     container.innerHTML = "";
 
-    const data = [...salasRankings].sort((a, b) => {
+    const data = [].concat(salasRankings).sort((a, b) => {
       if (currentSortKey === "rank") {
         return currentSortDir === "asc" ? a.rank - b.rank : b.rank - a.rank;
       }
@@ -163,7 +163,7 @@
 
     const body = document.createElement("div");
     body.className = "game-body";
-    body.textContent = `Prediction: ${game.prediction}`;
+    body.textContent = "Prediction: " + game.prediction;
 
     card.appendChild(topline);
     card.appendChild(body);
@@ -176,12 +176,12 @@
     bothContainer.innerHTML = "";
     oneContainer.innerHTML = "";
 
-    const salasSet = new Set(salasRankings.map(t => t.team.toLowerCase()));
+    const salasSet = new Set(salasRankings.map(function (t) { return t.team.toLowerCase(); }));
 
     const gamesWithTwo = [];
     const gamesWithOne = [];
 
-    games.forEach((g) => {
+    games.forEach(function (g) {
       const in1 = salasSet.has((g.team1 || "").toLowerCase());
       const in2 = salasSet.has((g.team2 || "").toLowerCase());
       if (in1 && in2) {
@@ -197,7 +197,9 @@
       empty.textContent = "No games today with two Salas 64 teams.";
       bothContainer.appendChild(empty);
     } else {
-      gamesWithTwo.forEach((g) => bothContainer.appendChild(makeGameCard(g)));
+      gamesWithTwo.forEach(function (g) {
+        bothContainer.appendChild(makeGameCard(g));
+      });
     }
 
     if (gamesWithOne.length === 0) {
@@ -206,18 +208,20 @@
       empty.textContent = "No games today with one Salas 64 team.";
       oneContainer.appendChild(empty);
     } else {
-      gamesWithOne.forEach((g) => oneContainer.appendChild(makeGameCard(g)));
+      gamesWithOne.forEach(function (g) {
+        oneContainer.appendChild(makeGameCard(g));
+      });
     }
   }
 
-  const allTeams = salasRankings.map(t => ({ name: t.team, rank: t.rank }));
+  const allTeams = salasRankings.map(function (t) { return { name: t.team, rank: t.rank }; });
 
   function scrollToTeam(teamName) {
-    const rows = Array.from(document.querySelectorAll(".ranking-row"));
-    rows.forEach(r => r.classList.remove("highlight"));
-    const target = rows.find(
-      r => (r.dataset.team || "").toLowerCase() === teamName.toLowerCase()
-    );
+    const rows = Array.prototype.slice.call(document.querySelectorAll(".ranking-row"));
+    rows.forEach(function (r) { r.classList.remove("highlight"); });
+    const target = rows.find(function (r) {
+      return (r.dataset.team || "").toLowerCase() === teamName.toLowerCase();
+    });
     if (target) {
       target.classList.add("highlight");
       target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -237,16 +241,16 @@
       return;
     }
 
-    const matches = allTeams.filter(t =>
-      t.name.toLowerCase().startsWith(query)
-    );
+    const matches = allTeams.filter(function (t) {
+      return t.name.toLowerCase().startsWith(query);
+    });
 
     if (!matches.length) {
       resultsBox.style.display = "none";
       return;
     }
 
-    matches.slice(0, 10).forEach(t => {
+    matches.slice(0, 10).forEach(function (t) {
       const item = document.createElement("div");
       item.className = "search-result-item";
 
@@ -256,12 +260,12 @@
 
       const spanRank = document.createElement("span");
       spanRank.className = "rank";
-      spanRank.textContent = `#${t.rank}`;
+      spanRank.textContent = "#" + t.rank;
 
       item.appendChild(spanTeam);
       item.appendChild(spanRank);
 
-      item.addEventListener("click", () => {
+      item.addEventListener("click", function () {
         input.value = t.name;
         resultsBox.style.display = "none";
         scrollToTeam(t.name);
@@ -283,7 +287,7 @@
 
     const sortSelect = document.getElementById("sortSelect");
     if (sortSelect) {
-      sortSelect.addEventListener("change", () => {
+      sortSelect.addEventListener("change", function () {
         currentSortKey = sortSelect.value;
         currentSortDir = "asc";
         renderRankings();
@@ -293,7 +297,7 @@
     const searchInput = document.getElementById("teamSearchInput");
     if (searchInput) {
       searchInput.addEventListener("input", updateSearchResults);
-      searchInput.addEventListener("keydown", (e) => {
+      searchInput.addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
           const resultsBox = document.getElementById("searchResults");
           const firstItem = resultsBox
@@ -307,7 +311,7 @@
       });
     }
 
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", function (e) {
       const wrapper = document.querySelector(".search-wrapper");
       const resultsBox = document.getElementById("searchResults");
       if (!wrapper || !resultsBox) return;
