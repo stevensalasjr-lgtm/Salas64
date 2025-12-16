@@ -340,7 +340,7 @@
   </div>
 
   <script>
-    // Salas 64 rankings (Mon, Dec 15)
+    // Salas 64 rankings (Tue, Dec 16)
     const salasRankings = [
       { "rank": 1,  "team": "Iowa State",     "record": "11-0" },
       { "rank": 2,  "team": "Arizona",        "record": "9-0" },
@@ -414,11 +414,131 @@
       { "rank": 64, "team": "Georgetown",     "record": "7-3" }
     ];
 
-    // No Salas 64 teams play on Mon, Dec 15
-    const games = [];
+    // Games on Tue, Dec 16 involving Salas 64 teams
+    const games = [
+      {
+        team1: "Lipscomb",
+        team2: "Duke",
+        matchup: "Lipscomb at Duke",
+        time: "3:00 PM",
+        prediction: "Duke heavy home favorite; expect a comfortable double-digit win."
+      },
+      {
+        team1: "Midway",
+        team2: "Liberty",
+        matchup: "Midway at Liberty",
+        time: "3:00 PM",
+        prediction: "Liberty should win big at home vs non-D1 opponent."
+      },
+      {
+        team1: "Louisville",
+        team2: "Tennessee",
+        matchup: "Louisville at Tennessee",
+        time: "4:00 PM",
+        prediction: "Slight edge to Tennessee at home in a close, high-level matchup."
+      },
+      {
+        team1: "DePaul",
+        team2: "St. John’s",
+        matchup: "DePaul at St. John’s",
+        time: "4:00 PM",
+        prediction: "St. John’s strong favorite at home; projected solid win."
+      },
+      {
+        team1: "Kansas City",
+        team2: "Oklahoma",
+        matchup: "Kansas City at Oklahoma",
+        time: "4:00 PM",
+        prediction: "Oklahoma should roll at home; likely large-margin victory."
+      },
+      {
+        team1: "Florida State",
+        team2: "Dayton",
+        matchup: "Florida State at Dayton",
+        time: "4:00 PM",
+        prediction: "Dayton favored at home; slight to moderate edge over FSU."
+      },
+      {
+        team1: "South Carolina",
+        team2: "Clemson",
+        matchup: "South Carolina at Clemson",
+        time: "4:00 PM",
+        prediction: "Clemson leans favorite at home in a rivalry-style game."
+      },
+      {
+        team1: "Florida International",
+        team2: "Miami FL",
+        matchup: "Florida International at Miami (FL)",
+        time: "4:00 PM",
+        prediction: "Miami should dominate at home; big talent edge."
+      },
+      {
+        team1: "East Tennessee State",
+        team2: "North Carolina",
+        matchup: "East Tennessee State at North Carolina",
+        time: "5:00 PM",
+        prediction: "North Carolina strong home favorite; likely decisive win."
+      },
+      {
+        team1: "Northern Colorado",
+        team2: "Texas Tech",
+        matchup: "Northern Colorado at Texas Tech",
+        time: "5:00 PM",
+        prediction: "Texas Tech expected to control this at home by double digits."
+      },
+      {
+        team1: "Valparaiso",
+        team2: "Northwestern",
+        matchup: "Valparaiso at Northwestern",
+        time: "5:00 PM",
+        prediction: "Northwestern clear favorite at home; projected solid win."
+      },
+      {
+        team1: "Butler",
+        team2: "UConn",
+        matchup: "Butler vs UConn (Hartford)",
+        time: "5:30 PM",
+        prediction: "UConn should win by a comfortable margin on a semi-home floor."
+      },
+      {
+        team1: "Abilene Christian",
+        team2: "Arizona",
+        matchup: "Abilene Christian at Arizona",
+        time: "6:00 PM",
+        prediction: "Arizona heavy favorite; likely blowout at McKale."
+      },
+      {
+        team1: "Pacific",
+        team2: "BYU",
+        matchup: "Pacific at BYU",
+        time: "6:00 PM",
+        prediction: "BYU should win comfortably at home."
+      },
+      {
+        team1: "Queens University",
+        team2: "Arkansas",
+        matchup: "Queens University at Arkansas",
+        time: "6:00 PM",
+        prediction: "Arkansas strong home favorite; projected large-margin win."
+      },
+      {
+        team1: "Towson",
+        team2: "Kansas",
+        matchup: "Towson at Kansas",
+        time: "6:00 PM",
+        prediction: "Kansas should dominate at Allen Fieldhouse."
+      },
+      {
+        team1: "UC San Diego",
+        team2: "Loyola Marymount",
+        matchup: "UC San Diego at Loyola Marymount",
+        time: "8:30 PM",
+        prediction: "Slight lean to UC San Diego in a competitive road matchup."
+      }
+    ];
 
-    const rankingsAsOf = "As of Mon, Dec 15";
-    const gamesDayLabel = "Games involving Salas 64 teams (Mon, Dec 15)";
+    const rankingsAsOf = "As of Tue, Dec 16";
+    const gamesDayLabel = "Games involving Salas 64 teams (Tue, Dec 16)";
 
     let currentSortKey = "rank";
     let currentSortDir = "asc";
