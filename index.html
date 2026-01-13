@@ -2,510 +2,566 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Salas 64 Rankings</title>
+  <title>About Salas 64</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    :root{
+    :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.5;
-      color: #0f172a;
+      color: #e5e7eb;
       background: #020617;
     }
-    body{
-      margin:0;
-      padding:0;
+    body {
+      margin: 0;
+      padding: 0;
       background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
-      color:#e5e7eb;
+      color: #e5e7eb;
     }
-    .page{
-      max-width:1100px;
-      margin:0 auto;
-      padding:24px 16px 40px;
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
     }
-    header{
-      display:flex;
-      flex-wrap:wrap;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:8px;
-      margin-bottom:24px;
-      border-bottom:1px solid #1f2933;
-      padding-bottom:12px;
+    header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid #1f2933;
+      padding-bottom: 12px;
     }
-    header h1{
-      margin:0;
-      font-size:1.6rem;
-      font-weight:700;
-      letter-spacing:0.03em;
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
     }
-    header .meta{
-      font-size:0.9rem;
-      color:#9ca3af;
+    header .subtitle {
+      margin: 6px 0 0;
+      font-size: 0.9rem;
+      color: #9ca3af;
     }
-
-    /* Single-column layout (games section removed) */
-    .layout{
-      display:grid;
-      grid-template-columns:minmax(0, 1fr);
-      gap:20px;
+    a {
+      color: #60a5fa;
+      text-decoration: none;
     }
-
-    .card{
-      background: rgba(15, 23, 42, 0.9);
-      border-radius:16px;
-      padding:16px 18px 18px;
-      box-shadow:0 18px 45px rgba(0,0,0,0.6);
-      border:1px solid rgba(55,65,81,0.8);
-      backdrop-filter: blur(10px);
+    a:hover {
+      text-decoration: underline;
     }
-    .card-header-row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:8px;
-      margin-bottom:4px;
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
     }
-    .card h2{
-      margin:0;
-      font-size:1.2rem;
+    p {
+      font-size: 0.95rem;
+      margin: 6px 0 10px;
+      color: #e5e7eb;
     }
-    .card p.subtitle{
-      margin:0 0 12px;
-      font-size:0.85rem;
-      color:#9ca3af;
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 3px 10px;
+      border: 1px solid #4b5563;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-top: 8px;
     }
-    .card-links{
-      display:flex;
-      gap:6px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      font-size:0.8rem;
+    ul {
+      margin-top: 4px;
+      margin-bottom: 10px;
+      padding-left: 18px;
+      font-size: 0.95rem;
     }
-    .info-link{
-      color:#60a5fa;
-      text-decoration:none;
-      white-space:nowrap;
+    li {
+      margin-bottom: 4px;
     }
-    .info-link:hover{ text-decoration:underline; }
-    .link-divider{ color:#4b5563; }
-
-    .search-bar{
-      margin-bottom:10px;
-      display:flex;
-      gap:8px;
-      position:relative;
-      z-index:5;
-    }
-    .search-wrapper{
-      position:relative;
-      flex:1;
-    }
-    .search-bar input{
-      width:100%;
-      border-radius:999px;
-      border:1px solid #4b5563;
-      padding:6px 10px;
-      background:#020617;
-      color:#e5e7eb;
-      font-size:0.85rem;
-      outline:none;
-    }
-    .search-bar input::placeholder{ color:#6b7280; }
-
-    .search-results{
-      position:absolute;
-      top:110%;
-      left:0;
-      right:0;
-      background:#020617;
-      border-radius:12px;
-      border:1px solid #4b5563;
-      max-height:220px;
-      overflow-y:auto;
-      padding:4px 0;
-      box-shadow:0 14px 35px rgba(0,0,0,0.7);
-      display:none;
-    }
-    .search-result-item{
-      padding:6px 10px;
-      font-size:0.85rem;
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      cursor:pointer;
-    }
-    .search-result-item span.team{ font-weight:500; }
-    .search-result-item span.rank{
-      color:#9ca3af;
-      font-variant-numeric:tabular-nums;
-    }
-    .search-result-item:hover{ background:#111827; }
-
-    .sort-row{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      gap:6px;
-      margin-bottom:6px;
-      font-size:0.8rem;
-      color:#9ca3af;
-    }
-    .sort-select{
-      border-radius:999px;
-      border:1px solid #4b5563;
-      padding:4px 10px;
-      background:#020617;
-      color:#e5e7eb;
-      font-size:0.8rem;
-      outline:none;
+    footer {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: #6b7280;
     }
 
-    .rankings-header{
-      display:grid;
-      grid-template-columns:50px 1fr 90px;
-      font-size:0.8rem;
-      text-transform:uppercase;
-      letter-spacing:0.08em;
-      color:#9ca3af;
-      padding:6px 8px;
-      border-radius:8px;
-      background: rgba(15, 23, 42, 0.9);
-      margin-bottom:4px;
+    /* --- Compare Tool styles --- */
+    .card {
+      margin-top: 14px;
+      border: 1px solid #1f2933;
+      background: rgba(2, 6, 23, 0.55);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
     }
-    .ranking-row{
-      display:grid;
-      grid-template-columns:50px 1fr 90px;
-      padding:6px 8px;
-      border-radius:999px;
-      font-size:0.92rem;
-      align-items:center;
-      transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
     }
-    .ranking-row:nth-child(odd){ background: rgba(15, 23, 42, 0.75); }
-    .ranking-row:nth-child(even){ background: rgba(17, 24, 39, 0.85); }
-    .ranking-row:hover{
-      background: rgba(31, 41, 55, 0.98);
-      transform: translateY(-1px);
+    @media (min-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
-    .ranking-row.highlight{ box-shadow:0 0 0 2px #facc15; }
-
-    .rank-num{ font-weight:600; color:#e5e7eb; }
-    .team-name{
-      font-weight:500;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 6px;
     }
-    .record{
-      font-variant-numeric:tabular-nums;
-      text-align:right;
-      color:#e5e7eb;
+    select, button {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #243042;
+      background: #0b1120;
+      color: #e5e7eb;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      outline: none;
     }
-
-    footer{
-      margin-top:22px;
-      font-size:0.75rem;
-      color:#6b7280;
-      text-align:center;
+    select:focus, button:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .site {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 8px 0 2px;
+    }
+    .site label {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .site input {
+      accent-color: #60a5fa;
+    }
+    .btn {
+      border: 1px solid #2a3a55;
+      background: linear-gradient(180deg, rgba(96,165,250,0.18), rgba(96,165,250,0.06));
+      cursor: pointer;
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+    .btn:hover {
+      border-color: #3b82f6;
+    }
+    .muted {
+      color: #9ca3af;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+    .result {
+      margin-top: 10px;
+      border-top: 1px dashed #243042;
+      padding-top: 10px;
+    }
+    .kpi {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    @media (min-width: 720px) {
+      .kpi {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+    .kpiBox {
+      border: 1px solid #1f2933;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(15, 23, 42, 0.55);
+    }
+    .kpiBox .k {
+      color: #9ca3af;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .kpiBox .v {
+      margin-top: 4px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #e5e7eb;
+    }
+    .warn {
+      color: #fbbf24;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
-      <h1><strong>Salas 64</strong> — College Basketball Rankings</h1>
-      <div class="meta" id="asOfText"></div>
+      <h1>About Salas 64</h1>
+      <p class="subtitle">
+        Who’s behind the rankings and what they’re built for.
+        <br />
+        <a href="index.html">&larr; Back to rankings</a>
+      </p>
     </header>
 
-    <div class="layout">
-      <section class="card" aria-label="Salas 64 Rankings">
-        <div class="card-header-row">
-          <h2>Salas 64 Rankings</h2>
-          <div class="card-links">
-            <a href="how-it-works.html" class="info-link">How do the rankings work?</a>
-            <span class="link-divider">•</span>
-            <a href="about.html" class="info-link">About Salas 64</a>
+    <section>
+      <span class="pill">Created by Steven Salas</span>
+
+      <h2>Who I am</h2>
+      <p>
+        My name is <strong>Steven Salas</strong>. I’m a <strong>16-year-old</strong> from
+        <strong>Pasadena, California</strong>, and I run the Salas 64 on my own.
+      </p>
+      <p>
+        I update these rankings <strong>every Monday</strong> during the season because I’m obsessed
+        with college basketball and wanted a way to track the <strong>top 64 teams</strong> all the
+        way until March: results, context, and how they’ll translate to March Madness.
+      </p>
+
+      <h2>Why I created the Salas 64</h2>
+      <p>
+        The goal of the Salas 64 is simple:
+        <strong>help you understand who the true top teams are so you can build a smarter March
+        Madness bracket.</strong>
+      </p>
+      <ul>
+        <li>Follow how teams rise and fall as the season goes on.</li>
+        <li>See which teams are really playing like contenders, not just who’s ranked in the polls.</li>
+        <li>Use the Salas 64 board as a guide when you’re filling out your bracket in March.</li>
+      </ul>
+      <p>
+        Every update tries to balance what teams have <strong>actually done</strong> (wins, losses,
+        schedule) with how strong they look on the floor right now.
+      </p>
+
+      <h2>How the rankings fit together</h2>
+      <p>
+        The <strong>Salas 64 page</strong> shows the current top 64 teams and their records.
+        The <a href="how-it-works.html">“How do the rankings work?”</a> page breaks down the system:
+        résumé value, consistency, schedule strength, March readiness, and how I treat mid-majors.
+      </p>
+      <p>Put together, the idea is to give you:</p>
+      <ul>
+        <li>A clean top-64 snapshot you can check quickly every day.</li>
+        <li>Enough detail behind the scenes so serious fans can understand the logic.</li>
+      </ul>
+
+      <!-- ===================== -->
+      <!-- Team Compare Tool     -->
+      <!-- ===================== -->
+      <h2>Compare two Top-64 teams</h2>
+      <p>
+        Pick any two teams from the current Top 64 and get a quick prediction (win probability + projected score).
+      </p>
+
+      <div class="card" id="compareCard">
+        <div class="grid">
+          <div>
+            <label for="teamA">Team A</label>
+            <select id="teamA" disabled>
+              <option>Loading Top 64...</option>
+            </select>
+          </div>
+          <div>
+            <label for="teamB">Team B</label>
+            <select id="teamB" disabled>
+              <option>Loading Top 64...</option>
+            </select>
           </div>
         </div>
-        <p class="subtitle">Adjusted top 64 using your weighting framework (records refreshed from your current table).</p>
 
-        <div class="search-bar">
-          <div class="search-wrapper">
-            <input id="teamSearchInput" type="text" placeholder="Search team (e.g. Kansas, Colorado State)" />
-            <div id="searchResults" class="search-results"></div>
+        <div style="margin-top:10px;">
+          <label>Game site</label>
+          <div class="site">
+            <label><input type="radio" name="site" value="A_HOME" checked /> Team A home</label>
+            <label><input type="radio" name="site" value="B_HOME" /> Team B home</label>
+            <label><input type="radio" name="site" value="NEUTRAL" /> Neutral</label>
+          </div>
+          <div class="muted">
+            Note: this is a simple model using rank + record. You can upgrade it later with efficiency, SOS, etc.
           </div>
         </div>
 
-        <div class="sort-row">
-          <span>Sort by:</span>
-          <select id="sortSelect" class="sort-select">
-            <option value="rank">Rank</option>
-            <option value="team">Team (A–Z)</option>
-            <option value="record">Record</option>
-          </select>
+        <div class="row" style="margin-top:12px;">
+          <button class="btn" id="predictBtn" disabled>Predict</button>
+          <span class="muted" id="dataStatus"></span>
         </div>
 
-        <div class="rankings-header">
-          <span>#</span>
-          <span>Team</span>
-          <span style="text-align:right">Record</span>
-        </div>
-        <div id="rankingsList"></div>
-      </section>
-    </div>
+        <div class="result" id="result" style="display:none;"></div>
+      </div>
+
+      <h2>What’s next</h2>
+      <p>
+        Over time I plan to add more features: better game listings, conference views, and tools
+        that make it even easier to compare teams as you get ready for March.
+      </p>
+    </section>
 
     <footer>
-      Salas 64 &copy; <span id="year"></span>. Updated daily.
+      Salas 64 &copy; <span id="year"></span>.
+      <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+      </script>
     </footer>
   </div>
 
   <script>
-    /*
-      NOTE:
-      Your full algorithm needs game-by-game inputs (margin, site, opponent Salas rank at tip, recency).
-      The table you provided includes current W–L and efficiency context, but not per-game logs.
-      So this page updates Salas 64 to match the TOP 64 TEAMS + CURRENT RECORDS from your “current rankings” table (rows 1–64).
-      When you paste game logs later, we can compute your full Résumé/Form/SOS/March/Mid-major scoring exactly.
-    */
+    /**
+     * Expected Top 64 data format (recommended):
+     * top64.json (same folder as this file) OR data/top64.json
+     * [
+     *   { "rank": 1, "team": "Purdue", "wins": 18, "losses": 2 },
+     *   ...
+     * ]
+     */
 
-    // Top 64 from your current table (rows 1–64) + current records
-    const salasRankings = [
-      { "rank": 1,  "team": "Michigan",         "record": "14-1" },
-      { "rank": 2,  "team": "Arizona",          "record": "16-0" },
-      { "rank": 3,  "team": "Iowa State",       "record": "16-0" },
-      { "rank": 4,  "team": "Purdue",           "record": "15-1" },
-      { "rank": 5,  "team": "Vanderbilt",       "record": "16-0" },
-      { "rank": 6,  "team": "Gonzaga",          "record": "17-1" },
-      { "rank": 7,  "team": "Illinois",         "record": "13-3" },
-      { "rank": 8,  "team": "Duke",             "record": "15-1" },
-      { "rank": 9,  "team": "Connecticut",      "record": "16-1" },
-      { "rank": 10, "team": "Houston",          "record": "15-1" },
+    const teamAEl = document.getElementById("teamA");
+    const teamBEl = document.getElementById("teamB");
+    const predictBtn = document.getElementById("predictBtn");
+    const resultEl = document.getElementById("result");
+    const dataStatusEl = document.getElementById("dataStatus");
 
-      { "rank": 11, "team": "BYU",              "record": "15-1" },
-      { "rank": 12, "team": "Florida",          "record": "11-5" },
-      { "rank": 13, "team": "Michigan State",   "record": "14-2" },
-      { "rank": 14, "team": "Alabama",          "record": "11-5" },
-      { "rank": 15, "team": "Virginia",         "record": "14-2" },
-      { "rank": 16, "team": "Louisville",       "record": "12-4" },
-      { "rank": 17, "team": "Nebraska",         "record": "16-0" },
-      { "rank": 18, "team": "St. John's",       "record": "11-5" },
-      { "rank": 19, "team": "Tennessee",        "record": "11-5" },
-      { "rank": 20, "team": "Utah State",       "record": "14-1" },
+    let TOP64 = [];
 
-      { "rank": 21, "team": "Iowa",             "record": "12-4" },
-      { "rank": 22, "team": "Texas Tech",       "record": "12-4" },
-      { "rank": 23, "team": "Kansas",           "record": "11-5" },
-      { "rank": 24, "team": "NC State",         "record": "12-5" },
-      { "rank": 25, "team": "Villanova",        "record": "13-3" },
-      { "rank": 26, "team": "Kentucky",         "record": "10-6" },
-      { "rank": 27, "team": "Indiana",          "record": "12-4" },
-      { "rank": 28, "team": "Georgia",          "record": "14-2" },
-      { "rank": 29, "team": "Clemson",          "record": "14-3" },
-      { "rank": 30, "team": "Arkansas",         "record": "12-4" },
-
-      { "rank": 31, "team": "Auburn",           "record": "10-6" },
-      { "rank": 32, "team": "SMU",              "record": "12-4" },
-      { "rank": 33, "team": "North Carolina",   "record": "14-2" },
-      { "rank": 34, "team": "Saint Louis",      "record": "15-1" },
-      { "rank": 35, "team": "Saint Mary's",     "record": "16-2" },
-      { "rank": 36, "team": "Miami FL",         "record": "14-2" },
-      { "rank": 37, "team": "Ohio State",       "record": "11-5" },
-      { "rank": 38, "team": "Wisconsin",        "record": "11-5" },
-      { "rank": 39, "team": "UCLA",             "record": "11-5" },
-      { "rank": 40, "team": "LSU",              "record": "12-4" },
-
-      { "rank": 41, "team": "Texas A&M",        "record": "13-3" },
-      { "rank": 42, "team": "Baylor",           "record": "10-5" },
-      { "rank": 43, "team": "Seton Hall",       "record": "14-2" },
-      { "rank": 44, "team": "Creighton",        "record": "10-7" },
-      { "rank": 45, "team": "UCF",              "record": "13-2" },
-      { "rank": 46, "team": "VCU",              "record": "11-6" },
-      { "rank": 47, "team": "Texas",            "record": "10-6" },
-      { "rank": 48, "team": "Washington",       "record": "10-6" },
-      { "rank": 49, "team": "USC",              "record": "13-3" },
-      { "rank": 50, "team": "Santa Clara",      "record": "14-5" },
-
-      { "rank": 51, "team": "New Mexico",       "record": "13-3" },
-      { "rank": 52, "team": "San Diego State",  "record": "11-4" },
-      { "rank": 53, "team": "TCU",              "record": "11-5" },
-      { "rank": 54, "team": "Oklahoma",         "record": "11-5" },
-      { "rank": 55, "team": "Oklahoma State",   "record": "13-3" },
-      { "rank": 56, "team": "Akron",            "record": "12-4" },
-      { "rank": 57, "team": "Missouri",         "record": "12-4" },
-      { "rank": 58, "team": "Butler",           "record": "10-6" },
-      { "rank": 59, "team": "West Virginia",    "record": "11-5" },
-      { "rank": 60, "team": "Syracuse",         "record": "11-5" },
-
-      { "rank": 61, "team": "Northwestern",     "record": "8-8" },
-      { "rank": 62, "team": "Wake Forest",      "record": "10-7" },
-      { "rank": 63, "team": "George Washington","record": "12-5" },
-      { "rank": 64, "team": "Cincinnati",       "record": "8-8" }
-    ];
-
-    const rankingsAsOf = "As of Mon, Jan 12";
-
-    let currentSortKey = "rank";
-    let currentSortDir = "asc";
-
-    function parseRecord(rec){
-      const cleaned = rec.replace(/–/g, "-");
-      const parts = cleaned.split("-");
-      const wins = parseInt(parts[0], 10) || 0;
-      const losses = parseInt(parts[1], 10) || 0;
-      return { wins, losses };
+    function clamp(n, lo, hi) {
+      return Math.max(lo, Math.min(hi, n));
     }
 
-    function renderRankings(){
-      const container = document.getElementById("rankingsList");
-      container.innerHTML = "";
-
-      const data = [...salasRankings].sort((a,b)=>{
-        if(currentSortKey === "rank"){
-          return currentSortDir === "asc" ? a.rank - b.rank : b.rank - a.rank;
-        }
-        if(currentSortKey === "team"){
-          const an = a.team.toLowerCase();
-          const bn = b.team.toLowerCase();
-          if(an < bn) return currentSortDir === "asc" ? -1 : 1;
-          if(an > bn) return currentSortDir === "asc" ? 1 : -1;
-          return 0;
-        }
-        if(currentSortKey === "record"){
-          const ar = parseRecord(a.record);
-          const br = parseRecord(b.record);
-          const pa = (ar.wins + ar.losses) > 0 ? ar.wins / (ar.wins + ar.losses) : 0;
-          const pb = (br.wins + br.losses) > 0 ? br.wins / (br.wins + br.losses) : 0;
-          if(pa !== pb) return pb - pa;
-          if(ar.wins !== br.wins) return br.wins - ar.wins;
-          return ar.losses - br.losses;
-        }
-        return 0;
-      });
-
-      data.forEach((item)=>{
-        const row = document.createElement("div");
-        row.className = "ranking-row";
-        row.dataset.team = item.team.toLowerCase();
-
-        const rankCell = document.createElement("div");
-        rankCell.className = "rank-num";
-        rankCell.textContent = item.rank;
-
-        const teamCell = document.createElement("div");
-        teamCell.className = "team-name";
-        teamCell.textContent = item.team;
-
-        const recordCell = document.createElement("div");
-        recordCell.className = "record";
-        recordCell.textContent = item.record;
-
-        row.appendChild(rankCell);
-        row.appendChild(teamCell);
-        row.appendChild(recordCell);
-        container.appendChild(row);
-      });
+    function toInt(x, fallback = 0) {
+      const n = Number(x);
+      return Number.isFinite(n) ? Math.trunc(n) : fallback;
     }
 
-    const allTeams = salasRankings.map((t)=>({ name:t.team, rank:t.rank }));
-
-    function scrollToTeam(teamName){
-      const rows = Array.from(document.querySelectorAll(".ranking-row"));
-      rows.forEach((r)=>r.classList.remove("highlight"));
-      const target = rows.find((r)=>(r.dataset.team || "").toLowerCase() === teamName.toLowerCase());
-      if(target){
-        target.classList.add("highlight");
-        target.scrollIntoView({ behavior:"smooth", block:"center" });
-      }
+    function winPct(team) {
+      const w = toInt(team.wins);
+      const l = toInt(team.losses);
+      const g = w + l;
+      return g > 0 ? (w / g) : 0.5;
     }
 
-    function updateSearchResults(){
-      const input = document.getElementById("teamSearchInput");
-      const resultsBox = document.getElementById("searchResults");
-      if(!input || !resultsBox) return;
+    // Simple rating from rank + record.
+    // Tune these weights any time.
+    function teamRating(team) {
+      const r = toInt(team.rank, 64);
+      const wp = winPct(team);
+      const rankPts = (65 - clamp(r, 1, 64)) * 1.2;     // better rank -> higher
+      const recordPts = (wp - 0.5) * 40;                // 0.750 -> +10, 0.600 -> +4
+      return rankPts + recordPts;
+    }
 
-      const query = input.value.trim().toLowerCase();
-      resultsBox.innerHTML = "";
+    function getSiteValue() {
+      const picked = document.querySelector('input[name="site"]:checked');
+      return picked ? picked.value : "A_HOME";
+    }
 
-      if(!query){
-        resultsBox.style.display = "none";
-        return;
+    function logistic(x) {
+      return 1 / (1 + Math.exp(-x));
+    }
+
+    function predict(teamA, teamB, site) {
+      const rA = teamRating(teamA);
+      const rB = teamRating(teamB);
+
+      // Home/away adjustment (roughly 2.5 points).
+      const HCA = 2.5;
+      let siteAdj = 0;
+      if (site === "A_HOME") siteAdj = +HCA;
+      if (site === "B_HOME") siteAdj = -HCA;
+      if (site === "NEUTRAL") siteAdj = 0;
+
+      // Margin is the core output of this simple model.
+      const margin = (rA - rB) + siteAdj;
+
+      // Convert margin -> win probability using a smooth curve.
+      // Scale of 7 makes ~7 points about a 73% favorite; adjust if you want.
+      const winProbA = logistic(margin / 7);
+
+      // Score projection: start from an average total and split by margin.
+      // You can replace 140 with your preferred average points per game total.
+      const total = 140;
+      let scoreA = (total / 2) + (margin / 2);
+      let scoreB = total - scoreA;
+
+      // Keep scores realistic and whole numbers.
+      scoreA = Math.round(clamp(scoreA, 40, 120));
+      scoreB = Math.round(clamp(scoreB, 40, 120));
+
+      // Ensure they add back to ~total after clamping/rounding.
+      // (Small drift is fine; but we can re-balance slightly.)
+      const drift = (scoreA + scoreB) - total;
+      if (drift !== 0) {
+        if (drift > 0) {
+          if (scoreA > scoreB) scoreA -= drift;
+          else scoreB -= drift;
+        } else {
+          if (scoreA > scoreB) scoreA -= drift;
+          else scoreB -= drift;
+        }
       }
 
-      const matches = allTeams.filter((t)=>t.name.toLowerCase().startsWith(query));
-      if(!matches.length){
-        resultsBox.style.display = "none";
-        return;
-      }
+      return {
+        winProbA,
+        margin,
+        scoreA,
+        scoreB
+      };
+    }
 
-      matches.slice(0,10).forEach((t)=>{
-        const item = document.createElement("div");
-        item.className = "search-result-item";
+    function optionLabel(t) {
+      const w = toInt(t.wins);
+      const l = toInt(t.losses);
+      const r = toInt(t.rank);
+      const rec = (w + l) > 0 ? `${w}-${l}` : "—";
+      return `#${r} ${t.team} (${rec})`;
+    }
 
-        const spanTeam = document.createElement("span");
-        spanTeam.className = "team";
-        spanTeam.textContent = t.name;
-
-        const spanRank = document.createElement("span");
-        spanRank.className = "rank";
-        spanRank.textContent = `#${t.rank}`;
-
-        item.appendChild(spanTeam);
-        item.appendChild(spanRank);
-
-        item.addEventListener("click", ()=>{
-          input.value = t.name;
-          resultsBox.style.display = "none";
-          scrollToTeam(t.name);
+    function fillDropdowns() {
+      const options = TOP64
+        .slice()
+        .sort((a, b) => toInt(a.rank) - toInt(b.rank))
+        .map(t => {
+          const opt = document.createElement("option");
+          opt.value = String(t.rank);
+          opt.textContent = optionLabel(t);
+          return opt;
         });
 
-        resultsBox.appendChild(item);
-      });
+      teamAEl.innerHTML = "";
+      teamBEl.innerHTML = "";
+      for (const opt of options) teamAEl.appendChild(opt.cloneNode(true));
+      for (const opt of options) teamBEl.appendChild(opt.cloneNode(true));
 
-      resultsBox.style.display = "block";
-    }
-
-    function initPage(){
-      document.getElementById("asOfText").textContent = rankingsAsOf;
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      renderRankings();
-
-      const sortSelect = document.getElementById("sortSelect");
-      if(sortSelect){
-        sortSelect.addEventListener("change", ()=>{
-          currentSortKey = sortSelect.value;
-          currentSortDir = "asc";
-          renderRankings();
-        });
+      // Default to #1 vs #2 if available
+      if (options.length >= 2) {
+        teamAEl.value = String(TOP64[0].rank);
+        teamBEl.value = String(TOP64[1].rank);
       }
 
-      const searchInput = document.getElementById("teamSearchInput");
-      if(searchInput){
-        searchInput.addEventListener("input", updateSearchResults);
-        searchInput.addEventListener("keydown", (e)=>{
-          if(e.key === "Enter"){
-            const resultsBox = document.getElementById("searchResults");
-            const firstItem = resultsBox ? resultsBox.querySelector(".search-result-item span.team") : null;
-            if(firstItem){
-              scrollToTeam(firstItem.textContent || "");
-              resultsBox.style.display = "none";
-            }
+      teamAEl.disabled = false;
+      teamBEl.disabled = false;
+      predictBtn.disabled = false;
+      dataStatusEl.textContent = "Loaded Top 64.";
+    }
+
+    function getTeamByRank(rankStr) {
+      const r = toInt(rankStr);
+      return TOP64.find(t => toInt(t.rank) === r);
+    }
+
+    function renderResult(teamA, teamB, site, out) {
+      const siteText =
+        site === "A_HOME" ? `${teamA.team} home` :
+        site === "B_HOME" ? `${teamB.team} home` :
+        "Neutral site";
+
+      const winPctA = Math.round(out.winProbA * 1000) / 10; // 1 decimal
+      const winPctB = Math.round((1 - out.winProbA) * 1000) / 10;
+
+      const marginText =
+        out.margin === 0 ? "Pick'em" :
+        out.margin > 0 ? `${teamA.team} by ${Math.abs(out.margin).toFixed(1)}` :
+        `${teamB.team} by ${Math.abs(out.margin).toFixed(1)}`;
+
+      const winner = out.scoreA === out.scoreB
+        ? "Tie"
+        : (out.scoreA > out.scoreB ? teamA.team : teamB.team);
+
+      resultEl.style.display = "block";
+      resultEl.innerHTML = `
+        <p class="muted">${siteText}</p>
+
+        <div class="kpi">
+          <div class="kpiBox">
+            <div class="k">Win probability</div>
+            <div class="v">${teamA.team}: ${winPctA}%</div>
+            <div class="muted">${teamB.team}: ${winPctB}%</div>
+          </div>
+          <div class="kpiBox">
+            <div class="k">Projected margin</div>
+            <div class="v">${marginText}</div>
+          </div>
+          <div class="kpiBox">
+            <div class="k">Projected score</div>
+            <div class="v">${teamA.team} ${out.scoreA} – ${out.scoreB} ${teamB.team}</div>
+            <div class="muted">Pick: ${winner}</div>
+          </div>
+        </div>
+
+        <p class="muted" style="margin-top:10px;">
+          Model inputs: rank + record + site adjustment.
+        </p>
+      `;
+    }
+
+    async function loadTop64() {
+      dataStatusEl.textContent = "Loading Top 64...";
+
+      const urls = ["top64.json", "data/top64.json"];
+      for (const url of urls) {
+        try {
+          const res = await fetch(url, { cache: "no-store" });
+          if (!res.ok) continue;
+          const data = await res.json();
+
+          if (!Array.isArray(data)) continue;
+
+          // Basic validation + normalization
+          const cleaned = data
+            .map(x => ({
+              rank: toInt(x.rank),
+              team: String(x.team || "").trim(),
+              wins: toInt(x.wins),
+              losses: toInt(x.losses)
+            }))
+            .filter(x => x.rank >= 1 && x.rank <= 64 && x.team.length > 0);
+
+          if (cleaned.length >= 10) {
+            TOP64 = cleaned;
+            fillDropdowns();
+            return;
           }
-        });
+        } catch (e) {
+          // try next URL
+        }
       }
 
-      document.addEventListener("click", (e)=>{
-        const wrapper = document.querySelector(".search-wrapper");
-        const resultsBox = document.getElementById("searchResults");
-        if(!wrapper || !resultsBox) return;
-        if(!wrapper.contains(e.target)){
-          resultsBox.style.display = "none";
-        }
-      });
+      // If no JSON found, show helpful message.
+      dataStatusEl.innerHTML = `<span class="warn">
+        Top 64 not found. Add <code>top64.json</code> (or <code>data/top64.json</code>) to enable the tool.
+      </span>`;
+      teamAEl.innerHTML = `<option>Missing top64.json</option>`;
+      teamBEl.innerHTML = `<option>Missing top64.json</option>`;
     }
 
-    initPage();
+    predictBtn.addEventListener("click", () => {
+      const teamA = getTeamByRank(teamAEl.value);
+      const teamB = getTeamByRank(teamBEl.value);
+      const site = getSiteValue();
+
+      if (!teamA || !teamB) {
+        resultEl.style.display = "block";
+        resultEl.innerHTML = `<p class="warn">Select two valid Top-64 teams first.</p>`;
+        return;
+      }
+      if (teamA.rank === teamB.rank) {
+        resultEl.style.display = "block";
+        resultEl.innerHTML = `<p class="warn">Pick two different teams.</p>`;
+        return;
+      }
+
+      const out = predict(teamA, teamB, site);
+      renderResult(teamA, teamB, site, out);
+    });
+
+    // Init
+    loadTop64();
   </script>
 </body>
 </html>
