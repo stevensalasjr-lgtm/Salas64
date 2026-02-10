@@ -96,10 +96,7 @@
       position:relative;
       z-index:5;
     }
-    .search-wrapper{
-      position:relative;
-      flex:1;
-    }
+    .search-wrapper{ position:relative; flex:1; }
     .search-bar input{
       width:100%;
       border-radius:999px;
@@ -202,7 +199,7 @@
       color:#e5e7eb;
     }
 
-    /* ======= SIMULATOR STYLES ======= */
+    /* ======= SIMULATOR ======= */
     .compare-hr{
       border:0;
       border-top:1px solid rgba(55,65,81,0.6);
@@ -333,7 +330,7 @@
             <a href="about.html" class="info-link">About Salas 64</a>
           </div>
         </div>
-        <p class="subtitle">Top 64 with records + efficiency inputs (NetRtg/ORtg/DRtg/AdjT). Sim engine uses tempo + ORtg vs opponent DRtg + soft seed prior. No luck.</p>
+        <p class="subtitle">Top 64 + efficiency inputs. Simulator tuned for March-style upset volatility (no “Luck” input).</p>
 
         <div class="search-bar">
           <div class="search-wrapper">
@@ -363,7 +360,9 @@
         <div class="card-header-row" style="margin-top:2px;">
           <h2>Team Compare Simulator</h2>
         </div>
-        <p class="subtitle">Balanced sims: matchup edges are “soft-capped” so close games aren’t overly lopsided; variance increases when teams are close.</p>
+        <p class="subtitle">
+          Default = 100 sims. Upsets are encouraged by shrinking win probabilities toward 50/50 unless teams are truly far apart.
+        </p>
 
         <div class="compare-grid">
           <div class="compare-col">
@@ -378,7 +377,7 @@
 
           <div class="compare-col">
             <label class="compare-label" for="simsInput">Simulations</label>
-            <input id="simsInput" class="compare-input" type="number" min="1" max="50000" value="5000" />
+            <input id="simsInput" class="compare-input" type="number" min="1" max="5000" value="100" />
           </div>
 
           <div class="compare-col compare-actions">
@@ -419,7 +418,7 @@
           </div>
 
           <div class="compare-disclaimer">
-            Tuning: if favorites still dominate too much, increase BASE_SD_POINTS; if upsets are too frequent, decrease it.
+            To make results even more “madness”: increase MADNESS_SHRINK_MAX or SCORE_SD. To make favorites stronger: decrease them.
           </div>
         </div>
       </section>
@@ -431,7 +430,7 @@
   </div>
 
   <script>
-    // Top 64 + records + efficiency inputs (from your table)
+    // ======= DATA (Top 64 you provided) =======
     const salasRankings = [
       { rank: 1,  team: "Michigan",        record:"22-1", netRtg: 37.63, ortg:125.8, drtg: 88.2, adjT:72.1 },
       { rank: 2,  team: "Arizona",         record:"23-1", netRtg: 36.62, ortg:125.7, drtg: 89.1, adjT:71.2 },
@@ -627,7 +626,7 @@
       resultsBox.style.display = "block";
     }
 
-    /* ===================== SIMULATOR LOGIC (MORE BALANCED) ===================== */
+    /* ===================== MYGAMESIM-STYLE SIM ENGINE ===================== */
     function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
     function randn(){
@@ -637,10 +636,11 @@
       return Math.sqrt(-2.0*Math.log(u))*Math.cos(2.0*Math.PI*v);
     }
 
-    function tanh(x){
-      // Stable tanh approximation using exp
-      const e2x = Math.exp(2*x);
-      return (e2x - 1) / (e2x + 1);
+    function logistic(x){
+      // stable logistic
+      if(x > 50) return 1;
+      if(x < -50) return 0;
+      return 1 / (1 + Math.exp(-x));
     }
 
     function getTeamByName(name){
@@ -648,75 +648,113 @@
     }
 
     // Baselines / tunables
-    const NAT_AVG_EFF = 112.0;     // per-100 baseline
-    const TEMPO_SD = 2.1;          // possessions noise
-    const BASE_SD_POINTS = 7.2;    // per-team score noise (bigger => more underdog wins)
+    const NAT_AVG_EFF = 112.0;
 
-    // Soft-capped edge settings (prevents crazy lopsided sims for moderate gaps)
-    const NET_EDGE_MAX = 4.0;      // max per-100 efficiency tilt from netRtg
-    const NET_EDGE_SCALE = 16.0;   // bigger => gentler effect (use tanh(netDiff/scale))
-    const SEED_EDGE_MAX = 1.6;     // max per-100 efficiency tilt from seed/rank
-    const SEED_EDGE_SCALE = 22.0;  // bigger => gentler effect
+    // Tempo noise
+    const TEMPO_SD = 2.4;
+
+    // Score noise (bigger = more upsets)
+    const SCORE_SD = 9.6;
+
+    // Convert expected margin to win prob (smaller = more sensitive; bigger = flatter)
+    const MARGIN_TO_PROB_SCALE = 8.5;
+
+    // "Madness" shrink: pulls p toward 0.50 unless margin is huge
+    const MADNESS_SHRINK_MAX = 0.32; // 0.32 = strong upset environment
+    const MADNESS_FADE_MARGIN = 18;  // by ~18 pts expected margin, shrink mostly fades
+
+    // Seed/rank prior (very small; kept so 1 vs 16 is not identical)
+    const SEED_BONUS_MAX = 1.2; // points to margin
+    const SEED_BONUS_SCALE = 28; // rank gap where it saturates
 
     function expectedEffVsOpponent(teamORtg, oppDRtg){
       // Opponent DRtg higher => weaker defense => scoring increases.
       return teamORtg + (oppDRtg - NAT_AVG_EFF);
     }
 
-    function simulateOnce(A, B){
-      // Shared "game environment" shock (refs, shooting backdrop, etc.)
-      const envShock = randn() * 1.6; // points-ish effect (used on efficiencies)
-
-      // Tempo (possessions)
+    function expectedPoss(A, B){
       let poss = ((A.adjT + B.adjT) / 2) + (randn() * TEMPO_SD);
-      poss = clamp(poss, 58, 79);
+      return clamp(poss, 58, 80);
+    }
 
-      // Base expected efficiencies (per 100)
+    function seedBonusMargin(A, B){
+      // Better seed (lower rank) gets a small margin bonus
+      const rankGap = (B.rank - A.rank); // positive => A better
+      const t = Math.tanh(rankGap / SEED_BONUS_SCALE);
+      return t * SEED_BONUS_MAX;
+    }
+
+    function winProbFromExpectedMargin(expMargin){
+      // Base probability from logistic
+      let p = logistic(expMargin / MARGIN_TO_PROB_SCALE);
+
+      // Madness shrink toward 0.5 (adaptive; fades when margin is huge)
+      const shrink = clamp(MADNESS_SHRINK_MAX * (1 - Math.min(Math.abs(expMargin) / MADNESS_FADE_MARGIN, 1)), 0, MADNESS_SHRINK_MAX);
+      p = (1 - shrink) * p + shrink * 0.5;
+
+      // Hard clamps to avoid absurdly lopsided outcomes unless margin is truly massive
+      if (Math.abs(expMargin) < 12) {
+        p = clamp(p, 0.22, 0.78);
+      } else if (Math.abs(expMargin) < 20) {
+        p = clamp(p, 0.14, 0.86);
+      } else {
+        p = clamp(p, 0.08, 0.92);
+      }
+      return p;
+    }
+
+    function simulateOnce(A, B){
+      const poss = expectedPoss(A, B);
+
+      // Expected efficiency per 100
       let effA = expectedEffVsOpponent(A.ortg, B.drtg);
       let effB = expectedEffVsOpponent(B.ortg, A.drtg);
 
-      // Soft-capped net rating tilt
-      const netDiff = (A.netRtg - B.netRtg);
-      const netTilt = tanh(netDiff / NET_EDGE_SCALE) * NET_EDGE_MAX;
-      effA += netTilt;
-      effB -= netTilt;
-
-      // Soft-capped seed/rank prior (small)
-      const seedDiff = (B.rank - A.rank); // + => A better seed
-      const seedTilt = tanh(seedDiff / SEED_EDGE_SCALE) * SEED_EDGE_MAX;
-      effA += seedTilt;
-      effB -= seedTilt;
-
-      // Apply shared environment shock to BOTH (keeps outcomes more realistic)
-      effA += envShock;
-      effB += envShock;
+      // Shared game environment shock (shooting background, whistles, etc.)
+      const env = randn() * 1.6;
+      effA += env;
+      effB += env;
 
       // Clamp efficiencies
-      effA = clamp(effA, 90, 134);
-      effB = clamp(effB, 90, 134);
+      effA = clamp(effA, 92, 132);
+      effB = clamp(effB, 92, 132);
 
-      // Convert to points
-      let ptsA = poss * (effA / 100);
-      let ptsB = poss * (effB / 100);
+      // Expected points
+      const expPtsA = poss * (effA / 100);
+      const expPtsB = poss * (effB / 100);
 
-      // Variance increases when teams are closer
-      const closeness = clamp(1 - (Math.abs(netDiff) / 18), 0.15, 1.0); // 1 close, 0 far
-      const sd = BASE_SD_POINTS * (0.85 + 0.35 * closeness); // close games get more randomness
+      // Expected margin (plus tiny seed prior)
+      const expMargin = (expPtsA - expPtsB) + seedBonusMargin(A, B);
 
-      // Independent shooting noise
-      ptsA += randn() * sd;
-      ptsB += randn() * sd;
+      // Winner by probability (mygamesim-style)
+      const pA = winProbFromExpectedMargin(expMargin);
+      const A_wins = Math.random() < pA;
 
-      // Clamp totals
-      ptsA = clamp(ptsA, 45, 110);
-      ptsB = clamp(ptsB, 45, 110);
+      // Draw a plausible final score around expected totals
+      let ptsA = expPtsA + randn() * SCORE_SD;
+      let ptsB = expPtsB + randn() * SCORE_SD;
+
+      // Make sure winner matches the sampled winner (without making it look fake)
+      if (A_wins && ptsA <= ptsB){
+        const bump = 1 + Math.floor(Math.random() * 6);
+        ptsA = ptsB + bump;
+      } else if (!A_wins && ptsB <= ptsA){
+        const bump = 1 + Math.floor(Math.random() * 6);
+        ptsB = ptsA + bump;
+      }
+
+      // Clamp to realistic ranges
+      ptsA = clamp(ptsA, 45, 112);
+      ptsB = clamp(ptsB, 45, 112);
 
       return {
         scoreA: Math.round(ptsA),
         scoreB: Math.round(ptsB),
         tempo: Math.round(poss),
         effA: Math.round(effA * 10) / 10,
-        effB: Math.round(effB * 10) / 10
+        effB: Math.round(effB * 10) / 10,
+        pA: pA,
+        expMargin: expMargin
       };
     }
 
@@ -766,7 +804,7 @@
 
       lastScoreline.textContent = `${A.team} ${last.scoreA} — ${B.team} ${last.scoreB}`;
       simMeta.textContent =
-        `Tempo: ~${last.tempo} poss • Exp Eff: ${A.team} ${last.effA} / ${B.team} ${last.effB} (per 100)`;
+        `Tempo: ~${last.tempo} poss • Exp Eff: ${A.team} ${last.effA} / ${B.team} ${last.effB} (per 100) • One-game win%: ${Math.round(last.pA*100)}%`;
 
       simCount.textContent = sims.toLocaleString();
       avgScore.textContent = `${A.team} ${avgA.toFixed(1)} — ${B.team} ${avgB.toFixed(1)}`;
@@ -802,7 +840,8 @@
       const B = getTeamByName(nameB);
       if(!A || !B) return;
 
-      const sims = clamp(parseInt(count ?? (simsInput ? simsInput.value : 5000), 10) || 5000, 1, 50000);
+      // default = 100, cap to 5000 for UI responsiveness
+      const sims = clamp(parseInt(count ?? (simsInput ? simsInput.value : 100), 10) || 100, 1, 5000);
 
       let sumA = 0, sumB = 0, winsA = 0;
       let last = null;
@@ -849,19 +888,17 @@
 
       if(runBtn){
         runBtn.addEventListener("click", ()=>{
-          runSimulations(simsInput ? simsInput.value : 5000);
+          runSimulations(simsInput ? simsInput.value : 100);
         });
       }
       if(oneBtn){
         oneBtn.addEventListener("click", runOne);
       }
 
-      const selA = document.getElementById("teamASelect");
-      const selB = document.getElementById("teamBSelect");
-      if(selA) selA.addEventListener("change", ()=>runSimulations(simsInput ? simsInput.value : 5000));
-      if(selB) selB.addEventListener("change", ()=>runSimulations(simsInput ? simsInput.value : 5000));
+      // auto-run once at load
+      runSimulations(100);
     }
-    /* ===================== END SIMULATOR LOGIC ===================== */
+    /* ===================== END SIM ENGINE ===================== */
 
     function initPage(){
       document.getElementById("asOfText").textContent = rankingsAsOf;
