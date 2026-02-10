@@ -333,7 +333,7 @@
             <a href="about.html" class="info-link">About Salas 64</a>
           </div>
         </div>
-        <p class="subtitle">Top 64 with records + efficiency inputs (NetRtg/ORtg/DRtg/AdjT). Sim engine uses tempo + ORtg vs opponent DRtg + seed prior. No luck.</p>
+        <p class="subtitle">Top 64 with records + efficiency inputs (NetRtg/ORtg/DRtg/AdjT). Sim engine uses tempo + ORtg vs opponent DRtg + soft seed prior. No luck.</p>
 
         <div class="search-bar">
           <div class="search-wrapper">
@@ -363,7 +363,7 @@
         <div class="card-header-row" style="margin-top:2px;">
           <h2>Team Compare Simulator</h2>
         </div>
-        <p class="subtitle">Expected score uses (ORtg + opponent DRtg adjustment) × tempo. Seed (rank) adds a small prior. Random variance added per game.</p>
+        <p class="subtitle">Balanced sims: matchup edges are “soft-capped” so close games aren’t overly lopsided; variance increases when teams are close.</p>
 
         <div class="compare-grid">
           <div class="compare-col">
@@ -419,7 +419,7 @@
           </div>
 
           <div class="compare-disclaimer">
-            No “Luck” used. If you still see weird results, reduce variance constants in JS (GAME_SD_POINTS / TEMPO_SD).
+            Tuning: if favorites still dominate too much, increase BASE_SD_POINTS; if upsets are too frequent, decrease it.
           </div>
         </div>
       </section>
@@ -432,7 +432,6 @@
 
   <script>
     // Top 64 + records + efficiency inputs (from your table)
-    // NOTE: luck removed from simulations as requested (still OK if present, but not used).
     const salasRankings = [
       { rank: 1,  team: "Michigan",        record:"22-1", netRtg: 37.63, ortg:125.8, drtg: 88.2, adjT:72.1 },
       { rank: 2,  team: "Arizona",         record:"23-1", netRtg: 36.62, ortg:125.7, drtg: 89.1, adjT:71.2 },
@@ -628,69 +627,89 @@
       resultsBox.style.display = "block";
     }
 
-    /* ===================== SIMULATOR LOGIC (FIXED + SEED/TEMPO/ORTG/DRTG) ===================== */
+    /* ===================== SIMULATOR LOGIC (MORE BALANCED) ===================== */
     function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
     function randn(){
-      // Box-Muller
       let u=0, v=0;
       while(u===0) u=Math.random();
       while(v===0) v=Math.random();
       return Math.sqrt(-2.0*Math.log(u))*Math.cos(2.0*Math.PI*v);
     }
 
+    function tanh(x){
+      // Stable tanh approximation using exp
+      const e2x = Math.exp(2*x);
+      return (e2x - 1) / (e2x + 1);
+    }
+
     function getTeamByName(name){
       return salasRankings.find(t => String(t.team).toLowerCase() === String(name).toLowerCase());
     }
 
-    // Tunables
-    const NAT_AVG_EFF = 112.0;        // baseline (per 100 poss)
-    const TEMPO_SD = 1.8;             // possessions noise
-    const GAME_SD_POINTS = 5.5;       // points noise per team (smaller => favorites win more often)
-    const SEED_EDGE_PER_RANK = 0.11;  // points per 100 possessions per rank difference (seed prior)
-    const NET_WEIGHT = 0.18;          // how much netRtg difference tilts expected efficiency (0..1)
+    // Baselines / tunables
+    const NAT_AVG_EFF = 112.0;     // per-100 baseline
+    const TEMPO_SD = 2.1;          // possessions noise
+    const BASE_SD_POINTS = 7.2;    // per-team score noise (bigger => more underdog wins)
+
+    // Soft-capped edge settings (prevents crazy lopsided sims for moderate gaps)
+    const NET_EDGE_MAX = 4.0;      // max per-100 efficiency tilt from netRtg
+    const NET_EDGE_SCALE = 16.0;   // bigger => gentler effect (use tanh(netDiff/scale))
+    const SEED_EDGE_MAX = 1.6;     // max per-100 efficiency tilt from seed/rank
+    const SEED_EDGE_SCALE = 22.0;  // bigger => gentler effect
 
     function expectedEffVsOpponent(teamORtg, oppDRtg){
-      // Correct direction:
-      // If opponent DRtg is HIGHER than baseline (worse defense), scoring increases.
-      // If opponent DRtg is LOWER than baseline (better defense), scoring decreases.
+      // Opponent DRtg higher => weaker defense => scoring increases.
       return teamORtg + (oppDRtg - NAT_AVG_EFF);
     }
 
     function simulateOnce(A, B){
+      // Shared "game environment" shock (refs, shooting backdrop, etc.)
+      const envShock = randn() * 1.6; // points-ish effect (used on efficiencies)
+
       // Tempo (possessions)
       let poss = ((A.adjT + B.adjT) / 2) + (randn() * TEMPO_SD);
-      poss = clamp(poss, 58, 78);
+      poss = clamp(poss, 58, 79);
 
-      // Base expected offensive efficiency (per 100)
+      // Base expected efficiencies (per 100)
       let effA = expectedEffVsOpponent(A.ortg, B.drtg);
       let effB = expectedEffVsOpponent(B.ortg, A.drtg);
 
-      // Add a controlled net rating tilt (keeps stronger teams stronger)
-      const netDiff = (A.netRtg - B.netRtg); // per 100
-      effA += netDiff * NET_WEIGHT;
-      effB -= netDiff * NET_WEIGHT;
+      // Soft-capped net rating tilt
+      const netDiff = (A.netRtg - B.netRtg);
+      const netTilt = tanh(netDiff / NET_EDGE_SCALE) * NET_EDGE_MAX;
+      effA += netTilt;
+      effB -= netTilt;
 
-      // Seed prior (rank: 1 is best). If A is better seed, B.rank - A.rank is positive.
-      const seedDiff = (B.rank - A.rank); // positive => A better
-      effA += seedDiff * SEED_EDGE_PER_RANK;
-      effB -= seedDiff * SEED_EDGE_PER_RANK;
+      // Soft-capped seed/rank prior (small)
+      const seedDiff = (B.rank - A.rank); // + => A better seed
+      const seedTilt = tanh(seedDiff / SEED_EDGE_SCALE) * SEED_EDGE_MAX;
+      effA += seedTilt;
+      effB -= seedTilt;
 
-      // Clamp efficiencies to sane ranges
-      effA = clamp(effA, 88, 135);
-      effB = clamp(effB, 88, 135);
+      // Apply shared environment shock to BOTH (keeps outcomes more realistic)
+      effA += envShock;
+      effB += envShock;
+
+      // Clamp efficiencies
+      effA = clamp(effA, 90, 134);
+      effB = clamp(effB, 90, 134);
 
       // Convert to points
       let ptsA = poss * (effA / 100);
       let ptsB = poss * (effB / 100);
 
-      // Add game variance (independent noise)
-      ptsA += randn() * GAME_SD_POINTS;
-      ptsB += randn() * GAME_SD_POINTS;
+      // Variance increases when teams are closer
+      const closeness = clamp(1 - (Math.abs(netDiff) / 18), 0.15, 1.0); // 1 close, 0 far
+      const sd = BASE_SD_POINTS * (0.85 + 0.35 * closeness); // close games get more randomness
+
+      // Independent shooting noise
+      ptsA += randn() * sd;
+      ptsB += randn() * sd;
 
       // Clamp totals
-      ptsA = clamp(ptsA, 45, 105);
-      ptsB = clamp(ptsB, 45, 105);
+      ptsA = clamp(ptsA, 45, 110);
+      ptsB = clamp(ptsB, 45, 110);
 
       return {
         scoreA: Math.round(ptsA),
