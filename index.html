@@ -333,7 +333,7 @@
             <a href="about.html" class="info-link">About Salas 64</a>
           </div>
         </div>
-        <p class="subtitle">Top 64 with records + efficiency inputs (NetRtg/ORtg/DRtg/AdjT/Luck) for better score simulations.</p>
+        <p class="subtitle">Top 64 with records + efficiency inputs (NetRtg/ORtg/DRtg/AdjT). Sim engine uses tempo + ORtg vs opponent DRtg + seed prior. No luck.</p>
 
         <div class="search-bar">
           <div class="search-wrapper">
@@ -358,13 +358,12 @@
         </div>
         <div id="rankingsList"></div>
 
-        <!-- ===================== SIMULATOR (BOTTOM) ===================== -->
         <hr class="compare-hr" />
 
         <div class="card-header-row" style="margin-top:2px;">
           <h2>Team Compare Simulator</h2>
         </div>
-        <p class="subtitle">Uses ORtg/DRtg + tempo (AdjT) + NetRtg + Luck noise to generate randomized score predictions. Run many sims to see averages.</p>
+        <p class="subtitle">Expected score uses (ORtg + opponent DRtg adjustment) × tempo. Seed (rank) adds a small prior. Random variance added per game.</p>
 
         <div class="compare-grid">
           <div class="compare-col">
@@ -420,10 +419,9 @@
           </div>
 
           <div class="compare-disclaimer">
-            Model notes: expected possessions ≈ average AdjT; expected PPP uses (team ORtg) adjusted by opponent DRtg vs a national baseline; random game variance added each sim.
+            No “Luck” used. If you still see weird results, reduce variance constants in JS (GAME_SD_POINTS / TEMPO_SD).
           </div>
         </div>
-        <!-- ===================== END SIMULATOR ===================== -->
       </section>
     </div>
 
@@ -434,79 +432,78 @@
 
   <script>
     // Top 64 + records + efficiency inputs (from your table)
-    // Fields:
-    // netRtg = ORtg - DRtg (per 100 poss), ortg/drtg are adjusted, adjT is tempo, luck is Luck (decimal).
+    // NOTE: luck removed from simulations as requested (still OK if present, but not used).
     const salasRankings = [
-      { rank: 1,  team: "Michigan",        record:"22-1", netRtg: 37.63, ortg:125.8, drtg: 88.2, adjT:72.1, luck: 0.038 },
-      { rank: 2,  team: "Arizona",         record:"23-1", netRtg: 36.62, ortg:125.7, drtg: 89.1, adjT:71.2, luck: 0.014 },
-      { rank: 3,  team: "Duke",            record:"21-2", netRtg: 35.36, ortg:125.6, drtg: 90.2, adjT:65.6, luck: 0.036 },
-      { rank: 4,  team: "Illinois",        record:"20-4", netRtg: 33.28, ortg:130.6, drtg: 97.3, adjT:65.5, luck: 0.004 },
-      { rank: 5,  team: "Houston",         record:"21-2", netRtg: 33.22, ortg:126.2, drtg: 93.0, adjT:62.8, luck: 0.027 },
-      { rank: 6,  team: "Iowa St.",        record:"21-2", netRtg: 32.63, ortg:125.3, drtg: 92.7, adjT:67.1, luck: 0.034 },
-      { rank: 7,  team: "Florida",         record:"17-6", netRtg: 32.26, ortg:124.2, drtg: 91.9, adjT:69.7, luck:-0.081 },
-      { rank: 8,  team: "Connecticut",     record:"22-2", netRtg: 29.89, ortg:121.8, drtg: 91.9, adjT:64.8, luck: 0.069 },
-      { rank: 9,  team: "Michigan St.",    record:"20-4", netRtg: 29.58, ortg:120.3, drtg: 90.7, adjT:65.6, luck:-0.015 },
-      { rank: 10, team: "Purdue",          record:"19-4", netRtg: 29.46, ortg:127.4, drtg: 97.9, adjT:65.1, luck: 0.019 },
+      { rank: 1,  team: "Michigan",        record:"22-1", netRtg: 37.63, ortg:125.8, drtg: 88.2, adjT:72.1 },
+      { rank: 2,  team: "Arizona",         record:"23-1", netRtg: 36.62, ortg:125.7, drtg: 89.1, adjT:71.2 },
+      { rank: 3,  team: "Duke",            record:"21-2", netRtg: 35.36, ortg:125.6, drtg: 90.2, adjT:65.6 },
+      { rank: 4,  team: "Illinois",        record:"20-4", netRtg: 33.28, ortg:130.6, drtg: 97.3, adjT:65.5 },
+      { rank: 5,  team: "Houston",         record:"21-2", netRtg: 33.22, ortg:126.2, drtg: 93.0, adjT:62.8 },
+      { rank: 6,  team: "Iowa St.",        record:"21-2", netRtg: 32.63, ortg:125.3, drtg: 92.7, adjT:67.1 },
+      { rank: 7,  team: "Florida",         record:"17-6", netRtg: 32.26, ortg:124.2, drtg: 91.9, adjT:69.7 },
+      { rank: 8,  team: "Connecticut",     record:"22-2", netRtg: 29.89, ortg:121.8, drtg: 91.9, adjT:64.8 },
+      { rank: 9,  team: "Michigan St.",    record:"20-4", netRtg: 29.58, ortg:120.3, drtg: 90.7, adjT:65.6 },
+      { rank: 10, team: "Purdue",          record:"19-4", netRtg: 29.46, ortg:127.4, drtg: 97.9, adjT:65.1 },
 
-      { rank: 11, team: "Kansas",          record:"19-5", netRtg: 28.05, ortg:120.6, drtg: 92.6, adjT:67.0, luck: 0.033 },
-      { rank: 12, team: "Nebraska",        record:"21-2", netRtg: 27.93, ortg:121.6, drtg: 93.7, adjT:66.8, luck: 0.047 },
-      { rank: 13, team: "Gonzaga",         record:"23-2", netRtg: 27.73, ortg:122.7, drtg: 94.9, adjT:69.2, luck: 0.082 },
-      { rank: 14, team: "Vanderbilt",      record:"19-4", netRtg: 26.92, ortg:123.9, drtg: 97.0, adjT:70.2, luck: 0.028 },
-      { rank: 15, team: "Louisville",      record:"18-6", netRtg: 26.84, ortg:125.0, drtg: 98.1, adjT:70.3, luck: 0.004 },
-      { rank: 16, team: "Virginia",        record:"20-3", netRtg: 25.68, ortg:123.0, drtg: 97.3, adjT:65.1, luck: 0.005 },
-      { rank: 17, team: "Tennessee",       record:"16-7", netRtg: 25.56, ortg:120.9, drtg: 95.4, adjT:65.6, luck:-0.039 },
-      { rank: 18, team: "Iowa",            record:"18-5", netRtg: 25.32, ortg:122.9, drtg: 97.5, adjT:63.4, luck:-0.009 },
-      { rank: 19, team: "Alabama",         record:"16-7", netRtg: 24.96, ortg:127.8, drtg:102.9, adjT:73.4, luck: 0.012 },
-      { rank: 20, team: "Texas Tech",      record:"17-6", netRtg: 24.78, ortg:123.7, drtg: 98.9, adjT:67.8, luck: 0.027 },
+      { rank: 11, team: "Kansas",          record:"19-5", netRtg: 28.05, ortg:120.6, drtg: 92.6, adjT:67.0 },
+      { rank: 12, team: "Nebraska",        record:"21-2", netRtg: 27.93, ortg:121.6, drtg: 93.7, adjT:66.8 },
+      { rank: 13, team: "Gonzaga",         record:"23-2", netRtg: 27.73, ortg:122.7, drtg: 94.9, adjT:69.2 },
+      { rank: 14, team: "Vanderbilt",      record:"19-4", netRtg: 26.92, ortg:123.9, drtg: 97.0, adjT:70.2 },
+      { rank: 15, team: "Louisville",      record:"18-6", netRtg: 26.84, ortg:125.0, drtg: 98.1, adjT:70.3 },
+      { rank: 16, team: "Virginia",        record:"20-3", netRtg: 25.68, ortg:123.0, drtg: 97.3, adjT:65.1 },
+      { rank: 17, team: "Tennessee",       record:"16-7", netRtg: 25.56, ortg:120.9, drtg: 95.4, adjT:65.6 },
+      { rank: 18, team: "Iowa",            record:"18-5", netRtg: 25.32, ortg:122.9, drtg: 97.5, adjT:63.4 },
+      { rank: 19, team: "Alabama",         record:"16-7", netRtg: 24.96, ortg:127.8, drtg:102.9, adjT:73.4 },
+      { rank: 20, team: "Texas Tech",      record:"17-6", netRtg: 24.78, ortg:123.7, drtg: 98.9, adjT:67.8 },
 
-      { rank: 21, team: "St. John's",      record:"19-5", netRtg: 24.74, ortg:121.6, drtg: 96.9, adjT:69.8, luck:-0.010 },
-      { rank: 22, team: "BYU",             record:"17-6", netRtg: 24.39, ortg:125.3, drtg:100.9, adjT:69.7, luck:-0.025 },
-      { rank: 23, team: "Arkansas",        record:"17-6", netRtg: 24.11, ortg:125.8, drtg:101.7, adjT:70.7, luck: 0.009 },
-      { rank: 24, team: "Saint Louis",     record:"23-1", netRtg: 23.37, ortg:121.0, drtg: 97.6, adjT:71.3, luck: 0.034 },
-      { rank: 25, team: "North Carolina",  record:"19-4", netRtg: 22.42, ortg:123.2, drtg:100.8, adjT:67.8, luck: 0.056 },
-      { rank: 26, team: "Utah St.",        record:"20-3", netRtg: 22.29, ortg:121.3, drtg: 99.0, adjT:68.0, luck: 0.061 },
-      { rank: 27, team: "Villanova",       record:"18-5", netRtg: 22.11, ortg:121.3, drtg: 99.2, adjT:63.6, luck: 0.019 },
-      { rank: 28, team: "Clemson",         record:"20-4", netRtg: 22.05, ortg:116.7, drtg: 94.6, adjT:64.0, luck: 0.034 },
-      { rank: 29, team: "N.C. State",      record:"18-7", netRtg: 21.92, ortg:122.4, drtg:100.4, adjT:69.4, luck: 0.012 },
-      { rank: 30, team: "Auburn",          record:"14-9", netRtg: 21.83, ortg:125.0, drtg:103.1, adjT:67.4, luck:-0.011 },
+      { rank: 21, team: "St. John's",      record:"19-5", netRtg: 24.74, ortg:121.6, drtg: 96.9, adjT:69.8 },
+      { rank: 22, team: "BYU",             record:"17-6", netRtg: 24.39, ortg:125.3, drtg:100.9, adjT:69.7 },
+      { rank: 23, team: "Arkansas",        record:"17-6", netRtg: 24.11, ortg:125.8, drtg:101.7, adjT:70.7 },
+      { rank: 24, team: "Saint Louis",     record:"23-1", netRtg: 23.37, ortg:121.0, drtg: 97.6, adjT:71.3 },
+      { rank: 25, team: "North Carolina",  record:"19-4", netRtg: 22.42, ortg:123.2, drtg:100.8, adjT:67.8 },
+      { rank: 26, team: "Utah St.",        record:"20-3", netRtg: 22.29, ortg:121.3, drtg: 99.0, adjT:68.0 },
+      { rank: 27, team: "Villanova",       record:"18-5", netRtg: 22.11, ortg:121.3, drtg: 99.2, adjT:63.6 },
+      { rank: 28, team: "Clemson",         record:"20-4", netRtg: 22.05, ortg:116.7, drtg: 94.6, adjT:64.0 },
+      { rank: 29, team: "N.C. State",      record:"18-7", netRtg: 21.92, ortg:122.4, drtg:100.4, adjT:69.4 },
+      { rank: 30, team: "Auburn",          record:"14-9", netRtg: 21.83, ortg:125.0, drtg:103.1, adjT:67.4 },
 
-      { rank: 31, team: "Kentucky",        record:"17-7", netRtg: 21.81, ortg:120.6, drtg: 98.7, adjT:67.3, luck: 0.033 },
-      { rank: 32, team: "Saint Mary's",    record:"21-4", netRtg: 21.27, ortg:119.2, drtg: 97.9, adjT:64.9, luck: 0.016 },
-      { rank: 33, team: "Texas A&M",       record:"17-6", netRtg: 20.77, ortg:120.5, drtg: 99.7, adjT:70.9, luck: 0.002 },
-      { rank: 34, team: "Texas",           record:"15-9", netRtg: 20.53, ortg:125.4, drtg:104.9, adjT:66.7, luck:-0.087 },
-      { rank: 35, team: "Indiana",         record:"17-8", netRtg: 20.39, ortg:121.3, drtg:100.9, adjT:66.6, luck:-0.015 },
-      { rank: 36, team: "SMU",             record:"16-7", netRtg: 19.95, ortg:123.4, drtg:103.5, adjT:68.7, luck:-0.001 },
-      { rank: 37, team: "Georgia",         record:"17-6", netRtg: 19.85, ortg:121.2, drtg:101.4, adjT:72.7, luck:-0.004 },
-      { rank: 38, team: "Santa Clara",     record:"21-5", netRtg: 19.28, ortg:120.8, drtg:101.5, adjT:69.6, luck: 0.011 },
-      { rank: 39, team: "UCLA",            record:"17-7", netRtg: 19.21, ortg:119.7, drtg:100.5, adjT:65.0, luck:-0.018 },
-      { rank: 40, team: "Wisconsin",       record:"16-7", netRtg: 18.82, ortg:120.7, drtg:101.8, adjT:69.1, luck: 0.028 },
+      { rank: 31, team: "Kentucky",        record:"17-7", netRtg: 21.81, ortg:120.6, drtg: 98.7, adjT:67.3 },
+      { rank: 32, team: "Saint Mary's",    record:"21-4", netRtg: 21.27, ortg:119.2, drtg: 97.9, adjT:64.9 },
+      { rank: 33, team: "Texas A&M",       record:"17-6", netRtg: 20.77, ortg:120.5, drtg: 99.7, adjT:70.9 },
+      { rank: 34, team: "Texas",           record:"15-9", netRtg: 20.53, ortg:125.4, drtg:104.9, adjT:66.7 },
+      { rank: 35, team: "Indiana",         record:"17-8", netRtg: 20.39, ortg:121.3, drtg:100.9, adjT:66.6 },
+      { rank: 36, team: "SMU",             record:"16-7", netRtg: 19.95, ortg:123.4, drtg:103.5, adjT:68.7 },
+      { rank: 37, team: "Georgia",         record:"17-6", netRtg: 19.85, ortg:121.2, drtg:101.4, adjT:72.7 },
+      { rank: 38, team: "Santa Clara",     record:"21-5", netRtg: 19.28, ortg:120.8, drtg:101.5, adjT:69.6 },
+      { rank: 39, team: "UCLA",            record:"17-7", netRtg: 19.21, ortg:119.7, drtg:100.5, adjT:65.0 },
+      { rank: 40, team: "Wisconsin",       record:"16-7", netRtg: 18.82, ortg:120.7, drtg:101.8, adjT:69.1 },
 
-      { rank: 41, team: "Miami FL",        record:"18-5", netRtg: 18.51, ortg:118.9, drtg:100.4, adjT:68.6, luck:-0.008 },
-      { rank: 42, team: "Ohio St.",        record:"15-8", netRtg: 18.49, ortg:122.0, drtg:103.5, adjT:66.2, luck:-0.029 },
-      { rank: 43, team: "San Diego St.",   record:"17-6", netRtg: 18.47, ortg:113.7, drtg: 95.2, adjT:68.8, luck: 0.043 },
-      { rank: 44, team: "Baylor",          record:"13-10",netRtg: 17.32, ortg:121.4, drtg:104.1, adjT:67.8, luck:-0.062 },
-      { rank: 45, team: "Washington",      record:"12-12",netRtg: 17.06, ortg:118.2, drtg:101.1, adjT:66.9, luck:-0.100 },
-      { rank: 46, team: "VCU",             record:"18-6", netRtg: 16.32, ortg:119.7, drtg:103.4, adjT:69.2, luck:-0.044 },
-      { rank: 47, team: "New Mexico",      record:"18-6", netRtg: 16.16, ortg:116.6, drtg:100.5, adjT:69.8, luck:-0.011 },
-      { rank: 48, team: "USC",             record:"18-6", netRtg: 15.38, ortg:114.8, drtg: 99.4, adjT:70.0, luck: 0.119 },
-      { rank: 49, team: "UCF",             record:"17-6", netRtg: 15.38, ortg:121.0, drtg:105.6, adjT:68.6, luck: 0.136 },
-      { rank: 50, team: "Seton Hall",      record:"16-8", netRtg: 15.36, ortg:109.5, drtg: 94.1, adjT:65.6, luck:-0.047 },
+      { rank: 41, team: "Miami FL",        record:"18-5", netRtg: 18.51, ortg:118.9, drtg:100.4, adjT:68.6 },
+      { rank: 42, team: "Ohio St.",        record:"15-8", netRtg: 18.49, ortg:122.0, drtg:103.5, adjT:66.2 },
+      { rank: 43, team: "San Diego St.",   record:"17-6", netRtg: 18.47, ortg:113.7, drtg: 95.2, adjT:68.8 },
+      { rank: 44, team: "Baylor",          record:"13-10",netRtg: 17.32, ortg:121.4, drtg:104.1, adjT:67.8 },
+      { rank: 45, team: "Washington",      record:"12-12",netRtg: 17.06, ortg:118.2, drtg:101.1, adjT:66.9 },
+      { rank: 46, team: "VCU",             record:"18-6", netRtg: 16.32, ortg:119.7, drtg:103.4, adjT:69.2 },
+      { rank: 47, team: "New Mexico",      record:"18-6", netRtg: 16.16, ortg:116.6, drtg:100.5, adjT:69.8 },
+      { rank: 48, team: "USC",             record:"18-6", netRtg: 15.38, ortg:114.8, drtg: 99.4, adjT:70.0 },
+      { rank: 49, team: "UCF",             record:"17-6", netRtg: 15.38, ortg:121.0, drtg:105.6, adjT:68.6 },
+      { rank: 50, team: "Seton Hall",      record:"16-8", netRtg: 15.36, ortg:109.5, drtg: 94.1, adjT:65.6 },
 
-      { rank: 51, team: "LSU",             record:"14-9", netRtg: 14.98, ortg:120.0, drtg:105.0, adjT:66.2, luck:-0.051 },
-      { rank: 52, team: "Missouri",        record:"16-7", netRtg: 14.74, ortg:117.9, drtg:103.2, adjT:66.4, luck: 0.069 },
-      { rank: 53, team: "Boise St.",       record:"15-9", netRtg: 13.94, ortg:116.8, drtg:102.9, adjT:66.3, luck: 0.035 },
-      { rank: 54, team: "Tulsa",           record:"20-4", netRtg: 13.76, ortg:122.1, drtg:108.4, adjT:68.0, luck: 0.044 },
-      { rank: 55, team: "TCU",             record:"14-9", netRtg: 13.67, ortg:112.7, drtg: 99.1, adjT:67.7, luck:-0.046 },
-      { rank: 56, team: "Nevada",          record:"17-7", netRtg: 13.57, ortg:118.0, drtg:104.4, adjT:64.9, luck: 0.018 },
-      { rank: 57, team: "Cincinnati",      record:"12-12",netRtg: 13.54, ortg:107.1, drtg: 93.6, adjT:68.0, luck:-0.085 },
-      { rank: 58, team: "Oklahoma St.",    record:"16-7", netRtg: 13.20, ortg:117.2, drtg:104.0, adjT:72.2, luck: 0.103 },
-      { rank: 59, team: "Virginia Tech",   record:"16-8", netRtg: 12.94, ortg:114.6, drtg:101.7, adjT:67.5, luck: 0.028 },
-      { rank: 60, team: "Oklahoma",        record:"12-12",netRtg: 12.75, ortg:120.1, drtg:107.4, adjT:67.0, luck:-0.109 },
+      { rank: 51, team: "LSU",             record:"14-9", netRtg: 14.98, ortg:120.0, drtg:105.0, adjT:66.2 },
+      { rank: 52, team: "Missouri",        record:"16-7", netRtg: 14.74, ortg:117.9, drtg:103.2, adjT:66.4 },
+      { rank: 53, team: "Boise St.",       record:"15-9", netRtg: 13.94, ortg:116.8, drtg:102.9, adjT:66.3 },
+      { rank: 54, team: "Tulsa",           record:"20-4", netRtg: 13.76, ortg:122.1, drtg:108.4, adjT:68.0 },
+      { rank: 55, team: "TCU",             record:"14-9", netRtg: 13.67, ortg:112.7, drtg: 99.1, adjT:67.7 },
+      { rank: 56, team: "Nevada",          record:"17-7", netRtg: 13.57, ortg:118.0, drtg:104.4, adjT:64.9 },
+      { rank: 57, team: "Cincinnati",      record:"12-12",netRtg: 13.54, ortg:107.1, drtg: 93.6, adjT:68.0 },
+      { rank: 58, team: "Oklahoma St.",    record:"16-7", netRtg: 13.20, ortg:117.2, drtg:104.0, adjT:72.2 },
+      { rank: 59, team: "Virginia Tech",   record:"16-8", netRtg: 12.94, ortg:114.6, drtg:101.7, adjT:67.5 },
+      { rank: 60, team: "Oklahoma",        record:"12-12",netRtg: 12.75, ortg:120.1, drtg:107.4, adjT:67.0 },
 
-      { rank: 61, team: "West Virginia",   record:"15-9", netRtg: 12.72, ortg:110.9, drtg: 98.1, adjT:62.2, luck: 0.000 },
-      { rank: 62, team: "Providence",      record:"11-13",netRtg: 12.63, ortg:122.3, drtg:109.7, adjT:71.7, luck:-0.130 },
-      { rank: 63, team: "Belmont",         record:"22-4", netRtg: 12.50, ortg:119.2, drtg:106.7, adjT:68.5, luck: 0.020 },
-      { rank: 64, team: "Akron",           record:"19-5", netRtg: 12.39, ortg:119.3, drtg:106.9, adjT:70.2, luck:-0.021 }
+      { rank: 61, team: "West Virginia",   record:"15-9", netRtg: 12.72, ortg:110.9, drtg: 98.1, adjT:62.2 },
+      { rank: 62, team: "Providence",      record:"11-13",netRtg: 12.63, ortg:122.3, drtg:109.7, adjT:71.7 },
+      { rank: 63, team: "Belmont",         record:"22-4", netRtg: 12.50, ortg:119.2, drtg:106.7, adjT:68.5 },
+      { rank: 64, team: "Akron",           record:"19-5", netRtg: 12.39, ortg:119.3, drtg:106.9, adjT:70.2 }
     ];
 
     const rankingsAsOf = "As of Tue, Feb 10";
@@ -631,10 +628,11 @@
       resultsBox.style.display = "block";
     }
 
-    /* ===================== SIMULATOR LOGIC (UPGRADED) ===================== */
+    /* ===================== SIMULATOR LOGIC (FIXED + SEED/TEMPO/ORTG/DRTG) ===================== */
     function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
     function randn(){
+      // Box-Muller
       let u=0, v=0;
       while(u===0) u=Math.random();
       while(v===0) v=Math.random();
@@ -645,51 +643,61 @@
       return salasRankings.find(t => String(t.team).toLowerCase() === String(name).toLowerCase());
     }
 
-    // Tunable baselines / variance (kept simple + stable)
-    const NAT_AVG_EFF = 112.0;     // "average" ORtg/DRtg baseline (per 100)
-    const GAME_SD_POINTS = 6.5;    // per-team scoring variance
-    const TEMPO_SD = 2.2;          // possessions variance
+    // Tunables
+    const NAT_AVG_EFF = 112.0;        // baseline (per 100 poss)
+    const TEMPO_SD = 1.8;             // possessions noise
+    const GAME_SD_POINTS = 5.5;       // points noise per team (smaller => favorites win more often)
+    const SEED_EDGE_PER_RANK = 0.11;  // points per 100 possessions per rank difference (seed prior)
+    const NET_WEIGHT = 0.18;          // how much netRtg difference tilts expected efficiency (0..1)
 
-    function expectedPPP(offORtg, oppDRtg){
-      // PPP from ORtg adjusted by opponent defense relative to baseline
-      // If opp DRtg < baseline => tougher defense => lower PPP
-      const basePPP = offORtg / 100.0;
-      const defAdj = NAT_AVG_EFF / oppDRtg;
-      return basePPP * defAdj;
+    function expectedEffVsOpponent(teamORtg, oppDRtg){
+      // Correct direction:
+      // If opponent DRtg is HIGHER than baseline (worse defense), scoring increases.
+      // If opponent DRtg is LOWER than baseline (better defense), scoring decreases.
+      return teamORtg + (oppDRtg - NAT_AVG_EFF);
     }
 
     function simulateOnce(A, B){
-      // possessions = avg AdjT with some randomness
+      // Tempo (possessions)
       let poss = ((A.adjT + B.adjT) / 2) + (randn() * TEMPO_SD);
       poss = clamp(poss, 58, 78);
 
-      // baseline ppp using ORtg vs opponent DRtg
-      let pppA = expectedPPP(A.ortg, B.drtg);
-      let pppB = expectedPPP(B.ortg, A.drtg);
+      // Base expected offensive efficiency (per 100)
+      let effA = expectedEffVsOpponent(A.ortg, B.drtg);
+      let effB = expectedEffVsOpponent(B.ortg, A.drtg);
 
-      // Net rating difference adds a mild "true strength" tilt (still randomized later)
+      // Add a controlled net rating tilt (keeps stronger teams stronger)
       const netDiff = (A.netRtg - B.netRtg); // per 100
-      const tilt = clamp(netDiff / 1000, -0.03, 0.03); // small tilt to PPP
-      pppA += tilt;
-      pppB -= tilt;
+      effA += netDiff * NET_WEIGHT;
+      effB -= netDiff * NET_WEIGHT;
 
-      // Luck nudges scoring slightly (kept small)
-      const luckDiff = (A.luck - B.luck);
-      pppA += clamp(luckDiff * 0.08, -0.02, 0.02);
-      pppB -= clamp(luckDiff * 0.08, -0.02, 0.02);
+      // Seed prior (rank: 1 is best). If A is better seed, B.rank - A.rank is positive.
+      const seedDiff = (B.rank - A.rank); // positive => A better
+      effA += seedDiff * SEED_EDGE_PER_RANK;
+      effB -= seedDiff * SEED_EDGE_PER_RANK;
 
-      // Convert to points and add game variance
-      let ptsA = (poss * pppA) + (randn() * GAME_SD_POINTS);
-      let ptsB = (poss * pppB) + (randn() * GAME_SD_POINTS);
+      // Clamp efficiencies to sane ranges
+      effA = clamp(effA, 88, 135);
+      effB = clamp(effB, 88, 135);
 
-      // Avoid weird totals
+      // Convert to points
+      let ptsA = poss * (effA / 100);
+      let ptsB = poss * (effB / 100);
+
+      // Add game variance (independent noise)
+      ptsA += randn() * GAME_SD_POINTS;
+      ptsB += randn() * GAME_SD_POINTS;
+
+      // Clamp totals
       ptsA = clamp(ptsA, 45, 105);
       ptsB = clamp(ptsB, 45, 105);
 
       return {
         scoreA: Math.round(ptsA),
         scoreB: Math.round(ptsB),
-        tempo: Math.round(poss)
+        tempo: Math.round(poss),
+        effA: Math.round(effA * 10) / 10,
+        effB: Math.round(effB * 10) / 10
       };
     }
 
@@ -739,7 +747,7 @@
 
       lastScoreline.textContent = `${A.team} ${last.scoreA} — ${B.team} ${last.scoreB}`;
       simMeta.textContent =
-        `Tempo: ~${last.tempo} poss • ORtg/DRtg/AdjT/NetRtg/Luck • Randomized every run`;
+        `Tempo: ~${last.tempo} poss • Exp Eff: ${A.team} ${last.effA} / ${B.team} ${last.effB} (per 100)`;
 
       simCount.textContent = sims.toLocaleString();
       avgScore.textContent = `${A.team} ${avgA.toFixed(1)} — ${B.team} ${avgB.toFixed(1)}`;
