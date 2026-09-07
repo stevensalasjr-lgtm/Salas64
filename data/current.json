@@ -1,8 +1,15 @@
 {
   "season": 2027,
-  "updatedAt": null,
+  "updatedAt": "2026-09-07T23:43:38.246054Z",
   "updatedLabel": "2026-27 preseason",
-  "message": "The 2026-27 Salas 64 will populate automatically once enough 2026-27 games have been played.",
+  "modelVersion": "Salas Score 1.0",
+  "weights": {
+    "strength": 0.5,
+    "resume": 0.25,
+    "march": 0.2,
+    "form": 0.05
+  },
+  "message": "The 2026-27 Salas 64 will populate automatically once enough regular-season data is available.",
   "rankings": [],
   "weeklySummary": {}
 }
