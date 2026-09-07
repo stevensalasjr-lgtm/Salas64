@@ -1,0 +1,40 @@
+name: Update Salas 64 Rankings
+
+on:
+  schedule:
+    # Monday morning during the college basketball season.
+    # 17:00 UTC = 9:00 AM Pacific Standard Time / 10:00 AM Pacific Daylight Time.
+    - cron: "0 17 * 1-4,11-12 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate weekly Salas 64
+        env:
+          CBBD_API_KEY: ${{ secrets.CBBD_API_KEY }}
+        run: python scripts/update_rankings.py
+
+      - name: Commit updated ranking data
+        run: |
+          if git diff --quiet; then
+            echo "No ranking changes to commit."
+            exit 0
+          fi
+          git config user.name "salas64-bot"
+          git config user.email "salas64-bot@users.noreply.github.com"
+          git add data/current.json data/history/
+          git commit -m "Update Salas 64 weekly rankings"
+          git push
