@@ -2,322 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Salas 64 Rankings</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Salas 64 weekly college basketball rankings, Salas Scores, weekly movers, team cards, and game predictor." />
+  <title>Salas 64 Rankings</title>
   <style>
     :root{
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
-      color: #0f172a;
-      background: #020617;
-    }
-    body{
-      margin:0;
-      padding:0;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.5;
       color:#e5e7eb;
-    }
-    .page{
-      max-width:1100px;
-      margin:0 auto;
-      padding:24px 16px 40px;
-    }
-    header{
-      display:flex;
-      flex-wrap:wrap;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:8px;
-      margin-bottom:24px;
-      border-bottom:1px solid #1f2933;
-      padding-bottom:12px;
-    }
-    header h1{
-      margin:0;
-      font-size:1.6rem;
-      font-weight:700;
-      letter-spacing:0.03em;
-    }
-    header .meta{
-      font-size:0.9rem;
-      color:#9ca3af;
-    }
-
-    .layout{
-      display:grid;
-      grid-template-columns:minmax(0, 1fr);
-      gap:20px;
-    }
-
-    .card{
-      background: rgba(15, 23, 42, 0.9);
-      border-radius:16px;
-      padding:16px 18px 18px;
-      box-shadow:0 18px 45px rgba(0,0,0,0.6);
-      border:1px solid rgba(55,65,81,0.8);
-      backdrop-filter: blur(10px);
-    }
-    .card-header-row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:8px;
-      margin-bottom:4px;
-    }
-    .card h2{
-      margin:0;
-      font-size:1.2rem;
-    }
-    .card p.subtitle{
-      margin:0 0 12px;
-      font-size:0.85rem;
-      color:#9ca3af;
-    }
-    .card-links{
-      display:flex;
-      gap:6px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      font-size:0.8rem;
-    }
-    .info-link{
-      color:#60a5fa;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-    .info-link:hover{ text-decoration:underline; }
-    .link-divider{ color:#4b5563; }
-
-    .search-bar{
-      margin-bottom:10px;
-      display:flex;
-      gap:8px;
-      position:relative;
-      z-index:5;
-    }
-    .search-wrapper{ position:relative; flex:1; }
-    .search-bar input{
-      width:100%;
-      border-radius:999px;
-      border:1px solid #4b5563;
-      padding:6px 10px;
       background:#020617;
-      color:#e5e7eb;
-      font-size:0.85rem;
-      outline:none;
+      --bg:#020617;
+      --panel:rgba(15,23,42,.9);
+      --panel2:rgba(17,24,39,.9);
+      --border:rgba(55,65,81,.85);
+      --muted:#9ca3af;
+      --blue:#60a5fa;
+      --gold:#facc15;
+      --green:#4ade80;
+      --red:#f87171;
     }
-    .search-bar input::placeholder{ color:#6b7280; }
-
-    .search-results{
-      position:absolute;
-      top:110%;
-      left:0;
-      right:0;
-      background:#020617;
-      border-radius:12px;
-      border:1px solid #4b5563;
-      max-height:220px;
-      overflow-y:auto;
-      padding:4px 0;
-      box-shadow:0 14px 35px rgba(0,0,0,0.7);
-      display:none;
-    }
-    .search-result-item{
-      padding:6px 10px;
-      font-size:0.85rem;
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      cursor:pointer;
-    }
-    .search-result-item span.team{ font-weight:500; }
-    .search-result-item span.rank{
-      color:#9ca3af;
-      font-variant-numeric:tabular-nums;
-    }
-    .search-result-item:hover{ background:#111827; }
-
-    .sort-row{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      gap:6px;
-      margin-bottom:6px;
-      font-size:0.8rem;
-      color:#9ca3af;
-    }
-    .sort-select{
-      border-radius:999px;
-      border:1px solid #4b5563;
-      padding:4px 10px;
-      background:#020617;
-      color:#e5e7eb;
-      font-size:0.8rem;
-      outline:none;
-    }
-
-    .rankings-header{
-      display:grid;
-      grid-template-columns:50px 1fr 90px;
-      font-size:0.8rem;
-      text-transform:uppercase;
-      letter-spacing:0.08em;
-      color:#9ca3af;
-      padding:6px 8px;
-      border-radius:8px;
-      background: rgba(15, 23, 42, 0.9);
-      margin-bottom:4px;
-    }
-    .ranking-row{
-      display:grid;
-      grid-template-columns:50px 1fr 90px;
-      padding:6px 8px;
-      border-radius:999px;
-      font-size:0.92rem;
-      align-items:center;
-      transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
-    }
-    .ranking-row:nth-child(odd){ background: rgba(15, 23, 42, 0.75); }
-    .ranking-row:nth-child(even){ background: rgba(17, 24, 39, 0.85); }
-    .ranking-row:hover{
-      background: rgba(31, 41, 55, 0.98);
-      transform: translateY(-1px);
-    }
-    .ranking-row.highlight{ box-shadow:0 0 0 2px #facc15; }
-
-    .rank-num{ font-weight:600; color:#e5e7eb; }
-    .team-name{
-      font-weight:500;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .record{
-      font-variant-numeric:tabular-nums;
-      text-align:right;
-      color:#e5e7eb;
-    }
-
-    /* ======= SIMULATOR ======= */
-    .compare-hr{
-      border:0;
-      border-top:1px solid rgba(55,65,81,0.6);
-      margin:18px 0;
-    }
-    .compare-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr 160px auto;
-      gap:10px;
-      align-items:end;
-      margin-top:8px;
-    }
-    @media (max-width: 820px){
-      .compare-grid{ grid-template-columns: 1fr; }
-      .compare-actions{ justify-content:flex-start; }
-    }
-    .compare-col{ display:flex; flex-direction:column; gap:6px; }
-    .compare-label{ font-size:0.8rem; color:#9ca3af; }
-
-    .compare-select, .compare-input{
-      border-radius:12px;
-      border:1px solid #4b5563;
-      padding:10px 10px;
-      background:#020617;
-      color:#e5e7eb;
-      font-size:0.9rem;
-      outline:none;
-    }
-
-    .compare-actions{
-      display:flex;
-      gap:8px;
-      justify-content:flex-end;
-      flex-wrap:wrap;
-    }
-    .compare-btn{
-      border-radius:999px;
-      border:1px solid rgba(96,165,250,0.6);
-      background: rgba(30, 58, 138, 0.35);
-      color:#e5e7eb;
-      padding:9px 12px;
-      font-size:0.85rem;
-      cursor:pointer;
-      transition: transform .12s ease, background .12s ease;
-    }
-    .compare-btn:hover{ transform: translateY(-1px); background: rgba(30, 58, 138, 0.5); }
-    .compare-btn.secondary{
-      border:1px solid rgba(156,163,175,0.5);
-      background: rgba(31,41,55,0.35);
-    }
-    .compare-btn.secondary:hover{ background: rgba(31,41,55,0.55); }
-
-    .compare-result{
-      margin-top:12px;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(55,65,81,0.7);
-      background: rgba(2,6,23,0.6);
-      display:none;
-    }
-    .compare-scoreline{
-      font-size:1.15rem;
-      font-weight:700;
-      letter-spacing:0.02em;
-      margin-bottom:4px;
-    }
-    .compare-meta{ color:#9ca3af; font-size:0.85rem; margin-bottom:10px; }
-
-    .sim-stats{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap:10px;
-      margin:10px 0 12px;
-    }
-    @media (max-width: 820px){ .sim-stats{ grid-template-columns: 1fr 1fr; } }
-    .sim-stat{
-      border:1px solid rgba(55,65,81,0.6);
-      background: rgba(15,23,42,0.55);
-      border-radius:12px;
-      padding:10px;
-    }
-    .sim-stat-k{ color:#9ca3af; font-size:0.75rem; margin-bottom:4px; }
-    .sim-stat-v{ font-size:0.95rem; font-weight:600; }
-
-    .bar-row{
-      display:grid;
-      grid-template-columns: 1fr 6fr 1fr;
-      gap:10px;
-      align-items:center;
-    }
-    .bar{
-      height:10px;
-      border-radius:999px;
-      background: rgba(55,65,81,0.55);
-      overflow:hidden;
-      border:1px solid rgba(55,65,81,0.7);
-    }
-    .bar-fill{
-      height:100%;
-      width:50%;
-      background: rgba(250, 204, 21, 0.9);
-    }
-    .bar-label{ font-size:0.8rem; color:#e5e7eb; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .compare-disclaimer{ margin-top:10px; color:#6b7280; font-size:0.75rem; }
-
-    footer{
-      margin-top:22px;
-      font-size:0.75rem;
-      color:#6b7280;
-      text-align:center;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at top,#0b1120 0,#020617 50%,#000 100%);color:#e5e7eb;min-height:100vh}
+    button,input,select{font:inherit}
+    .page{max-width:1120px;margin:0 auto;padding:24px 16px 44px}
+    header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:24px;border-bottom:1px solid #1f2933;padding-bottom:12px}
+    header h1{margin:0;font-size:1.65rem;letter-spacing:.03em}
+    .meta{font-size:.9rem;color:var(--muted)}
+    .layout{display:grid;gap:20px}
+    .card{background:var(--panel);border-radius:16px;padding:16px 18px 18px;box-shadow:0 18px 45px rgba(0,0,0,.6);border:1px solid var(--border);backdrop-filter:blur(10px)}
+    .card-header-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+    .card h2{margin:0;font-size:1.2rem}
+    .subtitle{margin:0 0 12px;font-size:.86rem;color:var(--muted)}
+    .card-links{display:flex;gap:7px;align-items:center;flex-wrap:wrap;font-size:.8rem}
+    .info-link{color:var(--blue);text-decoration:none}.info-link:hover{text-decoration:underline}.link-divider{color:#4b5563}
+    .status-banner{display:none;margin:10px 0 14px;padding:10px 12px;border:1px solid #334155;border-radius:12px;background:rgba(2,6,23,.62);font-size:.86rem;color:#cbd5e1}
+    .search-bar{margin-bottom:10px;display:flex;gap:8px;position:relative;z-index:5}
+    .search-wrapper{position:relative;flex:1}
+    .search-bar input{width:100%;border-radius:999px;border:1px solid #4b5563;padding:8px 12px;background:#020617;color:#e5e7eb;font-size:.86rem;outline:none}
+    .search-bar input::placeholder{color:#6b7280}
+    .search-results{position:absolute;top:110%;left:0;right:0;background:#020617;border-radius:12px;border:1px solid #4b5563;max-height:230px;overflow-y:auto;padding:4px 0;box-shadow:0 14px 35px rgba(0,0,0,.7);display:none}
+    .search-result-item{padding:7px 10px;font-size:.85rem;display:flex;justify-content:space-between;gap:8px;cursor:pointer}.search-result-item:hover{background:#111827}.search-result-item .team{font-weight:600}.search-result-item .rank{color:var(--muted)}
+    .sort-row{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-bottom:6px;font-size:.8rem;color:var(--muted)}
+    .sort-select{border-radius:999px;border:1px solid #4b5563;padding:5px 10px;background:#020617;color:#e5e7eb;font-size:.8rem;outline:none}
+    .rankings-header,.ranking-row{display:grid;grid-template-columns:50px minmax(145px,1fr) 90px 96px 78px;align-items:center;gap:6px}
+    .rankings-header{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:7px 8px;border-radius:8px;background:rgba(15,23,42,.95);margin-bottom:4px}
+    .ranking-row{width:100%;border:0;color:#e5e7eb;text-align:left;padding:8px;border-radius:999px;font-size:.92rem;cursor:pointer;transition:background .15s ease,transform .12s ease,box-shadow .12s ease}
+    .ranking-row:nth-child(odd){background:rgba(15,23,42,.75)}.ranking-row:nth-child(even){background:rgba(17,24,39,.85)}
+    .ranking-row:hover,.ranking-row:focus-visible{background:rgba(31,41,55,.98);transform:translateY(-1px);outline:none}
+    .ranking-row.highlight{box-shadow:0 0 0 2px var(--gold)}
+    .rank-num{font-weight:700}.team-name{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.record,.score,.change{text-align:right;font-variant-numeric:tabular-nums}.score{font-weight:800;color:#f8fafc}.change.up{color:var(--green)}.change.down{color:var(--red)}.change.new{color:var(--gold)}.change.same{color:var(--muted)}
+    .weekly-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}.weekly-box{border:1px solid rgba(55,65,81,.7);background:rgba(2,6,23,.55);border-radius:13px;padding:12px}.weekly-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}.weekly-team{font-size:1rem;font-weight:750}.weekly-note{font-size:.78rem;color:var(--muted);margin-top:3px}
+    .compare-hr{border:0;border-top:1px solid rgba(55,65,81,.6);margin:20px 0}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr 160px auto;gap:10px;align-items:end;margin-top:8px}.compare-col{display:flex;flex-direction:column;gap:6px}.compare-label{font-size:.8rem;color:var(--muted)}.compare-select,.compare-input{border-radius:12px;border:1px solid #4b5563;padding:10px;background:#020617;color:#e5e7eb;font-size:.9rem;outline:none}.compare-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.compare-btn{border-radius:999px;border:1px solid rgba(96,165,250,.6);background:rgba(30,58,138,.35);color:#e5e7eb;padding:9px 12px;font-size:.85rem;cursor:pointer}.compare-btn:hover{background:rgba(30,58,138,.52)}.compare-btn:disabled{opacity:.45;cursor:not-allowed}
+    .compare-result{margin-top:12px;padding:12px;border-radius:14px;border:1px solid rgba(55,65,81,.7);background:rgba(2,6,23,.6);display:none}.compare-scoreline{font-size:1.15rem;font-weight:750;margin-bottom:4px}.compare-meta{color:var(--muted);font-size:.85rem;margin-bottom:10px}.sim-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:10px 0 12px}.sim-stat{border:1px solid rgba(55,65,81,.6);background:rgba(15,23,42,.55);border-radius:12px;padding:10px}.sim-stat-k{color:var(--muted);font-size:.75rem;margin-bottom:4px}.sim-stat-v{font-size:.95rem;font-weight:600}.bar-row{display:grid;grid-template-columns:1fr 6fr 1fr;gap:10px;align-items:center}.bar{height:10px;border-radius:999px;background:rgba(55,65,81,.55);overflow:hidden;border:1px solid rgba(55,65,81,.7)}.bar-fill{height:100%;width:50%;background:rgba(250,204,21,.9)}.bar-label{font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    footer{margin-top:22px;font-size:.75rem;color:#6b7280;text-align:center}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal-backdrop.open{display:flex}.team-card{width:min(480px,100%);background:#0f172a;border:1px solid #475569;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.75);padding:20px;position:relative}.close-btn{position:absolute;right:14px;top:12px;border:0;background:transparent;color:#94a3b8;font-size:1.35rem;cursor:pointer}.team-card-rank{font-size:.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:.09em;font-weight:700}.team-card h3{margin:4px 36px 2px 0;font-size:1.55rem}.salas-score-label{color:var(--muted);font-size:.73rem;text-transform:uppercase;letter-spacing:.1em;margin-top:13px}.salas-score-big{font-size:3rem;line-height:1;font-weight:850;margin:4px 0 16px}.team-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.team-stat{border:1px solid #334155;background:#020617;border-radius:12px;padding:10px}.team-stat-k{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.team-stat-v{font-size:1rem;font-weight:700;margin-top:2px}.best-win{grid-column:1/-1}
+    @media(max-width:820px){.compare-grid{grid-template-columns:1fr}.compare-actions{justify-content:flex-start}.weekly-grid{grid-template-columns:1fr 1fr}.sim-stats{grid-template-columns:1fr 1fr}}
+    @media(max-width:650px){.rankings-header,.ranking-row{grid-template-columns:38px minmax(112px,1fr) 66px 72px 54px;font-size:.82rem}.rankings-header{font-size:.65rem;letter-spacing:.04em}.ranking-row{border-radius:14px}.weekly-grid{grid-template-columns:1fr}.team-card-grid{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
   <div class="page">
     <header>
       <h1><strong>Salas 64</strong> — College Basketball Rankings</h1>
-      <div class="meta" id="asOfText"></div>
+      <div class="meta" id="asOfText">Loading weekly rankings…</div>
     </header>
 
     <div class="layout">
@@ -330,11 +78,12 @@
             <a href="about.html" class="info-link">About Salas 64</a>
           </div>
         </div>
-        <p class="subtitle">Top 64 + efficiency inputs. Simulator tuned for March-style upset volatility (no “Luck” input).</p>
+        <p class="subtitle">The 64 teams that matter most. New official rankings every Monday.</p>
+        <div id="statusBanner" class="status-banner"></div>
 
         <div class="search-bar">
           <div class="search-wrapper">
-            <input id="teamSearchInput" type="text" placeholder="Search team (e.g. Kansas, Colorado State)" />
+            <input id="teamSearchInput" type="text" placeholder="Search a Salas 64 team" autocomplete="off" />
             <div id="searchResults" class="search-results"></div>
           </div>
         </div>
@@ -343,606 +92,195 @@
           <span>Sort by:</span>
           <select id="sortSelect" class="sort-select">
             <option value="rank">Rank</option>
+            <option value="score">Salas Score</option>
             <option value="team">Team (A–Z)</option>
             <option value="record">Record</option>
           </select>
         </div>
 
         <div class="rankings-header">
-          <span>#</span>
-          <span>Team</span>
-          <span style="text-align:right">Record</span>
+          <span>#</span><span>Team</span><span style="text-align:right">Record</span><span style="text-align:right">Salas</span><span style="text-align:right">Change</span>
         </div>
         <div id="rankingsList"></div>
 
         <hr class="compare-hr" />
-
-        <div class="card-header-row" style="margin-top:2px;">
-          <h2>Team Compare Simulator</h2>
+        <div class="card-header-row"><h2>This Week in the Salas 64</h2></div>
+        <p class="subtitle">Weekly movement is calculated automatically from the previous Monday ranking.</p>
+        <div class="weekly-grid">
+          <div class="weekly-box"><div class="weekly-kicker">Hottest Team</div><div class="weekly-team" id="hottestTeam">—</div><div class="weekly-note" id="hottestNote">—</div></div>
+          <div class="weekly-box"><div class="weekly-kicker">Biggest Riser</div><div class="weekly-team" id="biggestRiser">—</div><div class="weekly-note" id="riserNote">—</div></div>
+          <div class="weekly-box"><div class="weekly-kicker">Biggest Faller</div><div class="weekly-team" id="biggestFaller">—</div><div class="weekly-note" id="fallerNote">—</div></div>
+          <div class="weekly-box"><div class="weekly-kicker">Team to Watch</div><div class="weekly-team" id="teamToWatch">—</div><div class="weekly-note" id="watchNote">—</div></div>
         </div>
-        <p class="subtitle">
-          Default = 100 sims. Upsets are encouraged by shrinking win probabilities toward 50/50 unless teams are truly far apart.
-        </p>
 
+        <hr class="compare-hr" />
+        <div class="card-header-row"><h2>Game Predictor</h2></div>
+        <p class="subtitle">Neutral-court simulation using the same automatically refreshed adjusted efficiency data behind the Salas model.</p>
         <div class="compare-grid">
-          <div class="compare-col">
-            <label class="compare-label" for="teamASelect">Team A</label>
-            <select id="teamASelect" class="compare-select"></select>
-          </div>
-
-          <div class="compare-col">
-            <label class="compare-label" for="teamBSelect">Team B</label>
-            <select id="teamBSelect" class="compare-select"></select>
-          </div>
-
-          <div class="compare-col">
-            <label class="compare-label" for="simsInput">Simulations</label>
-            <input id="simsInput" class="compare-input" type="number" min="1" max="5000" value="100" />
-          </div>
-
-          <div class="compare-col compare-actions">
-            <button id="runSimBtn" class="compare-btn">Run simulations</button>
-            <button id="runOneBtn" class="compare-btn secondary">Randomize once</button>
-          </div>
+          <div class="compare-col"><label class="compare-label" for="teamASelect">Team A</label><select id="teamASelect" class="compare-select"></select></div>
+          <div class="compare-col"><label class="compare-label" for="teamBSelect">Team B</label><select id="teamBSelect" class="compare-select"></select></div>
+          <div class="compare-col"><label class="compare-label" for="simsInput">Simulations</label><input id="simsInput" class="compare-input" type="number" min="1" max="5000" value="100" /></div>
+          <div class="compare-col compare-actions"><button id="runSimBtn" class="compare-btn" disabled>Run simulations</button></div>
         </div>
-
         <div id="simResult" class="compare-result">
           <div class="compare-scoreline" id="lastScoreline"></div>
           <div class="compare-meta" id="simMeta"></div>
-
           <div class="sim-stats">
-            <div class="sim-stat">
-              <div class="sim-stat-k">Simulations</div>
-              <div class="sim-stat-v" id="simCount">—</div>
-            </div>
-            <div class="sim-stat">
-              <div class="sim-stat-k">Avg score</div>
-              <div class="sim-stat-v" id="avgScore">—</div>
-            </div>
-            <div class="sim-stat">
-              <div class="sim-stat-k">Win %</div>
-              <div class="sim-stat-v" id="winPct">—</div>
-            </div>
-            <div class="sim-stat">
-              <div class="sim-stat-k">Avg margin</div>
-              <div class="sim-stat-v" id="avgMargin">—</div>
-            </div>
+            <div class="sim-stat"><div class="sim-stat-k">Simulations</div><div class="sim-stat-v" id="simCount">—</div></div>
+            <div class="sim-stat"><div class="sim-stat-k">Avg score</div><div class="sim-stat-v" id="avgScore">—</div></div>
+            <div class="sim-stat"><div class="sim-stat-k">Win %</div><div class="sim-stat-v" id="winPct">—</div></div>
+            <div class="sim-stat"><div class="sim-stat-k">Avg margin</div><div class="sim-stat-v" id="avgMargin">—</div></div>
           </div>
-
-          <div class="bar-row">
-            <span class="bar-label" id="barLabelA"></span>
-            <div class="bar">
-              <div class="bar-fill" id="barFillA"></div>
-            </div>
-            <span class="bar-label" id="barLabelB"></span>
-          </div>
-
-          <div class="compare-disclaimer">
-            To make results even more “madness”: increase MADNESS_SHRINK_MAX or SCORE_SD. To make favorites stronger: decrease them.
-          </div>
+          <div class="bar-row"><span class="bar-label" id="barLabelA"></span><div class="bar"><div class="bar-fill" id="barFillA"></div></div><span class="bar-label" id="barLabelB"></span></div>
         </div>
       </section>
     </div>
 
-    <footer>
-      Salas 64 &copy; <span id="year"></span>. Updated daily.
-    </footer>
+    <footer>Salas 64 &copy; <span id="year"></span>. Official rankings update every Monday.</footer>
+  </div>
+
+  <div id="teamModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTeamName">
+    <div class="team-card">
+      <button class="close-btn" id="closeModal" aria-label="Close team card">×</button>
+      <div class="team-card-rank" id="modalRank">—</div>
+      <h3 id="modalTeamName">Team</h3>
+      <div class="salas-score-label">Salas Score</div>
+      <div class="salas-score-big" id="modalScore">—</div>
+      <div class="team-card-grid">
+        <div class="team-stat"><div class="team-stat-k">Overall Record</div><div class="team-stat-v" id="modalRecord">—</div></div>
+        <div class="team-stat"><div class="team-stat-k">Last 10</div><div class="team-stat-v" id="modalLast10">—</div></div>
+        <div class="team-stat"><div class="team-stat-k">Current Streak</div><div class="team-stat-v" id="modalStreak">—</div></div>
+        <div class="team-stat"><div class="team-stat-k">Last Week</div><div class="team-stat-v" id="modalLastWeek">—</div></div>
+        <div class="team-stat"><div class="team-stat-k">Ranking Change</div><div class="team-stat-v" id="modalChange">—</div></div>
+        <div class="team-stat best-win"><div class="team-stat-k">Best Win</div><div class="team-stat-v" id="modalBestWin">—</div></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // ======= DATA (Updated Top 64) =======
-    const salasRankings = [
-      { rank: 1,  team: "Michigan",        record:"25-1", netRtg: 39.28, ortg:128.2, drtg: 89.0, adjT:72.2 },
-      { rank: 2,  team: "Duke",            record:"24-2", netRtg: 36.61, ortg:126.8, drtg: 90.1, adjT:65.7 },
-      { rank: 3,  team: "Arizona",         record:"24-2", netRtg: 35.36, ortg:125.7, drtg: 90.3, adjT:70.6 },
-      { rank: 4,  team: "Illinois",        record:"22-5", netRtg: 34.38, ortg:132.5, drtg: 98.1, adjT:65.4 },
-      { rank: 5,  team: "Houston",         record:"23-3", netRtg: 33.30, ortg:126.3, drtg: 93.0, adjT:63.1 },
-      { rank: 6,  team: "Florida",         record:"20-6", netRtg: 32.60, ortg:124.5, drtg: 91.8, adjT:70.3 },
-      { rank: 7,  team: "Iowa St.",        record:"23-3", netRtg: 32.19, ortg:125.2, drtg: 93.0, adjT:66.9 },
-      { rank: 8,  team: "Purdue",          record:"21-5", netRtg: 30.83, ortg:129.2, drtg: 98.4, adjT:65.4 },
-      { rank: 9,  team: "Gonzaga",         record:"26-2", netRtg: 28.89, ortg:123.2, drtg: 94.3, adjT:69.7 },
-      { rank: 10, team: "Michigan St.",    record:"21-5", netRtg: 28.63, ortg:121.4, drtg: 92.8, adjT:66.0 },
-
-      { rank: 11, team: "Nebraska",        record:"22-4", netRtg: 28.18, ortg:120.4, drtg: 92.2, adjT:67.0 },
-      { rank: 12, team: "Vanderbilt",      record:"21-5", netRtg: 27.73, ortg:125.3, drtg: 97.6, adjT:70.0 },
-      { rank: 13, team: "Connecticut",     record:"24-3", netRtg: 27.62, ortg:122.7, drtg: 95.1, adjT:65.4 },
-      { rank: 14, team: "Kansas",          record:"20-6", netRtg: 27.55, ortg:121.0, drtg: 93.5, adjT:67.1 },
-      { rank: 15, team: "Louisville",      record:"19-7", netRtg: 26.79, ortg:125.5, drtg: 98.7, adjT:70.7 },
-      { rank: 16, team: "Tennessee",       record:"19-7", netRtg: 26.36, ortg:121.8, drtg: 95.5, adjT:65.8 },
-      { rank: 17, team: "Arkansas",        record:"19-7", netRtg: 26.34, ortg:127.7, drtg:101.3, adjT:70.6 },
-      { rank: 18, team: "Texas Tech",      record:"19-7", netRtg: 26.07, ortg:124.3, drtg: 98.2, adjT:67.2 },
-      { rank: 19, team: "Virginia",        record:"23-3", netRtg: 26.02, ortg:121.6, drtg: 95.6, adjT:65.8 },
-      { rank: 20, team: "Alabama",         record:"19-7", netRtg: 25.63, ortg:129.2, drtg:103.5, adjT:73.7 },
-
-      { rank: 21, team: "St. John's",      record:"21-5", netRtg: 24.56, ortg:121.0, drtg: 96.5, adjT:69.9 },
-      { rank: 22, team: "BYU",             record:"19-7", netRtg: 24.48, ortg:126.4, drtg:101.9, adjT:69.9 },
-      { rank: 23, team: "Utah St.",        record:"23-3", netRtg: 23.44, ortg:123.4, drtg:100.0, adjT:68.0 },
-      { rank: 24, team: "Iowa",            record:"19-7", netRtg: 22.85, ortg:122.2, drtg: 99.4, adjT:63.3 },
-      { rank: 25, team: "N.C. State",      record:"19-8", netRtg: 22.74, ortg:123.7, drtg:100.9, adjT:69.2 },
-      { rank: 26, team: "Saint Louis",     record:"24-2", netRtg: 22.52, ortg:121.1, drtg: 98.6, adjT:71.9 },
-      { rank: 27, team: "Villanova",       record:"21-5", netRtg: 21.96, ortg:121.9, drtg: 99.9, adjT:64.4 },
-      { rank: 28, team: "Texas",           record:"17-9", netRtg: 21.37, ortg:127.1, drtg:105.7, adjT:67.0 },
-      { rank: 29, team: "Saint Mary's",    record:"24-4", netRtg: 21.19, ortg:119.5, drtg: 98.3, adjT:65.8 },
-      { rank: 30, team: "Kentucky",        record:"17-9", netRtg: 21.01, ortg:121.7, drtg:100.7, adjT:67.6 },
-
-      { rank: 31, team: "Wisconsin",       record:"18-8", netRtg: 20.68, ortg:123.5, drtg:102.8, adjT:69.3 },
-      { rank: 32, team: "North Carolina",  record:"20-6", netRtg: 20.46, ortg:122.0, drtg:101.5, adjT:67.9 },
-      { rank: 33, team: "Auburn",          record:"14-12", netRtg: 20.41, ortg:126.7, drtg:106.3, adjT:67.1 },
-      { rank: 34, team: "SMU",             record:"18-8", netRtg: 20.39, ortg:125.3, drtg:104.9, adjT:69.2 },
-      { rank: 35, team: "Clemson",         record:"20-7", netRtg: 19.89, ortg:116.7, drtg: 96.8, adjT:64.4 },
-      { rank: 36, team: "Ohio St.",        record:"17-9", netRtg: 19.72, ortg:123.2, drtg:103.5, adjT:66.7 },
-      { rank: 37, team: "Indiana",         record:"17-9", netRtg: 19.63, ortg:121.5, drtg:101.9, adjT:66.5 },
-      { rank: 38, team: "Texas A&M",       record:"18-8", netRtg: 19.59, ortg:121.5, drtg:101.9, adjT:70.8 },
-      { rank: 39, team: "Santa Clara",     record:"22-6", netRtg: 19.30, ortg:122.6, drtg:103.3, adjT:69.9 },
-      { rank: 40, team: "Miami FL",        record:"21-5", netRtg: 19.29, ortg:119.4, drtg:100.2, adjT:68.3 },
-
-      { rank: 41, team: "Georgia",         record:"18-8", netRtg: 18.96, ortg:122.6, drtg:103.6, adjT:72.3 },
-      { rank: 42, team: "UCLA",            record:"17-9", netRtg: 17.69, ortg:120.0, drtg:102.3, adjT:65.1 },
-      { rank: 43, team: "San Diego St.",   record:"18-7", netRtg: 17.57, ortg:113.3, drtg: 95.7, adjT:68.8 },
-      { rank: 44, team: "New Mexico",      record:"20-6", netRtg: 17.20, ortg:117.5, drtg:100.4, adjT:70.0 },
-      { rank: 45, team: "VCU",             record:"21-6", netRtg: 17.13, ortg:121.0, drtg:103.9, adjT:69.3 },
-      { rank: 46, team: "Washington",      record:"13-13", netRtg: 16.21, ortg:117.7, drtg:101.5, adjT:66.9 },
-      { rank: 47, team: "Baylor",          record:"13-13", netRtg: 15.33, ortg:121.5, drtg:106.2, adjT:68.5 },
-      { rank: 48, team: "UCF",             record:"18-7", netRtg: 15.07, ortg:121.6, drtg:106.5, adjT:69.2 },
-      { rank: 49, team: "Seton Hall",      record:"18-9", netRtg: 14.86, ortg:109.7, drtg: 94.8, adjT:65.6 },
-      { rank: 50, team: "Cincinnati",      record:"14-12", netRtg: 14.80, ortg:109.2, drtg: 94.3, adjT:67.9 },
-
-      { rank: 51, team: "TCU",             record:"16-10", netRtg: 14.71, ortg:113.7, drtg: 99.0, adjT:67.8 },
-      { rank: 52, team: "Missouri",        record:"18-8",  netRtg: 14.38, ortg:119.5, drtg:105.2, adjT:66.4 },
-      { rank: 53, team: "LSU",             record:"14-12", netRtg: 14.24, ortg:120.4, drtg:106.2, adjT:66.6 },
-      { rank: 54, team: "USC",             record:"18-8",  netRtg: 14.20, ortg:115.7, drtg:101.5, adjT:70.6 },
-      { rank: 55, team: "South Florida",   record:"19-8",  netRtg: 13.78, ortg:117.9, drtg:104.1, adjT:71.6 },
-      { rank: 56, team: "Belmont",         record:"24-4",  netRtg: 13.62, ortg:121.0, drtg:107.4, adjT:69.0 },
-      { rank: 57, team: "Oklahoma",        record:"13-13", netRtg: 13.58, ortg:122.6, drtg:109.0, adjT:66.8 },
-      { rank: 58, team: "Grand Canyon",    record:"17-9",  netRtg: 13.26, ortg:111.1, drtg: 97.9, adjT:67.9 },
-      { rank: 59, team: "Virginia Tech",   record:"17-10", netRtg: 12.69, ortg:115.9, drtg:103.3, adjT:67.2 },
-      { rank: 60, team: "West Virginia",   record:"16-10", netRtg: 12.59, ortg:110.8, drtg: 98.2, adjT:62.6 },
-
-      { rank: 61, team: "Boise St.",       record:"15-11", netRtg: 12.58, ortg:117.1, drtg:104.5, adjT:65.8 },
-      { rank: 62, team: "McNeese",         record:"22-5",  netRtg: 12.37, ortg:116.4, drtg:104.0, adjT:66.3 },
-      { rank: 63, team: "Arizona St.",     record:"14-12", netRtg: 12.26, ortg:117.6, drtg:105.4, adjT:69.2 },
-      { rank: 64, team: "Tulsa",           record:"21-6",  netRtg: 12.20, ortg:121.5, drtg:109.3, adjT:68.2 }
-    ];
-
-    const rankingsAsOf = "As of Thu, Feb 19";
-
+    let salasRankings = [];
+    let weeklySummary = {};
     let currentSortKey = "rank";
-    let currentSortDir = "asc";
 
-    function parseRecord(rec){
-      const cleaned = String(rec || "").replace(/–/g, "-");
-      const parts = cleaned.split("-");
-      const wins = parseInt(parts[0], 10) || 0;
-      const losses = parseInt(parts[1], 10) || 0;
-      return { wins, losses };
+    const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
+    const parseRecord = (rec)=>{const [w,l]=String(rec||"0-0").replace(/–/g,"-").split("-").map(x=>parseInt(x,10)||0);return{wins:w,losses:l}};
+    const changeText = (t)=>{
+      if(t.previousRank == null) return {text:"NEW",cls:"new"};
+      if(t.change > 0) return {text:`↑${t.change}`,cls:"up"};
+      if(t.change < 0) return {text:`↓${Math.abs(t.change)}`,cls:"down"};
+      return {text:"—",cls:"same"};
+    };
+
+    async function loadData(){
+      try{
+        const res = await fetch(`data/current.json?v=${Date.now()}`,{cache:"no-store"});
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        const payload = await res.json();
+        salasRankings = Array.isArray(payload.rankings) ? payload.rankings : [];
+        weeklySummary = payload.weeklySummary || {};
+        document.getElementById("asOfText").textContent = payload.updatedLabel || "Weekly rankings";
+        if(!salasRankings.length) showStatus(payload.message || "The 2026–27 Salas 64 will populate automatically when the season model begins.");
+      }catch(err){
+        showStatus("Rankings data could not be loaded. Run the weekly updater to generate data/current.json.");
+        document.getElementById("asOfText").textContent = "Data unavailable";
+      }
+      renderAll();
+    }
+
+    function showStatus(message){const el=document.getElementById("statusBanner");el.textContent=message;el.style.display="block"}
+
+    function sortedData(){
+      const data=[...salasRankings];
+      if(currentSortKey==="rank") return data.sort((a,b)=>a.rank-b.rank);
+      if(currentSortKey==="score") return data.sort((a,b)=>b.salasScore-a.salasScore || a.rank-b.rank);
+      if(currentSortKey==="team") return data.sort((a,b)=>a.team.localeCompare(b.team));
+      if(currentSortKey==="record") return data.sort((a,b)=>{const ar=parseRecord(a.record),br=parseRecord(b.record);const ap=ar.wins/Math.max(1,ar.wins+ar.losses),bp=br.wins/Math.max(1,br.wins+br.losses);return bp-ap || br.wins-ar.wins});
+      return data;
     }
 
     function renderRankings(){
-      const container = document.getElementById("rankingsList");
-      container.innerHTML = "";
-
-      const data = [...salasRankings].sort((a,b)=>{
-        if(currentSortKey === "rank"){
-          return currentSortDir === "asc" ? a.rank - b.rank : b.rank - a.rank;
-        }
-        if(currentSortKey === "team"){
-          const an = a.team.toLowerCase();
-          const bn = b.team.toLowerCase();
-          if(an < bn) return currentSortDir === "asc" ? -1 : 1;
-          if(an > bn) return currentSortDir === "asc" ? 1 : -1;
-          return 0;
-        }
-        if(currentSortKey === "record"){
-          const ar = parseRecord(a.record);
-          const br = parseRecord(b.record);
-          const pa = (ar.wins + ar.losses) > 0 ? ar.wins / (ar.wins + ar.losses) : 0;
-          const pb = (br.wins + br.losses) > 0 ? br.wins / (br.wins + br.losses) : 0;
-          if(pa !== pb) return pb - pa;
-          if(ar.wins !== br.wins) return br.wins - ar.wins;
-          return ar.losses - br.losses;
-        }
-        return 0;
-      });
-
-      data.forEach((item)=>{
-        const row = document.createElement("div");
-        row.className = "ranking-row";
-        row.dataset.team = item.team.toLowerCase();
-
-        const rankCell = document.createElement("div");
-        rankCell.className = "rank-num";
-        rankCell.textContent = item.rank;
-
-        const teamCell = document.createElement("div");
-        teamCell.className = "team-name";
-        teamCell.textContent = item.team;
-
-        const recordCell = document.createElement("div");
-        recordCell.className = "record";
-        recordCell.textContent = item.record;
-
-        row.appendChild(rankCell);
-        row.appendChild(teamCell);
-        row.appendChild(recordCell);
-        container.appendChild(row);
+      const container=document.getElementById("rankingsList");container.innerHTML="";
+      sortedData().forEach(item=>{
+        const row=document.createElement("button");row.type="button";row.className="ranking-row";row.dataset.team=item.team.toLowerCase();
+        const c=changeText(item);
+        row.innerHTML=`<span class="rank-num">${item.rank}</span><span class="team-name">${escapeHtml(item.team)}</span><span class="record">${escapeHtml(item.record||"—")}</span><span class="score">${Number(item.salasScore).toFixed(1)}</span><span class="change ${c.cls}">${c.text}</span>`;
+        row.addEventListener("click",()=>openTeamCard(item));container.appendChild(row);
       });
     }
 
-    const allTeams = salasRankings.map((t)=>({ name:t.team, rank:t.rank }));
-
-    function scrollToTeam(teamName){
-      const rows = Array.from(document.querySelectorAll(".ranking-row"));
-      rows.forEach((r)=>r.classList.remove("highlight"));
-      const target = rows.find((r)=>(r.dataset.team || "").toLowerCase() === teamName.toLowerCase());
-      if(target){
-        target.classList.add("highlight");
-        target.scrollIntoView({ behavior:"smooth", block:"center" });
-      }
+    function renderWeekly(){
+      const set=(id,value)=>document.getElementById(id).textContent=value||"—";
+      set("hottestTeam",weeklySummary.hottestTeam?.team);set("hottestNote",weeklySummary.hottestTeam?.note);
+      set("biggestRiser",weeklySummary.biggestRiser?.team);set("riserNote",weeklySummary.biggestRiser?.note);
+      set("biggestFaller",weeklySummary.biggestFaller?.team);set("fallerNote",weeklySummary.biggestFaller?.note);
+      set("teamToWatch",weeklySummary.teamToWatch?.team);set("watchNote",weeklySummary.teamToWatch?.note);
     }
+
+    function openTeamCard(t){
+      const c=changeText(t);
+      document.getElementById("modalRank").textContent=`#${t.rank} Salas 64`;
+      document.getElementById("modalTeamName").textContent=t.team;
+      document.getElementById("modalScore").textContent=Number(t.salasScore).toFixed(1);
+      document.getElementById("modalRecord").textContent=t.record||"—";
+      document.getElementById("modalLast10").textContent=t.last10||"—";
+      document.getElementById("modalStreak").textContent=t.streak||"—";
+      document.getElementById("modalLastWeek").textContent=t.previousRank==null?"Not ranked":"#"+t.previousRank;
+      document.getElementById("modalChange").textContent=c.text;
+      document.getElementById("modalBestWin").textContent=t.bestWin||"—";
+      document.getElementById("teamModal").classList.add("open");
+      document.body.style.overflow="hidden";
+    }
+    function closeTeamCard(){document.getElementById("teamModal").classList.remove("open");document.body.style.overflow=""}
 
     function updateSearchResults(){
-      const input = document.getElementById("teamSearchInput");
-      const resultsBox = document.getElementById("searchResults");
-      if(!input || !resultsBox) return;
-
-      const query = input.value.trim().toLowerCase();
-      resultsBox.innerHTML = "";
-
-      if(!query){
-        resultsBox.style.display = "none";
-        return;
-      }
-
-      const matches = allTeams.filter((t)=>t.name.toLowerCase().startsWith(query));
-      if(!matches.length){
-        resultsBox.style.display = "none";
-        return;
-      }
-
-      matches.slice(0,10).forEach((t)=>{
-        const item = document.createElement("div");
-        item.className = "search-result-item";
-
-        const spanTeam = document.createElement("span");
-        spanTeam.className = "team";
-        spanTeam.textContent = t.name;
-
-        const spanRank = document.createElement("span");
-        spanRank.className = "rank";
-        spanRank.textContent = `#${t.rank}`;
-
-        item.appendChild(spanTeam);
-        item.appendChild(spanRank);
-
-        item.addEventListener("click", ()=>{
-          input.value = t.name;
-          resultsBox.style.display = "none";
-          scrollToTeam(t.name);
-        });
-
-        resultsBox.appendChild(item);
-      });
-
-      resultsBox.style.display = "block";
+      const input=document.getElementById("teamSearchInput"),box=document.getElementById("searchResults"),q=input.value.trim().toLowerCase();box.innerHTML="";
+      if(!q){box.style.display="none";return}
+      const matches=salasRankings.filter(t=>t.team.toLowerCase().includes(q)).slice(0,10);
+      if(!matches.length){box.style.display="none";return}
+      matches.forEach(t=>{const item=document.createElement("div");item.className="search-result-item";item.innerHTML=`<span class="team">${escapeHtml(t.team)}</span><span class="rank">#${t.rank} • ${Number(t.salasScore).toFixed(1)}</span>`;item.addEventListener("click",()=>{input.value=t.team;box.style.display="none";openTeamCard(t)});box.appendChild(item)});box.style.display="block";
     }
 
-    /* ===================== MYGAMESIM-STYLE SIM ENGINE ===================== */
-    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+    function escapeHtml(value){return String(value??"").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]))}
 
-    function randn(){
-      let u=0, v=0;
-      while(u===0) u=Math.random();
-      while(v===0) v=Math.random();
-      return Math.sqrt(-2.0*Math.log(u))*Math.cos(2.0*Math.PI*v);
-    }
-
-    function logistic(x){
-      // stable logistic
-      if(x > 50) return 1;
-      if(x < -50) return 0;
-      return 1 / (1 + Math.exp(-x));
-    }
-
-    function getTeamByName(name){
-      return salasRankings.find(t => String(t.team).toLowerCase() === String(name).toLowerCase());
-    }
-
-    // Baselines / tunables
-    const NAT_AVG_EFF = 112.0;
-
-    // Tempo noise
-    const TEMPO_SD = 2.4;
-
-    // Score noise (bigger = more upsets)
-    const SCORE_SD = 9.6;
-
-    // Convert expected margin to win prob (smaller = more sensitive; bigger = flatter)
-    const MARGIN_TO_PROB_SCALE = 8.5;
-
-    // "Madness" shrink: pulls p toward 0.50 unless margin is huge
-    const MADNESS_SHRINK_MAX = 0.32; // 0.32 = strong upset environment
-    const MADNESS_FADE_MARGIN = 18;  // by ~18 pts expected margin, shrink mostly fades
-
-    // Seed/rank prior (very small; kept so 1 vs 16 is not identical)
-    const SEED_BONUS_MAX = 1.2; // points to margin
-    const SEED_BONUS_SCALE = 28; // rank gap where it saturates
-
-    function expectedEffVsOpponent(teamORtg, oppDRtg){
-      // Opponent DRtg higher => weaker defense => scoring increases.
-      return teamORtg + (oppDRtg - NAT_AVG_EFF);
-    }
-
-    function expectedPoss(A, B){
-      let poss = ((A.adjT + B.adjT) / 2) + (randn() * TEMPO_SD);
-      return clamp(poss, 58, 80);
-    }
-
-    function seedBonusMargin(A, B){
-      // Better seed (lower rank) gets a small margin bonus
-      const rankGap = (B.rank - A.rank); // positive => A better
-      const t = Math.tanh(rankGap / SEED_BONUS_SCALE);
-      return t * SEED_BONUS_MAX;
-    }
-
-    function winProbFromExpectedMargin(expMargin){
-      // Base probability from logistic
-      let p = logistic(expMargin / MARGIN_TO_PROB_SCALE);
-
-      // Madness shrink toward 0.5 (adaptive; fades when margin is huge)
-      const shrink = clamp(MADNESS_SHRINK_MAX * (1 - Math.min(Math.abs(expMargin) / MADNESS_FADE_MARGIN, 1)), 0, MADNESS_SHRINK_MAX);
-      p = (1 - shrink) * p + shrink * 0.5;
-
-      // Hard clamps to avoid absurdly lopsided outcomes unless margin is truly massive
-      if (Math.abs(expMargin) < 12) {
-        p = clamp(p, 0.22, 0.78);
-      } else if (Math.abs(expMargin) < 20) {
-        p = clamp(p, 0.14, 0.86);
-      } else {
-        p = clamp(p, 0.08, 0.92);
-      }
-      return p;
-    }
-
-    function simulateOnce(A, B){
-      const poss = expectedPoss(A, B);
-
-      // Expected efficiency per 100
-      let effA = expectedEffVsOpponent(A.ortg, B.drtg);
-      let effB = expectedEffVsOpponent(B.ortg, A.drtg);
-
-      // Shared game environment shock (shooting background, whistles, etc.)
-      const env = randn() * 1.6;
-      effA += env;
-      effB += env;
-
-      // Clamp efficiencies
-      effA = clamp(effA, 92, 132);
-      effB = clamp(effB, 92, 132);
-
-      // Expected points
-      const expPtsA = poss * (effA / 100);
-      const expPtsB = poss * (effB / 100);
-
-      // Expected margin (plus tiny seed prior)
-      const expMargin = (expPtsA - expPtsB) + seedBonusMargin(A, B);
-
-      // Winner by probability (mygamesim-style)
-      const pA = winProbFromExpectedMargin(expMargin);
-      const A_wins = Math.random() < pA;
-
-      // Draw a plausible final score around expected totals
-      let ptsA = expPtsA + randn() * SCORE_SD;
-      let ptsB = expPtsB + randn() * SCORE_SD;
-
-      // Make sure winner matches the sampled winner (without making it look fake)
-      if (A_wins && ptsA <= ptsB){
-        const bump = 1 + Math.floor(Math.random() * 6);
-        ptsA = ptsB + bump;
-      } else if (!A_wins && ptsB <= ptsA){
-        const bump = 1 + Math.floor(Math.random() * 6);
-        ptsB = ptsA + bump;
-      }
-
-      // Clamp to realistic ranges
-      ptsA = clamp(ptsA, 45, 112);
-      ptsB = clamp(ptsB, 45, 112);
-
-      return {
-        scoreA: Math.round(ptsA),
-        scoreB: Math.round(ptsB),
-        tempo: Math.round(poss),
-        effA: Math.round(effA * 10) / 10,
-        effB: Math.round(effB * 10) / 10,
-        pA: pA,
-        expMargin: expMargin
-      };
-    }
-
+    function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+    function getTeamByName(name){return salasRankings.find(t=>t.team===name)}
     function buildTeamSelects(){
-      const selA = document.getElementById("teamASelect");
-      const selB = document.getElementById("teamBSelect");
-      if(!selA || !selB) return;
-
-      const list = [...salasRankings].sort((a,b)=>a.rank-b.rank);
-      selA.innerHTML = "";
-      selB.innerHTML = "";
-
-      list.forEach(t=>{
-        const tag = `#${t.rank} ${t.team} (${t.record})`;
-        const o1 = document.createElement("option");
-        o1.value = t.team;
-        o1.textContent = tag;
-        selA.appendChild(o1);
-
-        const o2 = document.createElement("option");
-        o2.value = t.team;
-        o2.textContent = tag;
-        selB.appendChild(o2);
-      });
-
-      if(list[0]) selA.value = list[0].team;
-      if(list[1]) selB.value = list[1].team;
+      const a=document.getElementById("teamASelect"),b=document.getElementById("teamBSelect"),btn=document.getElementById("runSimBtn");a.innerHTML="";b.innerHTML="";
+      salasRankings.slice().sort((x,y)=>x.rank-y.rank).forEach(t=>{const label=`#${t.rank} ${t.team} (${t.record})`;[a,b].forEach(sel=>{const o=document.createElement("option");o.value=t.team;o.textContent=label;sel.appendChild(o)})});
+      if(salasRankings.length>1){a.value=salasRankings[0].team;b.value=salasRankings[1].team;btn.disabled=false}else btn.disabled=true;
+    }
+    function simulatorProjection(A,B){
+      const natAvg=Number(A.nationalAverageEfficiency||B.nationalAverageEfficiency||110);
+      const pace=clamp(((Number(A.pace)||68)+(Number(B.pace)||68))/2,58,80);
+      const effA=(Number(A.offensiveRating)||natAvg)+((Number(B.defensiveRating)||natAvg)-natAvg);
+      const effB=(Number(B.offensiveRating)||natAvg)+((Number(A.defensiveRating)||natAvg)-natAvg);
+      const expA=pace*effA/100,expB=pace*effB/100,margin=expA-expB;
+      const pA=1/(1+Math.exp(-margin/7));
+      return{pace,expA,expB,pA,margin};
+    }
+    function runSimulations(){
+      const A=getTeamByName(document.getElementById("teamASelect").value),B=getTeamByName(document.getElementById("teamBSelect").value);if(!A||!B||A===B)return;
+      const sims=clamp(parseInt(document.getElementById("simsInput").value,10)||100,1,5000),base=simulatorProjection(A,B);let sumA=0,sumB=0,winsA=0,lastA=0,lastB=0;
+      for(let i=0;i<sims;i++){let a=base.expA+randn()*8.4,b=base.expB+randn()*8.4;lastA=Math.round(clamp(a,45,120));lastB=Math.round(clamp(b,45,120));if(lastA===lastB){Math.random()<base.pA?lastA++:lastB++}sumA+=lastA;sumB+=lastB;if(lastA>lastB)winsA++}
+      const avgA=sumA/sims,avgB=sumB/sims,pctA=Math.round(winsA/sims*100),margin=avgA-avgB;
+      document.getElementById("lastScoreline").textContent=`Latest sim: ${A.team} ${lastA} — ${B.team} ${lastB}`;
+      document.getElementById("simMeta").textContent=`Neutral court • ~${Math.round(base.pace)} possessions • model win probability: ${A.team} ${Math.round(base.pA*100)}%`;
+      document.getElementById("simCount").textContent=sims.toLocaleString();document.getElementById("avgScore").textContent=`${A.team} ${avgA.toFixed(1)} — ${B.team} ${avgB.toFixed(1)}`;document.getElementById("winPct").textContent=`${A.team} ${pctA}% / ${B.team} ${100-pctA}%`;document.getElementById("avgMargin").textContent=margin>=0?`${A.team} +${margin.toFixed(1)}`:`${B.team} +${Math.abs(margin).toFixed(1)}`;document.getElementById("barLabelA").textContent=`${A.team} ${pctA}%`;document.getElementById("barLabelB").textContent=`${B.team} ${100-pctA}%`;document.getElementById("barFillA").style.width=`${clamp(pctA,1,99)}%`;document.getElementById("simResult").style.display="block";
     }
 
-    function updateUIAfterSims(A, B, sims, sumA, sumB, winsA, last){
-      const box = document.getElementById("simResult");
-      const lastScoreline = document.getElementById("lastScoreline");
-      const simMeta = document.getElementById("simMeta");
-      const simCount = document.getElementById("simCount");
-      const avgScore = document.getElementById("avgScore");
-      const winPctEl = document.getElementById("winPct");
-      const avgMarginEl = document.getElementById("avgMargin");
-
-      const barFillA = document.getElementById("barFillA");
-      const barLabelA = document.getElementById("barLabelA");
-      const barLabelB = document.getElementById("barLabelB");
-
-      const avgA = sumA / sims;
-      const avgB = sumB / sims;
-      const pctA = Math.round((winsA / sims) * 100);
-      const avgMargin = avgA - avgB;
-
-      lastScoreline.textContent = `${A.team} ${last.scoreA} — ${B.team} ${last.scoreB}`;
-      simMeta.textContent =
-        `Tempo: ~${last.tempo} poss • Exp Eff: ${A.team} ${last.effA} / ${B.team} ${last.effB} (per 100) • One-game win%: ${Math.round(last.pA*100)}%`;
-
-      simCount.textContent = sims.toLocaleString();
-      avgScore.textContent = `${A.team} ${avgA.toFixed(1)} — ${B.team} ${avgB.toFixed(1)}`;
-      winPctEl.textContent = `${A.team} ${pctA}% / ${B.team} ${100 - pctA}%`;
-      avgMarginEl.textContent =
-        avgMargin >= 0
-          ? `${A.team} +${avgMargin.toFixed(1)}`
-          : `${B.team} +${Math.abs(avgMargin).toFixed(1)}`;
-
-      barLabelA.textContent = `${A.team} ${pctA}%`;
-      barLabelB.textContent = `${B.team} ${100 - pctA}%`;
-      barFillA.style.width = `${clamp(pctA, 1, 99)}%`;
-
-      box.style.display = "block";
+    function renderAll(){renderRankings();renderWeekly();buildTeamSelects()}
+    function init(){
+      document.getElementById("year").textContent=new Date().getFullYear();
+      document.getElementById("sortSelect").addEventListener("change",e=>{currentSortKey=e.target.value;renderRankings()});
+      document.getElementById("teamSearchInput").addEventListener("input",updateSearchResults);
+      document.getElementById("runSimBtn").addEventListener("click",runSimulations);
+      document.getElementById("closeModal").addEventListener("click",closeTeamCard);
+      document.getElementById("teamModal").addEventListener("click",e=>{if(e.target.id==="teamModal")closeTeamCard()});
+      document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTeamCard()});
+      document.addEventListener("click",e=>{const w=document.querySelector(".search-wrapper"),box=document.getElementById("searchResults");if(w&&!w.contains(e.target))box.style.display="none"});
+      loadData();
     }
-
-    function runSimulations(count){
-      const selA = document.getElementById("teamASelect");
-      const selB = document.getElementById("teamBSelect");
-      const simsInput = document.getElementById("simsInput");
-      if(!selA || !selB) return;
-
-      let nameA = selA.value;
-      let nameB = selB.value;
-
-      if(nameA === nameB){
-        const options = Array.from(selB.options).map(o=>o.value);
-        const alt = options.find(v => v !== nameA);
-        if(alt) { nameB = alt; selB.value = alt; }
-      }
-
-      const A = getTeamByName(nameA);
-      const B = getTeamByName(nameB);
-      if(!A || !B) return;
-
-      // default = 100, cap to 5000 for UI responsiveness
-      const sims = clamp(parseInt(count ?? (simsInput ? simsInput.value : 100), 10) || 100, 1, 5000);
-
-      let sumA = 0, sumB = 0, winsA = 0;
-      let last = null;
-
-      for(let i=0;i<sims;i++){
-        const r = simulateOnce(A, B);
-        sumA += r.scoreA;
-        sumB += r.scoreB;
-        if(r.scoreA > r.scoreB) winsA++;
-        last = r;
-      }
-
-      updateUIAfterSims(A, B, sims, sumA, sumB, winsA, last);
-    }
-
-    function runOne(){
-      const selA = document.getElementById("teamASelect");
-      const selB = document.getElementById("teamBSelect");
-      if(!selA || !selB) return;
-
-      let nameA = selA.value;
-      let nameB = selB.value;
-
-      if(nameA === nameB){
-        const options = Array.from(selB.options).map(o=>o.value);
-        const alt = options.find(v => v !== nameA);
-        if(alt) { nameB = alt; selB.value = alt; }
-      }
-
-      const A = getTeamByName(nameA);
-      const B = getTeamByName(nameB);
-      if(!A || !B) return;
-
-      const r = simulateOnce(A, B);
-      updateUIAfterSims(A, B, 1, r.scoreA, r.scoreB, r.scoreA > r.scoreB ? 1 : 0, r);
-    }
-
-    function initSimulator(){
-      buildTeamSelects();
-
-      const runBtn = document.getElementById("runSimBtn");
-      const oneBtn = document.getElementById("runOneBtn");
-      const simsInput = document.getElementById("simsInput");
-
-      if(runBtn){
-        runBtn.addEventListener("click", ()=>{
-          runSimulations(simsInput ? simsInput.value : 100);
-        });
-      }
-      if(oneBtn){
-        oneBtn.addEventListener("click", runOne);
-      }
-
-      // auto-run once at load
-      runSimulations(100);
-    }
-    /* ===================== END SIM ENGINE ===================== */
-
-    function initPage(){
-      document.getElementById("asOfText").textContent = rankingsAsOf;
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      renderRankings();
-
-      const sortSelect = document.getElementById("sortSelect");
-      if(sortSelect){
-        sortSelect.addEventListener("change", ()=>{
-          currentSortKey = sortSelect.value;
-          currentSortDir = "asc";
-          renderRankings();
-        });
-      }
-
-      const searchInput = document.getElementById("teamSearchInput");
-      if(searchInput){
-        searchInput.addEventListener("input", updateSearchResults);
-        searchInput.addEventListener("keydown", (e)=>{
-          if(e.key === "Enter"){
-            const resultsBox = document.getElementById("searchResults");
-            const firstItem = resultsBox ? resultsBox.querySelector(".search-result-item span.team") : null;
-            if(firstItem){
-              scrollToTeam(firstItem.textContent || "");
-              resultsBox.style.display = "none";
-            }
-          }
-        });
-      }
-
-      document.addEventListener("click", (e)=>{
-        const wrapper = document.querySelector(".search-wrapper");
-        const resultsBox = document.getElementById("searchResults");
-        if(!wrapper || !resultsBox) return;
-        if(!wrapper.contains(e.target)){
-          resultsBox.style.display = "none";
-        }
-      });
-
-      initSimulator();
-    }
-
-    initPage();
+    init();
   </script>
 </body>
 </html>
