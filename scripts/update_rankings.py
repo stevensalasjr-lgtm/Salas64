@@ -5,7 +5,7 @@ Required environment variable:
     CBBD_API_KEY
 
 Optional environment variables:
-    CBBD_SEASON   e.g. 2026 for the 2026-27 season
+    CBBD_SEASON   e.g. 2027 for the 2026-27 season
     DATA_DIR      defaults to ./data
 
 The script uses only Python's standard library so GitHub Actions needs no pip install.
@@ -39,8 +39,9 @@ def clamp(value: float, low: float, high: float) -> float:
 
 
 def season_year(today: date) -> int:
-    # College basketball seasons begin in the fall. September 2026 => season=2026.
-    return today.year if today.month >= 7 else today.year - 1
+    # CBBD labels a season by the calendar year in which it ends.
+    # Example: the 2026-27 season is season=2027.
+    return today.year + 1 if today.month >= 7 else today.year
 
 
 def api_get(path: str, params: dict[str, Any], api_key: str) -> list[dict[str, Any]]:
@@ -60,8 +61,9 @@ def api_get(path: str, params: dict[str, Any], api_key: str) -> list[dict[str, A
 
 def fetch_season_games(season: int, api_key: str) -> list[dict[str, Any]]:
     """Fetch final games in monthly chunks to stay safely under API result caps."""
-    start = date(season, 10, 15)
-    end = date(season + 1, 4, 20)
+    # CBBD season 2027 runs from fall 2026 through spring 2027.
+    start = date(season - 1, 10, 15)
+    end = date(season, 4, 20)
     today = datetime.now(timezone.utc).date()
     end = min(end, today + timedelta(days=1))
     if end < start:
@@ -446,7 +448,26 @@ def main() -> int:
     data_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"Generating Salas 64 for season {season}…")
-    payload = build_rankings(season, api_key, data_dir)
+    try:
+        payload = build_rankings(season, api_key, data_dir)
+    except RuntimeError as exc:
+        # Before enough 2026-27 games/ratings exist, keep the public site in
+        # preseason mode instead of falling back to the completed 2025-26 season.
+        if "eligible teams returned" not in str(exc):
+            raise
+        now = datetime.now(timezone.utc)
+        payload = {
+            "season": season,
+            "updatedAt": now.isoformat().replace("+00:00", "Z"),
+            "updatedLabel": "2026-27 preseason",
+            "modelVersion": "Salas Score 1.0",
+            "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
+            "message": "The 2026-27 Salas 64 will populate automatically once enough regular-season data is available.",
+            "rankings": [],
+            "weeklySummary": {},
+        }
+        print(f"Preseason mode: {exc}")
+
     out = data_dir / "current.json"
     out.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
     print(f"Wrote {out} with {len(payload['rankings'])} ranked teams.")
