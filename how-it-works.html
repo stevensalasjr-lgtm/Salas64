@@ -2,207 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>How the Salas 64 Rankings Work</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How the Salas 64 Rankings Work</title>
   <style>
-    :root {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
-      color: #e5e7eb;
-      background: #020617;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 50%, #000 100%);
-      color: #e5e7eb;
-    }
-    .page {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 24px 16px 40px;
-    }
-    header {
-      margin-bottom: 24px;
-      border-bottom: 1px solid #1f2933;
-      padding-bottom: 12px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-    header .subtitle {
-      margin: 6px 0 0;
-      font-size: 0.9rem;
-      color: #9ca3af;
-    }
-    a {
-      color: #60a5fa;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    h2 {
-      margin-top: 20px;
-      margin-bottom: 8px;
-      font-size: 1.2rem;
-    }
-    h3 {
-      margin-top: 16px;
-      margin-bottom: 4px;
-      font-size: 1rem;
-    }
-    ul {
-      margin-top: 4px;
-      margin-bottom: 10px;
-      padding-left: 20px;
-      font-size: 0.95rem;
-    }
-    li {
-      margin-bottom: 3px;
-    }
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.92rem;
-    }
-    footer {
-      margin-top: 28px;
-      font-size: 0.8rem;
-      color: #6b7280;
-      text-align: center;
-    }
+    :root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;color:#e5e7eb;background:#020617}
+    body{margin:0;background:radial-gradient(circle at top,#0b1120 0,#020617 50%,#000 100%);color:#e5e7eb}
+    .page{max-width:920px;margin:0 auto;padding:24px 16px 44px}header{margin-bottom:24px;border-bottom:1px solid #1f2933;padding-bottom:12px}header h1{margin:0;font-size:1.65rem;letter-spacing:.03em}.subtitle{margin:6px 0 0;font-size:.9rem;color:#9ca3af}a{color:#60a5fa;text-decoration:none}a:hover{text-decoration:underline}h2{margin:26px 0 8px;font-size:1.22rem}h3{margin:16px 0 5px;font-size:1rem}p,li{font-size:.95rem}.model-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}.model-box{border:1px solid #374151;border-radius:14px;background:rgba(15,23,42,.72);padding:12px}.weight{font-size:1.55rem;font-weight:800;color:#facc15}.label{font-weight:700}.muted{color:#9ca3af;font-size:.84rem}.formula{border:1px solid #374151;background:rgba(2,6,23,.65);border-radius:13px;padding:12px 14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem}.callout{border-left:3px solid #60a5fa;padding:10px 13px;background:rgba(30,58,138,.18);border-radius:0 12px 12px 0;margin:14px 0}.small{font-size:.84rem;color:#9ca3af}footer{margin-top:30px;font-size:.8rem;color:#6b7280;text-align:center}@media(max-width:720px){.model-grid{grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
   <div class="page">
     <header>
       <h1>How the Salas 64 Rankings Work</h1>
-      <p class="subtitle">
-        A results-driven model using opponent strength, site, margin, and mid-major adjustments.
-        <br />
-        <a href="index.html">&larr; Back to rankings</a>
-      </p>
+      <p class="subtitle">A weekly 1–100 model built to measure both current team quality and March readiness.<br><a href="index.html">&larr; Back to rankings</a></p>
     </header>
 
     <section>
-      <h2>Inputs we use</h2>
+      <h2>The Salas Score</h2>
+      <p>Every Division I team is graded from 1 to 100. The 64 highest Salas Scores become that Monday's official Salas 64. The score is calculated automatically from four parts:</p>
+      <div class="model-grid">
+        <div class="model-box"><div class="weight">50%</div><div class="label">Team Strength</div><div class="muted">Opponent-adjusted efficiency</div></div>
+        <div class="model-box"><div class="weight">25%</div><div class="label">Résumé</div><div class="muted">Salas Wins Above Bubble</div></div>
+        <div class="model-box"><div class="weight">20%</div><div class="label">March Profile</div><div class="muted">Four Factors + two-way balance</div></div>
+        <div class="model-box"><div class="weight">5%</div><div class="label">Current Form</div><div class="muted">Last eight adjusted performances</div></div>
+      </div>
+      <div class="formula">Salas Score = (Strength × .50) + (Résumé × .25) + (March × .20) + (Form × .05)</div>
+      <p class="small">Each component is normalized against the rest of Division I so teams from different conferences are judged on the same scale.</p>
+
+      <h2>1. Team Strength — 50%</h2>
+      <p>This is the foundation of the model. It uses opponent-adjusted offensive and defensive efficiency to estimate how strong a team actually is possession by possession, independent of raw record or pace.</p>
+      <div class="formula">Adjusted Net Rating = Adjusted Offensive Rating − Adjusted Defensive Rating</div>
+      <p>A team that consistently scores efficiently and prevents opponents from doing the same will grade highly even if it plays at a slow pace. The adjusted ratings account for opponent quality, which helps compare teams across different schedules.</p>
+
+      <h2>2. Résumé — 25%</h2>
+      <p>The résumé component measures what a team has actually accomplished. Salas 64 uses its own version of Wins Above Bubble rather than simply counting ranked wins or using raw strength of schedule.</p>
+      <h3>Salas Wins Above Bubble (SWAB)</h3>
+      <p>The model uses approximately the 45th-strongest Division I team as the bubble reference point. For every game, it estimates how likely that bubble-level team would have been to win against the same opponent at the same location.</p>
+      <div class="formula">SWAB = Actual Wins − Expected Wins by a Bubble Team against the same schedule</div>
+      <p>This means a difficult road win is worth much more than an easy home win, while a difficult schedule does not earn credit by itself. Teams must actually perform well against that schedule.</p>
+
+      <h2>3. March Profile — 20%</h2>
+      <p>The March Profile looks at the parts of basketball that repeatedly determine possession-by-possession success. The model uses both offense and defense so a one-dimensional team cannot receive an elite March grade from only one side of the floor.</p>
       <ul>
-        <li>Final score and point margin</li>
-        <li>Site (home, away, neutral)</li>
-        <li>Opponent’s Salas rank at tip</li>
-        <li>Each team’s current record</li>
-        <li>Optional context you include (OT, back-to-back, etc.)</li>
+        <li><strong>Shooting efficiency — 40% of March Profile:</strong> offensive effective field-goal percentage and opponent effective field-goal percentage.</li>
+        <li><strong>Ball security — 25%:</strong> limiting offensive turnovers and creating opponent turnovers.</li>
+        <li><strong>Rebounding — 20%:</strong> creating second chances while limiting opponent offensive rebounds.</li>
+        <li><strong>Free-throw battle — 15%:</strong> getting to the line, keeping opponents off the line, and a smaller free-throw percentage modifier.</li>
       </ul>
+      <p>The model also applies a small two-way balance adjustment. Teams that are strong on both offense and defense receive a modest boost; teams with a major weakness on one end receive a modest penalty.</p>
 
-      <h2>Weighting (100% total)</h2>
+      <h2>4. Current Form — 5%</h2>
+      <p>Recent performance matters, but it is intentionally kept small so one hot week does not erase the full season. The model evaluates each team's last eight games using scoring margin, opponent quality, and game location, then compares that recent performance with the rest of Division I.</p>
+
+      <h2>What is not directly rewarded</h2>
       <ul>
-        <li>Results &amp; Résumé Value — 55%</li>
-        <li>Consistency &amp; Form (last 2–4) — 20%</li>
-        <li>Schedule Strength to Date — 15%</li>
-        <li>March Readiness Proxies — 5%</li>
-        <li>Mid-Major Adjustment — 5%</li>
+        <li><strong>Raw win percentage:</strong> already reflected through résumé and opponent strength.</li>
+        <li><strong>Strength of schedule by itself:</strong> playing good teams is not enough; results against them matter.</li>
+        <li><strong>Conference reputation:</strong> conferences receive no automatic bonus.</li>
+        <li><strong>AP ranking or NET ranking:</strong> neither is directly inserted into the Salas Score.</li>
+        <li><strong>Tempo:</strong> playing faster or slower is a style, not automatically a strength.</li>
       </ul>
 
-      <h2>Results &amp; Résumé Value (55%)</h2>
+      <h2>Weekly updates</h2>
+      <p>The rankings publish every Monday. A scheduled data job pulls the newest season results, records, Four Factors, and adjusted efficiency data, recalculates every Division I team's Salas Score, saves the previous week's ranks, and produces the new top 64.</p>
+      <p>That same process automatically creates the <strong>Biggest Riser</strong>, <strong>Biggest Faller</strong>, and <strong>Hottest Team</strong>. The <strong>Team to Watch</strong> is selected by the model from teams outside the very top group that combine a strong Salas Score with strong recent form.</p>
 
-      <h3>Opponent tier by Salas rank at tip (multiplier)</h3>
-      <ul class="mono">
-        <li>#1–5 = 1.40</li>
-        <li>#6–10 = 1.25</li>
-        <li>#11–25 = 1.10</li>
-        <li>#26–40 = 1.00</li>
-        <li>#41–64 = 0.85</li>
-        <li>Unranked (65+) = 0.70</li>
-      </ul>
+      <h2>What you see on a team card</h2>
+      <p>The advanced math stays behind the scenes. Clicking a team in the rankings shows only the information most fans need: Salas Score, overall record, last-10 record, current streak, previous rank, weekly change, and best win.</p>
 
-      <h3>Site multiplier</h3>
-      <ul class="mono">
-        <li>True road ×1.30</li>
-        <li>Neutral ×1.15</li>
-        <li>Home ×1.00</li>
-      </ul>
+      <div class="callout"><strong>Model note:</strong> Salas 64 is a proprietary ranking model, not an NCAA selection formula. The weights can be backtested and refined as more historical seasons are evaluated.</div>
 
-      <h3>Margin with diminishing returns</h3>
-      <ul>
-        <li>Use <span class="mono">min(22, margin)</span> for value; blowouts past 22 are capped.</li>
-        <li>OT wins count as +2.</li>
-        <li>One-possession losses (≤3) to a higher-ranked team are softened.</li>
-      </ul>
-
-      <h3>Single-game Résumé Score</h3>
-      <p class="mono">
-        Score = OpponentTier × Site × MarginFactor
-      </p>
-      <ul>
-        <li>MarginFactor is built from the capped margin and OT/close-game rules above.</li>
-      </ul>
-
-      <h3>Additional penalty</h3>
-      <ul>
-        <li>Home losses to lower-ranked teams receive a −25% penalty on that game.</li>
-      </ul>
-
-      <h3>Season Résumé Sum with light recency</h3>
-      <ul class="mono">
-        <li>Last 2 games ×1.20</li>
-        <li>Previous 3 ×1.00</li>
-        <li>Older ×0.90</li>
-      </ul>
-
-      <h2>Consistency &amp; Form (20%)</h2>
-      <ul>
-        <li><strong>Consistency (10%)</strong>: lower spread of normalized margins across games is better.</li>
-        <li><strong>Form (10%)</strong>: average normalized margin over last 3 games; road/neutral weighted slightly higher.</li>
-      </ul>
-
-      <h2>Schedule Strength to Date (15%)</h2>
-      <ul>
-        <li>Average opponent tier faced plus site mix bonus.</li>
-        <li>Road/neutral share ≥40%: +10% to this subscore.</li>
-        <li>Road/neutral share ≤20%: −10% to this subscore.</li>
-        <li>If no games vs top-25, this subscore is capped at 60% of max.</li>
-      </ul>
-
-      <h2>March Readiness Proxies (5%)</h2>
-      <ul>
-        <li>Close-game record (decided by ≤5 or OT), road/neutral emphasized.</li>
-        <li>Neutral-court log bonus.</li>
-        <li>If provided, positive second-half differential adds a small bump.</li>
-      </ul>
-
-      <h2>Mid-Major Adjustment (5%)</h2>
-      <ul>
-        <li>Mid-majors with multiple road/neutral wins vs #1–50 can gain about +3 to +8 rank places relative to similar power-conference profiles.</li>
-        <li>A true road top-40 win can offset one “bad” home slip more than it would for power teams.</li>
-      </ul>
-
-      <h2>Tie-Breakers (in order)</h2>
-      <ul>
-        <li>Head-to-head (in reasonably comparable contexts).</li>
-        <li>Better road/neutral résumé.</li>
-        <li>Higher total Résumé Value (section 1).</li>
-        <li>Better short-term form (last 3).</li>
-        <li>Fewer bad losses (home loss to #41+ or any loss to 65+).</li>
-      </ul>
-
-      <h2>What moves teams</h2>
-      <ul>
-        <li><strong>Big jumps:</strong> road/neutral wins vs higher-ranked opponents by multiple possessions; stacking two quality results in a week.</li>
-        <li><strong>Small climbs:</strong> clean home wins while peers stumble; balanced road/neutral mix.</li>
-        <li><strong>Drops:</strong> home losses to lower-ranked teams; non-competitive losses vs peers; repeated narrow escapes vs low opponents.</li>
-      </ul>
+      <h2>Data</h2>
+      <p>The automated updater is built around the College Basketball Data API for game results, team season statistics, Four Factors, and adjusted efficiency ratings. The API key is kept private in GitHub Actions and is never exposed in the public website code.</p>
     </section>
 
-    <footer>
-      Salas 64 &copy; <span id="year"></span>.
-    </footer>
+    <footer>Salas 64 &copy; <span id="year"></span>.</footer>
   </div>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
 </body>
 </html>
