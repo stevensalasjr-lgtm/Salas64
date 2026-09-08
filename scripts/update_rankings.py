@@ -33,6 +33,130 @@ BUBBLE_REFERENCE_RANK = 45
 WIN_PROB_SCALE = 6.5
 TOP_N = 64
 
+# ESPN's public team-logo CDN is used only for displaying school logos.
+# The updater also tries ESPN's public teams feed each Monday, so teams that
+# enter the Salas 64 later in the season receive their logo automatically.
+ESPN_TEAMS_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=500"
+ESPN_LOGO_BASE = "https://a.espncdn.com/i/teamlogos/ncaa/500"
+
+# Reliable fallbacks for the published Week 0 teams.
+ESPN_TEAM_ID_OVERRIDES = {
+    "Florida": 57,
+    "Duke": 150,
+    "Illinois": 356,
+    "Texas": 251,
+    "UConn": 41,
+    "Arizona": 12,
+    "Michigan State": 127,
+    "Tennessee": 2633,
+    "Texas Tech": 2641,
+    "Arkansas": 8,
+    "Virginia": 258,
+    "Louisville": 97,
+    "Gonzaga": 2250,
+    "USC": 30,
+    "Houston": 248,
+    "Missouri": 142,
+    "BYU": 252,
+    "Alabama": 333,
+    "Miami": 2390,
+    "Kentucky": 96,
+    "Michigan": 130,
+    "UCLA": 26,
+    "St. John's": 2599,
+    "Iowa State": 66,
+    "Vanderbilt": 238,
+    "Kansas": 2305,
+    "Purdue": 2509,
+    "Villanova": 222,
+    "Nebraska": 158,
+    "Indiana": 84,
+    "North Carolina": 153,
+    "Ohio State": 194,
+    "Texas A&M": 245,
+    "TCU": 2628,
+    "West Virginia": 277,
+    "Oklahoma": 201,
+    "Saint Louis": 139,
+    "Oregon": 2483,
+    "Wisconsin": 275,
+    "VCU": 2670,
+    "Providence": 2507,
+    "Oklahoma State": 197,
+    "Iowa": 2294,
+    "Creighton": 156,
+    "Georgia": 61,
+    "Clemson": 228,
+    "Auburn": 2,
+    "Cincinnati": 2132,
+    "Marquette": 269,
+    "NC State": 152,
+    "SMU": 2567,
+    "Xavier": 2752,
+    "Virginia Tech": 259,
+    "Baylor": 239,
+    "San Diego State": 21,
+    "Florida State": 52,
+    "Syracuse": 183,
+    "California": 25,
+    "Georgia Tech": 59,
+    "Maryland": 120,
+    "Saint Mary's": 2608,
+    "Washington": 264,
+    "Mississippi State": 344,
+    "LSU": 99
+}
+
+
+def normalize_team_name(value: Any) -> str:
+    text = str(value or "").lower()
+    text = text.replace("&", "and")
+    return "".join(ch for ch in text if ch.isalnum())
+
+
+def fetch_espn_logo_map() -> dict[str, str]:
+    """Fetch a name -> logo map. Failure is non-fatal; team-ID fallbacks remain."""
+    try:
+        req = urllib.request.Request(
+            ESPN_TEAMS_URL,
+            headers={"Accept": "application/json", "User-Agent": "Salas64/2.1"},
+        )
+        with urllib.request.urlopen(req, timeout=20) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+
+        result: dict[str, str] = {}
+        sports = payload.get("sports") or []
+        leagues = (sports[0].get("leagues") or []) if sports else []
+        entries = (leagues[0].get("teams") or []) if leagues else []
+
+        for entry in entries:
+            team = entry.get("team") or {}
+            logos = team.get("logos") or []
+            logo = logos[0].get("href") if logos else None
+            if not logo:
+                continue
+            for key in ("displayName", "shortDisplayName", "location", "name", "abbreviation"):
+                value = team.get(key)
+                if value:
+                    result[normalize_team_name(value)] = str(logo)
+        return result
+    except Exception as exc:
+        print(f"Logo feed warning: {exc}")
+        return {}
+
+
+def team_logo_url(name: str, team_id: int, logo_map: dict[str, str]) -> str:
+    fetched = logo_map.get(normalize_team_name(name))
+    if fetched:
+        return fetched
+
+    espn_id = ESPN_TEAM_ID_OVERRIDES.get(name)
+    if espn_id is None:
+        # CBBD team IDs are retained as a best-effort fallback. If a future
+        # source ID does not resolve, index.html automatically shows initials.
+        espn_id = team_id
+    return f"{ESPN_LOGO_BASE}/{espn_id}.png"
+
 
 def clamp(value: float, low: float, high: float) -> float:
     return max(low, min(high, value))
@@ -325,6 +449,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
 
     manual = load_manual_adjustments(data_dir)
     national_avg_efficiency = statistics.mean(offense.values()) if offense else 110.0
+    logo_map = fetch_espn_logo_map()
 
     teams: list[dict[str, Any]] = []
     for tid in eligible_ids:
@@ -346,6 +471,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
             {
                 "teamId": tid,
                 "team": name,
+                "logo": team_logo_url(name, tid, logo_map),
                 "conference": r.get("conference") or s.get("conference"),
                 "salasScore": round(clamp(total, 1.0, 100.0), 1),
                 "record": f"{wins}-{losses}",
@@ -456,17 +582,36 @@ def main() -> int:
         if "eligible teams returned" not in str(exc):
             raise
         now = datetime.now(timezone.utc)
-        payload = {
-            "season": season,
-            "updatedAt": now.isoformat().replace("+00:00", "Z"),
-            "updatedLabel": "2026-27 preseason",
-            "modelVersion": "Salas Score 1.0",
-            "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
-            "message": "The 2026-27 Salas 64 will populate automatically once enough regular-season data is available.",
-            "rankings": [],
-            "weeklySummary": {},
-        }
-        print(f"Preseason mode: {exc}")
+        current_path = data_dir / "current.json"
+        existing = {}
+        if current_path.exists():
+            try:
+                existing = json.loads(current_path.read_text())
+            except Exception:
+                existing = {}
+
+        # Preserve the published Week 0 preseason list until the live model has
+        # enough 2026-27 data to produce a real Top 64.
+        if existing.get("preseason") and existing.get("rankings"):
+            payload = existing
+            payload["season"] = season
+            payload["updatedAt"] = now.isoformat().replace("+00:00", "Z")
+            payload["updatedLabel"] = "2026-27 Preseason Salas 64 — Week 0"
+            payload["message"] = "Preseason rankings are active. Live Salas Scores and weekly movement will begin once enough 2026-27 games have been played."
+            print(f"Preseason mode: preserving published Week 0 rankings ({exc})")
+        else:
+            payload = {
+                "season": season,
+                "preseason": True,
+                "updatedAt": now.isoformat().replace("+00:00", "Z"),
+                "updatedLabel": "2026-27 preseason",
+                "modelVersion": "Salas Score 1.0",
+                "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
+                "message": "The 2026-27 Salas 64 will populate automatically once enough regular-season data is available.",
+                "rankings": [],
+                "weeklySummary": {},
+            }
+            print(f"Preseason mode: {exc}")
 
     out = data_dir / "current.json"
     out.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
