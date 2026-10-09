@@ -94,6 +94,97 @@
       <a href="#predictions">Predictions</a><a href="#rankings">Rankings</a><a href="#simulator">Matchup Simulator</a>
     </nav>
     <div class="layout">
+      <section class="card" id="account" aria-labelledby="accountTitle">
+  <div class="card-header-row">
+    <h2 id="accountTitle">My Salas 64 Account</h2>
+    <span id="accountStatus" class="meta">Account setup in progress</span>
+  </div>
+
+  <p class="subtitle">
+    Sign in to save your favorite teams across devices.
+  </p>
+
+  <form id="accountForm">
+    <div class="compare-grid">
+      <div class="compare-col">
+        <label class="compare-label" for="authEmail">Email</label>
+        <input
+          id="authEmail"
+          class="compare-input"
+          type="email"
+          autocomplete="email"
+          required
+        />
+      </div>
+
+      <div class="compare-col">
+        <label class="compare-label" for="authPassword">Password</label>
+        <input
+          id="authPassword"
+          class="compare-input"
+          type="password"
+          autocomplete="current-password"
+          minlength="8"
+          required
+        />
+      </div>
+
+      <div class="compare-actions">
+        <button
+          id="signInBtn"
+          class="compare-btn"
+          type="submit"
+          disabled
+        >Sign in</button>
+
+        <button
+          id="signUpBtn"
+          class="compare-btn"
+          type="submit"
+          disabled
+        >Create account</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="profilePanel" hidden>
+    <p id="signedInEmail" class="meta"></p>
+
+    <label class="compare-label" for="displayName">Display name</label>
+    <input
+        id="displayName"
+        class="compare-input"
+        type="text"
+        maxlength="40"
+        autocomplete="nickname"
+    />
+
+    <button id="saveProfileBtn" class="compare-btn" type="button">
+      Save name
+    </button>
+
+    <h3>Favorite teams</h3>
+    <p class="subtitle">
+      Select teams to follow. Your choices save to your account.
+    </p>
+
+    <label class="compare-label" for="favoriteSearch">Find a team</label>
+    <input
+        id="favoriteSearch"
+        class="compare-input"
+        type="search"
+        placeholder="Search teams"
+    />
+
+    <div id="favoriteTeamsList"></div>
+
+    <button id="signOutBtn" class="compare-btn" type="button">
+      Sign out
+    </button>
+  </div>
+
+  <p id="accountFeedback" class="meta" role="status" aria-live="polite"></p>
+</section>
       <section class="card challenge" id="predictions" aria-labelledby="predictionTitle">
         <div class="weekly-kicker">The daily three • Season-long challenge</div>
         <div class="card-header-row"><h2 id="predictionTitle">You vs. <span class="gold">Salas 64</span></h2><span id="challengeSeason" class="meta"></span></div>
