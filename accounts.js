@@ -2,9 +2,87 @@
   "use strict";
 
   const $ = id => document.getElementById(id);
-  const message = text => {
+
+  const style = document.createElement("style");
+  style.textContent = `
+    #accountForm[hidden],
+    #profilePanel[hidden] {
+      display: none !important;
+    }
+
+    #account .account-settings {
+      margin-top: 10px;
+    }
+
+    #account .account-settings summary {
+      color: #facc15;
+    }
+
+    #account .account-settings .compare-actions {
+      justify-content: flex-start;
+      margin-top: 12px;
+    }
+
+    .favorite-star {
+      color: #facc15;
+      margin-right: 5px;
+    }
+  `;
+  document.head.append(style);
+
+  $("profilePanel").innerHTML = `
+    <details class="account-settings" id="accountSettings">
+      <summary>Account settings</summary>
+
+      <div style="margin-top:12px">
+        <label class="compare-label" for="displayName">
+          Display name
+        </label>
+
+        <input
+          id="displayName"
+          class="compare-input"
+          type="text"
+          maxlength="40"
+          autocomplete="nickname"
+        >
+
+        <div class="compare-actions">
+          <button
+            id="saveProfileBtn"
+            class="compare-btn"
+            type="button"
+          >Save name</button>
+
+          <button
+            id="signOutBtn"
+            class="compare-btn"
+            type="button"
+          >Sign out</button>
+        </div>
+      </div>
+    </details>
+  `;
+
+  const favoriteButton = document.createElement("button");
+  favoriteButton.id = "modalFavoriteBtn";
+  favoriteButton.type = "button";
+  favoriteButton.className = "compare-btn";
+  favoriteButton.style.marginTop = "16px";
+
+  const favoriteFeedback = document.createElement("p");
+  favoriteFeedback.className = "meta";
+  favoriteFeedback.setAttribute("role", "status");
+
+  document.querySelector("#teamModal .team-card")?.append(
+    favoriteButton,
+    favoriteFeedback
+  );
+
+  function message(text) {
     $("accountFeedback").textContent = text;
-  };
+    favoriteFeedback.textContent = text;
+  }
 
   const config = window.SALAS64_CONFIG;
 
@@ -44,7 +122,26 @@
         ? "Signed in"
         : "Signed out";
 
-    $("signedInEmail").textContent = user?.email || "";
+    if ($("signedInEmail")) {
+      $("signedInEmail").textContent = "";
+    }
+
+    $("accountTitle").textContent = user
+      ? "My Account"
+      : "My Salas 64 Account";
+
+    const subtitle = document.querySelector("#account .subtitle");
+
+    if (subtitle) {
+      subtitle.textContent = user
+        ? "Open a team card to add or remove a favorite. Favorites have a gold star in the rankings."
+        : "Sign in to save your favorite teams across devices.";
+    }
+
+    if (user && profile?.display_name) {
+      $("accountStatus").textContent =
+        `Signed in · ${profile.display_name}`;
+    }
 
     $("signInBtn").disabled = busy || starting;
     $("signUpBtn").disabled = busy || starting;
@@ -62,77 +159,107 @@
     );
   }
 
-  function renderTeams() {
-    const list = $("favoriteTeamsList");
-    list.replaceChildren();
+  function modalTeam() {
+    const name = $("modalTeamName")?.textContent;
+    return teams.find(team => team.team === name);
+  }
 
-    if (!user || !profile) return;
+  function renderFavorites() {
+    const selected = new Set(
+      user && profile ? profile.favorite_team_ids || [] : []
+    );
 
-    const selected = new Set(profile.favorite_team_ids || []);
-    const query = $("favoriteSearch").value.trim().toLowerCase();
+    const byName = new Map(
+      teams.map(team => [team.team.toLowerCase(), team])
+    );
 
-    const visible = teams
-      .filter(team => team.team.toLowerCase().includes(query))
-      .sort((a, b) =>
-        Number(selected.has(teamId(b))) -
-        Number(selected.has(teamId(a))) ||
-        a.rank - b.rank
-      );
+    document.querySelectorAll("#rankingsList .ranking-row")
+      .forEach(row => {
+        const name = row.querySelector(".team-name");
 
-    if (!teams.length) {
-      const note = document.createElement("p");
-      note.className = "meta";
-      note.textContent =
-        "Team list is unavailable. Refresh to try again.";
-      list.append(note);
-    } else if (!visible.length) {
-      const note = document.createElement("p");
-      note.textContent = "No matching teams.";
-      list.append(note);
-    }
+        if (!name) return;
 
-    for (const team of visible) {
-      const id = teamId(team);
-      const followed = selected.has(id);
+        name.querySelector(".favorite-star")?.remove();
 
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "pick-team";
-      button.disabled = busy;
-      button.setAttribute("aria-pressed", String(followed));
+        const team = byName.get(row.dataset.team);
 
-      button.textContent =
-        `${followed ? "★" : "☆"} #${team.rank} ` +
-        `${team.team} · ${team.record || "—"}`;
+        if (team && selected.has(teamId(team))) {
+          const star = document.createElement("span");
+          star.className = "favorite-star";
+          star.textContent = "★";
+          star.setAttribute("aria-label", "Favorite team");
+          star.title = "Your favorite team";
+          name.prepend(star);
+        }
+      });
 
-      button.onclick = () => toggleTeam(id, team.team);
-      list.append(button);
-    }
+    const team = modalTeam();
+    const followed = Boolean(
+      team && selected.has(teamId(team))
+    );
 
-    if (!query) {
-      const known = new Set(teams.map(teamId));
+    favoriteButton.hidden = !team;
+    favoriteButton.disabled =
+      busy || starting || Boolean(user && !profile);
 
-      for (const id of selected) {
-        if (known.has(id)) continue;
+    favoriteButton.setAttribute(
+      "aria-pressed",
+      String(followed)
+    );
 
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "pick-team";
-        button.disabled = busy;
+    favoriteButton.textContent = !user
+      ? "☆ Sign in to favorite"
+      : followed
+        ? "★ Remove favorite"
+        : "☆ Add favorite";
+  }
 
-        button.textContent =
-          `★ Saved team ${id} · outside current Salas 64 · Unfollow`;
-
-        button.onclick = () => toggleTeam(id, "Saved team");
-        list.append(button);
+  favoriteButton.onclick = () => {
+    if (!user) {
+      if (typeof closeTeamCard === "function") {
+        closeTeamCard();
       }
+
+      $("account").scrollIntoView({ behavior: "smooth" });
+      $("authEmail").focus({ preventScroll: true });
+      message("Sign in to save favorite teams.");
+      return;
     }
+
+    const team = modalTeam();
+
+    if (team) {
+      toggleTeam(teamId(team), team.team);
+    }
+  };
+
+  const rankingsObserver = new MutationObserver(
+    renderFavorites
+  );
+
+  if ($("rankingsList")) {
+    rankingsObserver.observe($("rankingsList"), {
+      childList: true
+    });
+  }
+
+  const modalObserver = new MutationObserver(() => {
+    favoriteFeedback.textContent = "";
+    renderFavorites();
+  });
+
+  if ($("modalTeamName")) {
+    modalObserver.observe($("modalTeamName"), {
+      childList: true
+    });
   }
 
   async function syncSession(session) {
     const next = session?.user || null;
 
-    if (!starting && next?.id === user?.id && profile) return;
+    if (!starting && next?.id === user?.id && profile) {
+      return;
+    }
 
     const ticket = ++version;
 
@@ -141,9 +268,16 @@
     starting = false;
 
     $("displayName").value = "";
-    $("favoriteTeamsList").replaceChildren();
+    $("accountSettings").open = false;
 
+    if (user) {
+      $("authEmail").value = "";
+      $("authPassword").value = "";
+    }
+
+    renderFavorites();
     controls();
+    message("");
 
     window.dispatchEvent(new CustomEvent("salas64:auth", {
       detail: { userId: user?.id || null }
@@ -187,12 +321,9 @@
       profile = result.data;
       $("displayName").value = profile.display_name || "";
 
-      message(
-        "Your profile and favorite teams are saved to your account."
-      );
-
+      message("");
       controls();
-      renderTeams();
+      renderFavorites();
     } catch (error) {
       if (ticket !== version) return;
 
@@ -209,7 +340,7 @@
 
     busy = true;
     controls();
-    renderTeams();
+    renderFavorites();
     message("Saving…");
 
     try {
@@ -232,7 +363,7 @@
     } finally {
       busy = false;
       controls();
-      renderTeams();
+      renderFavorites();
     }
   }
 
@@ -245,11 +376,11 @@
 
     return save(
       { favorite_team_ids: [...selected] },
-      removing ? `Unfollowed ${name}.` : `Following ${name}.`
+      removing
+        ? `Removed ${name} from favorites.`
+        : `Added ${name} to favorites.`
     );
   }
-
-  $("favoriteSearch").oninput = renderTeams;
 
   $("saveProfileBtn").onclick = () => save(
     {
@@ -286,6 +417,7 @@
 
       if (error) throw error;
 
+      $("authEmail").value = "";
       $("authPassword").value = "";
 
       if (data.session) {
@@ -300,7 +432,7 @@
     } finally {
       busy = false;
       controls();
-      renderTeams();
+      renderFavorites();
     }
   };
 
@@ -319,13 +451,15 @@
 
       await syncSession(null);
       message("Signed out.");
+
+      $("authEmail").value = "";
       $("authPassword").value = "";
     } catch (error) {
       message(error.message);
     } finally {
       busy = false;
       controls();
-      renderTeams();
+      renderFavorites();
     }
   };
 
@@ -357,10 +491,11 @@
       teams = (data.rankings || []).filter(
         team => typeof team.team === "string"
       );
-      renderTeams();
+
+      renderFavorites();
     })
     .catch(() => {
       teams = [];
-      renderTeams();
+      renderFavorites();
     });
 })();
