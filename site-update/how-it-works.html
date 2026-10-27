@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How the Salas 64 Rankings Work</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;color:#e5e7eb;background:#020617}
+    body{margin:0;background:radial-gradient(circle at top,#0b1120 0,#020617 50%,#000 100%);color:#e5e7eb}
+    .page{max-width:920px;margin:0 auto;padding:24px 16px 44px}header{margin-bottom:24px;border-bottom:1px solid #1f2933;padding-bottom:12px}header h1{margin:0;font-size:1.65rem;letter-spacing:.03em}.subtitle{margin:6px 0 0;font-size:.9rem;color:#9ca3af}a{color:#60a5fa;text-decoration:none}a:hover{text-decoration:underline}h2{margin:26px 0 8px;font-size:1.22rem}h3{margin:16px 0 5px;font-size:1rem}p,li{font-size:.95rem}.model-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}.model-box{border:1px solid #374151;border-radius:14px;background:rgba(15,23,42,.72);padding:12px}.weight{font-size:1.55rem;font-weight:800;color:#facc15}.label{font-weight:700}.muted{color:#9ca3af;font-size:.84rem}.formula{border:1px solid #374151;background:rgba(2,6,23,.65);border-radius:13px;padding:12px 14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem}.callout{border-left:3px solid #60a5fa;padding:10px 13px;background:rgba(30,58,138,.18);border-radius:0 12px 12px 0;margin:14px 0}.small{font-size:.84rem;color:#9ca3af}footer{margin-top:30px;font-size:.8rem;color:#6b7280;text-align:center}@media(max-width:720px){.model-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>How the Salas 64 Rankings Work</h1>
+      <p class="subtitle">A daily 1–100 model built to measure both current team quality and March readiness.<br><a href="index.html">&larr; Back to rankings</a></p>
+    </header>
+
+    <section>
+      <h2>The Salas Score</h2>
+      <p>Every Division I team is graded from 1 to 100. The 64 highest Salas Scores become that day's official Salas 64. The score is calculated automatically from four parts:</p>
+      <div class="model-grid">
+        <div class="model-box"><div class="weight">50%</div><div class="label">Team Strength</div><div class="muted">Opponent-adjusted efficiency</div></div>
+        <div class="model-box"><div class="weight">25%</div><div class="label">Résumé</div><div class="muted">Salas Wins Above Bubble</div></div>
+        <div class="model-box"><div class="weight">20%</div><div class="label">March Profile</div><div class="muted">Four Factors + two-way balance</div></div>
+        <div class="model-box"><div class="weight">5%</div><div class="label">Current Form</div><div class="muted">Last eight adjusted performances</div></div>
+      </div>
+      <div class="formula">Salas Score = (Strength × .50) + (Résumé × .25) + (March × .20) + (Form × .05)</div>
+      <p class="small">Each component is normalized against the rest of Division I so teams from different conferences are judged on the same scale.</p>
+
+      <h2>1. Team Strength — 50%</h2>
+      <p>This is the foundation of the model. It uses opponent-adjusted offensive and defensive efficiency to estimate how strong a team actually is possession by possession, independent of raw record or pace.</p>
+      <div class="formula">Adjusted Net Rating = Adjusted Offensive Rating − Adjusted Defensive Rating</div>
+      <p>A team that consistently scores efficiently and prevents opponents from doing the same will grade highly even if it plays at a slow pace. The adjusted ratings account for opponent quality, which helps compare teams across different schedules.</p>
+
+      <h2>2. Résumé — 25%</h2>
+      <p>The résumé component measures what a team has actually accomplished. Salas 64 uses its own version of Wins Above Bubble rather than simply counting ranked wins or using raw strength of schedule.</p>
+      <h3>Salas Wins Above Bubble (SWAB)</h3>
+      <p>The model uses approximately the 45th-strongest Division I team as the bubble reference point. For every game, it estimates how likely that bubble-level team would have been to win against the same opponent at the same location.</p>
+      <div class="formula">SWAB = Actual Wins − Expected Wins by a Bubble Team against the same schedule</div>
+      <p>This means a difficult road win is worth much more than an easy home win, while a difficult schedule does not earn credit by itself. Teams must actually perform well against that schedule.</p>
+
+      <h2>3. March Profile — 20%</h2>
+      <p>The March Profile looks at the parts of basketball that repeatedly determine possession-by-possession success. The model uses both offense and defense so a one-dimensional team cannot receive an elite March grade from only one side of the floor.</p>
+      <ul>
+        <li><strong>Shooting efficiency — 40% of March Profile:</strong> offensive effective field-goal percentage and opponent effective field-goal percentage.</li>
+        <li><strong>Ball security — 25%:</strong> limiting offensive turnovers and creating opponent turnovers.</li>
+        <li><strong>Rebounding — 20%:</strong> creating second chances while limiting opponent offensive rebounds.</li>
+        <li><strong>Free-throw battle — 15%:</strong> getting to the line, keeping opponents off the line, and a smaller free-throw percentage modifier.</li>
+      </ul>
+      <p>The model also applies a small two-way balance adjustment. Teams that are strong on both offense and defense receive a modest boost; teams with a major weakness on one end receive a modest penalty.</p>
+
+      <h2>4. Current Form — 5%</h2>
+      <p>Recent performance matters, but it is intentionally kept small so one hot week does not erase the full season. The model evaluates each team's last eight games using scoring margin, opponent quality, and game location, then compares that recent performance with the rest of Division I.</p>
+
+      <h2>What is not directly rewarded</h2>
+      <ul>
+        <li><strong>Raw win percentage:</strong> already reflected through résumé and opponent strength.</li>
+        <li><strong>Strength of schedule by itself:</strong> playing good teams is not enough; results against them matter.</li>
+        <li><strong>Conference reputation:</strong> conferences receive no automatic bonus.</li>
+        <li><strong>AP ranking or NET ranking:</strong> neither is directly inserted into the Salas Score.</li>
+        <li><strong>Tempo:</strong> playing faster or slower is a style, not automatically a strength.</li>
+      </ul>
+
+      <h2>Daily updates</h2>
+      <p>The ranking updater runs every day. A scheduled data job pulls the newest season results, records, Four Factors, and adjusted efficiency data, recalculates every Division I team's Salas Score, saves the previous update’s ranks, and produces the new top 64.</p>
+      <p>That same process automatically creates the <strong>Biggest Riser</strong>, <strong>Biggest Faller</strong>, and <strong>Hottest Team</strong>. The <strong>Team to Watch</strong> is selected by the model from teams outside the very top group that combine a strong Salas Score with strong recent form.</p>
+
+      <h2>What you see on a team card</h2>
+      <p>The advanced math stays behind the scenes. Clicking a team in the rankings shows only the information most fans need: Salas Score, overall record, last-10 record, current streak, previous rank, change since the previous update, and best win.</p>
+
+      <div class="callout"><strong>Model note:</strong> Salas 64 is a proprietary ranking model, not an NCAA selection formula. The weights can be backtested and refined as more historical seasons are evaluated.</div>
+
+      <h2>Data</h2>
+      <p>The automated updater is built around the College Basketball Data API for game results, team season statistics, Four Factors, and adjusted efficiency ratings. The API key is kept private in GitHub Actions and is never exposed in the public website code.</p>
+    </section>
+
+    <footer>Salas 64 &copy; <span id="year"></span>.</footer>
+  </div>
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
