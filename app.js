@@ -24,7 +24,7 @@
         salasRankings = Array.isArray(payload.rankings) ? payload.rankings : [];
         weeklySummary = payload.weeklySummary || {};
         isPreseason = Boolean(payload.preseason);
-        document.getElementById("asOfText").textContent = payload.updatedLabel || "Weekly rankings";
+        document.getElementById("asOfText").textContent = payload.updatedLabel || "Daily rankings";
         if(payload.message) showStatus(payload.message);
         else if(!salasRankings.length) showStatus("The 2026–27 Salas 64 will populate automatically when the season model begins.");
       }catch(err){

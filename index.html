@@ -5,7 +5,7 @@
 <link rel="apple-touch-icon" href="/favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Salas 64 weekly college basketball rankings, Salas Scores, weekly movers, team cards, and game predictor." />
+  <meta name="description" content="Salas 64 daily college basketball rankings, Salas Scores, daily movers, team cards, and game predictor." />
   <title>Salas 64 Rankings</title>
   <style>
     :root{
@@ -88,7 +88,7 @@
       <div class="site-brand">
         <a class="brand-mark" href="index.html" aria-label="Salas 64 home">S<span>64</span></a><div><h1>Salas 64</h1><div class="eyebrow">COLLEGE BASKETBALL. BY THE NUMBERS.</div></div>
       </div>
-      <div class="meta" id="asOfText">Loading weekly rankings…</div>
+      <div class="meta" id="asOfText">Loading daily rankings…</div>
     </header>
 
     <nav class="section-nav" aria-label="Site sections">
@@ -213,7 +213,7 @@
             <a href="about.html" class="info-link">About Salas 64</a>
           </div>
         </div>
-        <p class="subtitle">The 64 teams that matter most. New official rankings every Monday.</p>
+        <p class="subtitle">The 64 teams that matter most. Fresh rankings every day, using the latest available stats.</p>
         <div id="statusBanner" class="status-banner"></div>
 
         <div class="search-bar">
@@ -239,8 +239,8 @@
         <div id="rankingsList"></div>
 
         <hr class="compare-hr" />
-        <div class="card-header-row"><h2>This Week in the Salas 64</h2></div>
-        <p class="subtitle">Weekly movement is calculated automatically from the previous Monday ranking.</p>
+        <div class="card-header-row"><h2>Today in the Salas 64</h2></div>
+        <p class="subtitle">Movement compares the current ranking with the previous successful update.</p>
         <div class="weekly-grid">
           <div class="weekly-box"><div class="weekly-kicker">Hottest Team</div><div class="weekly-team" id="hottestTeam">—</div><div class="weekly-note" id="hottestNote">—</div></div>
           <div class="weekly-box"><div class="weekly-kicker">Biggest Riser</div><div class="weekly-team" id="biggestRiser">—</div><div class="weekly-note" id="riserNote">—</div></div>
@@ -272,7 +272,7 @@
       </section>
     </main>
 
-    <footer>Salas 64 &copy; <span id="year"></span>. Official rankings update every Monday.</footer>
+    <footer>Salas 64 &copy; <span id="year"></span>. Rankings refresh daily using the latest available stats.</footer>
   </div>
 
   <dialog id="challengePopup" aria-labelledby="popupTitle">
@@ -303,19 +303,19 @@
         <div class="team-stat"><div class="team-stat-k">Overall Record</div><div class="team-stat-v" id="modalRecord">—</div></div>
         <div class="team-stat"><div class="team-stat-k">Last 10</div><div class="team-stat-v" id="modalLast10">—</div></div>
         <div class="team-stat"><div class="team-stat-k">Current Streak</div><div class="team-stat-v" id="modalStreak">—</div></div>
-        <div class="team-stat"><div class="team-stat-k">Last Week</div><div class="team-stat-v" id="modalLastWeek">—</div></div>
+        <div class="team-stat"><div class="team-stat-k">Previous Update</div><div class="team-stat-v" id="modalLastWeek">—</div></div>
         <div class="team-stat"><div class="team-stat-k">Ranking Change</div><div class="team-stat-v" id="modalChange">—</div></div>
         <div class="team-stat best-win"><div class="team-stat-k">Best Win</div><div class="team-stat-v" id="modalBestWin">—</div></div>
       </div>
     </div>
   </div>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
 <script src="accounts.js?v=2"></script>
   <script src="predictions.js"></script>
-  <script src="redesign.js?v=3"></script>
+  <script src="redesign.js?v=4"></script>
 </body>
 </html>

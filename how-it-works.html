@@ -16,12 +16,12 @@
   <div class="page">
     <header>
       <h1>How the Salas 64 Rankings Work</h1>
-      <p class="subtitle">A weekly 1–100 model built to measure both current team quality and March readiness.<br><a href="index.html">&larr; Back to rankings</a></p>
+      <p class="subtitle">A daily 1–100 model built to measure both current team quality and March readiness.<br><a href="index.html">&larr; Back to rankings</a></p>
     </header>
 
     <section>
       <h2>The Salas Score</h2>
-      <p>Every Division I team is graded from 1 to 100. The 64 highest Salas Scores become that Monday's official Salas 64. The score is calculated automatically from four parts:</p>
+      <p>Every Division I team is graded from 1 to 100. The 64 highest Salas Scores become that day's official Salas 64. The score is calculated automatically from four parts:</p>
       <div class="model-grid">
         <div class="model-box"><div class="weight">50%</div><div class="label">Team Strength</div><div class="muted">Opponent-adjusted efficiency</div></div>
         <div class="model-box"><div class="weight">25%</div><div class="label">Résumé</div><div class="muted">Salas Wins Above Bubble</div></div>
@@ -65,12 +65,12 @@
         <li><strong>Tempo:</strong> playing faster or slower is a style, not automatically a strength.</li>
       </ul>
 
-      <h2>Weekly updates</h2>
-      <p>The rankings publish every Monday. A scheduled data job pulls the newest season results, records, Four Factors, and adjusted efficiency data, recalculates every Division I team's Salas Score, saves the previous week's ranks, and produces the new top 64.</p>
+      <h2>Daily updates</h2>
+      <p>The ranking updater runs every day. A scheduled data job pulls the newest season results, records, Four Factors, and adjusted efficiency data, recalculates every Division I team's Salas Score, saves the previous update’s ranks, and produces the new top 64.</p>
       <p>That same process automatically creates the <strong>Biggest Riser</strong>, <strong>Biggest Faller</strong>, and <strong>Hottest Team</strong>. The <strong>Team to Watch</strong> is selected by the model from teams outside the very top group that combine a strong Salas Score with strong recent form.</p>
 
       <h2>What you see on a team card</h2>
-      <p>The advanced math stays behind the scenes. Clicking a team in the rankings shows only the information most fans need: Salas Score, overall record, last-10 record, current streak, previous rank, weekly change, and best win.</p>
+      <p>The advanced math stays behind the scenes. Clicking a team in the rankings shows only the information most fans need: Salas Score, overall record, last-10 record, current streak, previous rank, change since the previous update, and best win.</p>
 
       <div class="callout"><strong>Model note:</strong> Salas 64 is a proprietary ranking model, not an NCAA selection formula. The weights can be backtested and refined as more historical seasons are evaluated.</div>
 

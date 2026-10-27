@@ -21,11 +21,11 @@
 
   if(!teamPage){
     const hero=document.createElement('section');hero.className='dashboard-hero';
-    hero.innerHTML='<div><div class="eyebrow">THE WEEKLY 64</div><h2>Follow the movement.<br><span>Know the contenders.</span></h2><p>Independent rankings. Matchup simulations. Your picks against the model.</p></div><a class="primary-link" href="#rankings">Explore the rankings ↓</a>';
+    hero.innerHTML='<div><div class="eyebrow">THE DAILY 64</div><h2>Follow the movement.<br><span>Know the contenders.</span></h2><p>Independent rankings. Matchup simulations. Your picks against the model.</p></div><a class="primary-link" href="#rankings">Explore the rankings ↓</a>';
     layout.prepend(hero);
-    const weekly=document.createElement('section');weekly.className='weekly-overview';weekly.setAttribute('aria-label','Weekly highlights');
+    const weekly=document.createElement('section');weekly.className='weekly-overview';weekly.setAttribute('aria-label','Daily highlights');
     weekly.append(document.querySelector('.weekly-grid'));hero.after(weekly);
-    const oldHeading=[...$('rankings').querySelectorAll('.card-header-row')].find(x=>x.textContent.includes('This Week'));
+    const oldHeading=[...$('rankings').querySelectorAll('.card-header-row')].find(x=>x.textContent.includes('Today in'));
     oldHeading?.nextElementSibling?.remove();oldHeading?.remove();$('rankings').querySelector('.compare-hr')?.remove();
     const grid=document.createElement('div');grid.className='dashboard-grid';weekly.after(grid);grid.append($('rankings'));
     const side=document.createElement('aside');side.className='insight-sidebar';side.setAttribute('aria-label','Rankings insights');
@@ -96,7 +96,7 @@
     const bestNote=document.createElement('p');bestNote.className='meta';bestNote.textContent='Best win is selected by opponent model strength, with extra credit for away and neutral-site wins.';document.querySelector('.best-win').append(bestNote);
     document.querySelector('.salas-score-label').textContent=isPreseason?'SALAS SCORE · AVAILABLE IN SEASON':'SALAS SCORE';
     $('strengthStats').innerHTML=[['Offensive efficiency',t.offensiveRating,'Points scored per 100 possessions; higher is better.'],['Defensive efficiency',t.defensiveRating,'Points allowed per 100 possessions; lower is better.'],['Pace',t.pace,'Estimated possessions per game.']].map(([label,value,note])=>`<div class="strength-row"><div><strong>${label}</strong><p>${note}</p></div><b>${formatScore(value)}</b></div>`).join('');
-    $('recentGames').innerHTML=Array.isArray(t.recentGames)&&t.recentGames.length?t.recentGames.map(g=>`<div class="result-row"><span class="result-badge ${g.win?'win':'loss'}">${g.win?'W':'L'}</span><div><strong>${esc(g.opponent)}</strong><small>${esc(String(g.date||'').slice(0,10))} · ${esc(g.location||'')}</small></div><strong>${esc(g.points??'—')}–${esc(g.opponentPoints??'—')}</strong></div>`).join(''):'<p class="empty-state">No results published yet. Completed games will appear after the weekly rankings update.</p>';
+    $('recentGames').innerHTML=Array.isArray(t.recentGames)&&t.recentGames.length?t.recentGames.map(g=>`<div class="result-row"><span class="result-badge ${g.win?'win':'loss'}">${g.win?'W':'L'}</span><div><strong>${esc(g.opponent)}</strong><small>${esc(String(g.date||'').slice(0,10))} · ${esc(g.location||'')}</small></div><strong>${esc(g.points??'—')}–${esc(g.opponentPoints??'—')}</strong></div>`).join(''):'<p class="empty-state">No results published yet. Completed games will appear after the daily rankings update.</p>';
     $('upcomingGames').innerHTML='<p class="empty-state">A full schedule feed is not connected yet. You can compare this team with any ranked opponent below.</p>';
     $('profileOpponent').innerHTML=salasRankings.filter(x=>x.team!==t.team).map(x=>`<option value="${esc(x.team)}">#${x.rank} ${esc(x.team)}</option>`).join('');
     renderHistory(t);
@@ -109,10 +109,10 @@
     const currentDate=String(now.updatedAt||'').slice(0,10);
     snapshots=snapshots.filter(s=>s.date!==currentDate);snapshots.push({date:currentDate,season:now.season,rankings:now.rankings});snapshots.sort((a,b)=>a.date.localeCompare(b.date));
     const points=snapshots.map(s=>({date:s.date,rank:s.rankings.find(x=>x.team===t.team)?.rank??null}));
-    if(points.length<2){$('rankingHistory').innerHTML=`<div class="history-current"><strong>#${t.rank}</strong><span>Current ranking</span></div><p class="empty-state">${failed?'Historical data could not be loaded.':'Ranking history builds with each weekly update.'} Your current rank is shown above.</p>`;return;}
+    if(points.length<2){$('rankingHistory').innerHTML=`<div class="history-current"><strong>#${t.rank}</strong><span>Current ranking</span></div><p class="empty-state">${failed?'Historical data could not be loaded.':'Ranking history builds with each daily update.'} Your current rank is shown above.</p>`;return;}
     const x=i=>45+i*(600/(points.length-1)),y=r=>24+(r-1)*2.8;
     let segments=[],segment=[];points.forEach((p,i)=>{if(p.rank!==null)segment.push(`${x(i)},${y(p.rank)}`);else if(segment.length){segments.push(segment);segment=[];}});if(segment.length)segments.push(segment);
-    $('rankingHistory').innerHTML=`<svg viewBox="0 0 690 245" role="img" aria-label="Weekly ranking history for ${esc(t.team)}. Rank one is at the top.">${[1,16,32,48,64].map(r=>`<line x1="45" y1="${y(r)}" x2="645" y2="${y(r)}" stroke="#25354b"/><text x="8" y="${y(r)+4}" fill="#94a3b8" font-size="12">${r}</text>`).join('')}${segments.map(s=>`<polyline points="${s.join(' ')}" fill="none" stroke="#53a5ff" stroke-width="3"/>`).join('')}${points.map((p,i)=>p.rank!==null?`<circle cx="${x(i)}" cy="${y(p.rank)}" r="4" fill="#8ac7ff"><title>${esc(p.date)}: #${p.rank}</title></circle>`:'').join('')}<text x="45" y="232" fill="#94a3b8" font-size="12">${esc(points[0].date)}</text><text x="645" y="232" text-anchor="end" fill="#94a3b8" font-size="12">${esc(points.at(-1).date)}</text></svg><details><summary>View ranking history as a list</summary>${points.map(p=>`<p>${esc(p.date)}: ${p.rank===null?'Outside the Top 64':'#'+p.rank}</p>`).join('')}</details>`;
+    $('rankingHistory').innerHTML=`<svg viewBox="0 0 690 245" role="img" aria-label="Daily ranking history for ${esc(t.team)}. Rank one is at the top.">${[1,16,32,48,64].map(r=>`<line x1="45" y1="${y(r)}" x2="645" y2="${y(r)}" stroke="#25354b"/><text x="8" y="${y(r)+4}" fill="#94a3b8" font-size="12">${r}</text>`).join('')}${segments.map(s=>`<polyline points="${s.join(' ')}" fill="none" stroke="#53a5ff" stroke-width="3"/>`).join('')}${points.map((p,i)=>p.rank!==null?`<circle cx="${x(i)}" cy="${y(p.rank)}" r="4" fill="#8ac7ff"><title>${esc(p.date)}: #${p.rank}</title></circle>`:'').join('')}<text x="45" y="232" fill="#94a3b8" font-size="12">${esc(points[0].date)}</text><text x="645" y="232" text-anchor="end" fill="#94a3b8" font-size="12">${esc(points.at(-1).date)}</text></svg><details><summary>View ranking history as a list</summary>${points.map(p=>`<p>${esc(p.date)}: ${p.rank===null?'Outside the Top 64':'#'+p.rank}</p>`).join('')}</details>`;
   }
   window.addEventListener('salas64:data',onData);
   window.addEventListener('salas64:favorites',applyFilters);
