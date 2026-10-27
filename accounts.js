@@ -67,6 +67,7 @@
   const favoriteButton = document.createElement("button");
   favoriteButton.id = "modalFavoriteBtn";
   favoriteButton.type = "button";
+  favoriteButton.hidden = true;
   favoriteButton.className = "compare-btn";
   favoriteButton.style.marginTop = "16px";
 
@@ -134,7 +135,7 @@
 
     if (subtitle) {
       subtitle.textContent = user
-        ? "Open a team card to add or remove a favorite. Favorites have a gold star in the rankings."
+        ? "Open a team page to add or remove a favorite. Favorites have a gold star in the rankings."
         : "Sign in to save your favorite teams across devices.";
     }
 
@@ -168,6 +169,9 @@
     const selected = new Set(
       user && profile ? profile.favorite_team_ids || [] : []
     );
+
+    window.salas64FavoriteIds = [...selected];
+    window.dispatchEvent(new Event("salas64:favorites"));
 
     const byName = new Map(
       teams.map(team => [team.team.toLowerCase(), team])

@@ -93,7 +93,7 @@
   popup.addEventListener('cancel',e=>{e.preventDefault();dismiss();});
   popup.addEventListener('click',e=>{if(e.target===popup){const r=popup.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dismiss();}});
   let show=true;try{show=sessionStorage.getItem('salas64:welcome')!==ptDay();}catch{}
-  if(show){popup.showModal();document.body.style.overflow='hidden';}
+  // The invitation now appears inline in the dashboard.
   window.addEventListener('storage',e=>{if(e.key===key){loadPicks();render();}});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
   setInterval(()=>{if(!document.hidden)refresh();},60000);
