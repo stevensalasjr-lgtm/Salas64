@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the weekly Salas 64 data file from College Basketball Data.
+"""Generate the daily Salas 64 data file from College Basketball Data.
 
 Required environment variable:
     CBBD_API_KEY
@@ -17,6 +17,7 @@ import json
 import math
 import os
 import shutil
+from zoneinfo import ZoneInfo
 import statistics
 import sys
 import urllib.parse
@@ -34,7 +35,7 @@ WIN_PROB_SCALE = 6.5
 TOP_N = 64
 
 # ESPN's public team-logo CDN is used only for displaying school logos.
-# The updater also tries ESPN's public teams feed each Monday, so teams that
+# The updater also tries ESPN's public teams feed each morning, so teams that
 # enter the Salas 64 later in the season receive their logo automatically.
 ESPN_TEAMS_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=500"
 ESPN_LOGO_BASE = "https://a.espncdn.com/i/teamlogos/ncaa/500"
@@ -269,6 +270,8 @@ def team_game_rows(games: list[dict[str, Any]]) -> dict[int, list[dict[str, Any]
                     "opponent": g.get("awayTeam" if is_home else "homeTeam") or "Unknown",
                     "win": points > opp_points,
                     "margin": points - opp_points,
+                    "points": points,
+                    "opponentPoints": opp_points,
                     "location": location,
                 }
             )
@@ -478,6 +481,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
                 "last10": last_ten_record(rows),
                 "streak": current_streak(rows),
                 "bestWin": best_win(rows, net),
+                "recentGames": list(reversed(rows[-10:])),
                 "powerScore": round(power_score.get(tid, 50.0), 2),
                 "resumeScore": round(resume_score.get(tid, 50.0), 2),
                 "marchScore": round(march_score.get(tid, 50.0), 2),
@@ -501,7 +505,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
             previous_payload = json.loads(previous_path.read_text())
         except Exception:
             previous_payload = {}
-    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")}
+    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season else {}
 
     for idx, t in enumerate(top, start=1):
         t["rank"] = idx
@@ -515,8 +519,8 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
         history_dir.mkdir(parents=True, exist_ok=True)
         previous_date = str(previous_payload.get("updatedAt") or datetime.now(timezone.utc).date().isoformat())[:10]
         archive = history_dir / f"{previous_date}.json"
-        if not archive.exists():
-            shutil.copy2(previous_path, archive)
+        # Keep the latest published version for a date, including manual reruns.
+        shutil.copy2(previous_path, archive)
 
     def summary_entry(team: dict[str, Any] | None, note: str) -> dict[str, Any]:
         return {"team": team["team"] if team else "—", "note": note}
@@ -531,14 +535,14 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     watch = max(watch_pool, key=lambda t: 0.58 * t["formScore"] + 0.37 * t["salasScore"] + 0.05 * max(t["change"], 0) * 5, default=None)
 
     if riser and riser["change"] > 0:
-        riser_note = f"Up {riser['change']} spots from last Monday."
+        riser_note = f"Up {riser['change']} spots since the previous update."
     elif riser:
         riser_note = "No team moved up from the previous official ranking."
     else:
         riser_note = "First official ranking of the season."
 
     if faller and faller["change"] < 0:
-        faller_note = f"Down {abs(faller['change'])} spots from last Monday."
+        faller_note = f"Down {abs(faller['change'])} spots since the previous update."
     elif faller:
         faller_note = "No team moved down from the previous official ranking."
     else:
@@ -548,12 +552,13 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     payload = {
         "season": season,
         "updatedAt": now.isoformat().replace("+00:00", "Z"),
-        "updatedLabel": f"Week of {now.strftime('%b %d, %Y')} • Monday model update",
+        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} • Daily rankings",
+        "previousUpdatedAt": previous_payload.get("updatedAt") if previous_payload.get("season") == season else None,
         "modelVersion": "Salas Score 1.0",
         "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
         "rankings": top,
         "weeklySummary": {
-            "hottestTeam": summary_entry(hottest, "Best recent adjusted form among this week's Salas 64." if hottest else "—"),
+            "hottestTeam": summary_entry(hottest, "Best recent adjusted form among today's Salas 64." if hottest else "—"),
             "biggestRiser": summary_entry(riser, riser_note),
             "biggestFaller": summary_entry(faller, faller_note),
             "teamToWatch": summary_entry(watch, f"#{watch['rank']} with a {watch['salasScore']:.1f} Salas Score and strong recent form." if watch else "—"),
@@ -595,9 +600,9 @@ def main() -> int:
         if existing.get("preseason") and existing.get("rankings"):
             payload = existing
             payload["season"] = season
-            payload["updatedAt"] = now.isoformat().replace("+00:00", "Z")
+            payload["dataCheckedAt"] = now.isoformat().replace("+00:00", "Z")
             payload["updatedLabel"] = "2026-27 Preseason Salas 64 — Week 0"
-            payload["message"] = "Preseason rankings are active. Live Salas Scores and weekly movement will begin once enough 2026-27 games have been played."
+            payload["message"] = "Preseason rankings are active. Live Salas Scores and daily movement will begin once enough 2026-27 games have been played."
             print(f"Preseason mode: preserving published Week 0 rankings ({exc})")
         else:
             payload = {
