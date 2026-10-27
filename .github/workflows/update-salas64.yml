@@ -2,42 +2,50 @@ name: Update Salas 64 Rankings
 
 on:
   schedule:
-    # Monday morning during the college basketball season.
-    # 17:00 UTC = 9:00 AM Pacific Standard Time / 10:00 AM Pacific Daylight Time.
-    - cron: "0 17 * 1-4,11-12 1"
+    # Every day at 17:17 UTC (9:17 AM PST / 10:17 AM PDT).
+    # GitHub may queue scheduled runs; this is not an exact publication deadline.
+    - cron: '17 17 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+
+concurrency:
+  group: salas-rankings
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-
-      - name: Generate weekly Salas 64
+          python-version: '3.12'
+      - name: Generate daily Salas 64 and ranking history
         env:
           CBBD_API_KEY: ${{ secrets.CBBD_API_KEY }}
         run: |
           python scripts/update_rankings.py
           python scripts/build_history.py
-
       - name: Commit updated ranking data
         run: |
-          if git diff --quiet; then
-            echo "No ranking changes to commit."
+          git config user.name 'salas64-bot'
+          git config user.email 'salas64-bot@users.noreply.github.com'
+          git add data/current.json data/history/
+          if git diff --cached --quiet; then
+            echo 'No ranking changes to commit.'
             exit 0
           fi
-          git config user.name "salas64-bot"
-          git config user.email "salas64-bot@users.noreply.github.com"
-          git add data/current.json data/history/
-          git commit -m "Update Salas 64 weekly rankings"
+          git commit -m 'Update Salas 64 daily rankings'
+          git pull --rebase origin "${GITHUB_REF_NAME}"
           git push
-      
+      - name: Request website refresh
+        if: github.ref_name == github.event.repository.default_branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
