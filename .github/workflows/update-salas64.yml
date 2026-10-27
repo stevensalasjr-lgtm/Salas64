@@ -25,7 +25,9 @@ jobs:
       - name: Generate weekly Salas 64
         env:
           CBBD_API_KEY: ${{ secrets.CBBD_API_KEY }}
-        run: python scripts/update_rankings.py
+        run: |
+          python scripts/update_rankings.py
+          python scripts/build_history.py
 
       - name: Commit updated ranking data
         run: |
@@ -38,3 +40,4 @@ jobs:
           git add data/current.json data/history/
           git commit -m "Update Salas 64 weekly rankings"
           git push
+      
