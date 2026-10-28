@@ -1,4 +1,4 @@
-name: Update You vs Salas
+name: Update Predictions and Results
 
 on:
   workflow_dispatch:
@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: salas-predictions
@@ -15,6 +16,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -23,14 +25,22 @@ jobs:
           python-version: '3.12'
 
       - name: Refresh schedule and results
-        run: python scripts/update_predictions.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+        run: python scripts/update_game_center.py
 
       - name: Save challenge archive
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/predictions.json
+          git add data/game-center.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Update daily predictions and season results'
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push
+      - name: Request website refresh
+        if: github.ref_name == github.event.repository.default_branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
