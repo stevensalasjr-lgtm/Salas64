@@ -13,6 +13,8 @@ The script uses only Python's standard library so GitHub Actions needs no pip in
 
 from __future__ import annotations
 
+from team_directory import refresh, enrich
+
 import json
 import math
 import os
@@ -153,9 +155,8 @@ def team_logo_url(name: str, team_id: int, logo_map: dict[str, str]) -> str:
 
     espn_id = ESPN_TEAM_ID_OVERRIDES.get(name)
     if espn_id is None:
-        # CBBD team IDs are retained as a best-effort fallback. If a future
-        # source ID does not resolve, index.html automatically shows initials.
-        espn_id = team_id
+        # Unmapped schools show initials. Never treat a CBBD ID as an ESPN ID.
+        return ""
     return f"{ESPN_LOGO_BASE}/{espn_id}.png"
 
 
@@ -350,6 +351,10 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     eligible_ids = [
         tid for tid, r in ratings_by_id.items()
         if tid in stats_by_id and safe_num(stats_by_id[tid].get("games")) > 0
+        and safe_num(r.get("offensiveRating")) > 0
+        and safe_num(r.get("defensiveRating")) > 0
+        and r.get("netRating") is not None
+        and math.isfinite(safe_num(r.get("netRating"), float("nan")))
     ]
     if len(eligible_ids) < TOP_N:
         raise RuntimeError(f"Only {len(eligible_ids)} eligible teams returned; expected at least {TOP_N}.")
@@ -490,7 +495,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
                 "offensiveRating": round(offense.get(tid, national_avg_efficiency), 2),
                 "defensiveRating": round(defense.get(tid, national_avg_efficiency), 2),
                 "netRating": round(net.get(tid, 0.0), 2),
-                "pace": round(safe_num(s.get("pace"), 68.0), 2),
+                "pace": round(safe_num(s.get("pace"), 0.0), 2),
                 "nationalAverageEfficiency": round(national_avg_efficiency, 2),
             }
         )
@@ -507,11 +512,12 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
             previous_payload = {}
     previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season else {}
 
-    for idx, t in enumerate(top, start=1):
-        t["rank"] = idx
+    for idx, t in enumerate(teams, start=1):
+        t["rank"] = idx if idx <= TOP_N else None
+        t["modelRank"] = idx
         prev = previous_rank.get(t["team"])
         t["previousRank"] = int(prev) if prev is not None else None
-        t["change"] = (int(prev) - idx) if prev is not None else 0
+        t["change"] = (int(prev) - idx) if prev is not None and idx <= TOP_N else 0
 
     # Archive the previous official ranking only when it actually contains rankings.
     if previous_payload.get("rankings"):
@@ -557,6 +563,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
         "modelVersion": "Salas Score 1.0",
         "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
         "rankings": top,
+        "allTeams": teams,
         "weeklySummary": {
             "hottestTeam": summary_entry(hottest, "Best recent adjusted form among today's Salas 64." if hottest else "—"),
             "biggestRiser": summary_entry(riser, riser_note),
@@ -618,6 +625,7 @@ def main() -> int:
             }
             print(f"Preseason mode: {exc}")
 
+    payload = enrich(payload, refresh(data_dir))
     out = data_dir / "current.json"
     out.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
     print(f"Wrote {out} with {len(payload['rankings'])} ranked teams.")

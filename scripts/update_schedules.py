@@ -88,7 +88,7 @@ def fetch_team(team, season):
 def main():
     current = json.loads((ROOT / 'data/current.json').read_text())
     season = int(current['season'])
-    teams = current.get('rankings', [])
+    teams = current.get('allTeams') or current.get('rankings', [])
     if not teams:
         raise RuntimeError('No ranked teams; preserving previous schedule file')
     path = ROOT / 'data/schedules.json'
