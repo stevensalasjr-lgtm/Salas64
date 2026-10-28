@@ -30,14 +30,14 @@
     oldHeading?.nextElementSibling?.remove();oldHeading?.remove();$('rankings').querySelector('.compare-hr')?.remove();
     const grid=document.createElement('div');grid.className='dashboard-grid';weekly.after(grid);grid.append($('rankings'));
     const side=document.createElement('aside');side.className='insight-sidebar';side.setAttribute('aria-label','Rankings insights');
-    side.innerHTML='<section class="card spotlight"><div class="eyebrow">AT THE TOP</div><div id="leaderSpotlight" class="loading-placeholder">Loading the leader…</div></section><section class="card"><div class="eyebrow">CONFERENCE BREAKDOWN</div><h2>The field, by conference</h2><div id="conferenceChart"></div></section><section class="card challenge-promo"><div class="eyebrow">YOUR CALL. EVERY GAME.</div><h2>Can you beat<br>Salas 64?</h2><p>Pick as many games as you want. Follow your record against the model.</p><a class="primary-link" href="predictions.html">Make your picks →</a></section>';
+    side.innerHTML='<section class="card spotlight"><div class="eyebrow">AT THE TOP</div><div id="leaderSpotlight" class="loading-placeholder">Loading the leader…</div></section><section class="card bubble-card" id="bubbleCard" aria-labelledby="bubbleTitle"><h2 id="bubbleTitle">Explore a Matchup</h2></section><section class="card challenge-promo"><div class="eyebrow">YOUR CALL. EVERY GAME.</div><h2>Can you beat<br>Salas 64?</h2><p>Pick as many games as you want. Follow your record against the model.</p><a class="primary-link" href="predictions.html">Make your picks →</a></section>';
     grid.append(side);layout.append(accountWrap);$('predictions').hidden=true;$('simulator').hidden=true;
     const filters=document.createElement('div');filters.className='filter-row';
     filters.innerHTML='<label>Conference<select id="conferenceFilter"><option value="">All conferences</option></select></label><label>Show<select id="rankFilter"><option value="64">All 64</option><option value="25">Top 25</option></select></label><label class="check-filter"><input id="favoritesFilter" type="checkbox"> Favorites</label><span id="filterCount" role="status"></span>';
     $('rankings').querySelector('.sort-row').before(filters);
     $('teamSearchInput').setAttribute('aria-label','Search all Division I teams');
     $('teamSearchInput').addEventListener('input',applyFilters);
-    ['conferenceFilter','rankFilter','favoritesFilter'].forEach(id=>$(id).addEventListener('change',()=>{applyFilters();renderConferences();}));
+    ['conferenceFilter','rankFilter','favoritesFilter'].forEach(id=>$(id).addEventListener('change',()=>{applyFilters();}));
     new MutationObserver(()=>{decorateRows();applyFilters();}).observe($('rankingsList'),{childList:true});
   } else if(teamPage) {
     const profile=document.createElement('article');profile.id='teamProfile';profile.className='team-profile';
@@ -70,11 +70,24 @@
     });
     $('filterCount').textContent=count?`${count} teams`:onlyFav?'No favorites found. Sign in and favorite a team on its page.':'No matching teams.';
   }
-  function renderConferences(){
+  function renderBubble(){
     if(!homePage)return;
-    const teams=salasRankings.filter(t=>t.rank<=Number($('rankFilter').value));const counts=new Map();
-    teams.forEach(t=>{if(t.conference)counts.set(t.conference,(counts.get(t.conference)||0)+1);});
-    $('conferenceChart').innerHTML=counts.size?[...counts].sort((a,b)=>b[1]-a[1]).map(([c,n])=>`<div class="conference-row"><div><span>${esc(c)}</span><strong>${n}</strong></div><div class="conference-track"><span style="width:${n/teams.length*100}%"></span></div></div>`).join(''):'<p class="empty-state">Conference data will appear when the season rankings feed includes it.</p>';
+    // Use the model's complete ordering, including its existing tie breakers.
+    // Homepage filters must not change which teams are closest to entering.
+    const rankedNames=new Set(salasRankings.map(t=>t.team));
+    const teams=isPreseason?[]:allTeams.filter(t=>
+      !rankedNames.has(t.team) && t.rank == null &&
+      Number.isInteger(t.modelRank) && t.modelRank>=65 && t.modelRank<=69 &&
+      t.salasScore != null && Number.isFinite(Number(t.salasScore))
+    ).sort((a,b)=>a.modelRank-b.modelRank);
+    const card=$('bubbleCard');
+    if(!teams.length){
+      card.innerHTML='<div class="eyebrow">HEAD TO HEAD</div><h2 id="bubbleTitle">Explore a Matchup</h2><p class="bubble-intro">Pick any two teams and open the matchup simulator.</p><a class="primary-link bubble-cta" href="simulator.html">Choose your teams →</a><p class="bubble-note">Simulations unlock when both teams have season stats. On the Bubble will appear here once season scores are available.</p>';
+      return;
+    }
+    card.innerHTML='<div class="eyebrow">THE NEXT TEAMS UP</div><h2 id="bubbleTitle">On the Bubble</h2><p class="bubble-intro">Just outside the Top 64. Updated daily as teams make their case.</p><div class="bubble-list">'+teams.map(t=>
+      `<a class="bubble-team" href="${pageLink(t)}" aria-label="${esc(t.team)}, NR, Salas Score ${formatScore(t.salasScore)}. View team page">${logo(t)}<span class="bubble-name"><strong>${esc(t.team)}</strong><small>NR · ${esc(t.record||'Record pending')}</small></span><span class="bubble-score"><strong>${formatScore(t.salasScore)}</strong><small>Salas</small></span></a>`
+    ).join('')+'</div><p class="bubble-note">Closest to entering, in model order. Tap a team to follow its season.</p>';
   }
   function onData(){
     if(teamPage){renderProfile();return;}
@@ -86,7 +99,7 @@
     const first=[...salasRankings].sort((a,b)=>a.rank-b.rank)[0];
     $('leaderSpotlight').innerHTML=first?`<a href="${pageLink(first)}" class="leader-link">${logo(first)}<span class="leader-rank">01</span><h2>${esc(first.team)}</h2><p>${esc(first.record)} · ${isPreseason?'Preseason leader':'Salas Score '+formatScore(first.salasScore)}</p><span class="info-link">View team profile →</span></a>`:'<p class="empty-state">Rankings are not available yet.</p>';
     if(isPreseason){document.querySelectorAll('.weekly-note').forEach(el=>{if(el.textContent==='—')el.textContent='Available after the season starts';});}
-    applyFilters();renderConferences();
+    applyFilters();renderBubble();
     const params=new URLSearchParams(location.search);
     for(const [param,id] of [['teamA','teamASelect'],['teamB','teamBSelect']]){if(salasRankings.some(t=>t.team===params.get(param)))$(id).value=params.get(param);}
   }
