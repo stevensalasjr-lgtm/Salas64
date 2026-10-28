@@ -14,7 +14,7 @@
     const recent=document.getElementById('recentGames');
     const name=new URLSearchParams(location.search).get('team');
     const current=window.salasPayload;
-    const team=current?.rankings.find(t=>t.team.toLowerCase()===String(name).toLowerCase());
+    const team=(current?.allTeams || current?.rankings || []).find(t=>t.team.toLowerCase()===String(name).toLowerCase());
     if(!box||!team)return;
     box.innerHTML='<p class="empty-state" role="status">Loading the published schedule…</p>';
     try{
@@ -28,11 +28,11 @@
       const updated=entry.updatedAt?new Date(entry.updatedAt).toLocaleString():null;
       const notice=`<p class="schedule-note">${entry.stale?'Refresh failed; showing the last saved schedule. ':''}ESPN · Refreshes approximately every 6 hours.${updated?' Updated '+escape(updated)+'.':''} Times shown in your local time zone. Scores are periodic snapshots, not live updates.</p>`;
       const render=g=>{
-        const opponent=current.rankings.find(t=>id(t)===g.opponentEspnId);
+        const opponent=(current.allTeams || current.rankings).find(t=>id(t)===g.opponentEspnId);
         const label=g.location==='away'?'at':g.location==='neutral'?'vs (neutral)':'vs';
         const title=opponent?`<a href="team.html?team=${encodeURIComponent(opponent.team)}">${escape(g.opponent)}</a>`:escape(g.opponent);
         const status=g.status==='final'?`${escape(g.result||'Final')} ${escape(g.teamScore??'—')}–${escape(g.opponentScore??'—')}`:g.status==='scheduled'?'Scheduled':escape(g.statusLabel);
-        const compare=opponent&&g.status==='scheduled'?`<a class="schedule-compare" href="index.html?teamA=${encodeURIComponent(team.team)}&teamB=${encodeURIComponent(opponent.team)}#simulator">Compare →</a>`:'';
+        const compare=opponent&&g.status==='scheduled'?`<a class="schedule-compare" href="simulator.html?teamA=${encodeURIComponent(team.team)}&teamB=${encodeURIComponent(opponent.team)}#simulator">Explore this matchup →</a>`:'';
         return `<div class="schedule-game"><div class="schedule-date">${escape(dateText(g))}</div><div class="schedule-opponent"><span>${label}</span> <strong>${title}</strong></div><div class="schedule-venue">${escape(g.venue)}</div><div class="schedule-bottom"><span class="schedule-status ${g.result==='W'?'schedule-win':g.result==='L'?'schedule-loss':''}">${status}</span>${compare}</div></div>`;
       };
       const upcoming=games.filter(g=>g.status!=='final'&&g.status!=='canceled');

@@ -80,8 +80,9 @@
     @media(max-width:400px){.rankings-header,.ranking-row{grid-template-columns:26px minmax(70px,1fr) 48px 45px 44px;gap:3px;font-size:.72rem}.rankings-header{font-size:.58rem}.card{padding:14px 12px}.page{padding-inline:10px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
   </style>
-  <link rel="stylesheet" href="redesign.css?v=3">
+  <link rel="stylesheet" href="redesign.css?v=5">
 <link rel="stylesheet" href="schedules.css?v=1">
+  <link rel="stylesheet" href="game-center.css?v=1">
 </head>
 <body data-page="team">
   <div class="page">
@@ -93,7 +94,7 @@
     </header>
 
     <nav class="section-nav" aria-label="Site sections">
-      <a href="index.html#rankings">Rankings</a><a href="index.html#predictions">Predictions</a><a href="index.html#simulator">Matchup Simulator</a><a href="#account" class="nav-account">My account</a>
+      <a href="index.html#rankings">Rankings</a><a href="predictions.html">Predictions</a><a href="simulator.html">Matchup Simulator</a><a href="#account" class="nav-account">My account</a>
     </nav>
     <main class="layout">
       <section class="card" id="account" aria-labelledby="accountTitle">
@@ -103,7 +104,7 @@
   </div>
 
   <p class="subtitle">
-    Sign in to save your favorite teams across devices.
+    Sign in to save your favorite teams and predictions across devices.
   </p>
 
   <form id="accountForm">
@@ -187,24 +188,7 @@
 
   <p id="accountFeedback" class="meta" role="status" aria-live="polite"></p>
 </section>
-      <section class="card challenge" id="predictions" aria-labelledby="predictionTitle">
-        <div class="weekly-kicker">The daily three • Season-long challenge</div>
-        <div class="card-header-row"><h2 id="predictionTitle">You vs. <span class="gold">Salas 64</span></h2><span id="challengeSeason" class="meta"></span></div>
-        <p class="subtitle">Three games. Your instincts. The Salas model. Pick your winners before tipoff.</p>
-        <div class="season-board">
-          <div><span class="weekly-kicker">YOUR RECORD</span><strong id="yourRecord">0–0</strong><span id="yourRate" class="meta">No graded picks yet</span></div>
-          <div class="board-middle"><span class="weekly-kicker">SEASON RACE</span><strong id="seasonRace">All square</strong><span class="meta">Compared on your picked games</span></div>
-          <div><span class="weekly-kicker">SALAS 64 RECORD</span><strong id="salasRecord">0–0</strong><span id="salasRate" class="meta">No graded picks yet</span></div>
-        </div>
-        <div class="card-header-row"><h3>Today's picks</h3><span class="meta" id="challengeDate"></span></div>
-        <p class="subtitle">Up to three games involving a Salas Top 25 team. Both teams must have model data. Each pick saves when you tap a team.</p>
-        <p id="predictionStatus" role="status" class="meta">Loading today's challenge…</p>
-        <div id="dailyGames" class="daily-games"></div>
-        <p id="pickFeedback" role="status" aria-live="polite" class="gold"></p>
-        <details class="prediction-history"><summary>Your season picks <span id="historyCount"></span></summary><div id="pickHistory"></div></details>
-        <p class="subtitle storage-note">Your picks stay in this browser on this device. Clearing browser data resets your record. This is a personal challenge, not a verified public leaderboard.</p>
-        <details class="model-notes"><summary>How the challenge works</summary><p>Top 25 matchups take priority, followed by games with the best combined Salas ranks. The slate is fixed when published. Salas picks use the simulator's adjusted efficiency formula plus a 3-point home-court adjustment, and are frozen before tipoff. Percentages are model estimates, not proven accuracy. Only final games you picked count in the comparison. Missed, canceled, and postponed games do not count. Results refresh periodically, so grading may lag the final whistle. The challenge day follows Pacific time; tipoff times appear in your local time.</p></details>
-      </section>
+      <section id="predictions" hidden></section>
       <section class="card" id="rankings" aria-label="Salas 64 Rankings">
         <div class="card-header-row">
           <h2>Salas 64 Rankings</h2>
@@ -219,7 +203,7 @@
 
         <div class="search-bar">
           <div class="search-wrapper">
-            <input id="teamSearchInput" type="text" placeholder="Search a Salas 64 team" autocomplete="off" />
+            <input id="teamSearchInput" type="text" placeholder="Search any Division I team" autocomplete="off" />
             <div id="searchResults" class="search-results"></div>
           </div>
         </div>
@@ -276,15 +260,6 @@
     <footer>Salas 64 &copy; <span id="year"></span>. Rankings refresh daily using the latest available stats.</footer>
   </div>
 
-  <dialog id="challengePopup" aria-labelledby="popupTitle">
-    <button class="close-btn" id="dismissChallenge" aria-label="Close prediction invitation">×</button>
-    <div class="weekly-kicker">The daily three</div>
-    <h2 id="popupTitle">Think you can<br>beat <span class="gold">Salas 64?</span></h2>
-    <p>Pick the winners of today's featured Top 25 games. Go head-to-head with the model all season.</p>
-    <div class="popup-steps"><span>3 games</span><span>You vs. model</span><span>All season</span></div>
-    <button id="startChallenge" class="gold-button">Make your predictions →</button>
-    <button id="browseChallenge" class="browse-button">Explore the rankings</button>
-  </dialog>
   <div id="teamModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTeamName">
     <div class="team-card">
       <button class="close-btn" id="closeModal" aria-label="Close team card">×</button>
@@ -311,13 +286,13 @@
     </div>
   </div>
 
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
-<script src="accounts.js?v=2"></script>
+<script src="accounts.js?v=5"></script>
 
-  <script src="redesign.js?v=4"></script>
-<script src="schedules.js?v=1"></script>
+  <script src="redesign.js?v=5"></script>
+<script src="schedules.js?v=5"></script>
 </body>
 </html>

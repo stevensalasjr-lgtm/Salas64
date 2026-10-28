@@ -492,7 +492,7 @@
       return response.json();
     })
     .then(data => {
-      teams = (data.rankings || []).filter(
+      teams = (data.allTeams || data.rankings || []).filter(
         team => typeof team.team === "string"
       );
 

@@ -1,5 +1,8 @@
 
     let salasRankings = [];
+    let allTeams = [];
+    const rankLabel = t => t.rank ? `#${t.rank}` : "NR";
+    const hasModel = t => t && [t.offensiveRating,t.defensiveRating,t.pace,t.nationalAverageEfficiency].every(v => Number.isFinite(Number(v)) && Number(v)>0);
     let weeklySummary = {};
     let isPreseason = false;
     let currentSortKey = "rank";
@@ -8,7 +11,7 @@
     const parseRecord = (rec)=>{const [w,l]=String(rec||"0-0").replace(/–/g,"-").split("-").map(x=>parseInt(x,10)||0);return{wins:w,losses:l}};
     const formatScore = (value)=>value == null || !Number.isFinite(Number(value)) ? "—" : Number(value).toFixed(1);
     const changeText = (t)=>{
-      if(isPreseason) return {text:"—",cls:"same"};
+      if(isPreseason || !t.rank) return {text:"—",cls:"same"};
       if(t.previousRank == null) return {text:"NEW",cls:"new"};
       if(t.change > 0) return {text:`↑${t.change}`,cls:"up"};
       if(t.change < 0) return {text:`↓${Math.abs(t.change)}`,cls:"down"};
@@ -22,6 +25,7 @@
         const payload = await res.json();
         window.salasPayload = payload;
         salasRankings = Array.isArray(payload.rankings) ? payload.rankings : [];
+        allTeams = payload.allTeams?.length ? payload.allTeams : salasRankings;
         weeklySummary = payload.weeklySummary || {};
         isPreseason = Boolean(payload.preseason);
         document.getElementById("asOfText").textContent = payload.updatedLabel || "Daily rankings";
@@ -95,7 +99,7 @@
       if(document.body.dataset.page !== "team"){location.href="team.html?team="+encodeURIComponent(t.team);return;}
       const c=changeText(t);
       setTeamLogo(t);
-      document.getElementById("modalRank").textContent=`#${t.rank} Salas 64`;
+      document.getElementById("modalRank").textContent=`${rankLabel(t)} · Salas 64`;
       document.getElementById("modalTeamName").textContent=t.team;
       document.getElementById("modalScore").textContent=formatScore(t.salasScore);
       document.getElementById("modalRecord").textContent=t.record||"—";
@@ -112,21 +116,33 @@
     function updateSearchResults(){
       const input=document.getElementById("teamSearchInput"),box=document.getElementById("searchResults"),q=input.value.trim().toLowerCase();box.innerHTML="";
       if(!q){box.style.display="none";return}
-      const matches=salasRankings.filter(t=>t.team.toLowerCase().includes(q)).slice(0,10);
+      const matches=allTeams.filter(t=>t.team.toLowerCase().includes(q)).slice(0,10);
       if(!matches.length){box.style.display="none";return}
-      matches.forEach(t=>{const item=document.createElement("div");item.className="search-result-item";item.innerHTML=`<span class="team">${escapeHtml(t.team)}</span><span class="rank">#${t.rank}${isPreseason?"":" • "+formatScore(t.salasScore)}</span>`;item.addEventListener("click",()=>{input.value=t.team;box.style.display="none";openTeamCard(t)});box.appendChild(item)});box.style.display="block";
+      matches.forEach(t=>{const item=document.createElement("button");item.type="button";item.className="search-result-item";item.innerHTML=`<span class="team">${escapeHtml(t.team)}</span><span class="rank">${rankLabel(t)}${isPreseason?"":" • "+formatScore(t.salasScore)}</span>`;item.addEventListener("click",()=>{input.value=t.team;box.style.display="none";openTeamCard(t)});box.appendChild(item)});box.style.display="block";
     }
 
     function escapeHtml(value){return String(value??"").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]))}
 
     function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
-    function getTeamByName(name){return salasRankings.find(t=>t.team===name)}
+    function getTeamByName(name){return allTeams.find(t=>t.team===name)}
     function buildTeamSelects(){
       const a=document.getElementById("teamASelect"),b=document.getElementById("teamBSelect"),btn=document.getElementById("runSimBtn");a.innerHTML="";b.innerHTML="";
-      salasRankings.slice().sort((x,y)=>x.rank-y.rank).forEach(t=>{const label=`#${t.rank} ${t.team} (${t.record})`;[a,b].forEach(sel=>{const o=document.createElement("option");o.value=t.team;o.textContent=label;sel.appendChild(o)})});
-      if(isPreseason){btn.disabled=true;btn.textContent="Available after season starts";return}
-      btn.textContent="Run simulations";
-      if(salasRankings.length>1){a.value=salasRankings[0].team;b.value=salasRankings[1].team;btn.disabled=false}else btn.disabled=true;
+      const requested=new URLSearchParams(location.search);
+      for(const key of ["teamA","teamB"]){const name=requested.get(key);if(name&&!getTeamByName(name))allTeams.push({team:name,rank:null,dataStatus:"not-in-directory"});}
+      allTeams.slice().sort((x,y)=>x.team.localeCompare(y.team)).forEach(t=>{const label=`${rankLabel(t)} ${t.team}${hasModel(t)?'':' · Stats pending'}`;[a,b].forEach(sel=>{const o=document.createElement("option");o.value=t.team;o.textContent=label;sel.appendChild(o)})});
+      const params=new URLSearchParams(location.search);
+      a.value=getTeamByName(params.get('teamA'))?.team || allTeams[0]?.team || '';
+      b.value=getTeamByName(params.get('teamB'))?.team || allTeams[1]?.team || '';
+      updateSimulatorAvailability();
+    }
+    function updateSimulatorAvailability(){
+      const a=getTeamByName(document.getElementById('teamASelect').value),b=getTeamByName(document.getElementById('teamBSelect').value);
+      const ready=hasModel(a)&&hasModel(b)&&a!==b;
+      const btn=document.getElementById('runSimBtn');btn.disabled=!ready;btn.textContent='Run simulations';
+      let note=document.getElementById('simAvailability');
+      if(!note){note=document.createElement('p');note.id='simAvailability';note.className='meta';note.setAttribute('role','status');document.getElementById('simulator').append(note);}
+      note.textContent=a===b?'Choose two different teams.':ready?'Both teams have season model data.':'These teams are selected. Simulation unlocks when both have season efficiency and pace data.';
+      document.getElementById('simResult').style.display='none';
     }
     function simulatorProjection(A,B){
       const natAvg=Number(A.nationalAverageEfficiency||B.nationalAverageEfficiency||110);
@@ -138,7 +154,7 @@
       return{pace,expA,expB,pA,margin};
     }
     function runSimulations(){
-      const A=getTeamByName(document.getElementById("teamASelect").value),B=getTeamByName(document.getElementById("teamBSelect").value);if(!A||!B||A===B)return;
+      const A=getTeamByName(document.getElementById("teamASelect").value),B=getTeamByName(document.getElementById("teamBSelect").value);if(!hasModel(A)||!hasModel(B)||A===B)return;
       const sims=clamp(parseInt(document.getElementById("simsInput").value,10)||100,1,5000),base=simulatorProjection(A,B);let sumA=0,sumB=0,winsA=0,lastA=0,lastB=0;
       for(let i=0;i<sims;i++){let a=base.expA+randn()*8.4,b=base.expB+randn()*8.4;lastA=Math.round(clamp(a,45,120));lastB=Math.round(clamp(b,45,120));if(lastA===lastB){Math.random()<base.pA?lastA++:lastB++}sumA+=lastA;sumB+=lastB;if(lastA>lastB)winsA++}
       const avgA=sumA/sims,avgB=sumB/sims,pctA=Math.round(winsA/sims*100),margin=avgA-avgB;
@@ -157,6 +173,7 @@
       document.getElementById("teamModal").addEventListener("click",e=>{if(e.target.id==="teamModal")closeTeamCard()});
       document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTeamCard()});
       document.addEventListener("click",e=>{const w=document.querySelector(".search-wrapper"),box=document.getElementById("searchResults");if(w&&!w.contains(e.target))box.style.display="none"});
+      ["teamASelect","teamBSelect"].forEach(id=>document.getElementById(id).addEventListener("change",updateSimulatorAvailability));
       loadData();
     }
         document.addEventListener("DOMContentLoaded",init);
