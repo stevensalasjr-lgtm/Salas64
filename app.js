@@ -31,6 +31,10 @@
         document.getElementById("asOfText").textContent = payload.updatedLabel || "Daily rankings";
         if(payload.message) showStatus(payload.message);
         else if(!salasRankings.length) showStatus("The 2026–27 Salas 64 will populate automatically when the season model begins.");
+        if(payload.preseason && payload.preseasonConsensus){
+          const link=document.createElement('a');link.href='preseason-sources.html';link.className='info-link';link.textContent='View the averages and sources →';
+          const banner=document.getElementById('statusBanner');banner.append(document.createElement('br'),link);banner.style.display='block';
+        }
       }catch(err){
         showStatus("Rankings could not be loaded. Please refresh the page to try again.");
         document.getElementById("asOfText").textContent = "Data unavailable";
