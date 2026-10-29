@@ -604,13 +604,15 @@ def main() -> int:
 
         # Preserve the published Week 0 preseason list until the live model has
         # enough 2026-27 data to produce a real Top 64.
-        if existing.get("preseason") and existing.get("rankings"):
+        if existing.get("preseason") and existing.get("rankings") and existing.get("season") == season:
             payload = existing
             payload["season"] = season
             payload["dataCheckedAt"] = now.isoformat().replace("+00:00", "Z")
-            payload["updatedLabel"] = "2026-27 Preseason Salas 64 — Week 0"
-            payload["message"] = "Preseason rankings are active. Live Salas Scores and daily movement will begin once enough 2026-27 games have been played."
-            print(f"Preseason mode: preserving published Week 0 rankings ({exc})")
+            # Keep the verified consensus label, source audit, and snapshot date.
+            if not payload.get("preseasonConsensus"):
+                payload["updatedLabel"] = "2026-27 Preseason Salas 64 — Week 0"
+                payload["message"] = "Preseason rankings are active. Live Salas Scores and daily movement will begin once enough 2026-27 games have been played."
+            print(f"Preseason mode: preserving published preseason baseline ({exc})")
         else:
             payload = {
                 "season": season,
