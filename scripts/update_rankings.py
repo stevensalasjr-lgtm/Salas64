@@ -627,6 +627,15 @@ def main() -> int:
             }
             print(f"Preseason mode: {exc}")
 
+    baseline_path = data_dir / "ranking-baseline.json"
+    if baseline_path.exists():
+        baseline = json.loads(baseline_path.read_text())
+        if baseline.get("season") == season:
+            payload["rankingBaseline"] = baseline
+    if payload.get("preseason") and payload.get("rankings"):
+        checked = datetime.fromisoformat(payload["updatedAt"].replace("Z", "+00:00"))
+        payload["updatedLabel"] = "Updated " + checked.astimezone(ZoneInfo("America/Los_Angeles")).strftime("%b %d, %Y")
+        payload["message"] = ""
     payload = enrich(payload, refresh(data_dir))
     out = data_dir / "current.json"
     out.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
