@@ -97,7 +97,7 @@
     select.innerHTML='<option value="">All conferences</option>'+[...new Set(salasRankings.map(t=>t.conference).filter(Boolean))].sort().map(c=>`<option>${esc(c)}</option>`).join('');
     select.value=old;select.disabled=select.options.length===1;
     const first=[...salasRankings].sort((a,b)=>a.rank-b.rank)[0];
-    $('leaderSpotlight').innerHTML=first?`<a href="${pageLink(first)}" class="leader-link">${logo(first)}<span class="leader-rank">01</span><h2>${esc(first.team)}</h2><p>${esc(first.record)} · ${isPreseason?'Preseason leader':'Salas Score '+formatScore(first.salasScore)}</p><span class="info-link">View team profile →</span></a>`:'<p class="empty-state">Rankings are not available yet.</p>';
+    $('leaderSpotlight').innerHTML=first?`<a href="${pageLink(first)}" class="leader-link">${logo(first)}<span class="leader-rank">01</span><h2>${esc(first.team)}</h2><p>${esc(first.record)} · ${isPreseason?'Current leader':'Salas Score '+formatScore(first.salasScore)}</p><span class="info-link">View team profile →</span></a>`:'<p class="empty-state">Rankings are not available yet.</p>';
     if(isPreseason){document.querySelectorAll('.weekly-note').forEach(el=>{if(el.textContent==='—')el.textContent='Available after the season starts';});}
     applyFilters();renderBubble();
     const params=new URLSearchParams(location.search);
@@ -121,17 +121,26 @@
     renderHistory(t);
   }
   async function renderHistory(t){
-    let snapshots=[];let failed=false;
-    try{const r=await fetch('data/history/index.json');if(!r.ok)throw Error('history unavailable');snapshots=await r.json();if(!Array.isArray(snapshots))throw Error('invalid history');}catch{failed=true;}
     const now=window.salasPayload;
-    snapshots=snapshots.filter(s=>s.season===now.season);
-    const currentDate=String(now.updatedAt||'').slice(0,10);
-    snapshots=snapshots.filter(s=>s.date!==currentDate);snapshots.push({date:currentDate,season:now.season,rankings:now.rankings});snapshots.sort((a,b)=>a.date.localeCompare(b.date));
-    const points=snapshots.map(s=>({date:s.date,rank:s.rankings.find(x=>x.team===t.team)?.rank??null}));
-    if(points.length<2){$('rankingHistory').innerHTML=`<div class="history-current"><strong>${rankLabel(t)}</strong><span>Current ranking</span></div><p class="empty-state">${failed?'Historical data could not be loaded.':'Ranking history builds with each daily update.'} Your current rank is shown above.</p>`;return;}
+    if(now.preseason){
+      $('rankingHistory').innerHTML=`<div class="history-current"><strong>${rankLabel(t)}</strong><span>Starting ranking</span></div><p class="empty-state">Progress will appear after live season rankings begin, using this ranking as the starting point.</p>`;
+      return;
+    }
+    let snapshots=[];let failed=false;
+    try{const r=await fetch('data/history/index.json',{cache:'no-store'});if(!r.ok)throw Error('history unavailable');snapshots=await r.json();if(!Array.isArray(snapshots))throw Error('invalid history');}catch{failed=true;}
+    const baseline=now.rankingBaseline;
+    const day=value=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Los_Angeles',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value));
+    const currentDate=day(now.updatedAt);
+    // Only use history explicitly tied to the saved starting rankings.
+    snapshots=snapshots.filter(s=>s.season===now.season && s.phase==='live' && baseline && s.baselineId===baseline.id && s.date>=baseline.date && s.date!==currentDate);
+    snapshots.push({date:currentDate,season:now.season,rankings:now.rankings,phase:'live'});
+    snapshots.sort((a,b)=>a.date.localeCompare(b.date));
+    if(baseline?.season===now.season)snapshots.unshift({...baseline,phase:'baseline'});
+    const points=snapshots.map(s=>({date:s.date,baseline:s.phase==='baseline',rank:s.rankings.find(x=>x.team===t.team)?.rank??null}));
+    if(points.length<2){$('rankingHistory').innerHTML=`<div class="history-current"><strong>${rankLabel(t)}</strong><span>Current ranking</span></div><p class="empty-state">${failed?'Historical data could not be loaded.':'Ranking history builds with each live season update.'}</p>`;return;}
     const x=i=>45+i*(600/(points.length-1)),y=r=>24+(r-1)*2.8;
     let segments=[],segment=[];points.forEach((p,i)=>{if(p.rank!==null)segment.push(`${x(i)},${y(p.rank)}`);else if(segment.length){segments.push(segment);segment=[];}});if(segment.length)segments.push(segment);
-    $('rankingHistory').innerHTML=`<svg viewBox="0 0 690 245" role="img" aria-label="Daily ranking history for ${esc(t.team)}. Rank one is at the top.">${[1,16,32,48,64].map(r=>`<line x1="45" y1="${y(r)}" x2="645" y2="${y(r)}" stroke="#25354b"/><text x="8" y="${y(r)+4}" fill="#94a3b8" font-size="12">${r}</text>`).join('')}${segments.map(s=>`<polyline points="${s.join(' ')}" fill="none" stroke="#53a5ff" stroke-width="3"/>`).join('')}${points.map((p,i)=>p.rank!==null?`<circle cx="${x(i)}" cy="${y(p.rank)}" r="4" fill="#8ac7ff"><title>${esc(p.date)}: #${p.rank}</title></circle>`:'').join('')}<text x="45" y="232" fill="#94a3b8" font-size="12">${esc(points[0].date)}</text><text x="645" y="232" text-anchor="end" fill="#94a3b8" font-size="12">${esc(points.at(-1).date)}</text></svg><details><summary>View ranking history as a list</summary>${points.map(p=>`<p>${esc(p.date)}: ${p.rank===null?'Outside the Top 64':'#'+p.rank}</p>`).join('')}</details>`;
+    $('rankingHistory').innerHTML=`<svg viewBox="0 0 690 245" role="img" aria-label="Daily ranking history for ${esc(t.team)}. Rank one is at the top.">${[1,16,32,48,64].map(r=>`<line x1="45" y1="${y(r)}" x2="645" y2="${y(r)}" stroke="#25354b"/><text x="8" y="${y(r)+4}" fill="#94a3b8" font-size="12">${r}</text>`).join('')}${segments.map(s=>`<polyline points="${s.join(' ')}" fill="none" stroke="#53a5ff" stroke-width="3"/>`).join('')}${points.map((p,i)=>p.rank!==null?`<circle cx="${x(i)}" cy="${y(p.rank)}" r="4" fill="#8ac7ff"><title>${p.baseline?'Starting ranking':esc(p.date)}: #${p.rank}</title></circle>`:'').join('')}<text x="45" y="232" fill="#94a3b8" font-size="12">${points[0].baseline?'Start':esc(points[0].date)}</text><text x="645" y="232" text-anchor="end" fill="#94a3b8" font-size="12">${esc(points.at(-1).date)}</text></svg><details><summary>View ranking history as a list</summary>${points.map(p=>`<p>${p.baseline?'Starting ranking':esc(p.date)}: ${p.rank===null?'Outside the Top 64':'#'+p.rank}</p>`).join('')}</details>${failed?'<p class="empty-state">Some past updates could not load. Showing the starting and current rankings.</p>':''}`;
   }
   window.addEventListener('salas64:data',onData);
   window.addEventListener('salas64:favorites',applyFilters);
