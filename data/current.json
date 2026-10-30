@@ -2,9 +2,9 @@
   "season": 2027,
   "preseason": true,
   "updatedAt": "2026-10-29T00:08:40.047546+00:00",
-  "updatedLabel": "2026–27 Preseason · 6-source average · Oct 28, 2026",
+  "updatedLabel": "Updated Oct 28, 2026",
   "modelVersion": "Preseason consensus 2026–27 (6 sources)",
-  "message": "Preseason baseline: an equal-weight average of 6 published 2026–27 ranking lists. Live Salas Scores and daily movement begin when enough current-season data is available.",
+  "message": "",
   "rankings": [
     {
       "rank": 1,
@@ -1947,7 +1947,7 @@
       "note": "Available after the season starts."
     }
   },
-  "dataCheckedAt": "2026-10-29T21:49:04.417760Z",
+  "dataCheckedAt": "2026-10-29T00:08:40.047546+00:00",
   "allTeams": [
     {
       "rank": 1,
@@ -2118,6 +2118,7 @@
       "espnId": "66",
       "aliases": [
         "ISU",
+        "Iowa St.",
         "Iowa State",
         "Iowa State Cyclones"
       ],
@@ -2208,6 +2209,7 @@
       "espnId": "41",
       "aliases": [
         "CONN",
+        "Connecticut",
         "UConn",
         "UConn Huskies"
       ],
@@ -2239,6 +2241,7 @@
       "aliases": [
         "MSU",
         "Michigan St",
+        "Michigan St.",
         "Michigan State",
         "Michigan State Spartans"
       ],
@@ -2541,6 +2544,8 @@
       "aliases": [
         "MIA",
         "Miami",
+        "Miami (Fla.)",
+        "Miami FL",
         "Miami Hurricanes"
       ],
       "conference": "ACC",
@@ -2659,6 +2664,7 @@
       "espnId": "194",
       "aliases": [
         "OSU",
+        "Ohio St.",
         "Ohio State",
         "Ohio State Buckeyes"
       ],
@@ -3226,6 +3232,7 @@
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/152.png",
       "espnId": "152",
       "aliases": [
+        "N.C. State",
         "NC State",
         "NC State Wolfpack",
         "NCSU"
@@ -3421,6 +3428,7 @@
       "team": "Utah State",
       "aliases": [
         "USU",
+        "Utah St.",
         "Utah State",
         "Utah State Aggies"
       ],
@@ -3538,6 +3546,7 @@
       "team": "Ole Miss",
       "aliases": [
         "MISS",
+        "Mississippi",
         "Ole Miss",
         "Ole Miss Rebels"
       ],
@@ -3672,6 +3681,7 @@
       "aliases": [
         "OKST",
         "Oklahoma St",
+        "Oklahoma St.",
         "Oklahoma State",
         "Oklahoma State Cowboys"
       ],
@@ -3776,6 +3786,7 @@
       "aliases": [
         "ASU",
         "Arizona St",
+        "Arizona St.",
         "Arizona State",
         "Arizona State Sun Devils"
       ],
@@ -3848,6 +3859,7 @@
       "aliases": [
         "SDSU",
         "San Diego St",
+        "San Diego St.",
         "San Diego State",
         "San Diego State Aztecs"
       ],
@@ -3909,6 +3921,7 @@
       "aliases": [
         "FSU",
         "Florida St",
+        "Florida St.",
         "Florida State",
         "Florida State Seminoles"
       ],
@@ -3940,6 +3953,7 @@
       "aliases": [
         "MSST",
         "Mississippi St",
+        "Mississippi St.",
         "Mississippi State",
         "Mississippi State Bulldogs"
       ],
@@ -4074,6 +4088,7 @@
       "aliases": [
         "WICH",
         "Wichita St",
+        "Wichita St.",
         "Wichita State",
         "Wichita State Shockers"
       ],
@@ -4250,6 +4265,7 @@
       "aliases": [
         "CSU",
         "Colorado St",
+        "Colorado St.",
         "Colorado State",
         "Colorado State Rams"
       ],
@@ -4280,6 +4296,7 @@
       "aliases": [
         "BOIS",
         "Boise St",
+        "Boise St.",
         "Boise State",
         "Boise State Broncos"
       ],
@@ -4630,7 +4647,9 @@
       "aliases": [
         "MCN",
         "McNeese",
-        "McNeese Cowboys"
+        "McNeese Cowboys",
+        "McNeese St.",
+        "McNeese State"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2377.png",
       "rank": null,
@@ -4659,6 +4678,7 @@
       "aliases": [
         "KSU",
         "Kansas St",
+        "Kansas St.",
         "Kansas State",
         "Kansas State Wildcats"
       ],
@@ -4718,6 +4738,7 @@
       "aliases": [
         "ORST",
         "Oregon St",
+        "Oregon St.",
         "Oregon State",
         "Oregon State Beavers"
       ],
@@ -4833,6 +4854,8 @@
       "espnId": "82",
       "team": "UIC",
       "aliases": [
+        "Illinois Chicago",
+        "Illinois-Chicago",
         "UIC",
         "UIC Flames"
       ],
@@ -4891,6 +4914,7 @@
       "team": "George Washington",
       "aliases": [
         "G Washington",
+        "G. Washington",
         "GW",
         "George Washington",
         "George Washington Revolutionaries"
@@ -4979,6 +5003,7 @@
       "team": "Penn State",
       "aliases": [
         "PSU",
+        "Penn St.",
         "Penn State",
         "Penn State Nittany Lions"
       ],
@@ -5009,6 +5034,7 @@
       "aliases": [
         "MUR",
         "Murray St",
+        "Murray St.",
         "Murray State",
         "Murray State Racers"
       ],
@@ -5069,6 +5095,7 @@
       "aliases": [
         "ILST",
         "Illinois St",
+        "Illinois St.",
         "Illinois State",
         "Illinois State Redbirds"
       ],
@@ -5419,6 +5446,7 @@
       "team": "Seattle U",
       "aliases": [
         "SEA",
+        "Seattle",
         "Seattle U",
         "Seattle U Redhawks"
       ],
@@ -5505,6 +5533,7 @@
       "espnId": "98",
       "team": "Western Kentucky",
       "aliases": [
+        "W. Kentucky",
         "WKU",
         "Western KY",
         "Western Kentucky",
@@ -5536,6 +5565,7 @@
       "team": "Saint Joseph's",
       "aliases": [
         "JOES",
+        "Saint Joe's",
         "Saint Joseph's",
         "Saint Joseph's Hawks"
       ],
@@ -5595,6 +5625,7 @@
       "aliases": [
         "MTST",
         "Montana St",
+        "Montana St.",
         "Montana State",
         "Montana State Bobcats"
       ],
@@ -5654,6 +5685,7 @@
       "aliases": [
         "TXST",
         "Texas St",
+        "Texas St.",
         "Texas State",
         "Texas State Bobcats"
       ],
@@ -5799,7 +5831,8 @@
       "aliases": [
         "COFC",
         "Charleston",
-        "Charleston Cougars"
+        "Charleston Cougars",
+        "College of Charleston"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/232.png",
       "rank": null,
@@ -5858,7 +5891,8 @@
       "aliases": [
         "HAW",
         "Hawai'i",
-        "Hawai'i Rainbow Warriors"
+        "Hawai'i Rainbow Warriors",
+        "Hawaii"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/62.png",
       "rank": null,
@@ -5944,6 +5978,7 @@
       "team": "Kent State",
       "aliases": [
         "KENT",
+        "Kent St.",
         "Kent State",
         "Kent State Golden Flashes"
       ],
@@ -6063,7 +6098,9 @@
         "STMN",
         "St Thomas",
         "St. Thomas",
-        "St. Thomas Tommies"
+        "St. Thomas (MN)",
+        "St. Thomas Tommies",
+        "St. Thomas-Minnesota"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2900.png",
       "rank": null,
@@ -6179,7 +6216,8 @@
       "aliases": [
         "LUC",
         "Loyola Chicago",
-        "Loyola Chicago Ramblers"
+        "Loyola Chicago Ramblers",
+        "Loyola-Chicago"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2350.png",
       "rank": null,
@@ -6237,6 +6275,7 @@
       "aliases": [
         "KENN",
         "Kennesaw St",
+        "Kennesaw St.",
         "Kennesaw State",
         "Kennesaw State Owls"
       ],
@@ -6267,6 +6306,7 @@
       "aliases": [
         "NMSU",
         "New Mexico St",
+        "New Mexico St.",
         "New Mexico State",
         "New Mexico State Aggies"
       ],
@@ -6297,6 +6337,7 @@
       "aliases": [
         "WSU",
         "Washington St",
+        "Washington St.",
         "Washington State",
         "Washington State Cougars"
       ],
@@ -6443,6 +6484,7 @@
       "aliases": [
         "WRST",
         "Wright St",
+        "Wright St.",
         "Wright State",
         "Wright State Raiders"
       ],
@@ -6473,6 +6515,7 @@
       "aliases": [
         "N Dakota St",
         "NDSU",
+        "North Dakota St.",
         "North Dakota State",
         "North Dakota State Bison"
       ],
@@ -6531,6 +6574,7 @@
       "team": "St. Bonaventure",
       "aliases": [
         "SBU",
+        "Saint Bonaventure",
         "St Bonaventure",
         "St. Bonaventure",
         "St. Bonaventure Bonnies"
@@ -6620,7 +6664,9 @@
       "aliases": [
         "SHSU",
         "Sam Houston",
-        "Sam Houston Bearkats"
+        "Sam Houston Bearkats",
+        "Sam Houston St.",
+        "Sam Houston State"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2534.png",
       "rank": null,
@@ -6706,6 +6752,7 @@
       "team": "Eastern Washington",
       "aliases": [
         "E Washington",
+        "E. Washington",
         "EWU",
         "Eastern Washington",
         "Eastern Washington Eagles"
@@ -6765,6 +6812,7 @@
       "team": "East Tennessee State",
       "aliases": [
         "ETSU",
+        "East Tennessee St.",
         "East Tennessee State",
         "East Tennessee State Buccaneers"
       ],
@@ -6853,6 +6901,7 @@
       "aliases": [
         "ARST",
         "Arkansas St",
+        "Arkansas St.",
         "Arkansas State",
         "Arkansas State Red Wolves"
       ],
@@ -6942,6 +6991,7 @@
       "aliases": [
         "C Arkansas",
         "CARK",
+        "Cent. Arkansas",
         "Central Arkansas",
         "Central Arkansas Bears"
       ],
@@ -6972,6 +7022,7 @@
       "aliases": [
         "FRES",
         "Fresno St",
+        "Fresno St.",
         "Fresno State",
         "Fresno State Bulldogs"
       ],
@@ -7030,6 +7081,7 @@
       "team": "Western Michigan",
       "aliases": [
         "W Michigan",
+        "W. Michigan",
         "WMU",
         "Western Michigan",
         "Western Michigan Broncos"
@@ -7061,6 +7113,7 @@
       "aliases": [
         "TNST",
         "Tennessee St",
+        "Tennessee St.",
         "Tennessee State",
         "Tennessee State Tigers"
       ],
@@ -7090,6 +7143,8 @@
       "team": "San José State",
       "aliases": [
         "SJSU",
+        "San Jose St.",
+        "San Jose State",
         "San José St",
         "San José State",
         "San José State Spartans"
@@ -7235,6 +7290,7 @@
       "team": "Northern Colorado",
       "aliases": [
         "N Colorado",
+        "N. Colorado",
         "Northern Colorado",
         "Northern Colorado Bears",
         "UNCO"
@@ -7556,6 +7612,7 @@
       "team": "Southern Illinois",
       "aliases": [
         "S Illinois",
+        "S. Illinois",
         "SIU",
         "Southern Illinois",
         "Southern Illinois Salukis"
@@ -7587,6 +7644,7 @@
       "aliases": [
         "CA Baptist",
         "CBU",
+        "Cal Baptist",
         "California Baptist",
         "California Baptist Lancers"
       ],
@@ -7617,6 +7675,7 @@
       "aliases": [
         "SAC",
         "Sacramento St",
+        "Sacramento St.",
         "Sacramento State",
         "Sacramento State Hornets"
       ],
@@ -7676,6 +7735,7 @@
       "aliases": [
         "CSU Northridge",
         "CSUN",
+        "Cal St. Northridge",
         "Cal State Northridge",
         "Cal State Northridge Matadors"
       ],
@@ -7705,6 +7765,7 @@
       "team": "Western Carolina",
       "aliases": [
         "W Carolina",
+        "W. Carolina",
         "WCU",
         "Western Carolina",
         "Western Carolina Catamounts"
@@ -7735,6 +7796,7 @@
       "team": "Eastern Michigan",
       "aliases": [
         "E Michigan",
+        "E. Michigan",
         "EMU",
         "Eastern Michigan",
         "Eastern Michigan Eagles"
@@ -7795,7 +7857,9 @@
       "team": "Tarleton State",
       "aliases": [
         "TAR",
+        "Tarleton",
         "Tarleton St",
+        "Tarleton St.",
         "Tarleton State",
         "Tarleton State Texans"
       ],
@@ -7825,6 +7889,7 @@
       "team": "Jacksonville State",
       "aliases": [
         "JXST",
+        "Jacksonville St.",
         "Jacksonville State",
         "Jacksonville State Gamecocks",
         "Jax State"
@@ -7884,6 +7949,7 @@
       "team": "Ball State",
       "aliases": [
         "BALL",
+        "Ball St.",
         "Ball State",
         "Ball State Cardinals"
       ],
@@ -8088,6 +8154,7 @@
       "aliases": [
         "PRST",
         "Portland St",
+        "Portland St.",
         "Portland State",
         "Portland State Vikings"
       ],
@@ -8118,6 +8185,7 @@
       "aliases": [
         "BCU",
         "Bethune",
+        "Bethune Cookman",
         "Bethune-Cookman",
         "Bethune-Cookman Wildcats"
       ],
@@ -8148,6 +8216,7 @@
       "aliases": [
         "INST",
         "Indiana St",
+        "Indiana St.",
         "Indiana State",
         "Indiana State Sycamores"
       ],
@@ -8236,6 +8305,7 @@
       "aliases": [
         "S Dakota St",
         "SDST",
+        "South Dakota St.",
         "South Dakota State",
         "South Dakota State Jackrabbits"
       ],
@@ -8295,6 +8365,7 @@
       "aliases": [
         "GAST",
         "Georgia St",
+        "Georgia St.",
         "Georgia State",
         "Georgia State Panthers"
       ],
@@ -8324,6 +8395,7 @@
       "team": "Texas A&M-Corpus Christi",
       "aliases": [
         "AMCC",
+        "Texas A&M Corpus Chris",
         "Texas A&M-CC",
         "Texas A&M-Corpus Christi",
         "Texas A&M-Corpus Christi Islanders"
@@ -8354,6 +8426,7 @@
       "team": "Northern Kentucky",
       "aliases": [
         "N Kentucky",
+        "N. Kentucky",
         "NKU",
         "Northern Kentucky",
         "Northern Kentucky Norse"
@@ -8443,6 +8516,7 @@
       "aliases": [
         "Southern Miss",
         "Southern Miss Golden Eagles",
+        "Southern Mississippi",
         "USM"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2572.png",
@@ -8586,6 +8660,7 @@
       "espnId": "2031",
       "team": "Little Rock",
       "aliases": [
+        "Arkansas-Little Rock",
         "LR",
         "Little Rock",
         "Little Rock Trojans"
@@ -8905,7 +8980,9 @@
       "espnId": "2239",
       "team": "Cal State Fullerton",
       "aliases": [
+        "CSU Fullerton",
         "CSUF",
+        "Cal St. Fullerton",
         "Cal State Fullerton",
         "Cal State Fullerton Titans",
         "Fullerton"
@@ -8965,9 +9042,11 @@
       "team": "UT Rio Grande Valley",
       "aliases": [
         "RGV",
+        "Texas-Rio Grande Valley",
         "UT Rio Grande",
         "UT Rio Grande Valley",
-        "UT Rio Grande Valley Vaqueros"
+        "UT Rio Grande Valley Vaqueros",
+        "UTRGV"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/292.png",
       "rank": null,
@@ -8996,7 +9075,9 @@
       "aliases": [
         "APP",
         "App State",
-        "App State Mountaineers"
+        "App State Mountaineers",
+        "Appalachian St.",
+        "Appalachian State"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2026.png",
       "rank": null,
@@ -9053,6 +9134,7 @@
       "team": "Tennessee Tech",
       "aliases": [
         "TNTC",
+        "Tenn. Tech",
         "Tennessee Tech",
         "Tennessee Tech Golden Eagles"
       ],
@@ -9083,6 +9165,7 @@
       "aliases": [
         "Louisiana",
         "Louisiana Ragin' Cajuns",
+        "Louisiana-Lafayette",
         "UL"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/309.png",
@@ -9200,6 +9283,7 @@
       "aliases": [
         "MOST",
         "Missouri St",
+        "Missouri St.",
         "Missouri State",
         "Missouri State Bears"
       ],
@@ -9315,6 +9399,7 @@
       "team": "Coastal Carolina",
       "aliases": [
         "CCU",
+        "Coast. Carolina",
         "Coastal",
         "Coastal Carolina",
         "Coastal Carolina Chanticleers"
@@ -9373,6 +9458,7 @@
       "espnId": "2348",
       "team": "Louisiana Tech",
       "aliases": [
+        "LA Tech",
         "LT",
         "Louisiana Tech",
         "Louisiana Tech Bulldogs"
@@ -9403,6 +9489,7 @@
       "team": "Abilene Christian",
       "aliases": [
         "ACU",
+        "Abil. Christian",
         "Abilene Christian",
         "Abilene Christian Wildcats",
         "Abilene Chrstn"
@@ -9577,6 +9664,7 @@
       "espnId": "2870",
       "team": "Purdue Fort Wayne",
       "aliases": [
+        "Fort Wayne",
         "PFW",
         "Purdue FW",
         "Purdue Fort Wayne",
@@ -9783,6 +9871,7 @@
       "aliases": [
         "LBSU",
         "Long Beach St",
+        "Long Beach St.",
         "Long Beach State",
         "Long Beach State Beach"
       ],
@@ -9812,7 +9901,10 @@
       "team": "Southeast Missouri State",
       "aliases": [
         "SE Missouri",
+        "SE Missouri St.",
         "SEMO",
+        "Southeast Missouri",
+        "Southeast Missouri St.",
         "Southeast Missouri State",
         "Southeast Missouri State Redhawks"
       ],
@@ -9844,7 +9936,8 @@
         "LSU N Orleans",
         "LSU New Orleans",
         "LSU New Orleans Privateers",
-        "NOLA"
+        "NOLA",
+        "New Orleans"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2443.png",
       "rank": null,
@@ -9931,7 +10024,8 @@
       "aliases": [
         "SE Louisiana",
         "SE Louisiana Lions",
-        "SELA"
+        "SELA",
+        "Southeastern Louisiana"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2545.png",
       "rank": null,
@@ -9989,6 +10083,7 @@
       "aliases": [
         "C Michigan",
         "CMU",
+        "Cent. Michigan",
         "Central Michigan",
         "Central Michigan Chippewas"
       ],
@@ -10104,6 +10199,7 @@
       "team": "Northern Illinois",
       "aliases": [
         "N Illinois",
+        "N. Illinois",
         "NIU",
         "Northern Illinois",
         "Northern Illinois Huskies"
@@ -10135,6 +10231,7 @@
       "aliases": [
         "YSU",
         "Youngstown St",
+        "Youngstown St.",
         "Youngstown State",
         "Youngstown State Penguins"
       ],
@@ -10164,6 +10261,7 @@
       "team": "Detroit Mercy",
       "aliases": [
         "DETM",
+        "Detroit",
         "Detroit Mercy",
         "Detroit Mercy Titans"
       ],
@@ -10194,6 +10292,7 @@
       "aliases": [
         "WEB",
         "Weber St",
+        "Weber St.",
         "Weber State",
         "Weber State Wildcats"
       ],
@@ -10222,6 +10321,7 @@
       "espnId": "2437",
       "team": "Omaha",
       "aliases": [
+        "Nebraska Omaha",
         "OMA",
         "Omaha",
         "Omaha Mavericks"
@@ -10368,6 +10468,8 @@
       "espnId": "2630",
       "team": "UT Martin",
       "aliases": [
+        "Tennessee Martin",
+        "Tennessee-Martin",
         "UT Martin",
         "UT Martin Skyhawks",
         "UTM"
@@ -10399,7 +10501,8 @@
       "aliases": [
         "SPU",
         "Saint Peter's",
-        "Saint Peter's Peacocks"
+        "Saint Peter's Peacocks",
+        "St. Peter's"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2612.png",
       "rank": null,
@@ -10427,6 +10530,7 @@
       "team": "Eastern Kentucky",
       "aliases": [
         "E Kentucky",
+        "E. Kentucky",
         "EKU",
         "Eastern Kentucky",
         "Eastern Kentucky Colonels"
@@ -10458,6 +10562,7 @@
       "aliases": [
         "CLE",
         "Cleveland St",
+        "Cleveland St.",
         "Cleveland State",
         "Cleveland State Vikings"
       ],
@@ -10488,7 +10593,9 @@
       "aliases": [
         "NICH",
         "Nicholls",
-        "Nicholls Colonels"
+        "Nicholls Colonels",
+        "Nicholls St.",
+        "Nicholls State"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2447.png",
       "rank": null,
@@ -10575,7 +10682,9 @@
       "team": "Cal State Bakersfield",
       "aliases": [
         "Bakersfield",
+        "CSU Bakersfield",
         "CSUB",
+        "Cal St. Bakersfield",
         "Cal State Bakersfield",
         "Cal State Bakersfield Roadrunners"
       ],
@@ -10607,7 +10716,8 @@
         "MSM",
         "Mount St Marys",
         "Mount St. Mary's",
-        "Mount St. Mary's Mountaineers"
+        "Mount St. Mary's Mountaineers",
+        "Mt. St. Mary's"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/116.png",
       "rank": null,
@@ -10723,6 +10833,7 @@
       "aliases": [
         "NORF",
         "Norfolk St",
+        "Norfolk St.",
         "Norfolk State",
         "Norfolk State Spartans"
       ],
@@ -10752,6 +10863,7 @@
       "team": "Northern Arizona",
       "aliases": [
         "N Arizona",
+        "N. Arizona",
         "NAU",
         "Northern Arizona",
         "Northern Arizona Lumberjacks"
@@ -10783,6 +10895,7 @@
       "aliases": [
         "ALST",
         "Alabama St",
+        "Alabama St.",
         "Alabama State",
         "Alabama State Hornets"
       ],
@@ -10813,7 +10926,9 @@
       "aliases": [
         "KC",
         "Kansas City",
-        "Kansas City Roos"
+        "Kansas City Roos",
+        "Missouri-Kansas City",
+        "UMKC"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/140.png",
       "rank": null,
@@ -10871,6 +10986,7 @@
       "aliases": [
         "N'Western St",
         "NWST",
+        "Northwestern St.",
         "Northwestern State",
         "Northwestern State Demons"
       ],
@@ -11047,6 +11163,7 @@
       "aliases": [
         "CHSO",
         "Charleston So",
+        "Charleston So.",
         "Charleston Southern",
         "Charleston Southern Buccaneers"
       ],
@@ -11107,6 +11224,7 @@
       "aliases": [
         "MORE",
         "Morehead St",
+        "Morehead St.",
         "Morehead State",
         "Morehead State Eagles"
       ],
@@ -11194,6 +11312,7 @@
       "espnId": "399",
       "team": "UAlbany",
       "aliases": [
+        "Albany",
         "UALB",
         "UAlbany",
         "UAlbany Great Danes"
@@ -11225,6 +11344,7 @@
       "aliases": [
         "IDST",
         "Idaho St",
+        "Idaho St.",
         "Idaho State",
         "Idaho State Bengals"
       ],
@@ -11284,6 +11404,7 @@
       "aliases": [
         "JKST",
         "Jackson St",
+        "Jackson St.",
         "Jackson State",
         "Jackson State Tigers"
       ],
@@ -11342,6 +11463,7 @@
       "team": "Prairie View A&M",
       "aliases": [
         "PV",
+        "PV A&M",
         "Prairie View",
         "Prairie View A&M",
         "Prairie View A&M Panthers"
@@ -11460,6 +11582,7 @@
       "aliases": [
         "C Connecticut",
         "CCSU",
+        "Cent. Conn. St.",
         "Central Connecticut",
         "Central Connecticut Blue Devils"
       ],
@@ -11635,6 +11758,8 @@
       "aliases": [
         "GRAM",
         "Grambling",
+        "Grambling St.",
+        "Grambling State",
         "Grambling Tigers"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2755.png",
@@ -11923,6 +12048,8 @@
       "espnId": "2433",
       "team": "UL Monroe",
       "aliases": [
+        "Louisiana Monroe",
+        "Louisiana-Monroe",
         "UL Monroe",
         "UL Monroe Warhawks",
         "ULM"
@@ -12040,6 +12167,7 @@
       "team": "Loyola Maryland",
       "aliases": [
         "L-MD",
+        "Loyola (MD)",
         "Loyola MD",
         "Loyola Maryland",
         "Loyola Maryland Greyhounds"
@@ -12099,6 +12227,7 @@
       "team": "Fairleigh Dickinson",
       "aliases": [
         "FDU",
+        "Fair. Dickinson",
         "Fairleigh Dickinson",
         "Fairleigh Dickinson Knights"
       ],
@@ -12159,7 +12288,8 @@
         "SC Upstate",
         "South Carolina Upstate",
         "South Carolina Upstate Spartans",
-        "UPST"
+        "UPST",
+        "USC Upstate"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2908.png",
       "rank": null,
@@ -12188,6 +12318,7 @@
       "aliases": [
         "ALCN",
         "Alcorn St",
+        "Alcorn St.",
         "Alcorn State",
         "Alcorn State Braves"
       ],
@@ -12275,6 +12406,7 @@
       "team": "Gardner-Webb",
       "aliases": [
         "GWEB",
+        "Gardner Webb",
         "Gardner-Webb",
         "Gardner-Webb Runnin' Bulldogs"
       ],
@@ -12303,8 +12435,10 @@
       "espnId": "2569",
       "team": "South Carolina State",
       "aliases": [
+        "S. Carolina St.",
         "SC State",
         "SCST",
+        "South Carolina St.",
         "South Carolina State",
         "South Carolina State Bulldogs"
       ],
@@ -12364,6 +12498,7 @@
       "aliases": [
         "MORG",
         "Morgan St",
+        "Morgan St.",
         "Morgan State",
         "Morgan State Bears"
       ],
@@ -12393,6 +12528,7 @@
       "team": "Eastern Illinois",
       "aliases": [
         "E Illinois",
+        "E. Illinois",
         "EIU",
         "Eastern Illinois",
         "Eastern Illinois Panthers"
@@ -12424,6 +12560,7 @@
       "aliases": [
         "CHST",
         "Chicago St",
+        "Chicago St.",
         "Chicago State",
         "Chicago State Cougars"
       ],
@@ -12513,6 +12650,7 @@
       "aliases": [
         "COPP",
         "Coppin St",
+        "Coppin St.",
         "Coppin State",
         "Coppin State Eagles"
       ],
@@ -12543,6 +12681,7 @@
       "aliases": [
         "DSU",
         "Delaware St",
+        "Delaware St.",
         "Delaware State",
         "Delaware State Hornets"
       ],
@@ -12572,6 +12711,7 @@
       "team": "Arkansas-Pine Bluff",
       "aliases": [
         "AR-Pine Bluff",
+        "Arkansas Pine Bluff",
         "Arkansas-Pine Bluff",
         "Arkansas-Pine Bluff Golden Lions",
         "UAPB"
@@ -12602,6 +12742,7 @@
       "team": "Western Illinois",
       "aliases": [
         "W Illinois",
+        "W. Illinois",
         "WIU",
         "Western Illinois",
         "Western Illinois Leathernecks"
@@ -12634,6 +12775,7 @@
         "MD Eastern",
         "Maryland Eastern Shore",
         "Maryland Eastern Shore Hawks",
+        "Maryland-Eastern Shore",
         "UMES"
       ],
       "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2379.png",
@@ -12663,6 +12805,8 @@
       "aliases": [
         "MVSU",
         "Miss Valley St",
+        "Miss. Valley St.",
+        "Mississippi Valley St.",
         "Mississippi Valley State",
         "Mississippi Valley State Delta Devils"
       ],
@@ -12703,5 +12847,269 @@
     "teamCount": 365,
     "auditFile": "data/preseason-consensus-2027.json",
     "sourcesPage": "preseason-sources.html"
+  },
+  "rankingBaseline": {
+    "id": "2027-starting-rankings-2026-10-28",
+    "season": 2027,
+    "date": "2026-10-28",
+    "updatedAt": "2026-10-29T00:08:40.047546+00:00",
+    "rankings": [
+      {
+        "team": "Duke",
+        "rank": 1
+      },
+      {
+        "team": "Florida",
+        "rank": 2
+      },
+      {
+        "team": "Arizona",
+        "rank": 3
+      },
+      {
+        "team": "Illinois",
+        "rank": 4
+      },
+      {
+        "team": "Houston",
+        "rank": 5
+      },
+      {
+        "team": "Iowa State",
+        "rank": 6
+      },
+      {
+        "team": "Gonzaga",
+        "rank": 7
+      },
+      {
+        "team": "Kansas",
+        "rank": 8
+      },
+      {
+        "team": "UConn",
+        "rank": 9
+      },
+      {
+        "team": "Michigan State",
+        "rank": 10
+      },
+      {
+        "team": "Texas Tech",
+        "rank": 11
+      },
+      {
+        "team": "Michigan",
+        "rank": 12
+      },
+      {
+        "team": "Louisville",
+        "rank": 13
+      },
+      {
+        "team": "Alabama",
+        "rank": 14
+      },
+      {
+        "team": "Tennessee",
+        "rank": 15
+      },
+      {
+        "team": "St. John's",
+        "rank": 16
+      },
+      {
+        "team": "Texas",
+        "rank": 17
+      },
+      {
+        "team": "Virginia",
+        "rank": 18
+      },
+      {
+        "team": "Nebraska",
+        "rank": 19
+      },
+      {
+        "team": "Miami",
+        "rank": 20
+      },
+      {
+        "team": "Vanderbilt",
+        "rank": 21
+      },
+      {
+        "team": "Arkansas",
+        "rank": 22
+      },
+      {
+        "team": "BYU",
+        "rank": 23
+      },
+      {
+        "team": "Ohio State",
+        "rank": 24
+      },
+      {
+        "team": "Kentucky",
+        "rank": 25
+      },
+      {
+        "team": "Purdue",
+        "rank": 26
+      },
+      {
+        "team": "Auburn",
+        "rank": 27
+      },
+      {
+        "team": "Oklahoma",
+        "rank": 28
+      },
+      {
+        "team": "UCLA",
+        "rank": 29
+      },
+      {
+        "team": "Villanova",
+        "rank": 30
+      },
+      {
+        "team": "Texas A&M",
+        "rank": 31
+      },
+      {
+        "team": "USC",
+        "rank": 32
+      },
+      {
+        "team": "Indiana",
+        "rank": 33
+      },
+      {
+        "team": "Cincinnati",
+        "rank": 34
+      },
+      {
+        "team": "Missouri",
+        "rank": 35
+      },
+      {
+        "team": "Georgia",
+        "rank": 36
+      },
+      {
+        "team": "North Carolina",
+        "rank": 37
+      },
+      {
+        "team": "Wisconsin",
+        "rank": 38
+      },
+      {
+        "team": "Baylor",
+        "rank": 39
+      },
+      {
+        "team": "Marquette",
+        "rank": 40
+      },
+      {
+        "team": "Iowa",
+        "rank": 41
+      },
+      {
+        "team": "Clemson",
+        "rank": 42
+      },
+      {
+        "team": "NC State",
+        "rank": 43
+      },
+      {
+        "team": "Grand Canyon",
+        "rank": 44
+      },
+      {
+        "team": "Creighton",
+        "rank": 45
+      },
+      {
+        "team": "West Virginia",
+        "rank": 46
+      },
+      {
+        "team": "LSU",
+        "rank": 47
+      },
+      {
+        "team": "Maryland",
+        "rank": 48
+      },
+      {
+        "team": "Providence",
+        "rank": 49
+      },
+      {
+        "team": "Utah State",
+        "rank": 50
+      },
+      {
+        "team": "VCU",
+        "rank": 51
+      },
+      {
+        "team": "Saint Louis",
+        "rank": 52
+      },
+      {
+        "team": "TCU",
+        "rank": 53
+      },
+      {
+        "team": "Ole Miss",
+        "rank": 54
+      },
+      {
+        "team": "Virginia Tech",
+        "rank": 55
+      },
+      {
+        "team": "Xavier",
+        "rank": 56
+      },
+      {
+        "team": "Oregon",
+        "rank": 57
+      },
+      {
+        "team": "Oklahoma State",
+        "rank": 58
+      },
+      {
+        "team": "SMU",
+        "rank": 59
+      },
+      {
+        "team": "New Mexico",
+        "rank": 60
+      },
+      {
+        "team": "High Point",
+        "rank": 61
+      },
+      {
+        "team": "Arizona State",
+        "rank": 62
+      },
+      {
+        "team": "UCF",
+        "rank": 63
+      },
+      {
+        "team": "San Diego State",
+        "rank": 64
+      }
+    ]
   }
 }
