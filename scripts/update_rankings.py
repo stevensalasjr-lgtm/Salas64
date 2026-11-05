@@ -348,7 +348,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     print("Games returned:", len(games))
     print("First rating:", ratings[:1])
     print("First team stats:", stats[:1])
-        print("2026 ratings test:", len(api_get("/ratings/adjusted", {"season": 2026}, api_key)))
+    print("2026 ratings test:", len(api_get("/ratings/adjusted", {"season": 2026}, api_key)))
 
     ratings_by_id = {int(r["teamId"]): r for r in ratings if r.get("teamId") is not None}
     stats_by_id = {int(s["teamId"]): s for s in stats if s.get("teamId") is not None}
