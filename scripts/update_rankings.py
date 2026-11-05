@@ -406,9 +406,9 @@ def torvik_name(value: Any) -> str:
     return normalize_team_name(text)
 
 
-def fetch_torvik_ratings(season: int, stats: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def fetch_torvik_ratings(season, stats):
     url = f"https://barttorvik.com/{season}_team_results.csv"
-     request = urllib.request.Request(
+    request = urllib.request.Request(
         url,
         headers={
             "User-Agent": "Mozilla/5.0 (compatible; Salas64/3.1; +https://salas64rankings.com)",
