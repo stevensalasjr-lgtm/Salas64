@@ -497,7 +497,76 @@ def build_own_ratings(games, boxes, stats):
     return ratings, diagnostics
 
 
+# Preseason ranks are converted to an ordinal starting score, not presented
+# as measured efficiencies. Baseline #1 starts at 100, #64 at 50; unranked
+# teams start at 45. Influence declines linearly to zero after 12 games.
+PRESEASON_FADE_GAMES = 12
+PRESEASON_BLEND_VERSION = 'Salas 2.1 - preseason blend'
+
+
+def preseason_key(name):
+    aliases = {'connecticut': 'uconn', 'northcarolinastate': 'ncstate',
+               'miamifl': 'miami', 'miamiflorida': 'miami', 'mississippi': 'olemiss',
+               'saintjohns': 'stjohns', 'southerncalifornia': 'usc',
+               'centralflorida': 'ucf', 'southernmethodist': 'smu',
+               'texaschristian': 'tcu', 'brighamyoung': 'byu',
+               'louisianastate': 'lsu', 'virginiacommonwealth': 'vcu'}
+    key = normalize_team_name(name)
+    return aliases.get(key, key)
+
+
+def load_preseason_baseline(data_dir, season):
+    path = data_dir / 'ranking-baseline.json'
+    if not path.exists():
+        raise RuntimeError('Missing data/ranking-baseline.json; refusing to invent preseason strengths.')
+    baseline = json.loads(path.read_text())
+    entries = baseline.get('rankings') or []
+    if baseline.get('season') != season or len(entries) != TOP_N or {t.get('rank') for t in entries} != set(range(1, TOP_N+1)):
+        raise RuntimeError('Invalid current-season preseason baseline; keeping existing publication.')
+    return baseline
+
+
+def blend_preseason(teams, baseline, stats, data_dir):
+    priors = {preseason_key(t['team']): t for t in baseline['rankings']}
+    stat_lookup = {preseason_key(t.get('team')): t for t in stats}
+    # Carry baseline teams awaiting box scores, rather than dropping them merely
+    # because their first game has not been played or fully ingested.
+    present = {preseason_key(t['team']) for t in teams}
+    current_path = data_dir / 'current.json'
+    previous = json.loads(current_path.read_text()) if current_path.exists() else {}
+    metadata = {preseason_key(t['team']): t for t in previous.get('allTeams', []) + previous.get('rankings', [])}
+    for key, prior in priors.items():
+        if key in present:
+            continue
+        stats_row = stat_lookup.get(key, {})
+        old = metadata.get(key, {})
+        teams.append({'team': prior['team'], 'teamId': stats_row.get('teamId'),
+                      'espnId': old.get('espnId'), 'logo': old.get('logo'),
+                      'conference': stats_row.get('conference') or old.get('conference'),
+                      'record': f"{int(safe_num(stats_row.get('wins')))}-{int(safe_num(stats_row.get('losses')))}" if stats_row else (old.get('record') or '0-0'),
+                      'last10': old.get('last10') or '0-0', 'streak': old.get('streak') or 'â',
+                      'bestWin': old.get('bestWin') or 'â', 'recentGames': old.get('recentGames') or [],
+                      'salasScore': None, 'powerScore': 50, 'resumeScore': 50, 'marchScore': 50, 'formScore': 50,
+                      'offensiveRating': None, 'defensiveRating': None, 'pace': None,
+                      'dataStatus': 'awaiting-game-box-scores'})
+    for team in teams:
+        key = preseason_key(team['team'])
+        prior = priors.get(key)
+        starting = 100 - (prior['rank'] - 1) * 50 / (TOP_N - 1) if prior else 45.0
+        raw = team.get('salasScore')
+        stats_row = stat_lookup.get(key, {})
+        games = max(0, int(safe_num(stats_row.get('games'))))
+        live_weight = min(1.0, games / PRESEASON_FADE_GAMES) if raw is not None else 0.0
+        team['liveSalasScore'] = raw
+        team['preseasonRank'] = prior['rank'] if prior else None
+        team['preseasonStartingScore'] = round(starting, 3)
+        team['preseasonWeight'] = round(1-live_weight, 4)
+        team['salasScore'] = round(starting * (1-live_weight) + (raw if raw is not None else starting) * live_weight, 1)
+    return teams
+
+
 def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
+    preseason_baseline = load_preseason_baseline(data_dir, season)
     stats = api_get("/stats/team/season", {"season": season}, api_key)
     games = fetch_season_games(season, api_key)
     boxes = fetch_game_boxes(season, api_key)
@@ -660,6 +729,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
             }
         )
 
+    teams = blend_preseason(teams, preseason_baseline, stats, data_dir)
     teams.sort(key=lambda t: (-t["salasScore"], -t["powerScore"], -t["resumeScore"], t["team"]))
     top = teams[:TOP_N]
 
@@ -670,7 +740,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
             previous_payload = json.loads(previous_path.read_text())
         except Exception:
             previous_payload = {}
-    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season and previous_payload.get("ratingsSource") == OWN_MODEL_VERSION and not previous_payload.get("preseason") else {}
+    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season and previous_payload.get("preseasonBlendVersion") == PRESEASON_BLEND_VERSION and not previous_payload.get("preseason") else {}
 
     for idx, t in enumerate(teams, start=1):
         t["rank"] = idx if idx <= TOP_N else None
@@ -718,14 +788,16 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     payload = {
         "season": season,
         "updatedAt": now.isoformat().replace("+00:00", "Z"),
-        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} â¢ Salas independent ratings",
+        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} â¢ Salas preseason/live blend",
         "previousUpdatedAt": previous_payload.get("updatedAt") if previous_payload.get("season") == season else None,
-        "modelVersion": "Salas Score 2.0 - independent efficiencies",
+        "modelVersion": PRESEASON_BLEND_VERSION,
         "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
         "preseason": False,
+        "preseasonBlendVersion": PRESEASON_BLEND_VERSION,
+        "preseasonBlend": {"baselineId": preseason_baseline.get("id"), "fadeGames": PRESEASON_FADE_GAMES, "method": "Linear blend of ordinal preseason starting score with live Salas Score; preseason #1=100, #64=50, unranked=45."},
         "ratingsSource": OWN_MODEL_VERSION,
         "modelDiagnostics": model_diagnostics,
-        "message": "Salas calculates its own opponent-adjusted efficiencies from CBBD box scores. Early-season ratings use a small sample; predictive accuracy is not yet established.",
+        "message": "Early-season rankings blend the published preseason baseline with game results. Preseason influence fades to zero after each team plays 12 games. Predictive accuracy is not yet established.",
         "rankings": top,
         "allTeams": teams,
         "weeklySummary": {
