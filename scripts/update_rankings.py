@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate daily Salas 64 rankings using Bart Torvik efficiencies and CBBD stats.
+"""Generate Salas 64 with independently calculated opponent-adjusted efficiencies.
 
 Required environment variable:
     CBBD_API_KEY
@@ -16,10 +16,6 @@ from __future__ import annotations
 from team_directory import refresh, enrich
 
 import json
-import csv
-import io
-import re
-import unicodedata
 import math
 import os
 import shutil
@@ -305,7 +301,7 @@ def last_ten_record(rows: list[dict[str, Any]]) -> str:
 
 def current_streak(rows: list[dict[str, Any]]) -> str:
     if not rows:
-        return "—"
+        return "â"
     last_result = rows[-1]["win"]
     count = 0
     for row in reversed(rows):
@@ -318,7 +314,7 @@ def current_streak(rows: list[dict[str, Any]]) -> str:
 def best_win(rows: list[dict[str, Any]], net_by_id: dict[int, float]) -> str:
     wins = [r for r in rows if r["win"]]
     if not wins:
-        return "—"
+        return "â"
     def quality(r: dict[str, Any]) -> float:
         # Opponent quality plus extra credit for winning away from home.
         site_bonus = 3.0 if r["location"] == "away" else (1.5 if r["location"] == "neutral" else 0.0)
@@ -343,128 +339,169 @@ def load_manual_adjustments(data_dir: Path) -> dict[str, float]:
         return {}
 
 
-# Fixed provider for the season: never silently mix CBBD and Torvik ratings.
-RATINGS_SOURCE = "Bart Torvik"
-TORVIK_ALIASES = {
-    "UIC": "Illinois Chicago", "Seattle U": "Seattle", "Sam Houston": "Sam Houston State",
-    "Cal Baptist": "California Baptist", "American": "American University",
-    "LSU New Orleans": "New Orleans", "App State": "Appalachian State",
-    "SE Louisiana": "Southeastern Louisiana", "UAlbany": "Albany",
-    "Grambling": "Grambling State", "USC Upstate": "South Carolina Upstate",
-    "Cal St. Northridge": "CSUN", "Cal St. Bakersfield": "CSU Bakersfield",
-    "UConn": "Connecticut", "UCONN": "Connecticut", "NC State": "North Carolina State",
-    "N.C. State": "North Carolina State", "Ole Miss": "Mississippi",
-    "Miami": "Miami FL", "Miami (FL)": "Miami FL", "Miami (OH)": "Miami OH",
-    "USC": "Southern California", "UCF": "Central Florida", "SMU": "Southern Methodist",
-    "TCU": "Texas Christian", "BYU": "Brigham Young", "LSU": "Louisiana State",
-    "VCU": "Virginia Commonwealth", "UMass": "Massachusetts", "UTEP": "Texas El Paso",
-    "UTSA": "Texas San Antonio", "UAB": "Alabama Birmingham", "UNLV": "Nevada Las Vegas",
-    "UNC": "North Carolina", "UNC Greensboro": "North Carolina Greensboro",
-    "UNC Wilmington": "North Carolina Wilmington", "UNC Asheville": "North Carolina Asheville",
-    "Queens": "Queens University", "Queens NC": "Queens University",
-    "Saint Mary's": "Saint Marys", "Saint Mary's (CA)": "Saint Marys", "St. Mary's": "Saint Marys",
-    "St. John's": "Saint Johns", "St. John's (NY)": "Saint Johns", "St. John's (N.Y.)": "Saint Johns",
-    "St. Bonaventure": "Saint Bonaventure", "St. Francis PA": "Saint Francis",
-    "St. Francis (PA)": "Saint Francis", "Saint Francis (PA)": "Saint Francis",
-    "St. Thomas": "Saint Thomas", "St. Thomas (MN)": "Saint Thomas", "Saint Thomas (MN)": "Saint Thomas",
-    "Saint Peter's": "Saint Peters", "St. Peter's": "Saint Peters",
-    "McNeese": "McNeese State", "Nicholls": "Nicholls State",
-    "Cal State Bakersfield": "CSU Bakersfield", "Cal State Northridge": "CSUN",
-    "Cal State Fullerton": "CSU Fullerton", "Cal St. Fullerton": "CSU Fullerton",
-    "SIUE": "SIU Edwardsville", "Southern Illinois Edwardsville": "SIU Edwardsville",
-    "Loyola (IL)": "Loyola Chicago", "Loyola (MD)": "Loyola Maryland",
-    "Loyola (CA)": "Loyola Marymount", "LIU": "Long Island", "Long Island University": "Long Island",
-    "UT Martin": "Tennessee Martin", "UT Arlington": "Texas Arlington",
-    "UT Rio Grande Valley": "Texas Rio Grande Valley", "UTRGV": "Texas Rio Grande Valley",
-    "Texas A&M Corpus Christi": "Texas A&M Corpus Chris", "Texas A&M-Corpus Christi": "Texas A&M Corpus Chris",
-    "Texas A&M-Commerce": "East Texas A&M", "Texas A&M Commerce": "East Texas A&M",
-    "UMKC": "Kansas City", "Omaha": "Nebraska Omaha", "Purdue Fort Wayne": "Fort Wayne",
-    "Green Bay": "Wisconsin Green Bay", "Milwaukee": "Wisconsin Milwaukee",
-    "UL Monroe": "Louisiana Monroe", "ULM": "Louisiana Monroe", "UL Lafayette": "Louisiana",
-    "Louisiana Lafayette": "Louisiana", "Penn": "Pennsylvania",
-    "Boston U": "Boston University", "Boston U.": "Boston University",
-    "Charleston": "College of Charleston", "Charleston Southern": "Charleston Southern",
-    "Detroit Mercy": "Detroit", "Southern Miss": "Southern Mississippi",
-    "FIU": "Florida International", "FGCU": "Florida Gulf Coast",
-    "IU Indianapolis": "IU Indy", "IUPUI": "IU Indy",
-    "Mount St. Mary's": "Mount Saint Marys", "Mt. St. Mary's": "Mount Saint Marys",
-    "Saint Joseph's": "Saint Josephs", "St. Joseph's": "Saint Josephs",
-    "San Jose St.": "San Jose State", "UC Davis": "California Davis",
-    "UC Irvine": "California Irvine", "UC Riverside": "California Riverside",
-    "UC San Diego": "California San Diego", "UC Santa Barbara": "California Santa Barbara",
-    "UCSB": "California Santa Barbara", "Hawai'i": "Hawaii",
-}
+# Independent Salas efficiencies. One game is one observation per offense.
+# Model: points/100 = league mean + offense(team) + defense_allowed(opponent)
+#        + venue effect. Ridge penalty = five average games per team effect.
+# This is Salas's model, not a reproduction of CBBD, Torvik, or KenPom ratings.
+OWN_MODEL_VERSION = 'Salas adjusted efficiency 1.0'
+RIDGE_GAMES = 5.0
 
 
-def torvik_name(value: Any) -> str:
-    text = str(value or "").strip().replace("’", "'")
-    # Resolve explicit aliases before normalizing; never use fuzzy team matching.
-    aliases = {normalize_team_name(k): v for k, v in TORVIK_ALIASES.items()}
-    text = aliases.get(normalize_team_name(text), text)
-    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
-    text = re.sub(r"\bSt\.?$", "State", text, flags=re.I)
-    return normalize_team_name(text)
+def fetch_game_boxes(season, api_key):
+    start = date(season - 1, 10, 15)
+    end = min(date(season, 4, 20), datetime.now(timezone.utc).date())
+    rows = {}
+    while start <= end:
+        stop = min(start + timedelta(days=13), end)
+        part = api_get('/games/teams', {'season': season,
+            'startDateRange': f'{start.isoformat()}T00:00:00Z',
+            'endDateRange': f'{stop.isoformat()}T23:59:59Z'}, api_key)
+        if len(part) >= 3000:
+            raise RuntimeError('Box-score response may be truncated; refusing incomplete ratings.')
+        for row in part:
+            if row.get('gameId') is not None and row.get('teamId') is not None:
+                rows[(int(row['gameId']), int(row['teamId']))] = row
+        start = stop + timedelta(days=1)
+    return list(rows.values())
 
 
-def fetch_torvik_ratings(season, stats):
-    url = f"https://barttorvik.com/{season}_team_results.csv"
-    request = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0 (compatible; Salas64/3.1; +https://salas64rankings.com)",
-            "Accept": "text/csv, */*",
-        },
-    )
-    with urllib.request.urlopen(request, timeout=45) as response:
-        text = response.read().decode("utf-8-sig")
-    reader = csv.DictReader(io.StringIO(text))
-    required = {"team", "adjoe", "adjde", "adjt", "oe Rank", "de Rank"}
-    if not required.issubset(set(reader.fieldnames or [])):
-        raise RuntimeError("Torvik feed is not a valid ratings CSV; preserving published data.")
-    rows = list(reader)
-    if len(rows) < TOP_N:
-        raise RuntimeError("Torvik feed contains fewer than 64 teams; preserving published data.")
-    lookup: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for team in stats:
-        if team.get("teamId") is not None and team.get("team"):
-            lookup[torvik_name(team["team"])].append(team)
-    matched, unmatched, used = [], [], set()
-    for row in rows:
-        candidates = lookup.get(torvik_name(row["team"]), [])
-        # Duplicate normalized names are ambiguous: refuse to guess an identity.
-        if len(candidates) != 1:
-            unmatched.append(row["team"])
+def estimated_possessions(stats):
+    recorded = safe_num(stats.get('possessions'))
+    if recorded > 0:
+        return recorded
+    fields = (stats.get('fieldGoals') or {}, stats.get('freeThrows') or {},
+              stats.get('rebounds') or {}, stats.get('turnovers') or {})
+    if not all(key in source for source, key in zip(fields, ('attempted', 'attempted', 'offensive', 'total'))):
+        return 0.0
+    return (safe_num(fields[0]['attempted']) + .475 * safe_num(fields[1]['attempted'])
+            - safe_num(fields[2]['offensive']) + safe_num(fields[3]['total']))
+
+
+def efficiency_observations(games, boxes, stats):
+    # Conference membership excludes unclassified/non-Division-I opponents from
+    # strength estimation; their completed results still count toward records.
+    members = {int(s['teamId']) for s in stats if s.get('teamId') is not None and s.get('conference')}
+    by_game = defaultdict(list)
+    for row in boxes:
+        by_game[int(row['gameId'])].append(row)
+    observations, covered, seen = [], set(), set()
+    for g in sorted(games, key=lambda g: (g.get('startDate') or '', str(g.get('id')))):
+        gid = int(g['id'])
+        if gid in seen or g.get('seasonType') == 'preseason' or g.get('status') != 'final':
             continue
-        team = candidates[0]
-        tid = int(team["teamId"])
-        if tid in used:
-            raise RuntimeError(f"Duplicate Torvik mapping for {team['team']}")
-        offense = float(row["adjoe"])
-        defense = float(row["adjde"])
-        pace = float(row["adjt"])
-        if not all(math.isfinite(v) and v > 0 for v in (offense, defense, pace)):
-            raise RuntimeError(f"Invalid Torvik efficiencies for {row['team']}")
-        used.add(tid)
-        matched.append({"teamId": tid, "team": team["team"], "conference": team.get("conference"),
-                        "offensiveRating": offense, "defensiveRating": defense,
-                        "netRating": offense - defense, "pace": pace,
-                        "ratingsSource": RATINGS_SOURCE, "torvikTeam": row["team"],
-                        "rankings": {"offense": int(float(row["oe Rank"])), "defense": int(float(row["de Rank"]))}})
-    for field, reverse, name in (("offensiveRating", True, "offense"), ("defensiveRating", False, "defense"), ("netRating", True, "net")):
-        for rank, team in enumerate(sorted(matched, key=lambda t: t[field], reverse=reverse), 1):
-            team.setdefault("rankings", {}).setdefault(name, rank)
-    print(f"Bart Torvik: {len(rows)} ratings; {len(matched)} matched to CBBD team IDs.")
-    if unmatched:
-        print("Unmatched Torvik teams (excluded, not guessed): " + ", ".join(unmatched))
-    if len(matched) < TOP_N:
-        raise RuntimeError("Fewer than 64 Torvik teams matched CBBD; preserving published data.")
-    return matched
+        seen.add(gid)
+        home, away = g.get('homeTeamId'), g.get('awayTeamId')
+        if home is None or away is None or int(home) not in members or int(away) not in members:
+            continue
+        hp, ap = g.get('homePoints'), g.get('awayPoints')
+        if hp is None or ap is None or hp == ap:
+            continue
+        candidates = []
+        for row in by_game.get(gid, []):
+            if int(row['teamId']) not in (int(home), int(away)):
+                continue
+            own = estimated_possessions(row.get('teamStats') or {})
+            opp = estimated_possessions(row.get('opponentStats') or {})
+            if own > 0 and opp > 0:
+                candidates.append((own + opp) / 2)
+        if not candidates:
+            continue
+        possessions = statistics.mean(candidates)
+        if not 30 <= possessions <= 160:
+            continue
+        edge = 0 if g.get('neutralSite') else HOME_COURT_POINTS / 2 * 100 / possessions
+        # Observed scoring is venue-neutralized before fitting.
+        observations.extend([(int(home), int(away), float(hp) / possessions * 100 - edge, gid),
+                             (int(away), int(home), float(ap) / possessions * 100 + edge, gid)])
+        covered.update((int(home), int(away)))
+    if len(covered) < TOP_N:
+        raise RuntimeError(f'Only {len(covered)} eligible teams returned with complete Division I box scores; expected at least {TOP_N}.')
+    return observations
+
+
+def solve_efficiencies(observations):
+    if not observations:
+        raise RuntimeError('No complete offensive observations available.')
+    mean = statistics.mean(r[2] for r in observations)
+    offense_rows, defense_rows = defaultdict(list), defaultdict(list)
+    for team, opponent, efficiency, gid in observations:
+        offense_rows[team].append((opponent, efficiency - mean))
+        defense_rows[opponent].append((team, efficiency - mean))
+    ids = set(offense_rows) | set(defense_rows)
+    offense, defense = dict.fromkeys(ids, 0.0), dict.fromkeys(ids, 0.0)
+    # Block coordinate descent for a convex ridge objective. The positive
+    # penalty anchors disconnected early-season schedules to the league mean.
+    for iteration in range(1000):
+        delta = 0.0
+        for tid in sorted(ids):
+            rows = offense_rows[tid]
+            value = sum(y - defense[opp] for opp, y in rows) / (len(rows) + RIDGE_GAMES)
+            delta = max(delta, abs(value - offense[tid])); offense[tid] = value
+        for tid in sorted(ids):
+            rows = defense_rows[tid]
+            value = sum(y - offense[opp] for opp, y in rows) / (len(rows) + RIDGE_GAMES)
+            delta = max(delta, abs(value - defense[tid])); defense[tid] = value
+        if delta < 1e-9:
+            break
+    else:
+        raise RuntimeError('Salas efficiency solver did not converge; keeping published data.')
+    result = {tid: {'offensiveRating': mean + offense[tid],
+                    'defensiveRating': mean + defense[tid],
+                    'netRating': offense[tid] - defense[tid]} for tid in ids}
+    if not all(math.isfinite(t[k]) and (k == 'netRating' or t[k] > 0) for t in result.values() for k in t):
+        raise RuntimeError('Invalid adjusted efficiencies; keeping published data.')
+    return result, mean
+
+
+def build_own_ratings(games, boxes, stats):
+    observations = efficiency_observations(games, boxes, stats)
+    fitted, average = solve_efficiencies(observations)
+    names = {int(t['teamId']): t for t in stats if t.get('teamId') is not None}
+    ratings = [{**values, 'teamId': tid, 'team': names[tid]['team'],
+                'conference': names[tid].get('conference'), 'rankings': {}} for tid, values in fitted.items()]
+    for key, reverse, label in [('offensiveRating', True, 'offense'), ('defensiveRating', False, 'defense'), ('netRating', True, 'net')]:
+        for rank, team in enumerate(sorted(ratings, key=lambda t: t[key], reverse=reverse), 1):
+            team['rankings'][label] = rank
+    diagnostics = {'model': OWN_MODEL_VERSION, 'ridgeGames': RIDGE_GAMES,
+                   'gamesUsed': len(observations) // 2, 'teamsRated': len(ratings),
+                   'leagueEfficiency': round(average, 3), 'validation': 'Small-sample model; predictive accuracy not yet established.'}
+    # Chronological holdout, with no future scoring in fitted coefficients.
+    game_ids = list(dict.fromkeys(r[3] for r in observations))
+    if len(game_ids) >= 100:
+        cutoff = int(len(game_ids) * .8)
+        training_ids = set(game_ids[:cutoff])
+        training = [r for r in observations if r[3] in training_ids]
+        trial, _ = solve_efficiencies(training)
+        pairs = defaultdict(list)
+        for r in observations:
+            if r[3] not in training_ids:
+                pairs[r[3]].append(r)
+        errors, baseline, wins = [], [], []
+        for pair in pairs.values():
+            if len(pair) != 2:
+                continue
+            a, b = pair
+            if a[0] not in trial or b[0] not in trial:
+                continue
+            predicted = trial[a[0]]['netRating'] - trial[b[0]]['netRating']
+            actual = a[2] - b[2]
+            errors.append(abs(predicted - actual)); baseline.append(abs(actual))
+            wins.append((predicted > 0) == (actual > 0))
+        diagnostics['chronologicalHoldout'] = {'trainingGames': cutoff, 'evaluatedGames': len(errors),
+            'neutralMarginMAEPer100': round(statistics.mean(errors), 3) if errors else None,
+            'equalTeamsMAEPer100': round(statistics.mean(baseline), 3) if baseline else None,
+            'neutralMarginSignAccuracy': round(statistics.mean(wins), 3) if wins else None,
+            'note': 'Current-season holdout only, not a validated historical win-probability calibration.'}
+    print(f"Salas own ratings: {len(ratings)} teams from {len(observations)//2} completed Division I games.")
+    print('Model diagnostics: ' + json.dumps(diagnostics))
+    return ratings, diagnostics
 
 
 def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     stats = api_get("/stats/team/season", {"season": season}, api_key)
-    ratings = fetch_torvik_ratings(season, stats)
     games = fetch_season_games(season, api_key)
+    boxes = fetch_game_boxes(season, api_key)
+    ratings, model_diagnostics = build_own_ratings(games, boxes, stats)
 
     ratings_by_id = {int(r["teamId"]): r for r in ratings if r.get("teamId") is not None}
     stats_by_id = {int(s["teamId"]): s for s in stats if s.get("teamId") is not None}
@@ -614,11 +651,11 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
                 "marchScore": round(march_score.get(tid, 50.0), 2),
                 "formScore": round(form_score.get(tid, 50.0), 2),
                 "swab": round(swab.get(tid, 0.0), 3),
+                "ratingsSource": OWN_MODEL_VERSION,
                 "offensiveRating": round(offense.get(tid, national_avg_efficiency), 2),
                 "defensiveRating": round(defense.get(tid, national_avg_efficiency), 2),
                 "netRating": round(net.get(tid, 0.0), 2),
-                "pace": round(safe_num(r.get("pace"), safe_num(s.get("pace"), 0.0)), 2),
-                "ratingsSource": RATINGS_SOURCE,
+                "pace": round(safe_num(s.get("pace"), 0.0), 2),
                 "nationalAverageEfficiency": round(national_avg_efficiency, 2),
             }
         )
@@ -633,7 +670,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
             previous_payload = json.loads(previous_path.read_text())
         except Exception:
             previous_payload = {}
-    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season and not previous_payload.get("preseason") and previous_payload.get("ratingsSource") == RATINGS_SOURCE else {}
+    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season and previous_payload.get("ratingsSource") == OWN_MODEL_VERSION and not previous_payload.get("preseason") else {}
 
     for idx, t in enumerate(teams, start=1):
         t["rank"] = idx if idx <= TOP_N else None
@@ -652,7 +689,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
         shutil.copy2(previous_path, archive)
 
     def summary_entry(team: dict[str, Any] | None, note: str) -> dict[str, Any]:
-        return {"team": team["team"] if team else "—", "note": note}
+        return {"team": team["team"] if team else "â", "note": note}
 
     hottest = max(top, key=lambda t: t["formScore"], default=None)
     with_previous = [t for t in top if t["previousRank"] is not None]
@@ -681,20 +718,21 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     payload = {
         "season": season,
         "updatedAt": now.isoformat().replace("+00:00", "Z"),
-        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} • Daily rankings • Bart Torvik efficiencies",
+        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} â¢ Salas independent ratings",
         "previousUpdatedAt": previous_payload.get("updatedAt") if previous_payload.get("season") == season else None,
-        "modelVersion": "Salas Score 1.0",
-        "ratingsSource": RATINGS_SOURCE,
-        "ratingsSourceUrl": f"https://barttorvik.com/trank.php?year={season}",
+        "modelVersion": "Salas Score 2.0 - independent efficiencies",
         "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
         "preseason": False,
+        "ratingsSource": OWN_MODEL_VERSION,
+        "modelDiagnostics": model_diagnostics,
+        "message": "Salas calculates its own opponent-adjusted efficiencies from CBBD box scores. Early-season ratings use a small sample; predictive accuracy is not yet established.",
         "rankings": top,
         "allTeams": teams,
         "weeklySummary": {
-            "hottestTeam": summary_entry(hottest, "Best recent adjusted form among today's Salas 64." if hottest else "—"),
+            "hottestTeam": summary_entry(hottest, "Best recent adjusted form among today's Salas 64." if hottest else "â"),
             "biggestRiser": summary_entry(riser, riser_note),
             "biggestFaller": summary_entry(faller, faller_note),
-            "teamToWatch": summary_entry(watch, f"#{watch['rank']} with a {watch['salasScore']:.1f} Salas Score and strong recent form." if watch else "—"),
+            "teamToWatch": summary_entry(watch, f"#{watch['rank']} with a {watch['salasScore']:.1f} Salas Score and strong recent form." if watch else "â"),
         },
     }
     return payload
@@ -711,7 +749,7 @@ def main() -> int:
     data_dir = Path(os.getenv("DATA_DIR") or Path(__file__).resolve().parents[1] / "data")
     data_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"Generating Salas 64 for season {season}…")
+    print(f"Generating Salas 64 for season {season}â¦")
     try:
         payload = build_rankings(season, api_key, data_dir)
     except RuntimeError as exc:
@@ -736,7 +774,7 @@ def main() -> int:
             payload["dataCheckedAt"] = now.isoformat().replace("+00:00", "Z")
             # Keep the verified consensus label, source audit, and snapshot date.
             if not payload.get("preseasonConsensus"):
-                payload["updatedLabel"] = "2026-27 Preseason Salas 64 — Week 0"
+                payload["updatedLabel"] = "2026-27 Preseason Salas 64 â Week 0"
                 payload["message"] = "Preseason rankings are active. Live Salas Scores and daily movement will begin once enough 2026-27 games have been played."
             print(f"Preseason mode: preserving published preseason baseline ({exc})")
         elif existing.get("rankings") and existing.get("season") == season:
@@ -744,20 +782,7 @@ def main() -> int:
             payload["dataCheckedAt"] = now.isoformat().replace("+00:00", "Z")
             payload["message"] = "Ranking refresh delayed; showing the last successful update."
         else:
-            payload = {
-                "season": season,
-                "preseason": True,
-                "updatedAt": now.isoformat().replace("+00:00", "Z"),
-                "updatedLabel": "2026-27 preseason",
-                "modelVersion": "Salas Score 1.0",
-        "ratingsSource": RATINGS_SOURCE,
-        "ratingsSourceUrl": f"https://barttorvik.com/trank.php?year={season}",
-                "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
-                "message": "The 2026-27 Salas 64 will populate automatically once enough regular-season data is available.",
-                "rankings": [],
-                "weeklySummary": {},
-            }
-            print(f"Preseason mode: {exc}")
+            raise RuntimeError("No current-season ranking baseline available; refusing empty publication.")
 
     baseline_path = data_dir / "ranking-baseline.json"
     if baseline_path.exists():
