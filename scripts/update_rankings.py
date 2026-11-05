@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the daily Salas 64 data file from College Basketball Data.
+"""Generate daily Salas 64 rankings using Bart Torvik efficiencies and CBBD stats.
 
 Required environment variable:
     CBBD_API_KEY
@@ -16,6 +16,10 @@ from __future__ import annotations
 from team_directory import refresh, enrich
 
 import json
+import csv
+import io
+import re
+import unicodedata
 import math
 import os
 import shutil
@@ -339,15 +343,122 @@ def load_manual_adjustments(data_dir: Path) -> dict[str, float]:
         return {}
 
 
+# Fixed provider for the season: never silently mix CBBD and Torvik ratings.
+RATINGS_SOURCE = "Bart Torvik"
+TORVIK_ALIASES = {
+    "UIC": "Illinois Chicago", "Seattle U": "Seattle", "Sam Houston": "Sam Houston State",
+    "Cal Baptist": "California Baptist", "American": "American University",
+    "LSU New Orleans": "New Orleans", "App State": "Appalachian State",
+    "SE Louisiana": "Southeastern Louisiana", "UAlbany": "Albany",
+    "Grambling": "Grambling State", "USC Upstate": "South Carolina Upstate",
+    "Cal St. Northridge": "CSUN", "Cal St. Bakersfield": "CSU Bakersfield",
+    "UConn": "Connecticut", "UCONN": "Connecticut", "NC State": "North Carolina State",
+    "N.C. State": "North Carolina State", "Ole Miss": "Mississippi",
+    "Miami": "Miami FL", "Miami (FL)": "Miami FL", "Miami (OH)": "Miami OH",
+    "USC": "Southern California", "UCF": "Central Florida", "SMU": "Southern Methodist",
+    "TCU": "Texas Christian", "BYU": "Brigham Young", "LSU": "Louisiana State",
+    "VCU": "Virginia Commonwealth", "UMass": "Massachusetts", "UTEP": "Texas El Paso",
+    "UTSA": "Texas San Antonio", "UAB": "Alabama Birmingham", "UNLV": "Nevada Las Vegas",
+    "UNC": "North Carolina", "UNC Greensboro": "North Carolina Greensboro",
+    "UNC Wilmington": "North Carolina Wilmington", "UNC Asheville": "North Carolina Asheville",
+    "Queens": "Queens University", "Queens NC": "Queens University",
+    "Saint Mary's": "Saint Marys", "Saint Mary's (CA)": "Saint Marys", "St. Mary's": "Saint Marys",
+    "St. John's": "Saint Johns", "St. John's (NY)": "Saint Johns", "St. John's (N.Y.)": "Saint Johns",
+    "St. Bonaventure": "Saint Bonaventure", "St. Francis PA": "Saint Francis",
+    "St. Francis (PA)": "Saint Francis", "Saint Francis (PA)": "Saint Francis",
+    "St. Thomas": "Saint Thomas", "St. Thomas (MN)": "Saint Thomas", "Saint Thomas (MN)": "Saint Thomas",
+    "Saint Peter's": "Saint Peters", "St. Peter's": "Saint Peters",
+    "McNeese": "McNeese State", "Nicholls": "Nicholls State",
+    "Cal State Bakersfield": "CSU Bakersfield", "Cal State Northridge": "CSUN",
+    "Cal State Fullerton": "CSU Fullerton", "Cal St. Fullerton": "CSU Fullerton",
+    "SIUE": "SIU Edwardsville", "Southern Illinois Edwardsville": "SIU Edwardsville",
+    "Loyola (IL)": "Loyola Chicago", "Loyola (MD)": "Loyola Maryland",
+    "Loyola (CA)": "Loyola Marymount", "LIU": "Long Island", "Long Island University": "Long Island",
+    "UT Martin": "Tennessee Martin", "UT Arlington": "Texas Arlington",
+    "UT Rio Grande Valley": "Texas Rio Grande Valley", "UTRGV": "Texas Rio Grande Valley",
+    "Texas A&M Corpus Christi": "Texas A&M Corpus Chris", "Texas A&M-Corpus Christi": "Texas A&M Corpus Chris",
+    "Texas A&M-Commerce": "East Texas A&M", "Texas A&M Commerce": "East Texas A&M",
+    "UMKC": "Kansas City", "Omaha": "Nebraska Omaha", "Purdue Fort Wayne": "Fort Wayne",
+    "Green Bay": "Wisconsin Green Bay", "Milwaukee": "Wisconsin Milwaukee",
+    "UL Monroe": "Louisiana Monroe", "ULM": "Louisiana Monroe", "UL Lafayette": "Louisiana",
+    "Louisiana Lafayette": "Louisiana", "Penn": "Pennsylvania",
+    "Boston U": "Boston University", "Boston U.": "Boston University",
+    "Charleston": "College of Charleston", "Charleston Southern": "Charleston Southern",
+    "Detroit Mercy": "Detroit", "Southern Miss": "Southern Mississippi",
+    "FIU": "Florida International", "FGCU": "Florida Gulf Coast",
+    "IU Indianapolis": "IU Indy", "IUPUI": "IU Indy",
+    "Mount St. Mary's": "Mount Saint Marys", "Mt. St. Mary's": "Mount Saint Marys",
+    "Saint Joseph's": "Saint Josephs", "St. Joseph's": "Saint Josephs",
+    "San Jose St.": "San Jose State", "UC Davis": "California Davis",
+    "UC Irvine": "California Irvine", "UC Riverside": "California Riverside",
+    "UC San Diego": "California San Diego", "UC Santa Barbara": "California Santa Barbara",
+    "UCSB": "California Santa Barbara", "Hawai'i": "Hawaii",
+}
+
+
+def torvik_name(value: Any) -> str:
+    text = str(value or "").strip().replace("’", "'")
+    # Resolve explicit aliases before normalizing; never use fuzzy team matching.
+    aliases = {normalize_team_name(k): v for k, v in TORVIK_ALIASES.items()}
+    text = aliases.get(normalize_team_name(text), text)
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    text = re.sub(r"\bSt\.?$", "State", text, flags=re.I)
+    return normalize_team_name(text)
+
+
+def fetch_torvik_ratings(season: int, stats: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    url = f"https://barttorvik.com/{season}_team_results.csv"
+    request = urllib.request.Request(url, headers={"User-Agent": "Salas64/3.0", "Accept": "text/csv"})
+    with urllib.request.urlopen(request, timeout=45) as response:
+        text = response.read().decode("utf-8-sig")
+    reader = csv.DictReader(io.StringIO(text))
+    required = {"team", "adjoe", "adjde", "adjt", "oe Rank", "de Rank"}
+    if not required.issubset(set(reader.fieldnames or [])):
+        raise RuntimeError("Torvik feed is not a valid ratings CSV; preserving published data.")
+    rows = list(reader)
+    if len(rows) < TOP_N:
+        raise RuntimeError("Torvik feed contains fewer than 64 teams; preserving published data.")
+    lookup: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for team in stats:
+        if team.get("teamId") is not None and team.get("team"):
+            lookup[torvik_name(team["team"])].append(team)
+    matched, unmatched, used = [], [], set()
+    for row in rows:
+        candidates = lookup.get(torvik_name(row["team"]), [])
+        # Duplicate normalized names are ambiguous: refuse to guess an identity.
+        if len(candidates) != 1:
+            unmatched.append(row["team"])
+            continue
+        team = candidates[0]
+        tid = int(team["teamId"])
+        if tid in used:
+            raise RuntimeError(f"Duplicate Torvik mapping for {team['team']}")
+        offense = float(row["adjoe"])
+        defense = float(row["adjde"])
+        pace = float(row["adjt"])
+        if not all(math.isfinite(v) and v > 0 for v in (offense, defense, pace)):
+            raise RuntimeError(f"Invalid Torvik efficiencies for {row['team']}")
+        used.add(tid)
+        matched.append({"teamId": tid, "team": team["team"], "conference": team.get("conference"),
+                        "offensiveRating": offense, "defensiveRating": defense,
+                        "netRating": offense - defense, "pace": pace,
+                        "ratingsSource": RATINGS_SOURCE, "torvikTeam": row["team"],
+                        "rankings": {"offense": int(float(row["oe Rank"])), "defense": int(float(row["de Rank"]))}})
+    for field, reverse, name in (("offensiveRating", True, "offense"), ("defensiveRating", False, "defense"), ("netRating", True, "net")):
+        for rank, team in enumerate(sorted(matched, key=lambda t: t[field], reverse=reverse), 1):
+            team.setdefault("rankings", {}).setdefault(name, rank)
+    print(f"Bart Torvik: {len(rows)} ratings; {len(matched)} matched to CBBD team IDs.")
+    if unmatched:
+        print("Unmatched Torvik teams (excluded, not guessed): " + ", ".join(unmatched))
+    if len(matched) < TOP_N:
+        raise RuntimeError("Fewer than 64 Torvik teams matched CBBD; preserving published data.")
+    return matched
+
+
 def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
-    ratings = api_get("/ratings/adjusted", {"season": season}, api_key)
     stats = api_get("/stats/team/season", {"season": season}, api_key)
+    ratings = fetch_torvik_ratings(season, stats)
     games = fetch_season_games(season, api_key)
-    print("Ratings returned:", len(ratings))
-    print("Stats returned:", len(stats))
-    print("Games returned:", len(games))
-    print("First rating:", ratings[:1])
-    print("First team stats:", stats[:1])
 
     ratings_by_id = {int(r["teamId"]): r for r in ratings if r.get("teamId") is not None}
     stats_by_id = {int(s["teamId"]): s for s in stats if s.get("teamId") is not None}
@@ -500,7 +611,8 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
                 "offensiveRating": round(offense.get(tid, national_avg_efficiency), 2),
                 "defensiveRating": round(defense.get(tid, national_avg_efficiency), 2),
                 "netRating": round(net.get(tid, 0.0), 2),
-                "pace": round(safe_num(s.get("pace"), 0.0), 2),
+                "pace": round(safe_num(r.get("pace"), safe_num(s.get("pace"), 0.0)), 2),
+                "ratingsSource": RATINGS_SOURCE,
                 "nationalAverageEfficiency": round(national_avg_efficiency, 2),
             }
         )
@@ -515,7 +627,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
             previous_payload = json.loads(previous_path.read_text())
         except Exception:
             previous_payload = {}
-    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season else {}
+    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season and not previous_payload.get("preseason") and previous_payload.get("ratingsSource") == RATINGS_SOURCE else {}
 
     for idx, t in enumerate(teams, start=1):
         t["rank"] = idx if idx <= TOP_N else None
@@ -525,7 +637,7 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
         t["change"] = (int(prev) - idx) if prev is not None and idx <= TOP_N else 0
 
     # Archive the previous official ranking only when it actually contains rankings.
-    if previous_payload.get("rankings"):
+    if previous_payload.get("rankings") and not previous_payload.get("preseason") and previous_payload.get("season") == season:
         history_dir = data_dir / "history"
         history_dir.mkdir(parents=True, exist_ok=True)
         previous_date = str(previous_payload.get("updatedAt") or datetime.now(timezone.utc).date().isoformat())[:10]
@@ -563,10 +675,13 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     payload = {
         "season": season,
         "updatedAt": now.isoformat().replace("+00:00", "Z"),
-        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} • Daily rankings",
+        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} • Daily rankings • Bart Torvik efficiencies",
         "previousUpdatedAt": previous_payload.get("updatedAt") if previous_payload.get("season") == season else None,
         "modelVersion": "Salas Score 1.0",
+        "ratingsSource": RATINGS_SOURCE,
+        "ratingsSourceUrl": f"https://barttorvik.com/trank.php?year={season}",
         "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
+        "preseason": False,
         "rankings": top,
         "allTeams": teams,
         "weeklySummary": {
@@ -618,6 +733,10 @@ def main() -> int:
                 payload["updatedLabel"] = "2026-27 Preseason Salas 64 — Week 0"
                 payload["message"] = "Preseason rankings are active. Live Salas Scores and daily movement will begin once enough 2026-27 games have been played."
             print(f"Preseason mode: preserving published preseason baseline ({exc})")
+        elif existing.get("rankings") and existing.get("season") == season:
+            payload = existing
+            payload["dataCheckedAt"] = now.isoformat().replace("+00:00", "Z")
+            payload["message"] = "Ranking refresh delayed; showing the last successful update."
         else:
             payload = {
                 "season": season,
@@ -625,6 +744,8 @@ def main() -> int:
                 "updatedAt": now.isoformat().replace("+00:00", "Z"),
                 "updatedLabel": "2026-27 preseason",
                 "modelVersion": "Salas Score 1.0",
+        "ratingsSource": RATINGS_SOURCE,
+        "ratingsSourceUrl": f"https://barttorvik.com/trank.php?year={season}",
                 "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
                 "message": "The 2026-27 Salas 64 will populate automatically once enough regular-season data is available.",
                 "rankings": [],
