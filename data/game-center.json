@@ -1,6 +1,6 @@
 {
   "season": 2027,
-  "updatedAt": "2026-11-05T03:26:01.805748+00:00",
+  "updatedAt": "2026-11-05T07:19:04.193537+00:00",
   "dayTimezone": "America/Los_Angeles",
   "games": [
     {
@@ -197,7 +197,7 @@
       "home": {
         "espnId": "96",
         "team": "Kentucky",
-        "rank": 25,
+        "rank": 23,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/96.png",
         "inDirectory": true,
         "score": "85"
@@ -429,7 +429,7 @@
       "home": {
         "espnId": "245",
         "team": "Texas A&M",
-        "rank": 31,
+        "rank": 29,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
         "inDirectory": true,
         "score": "97"
@@ -458,7 +458,7 @@
       "home": {
         "espnId": "142",
         "team": "Missouri",
-        "rank": 35,
+        "rank": 33,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
         "inDirectory": true,
         "score": "111"
@@ -603,7 +603,7 @@
       "home": {
         "espnId": "8",
         "team": "Arkansas",
-        "rank": 22,
+        "rank": 21,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/8.png",
         "inDirectory": true,
         "score": "106"
@@ -719,7 +719,7 @@
       "home": {
         "espnId": "21",
         "team": "San Diego State",
-        "rank": 64,
+        "rank": 63,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/21.png",
         "inDirectory": true,
         "score": "102"
@@ -893,7 +893,7 @@
       "home": {
         "espnId": "2086",
         "team": "Butler",
-        "rank": null,
+        "rank": 64,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2086.png",
         "inDirectory": true,
         "score": "99"
@@ -951,7 +951,7 @@
       "home": {
         "espnId": "2272",
         "team": "High Point",
-        "rank": 61,
+        "rank": 58,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2272.png",
         "inDirectory": true,
         "score": "63"
@@ -1299,7 +1299,7 @@
       "home": {
         "espnId": "2",
         "team": "Auburn",
-        "rank": 27,
+        "rank": 25,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2.png",
         "inDirectory": true,
         "score": "92"
@@ -1330,7 +1330,7 @@
         "team": "Southern Indiana",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/88.png",
-        "inDirectory": true,
+        "inDirectory": false,
         "score": "112"
       },
       "winnerId": "88",
@@ -1402,15 +1402,15 @@
       "day": "2026-11-04",
       "lockAt": "2026-11-05T02:00:00+00:00",
       "timeKnown": true,
-      "state": "in-progress",
-      "statusLabel": "11:42 - 2nd Half",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2515",
         "team": "Radford",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2515.png",
         "inDirectory": true,
-        "score": "51"
+        "score": "70"
       },
       "home": {
         "espnId": "25",
@@ -1418,9 +1418,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/25.png",
         "inDirectory": true,
-        "score": "54"
+        "score": "84"
       },
-      "winnerId": null,
+      "winnerId": "25",
       "neutral": false,
       "model": null
     },
@@ -1431,15 +1431,15 @@
       "day": "2026-11-04",
       "lockAt": "2026-11-05T02:00:00+00:00",
       "timeKnown": true,
-      "state": "in-progress",
-      "statusLabel": "7:19 - 2nd Half",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "131858",
         "team": "Salish Kootenai",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "36"
+        "score": "40"
       },
       "home": {
         "espnId": "149",
@@ -1447,9 +1447,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/149.png",
         "inDirectory": true,
-        "score": "87"
+        "score": "105"
       },
-      "winnerId": null,
+      "winnerId": "149",
       "neutral": false,
       "model": null
     },
@@ -1460,15 +1460,15 @@
       "day": "2026-11-04",
       "lockAt": "2026-11-05T02:00:00+00:00",
       "timeKnown": true,
-      "state": "in-progress",
-      "statusLabel": "11:56 - 2nd Half",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "134743",
         "team": "Grace University",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "36"
+        "score": "52"
       },
       "home": {
         "espnId": "3101",
@@ -1476,9 +1476,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/3101.png",
         "inDirectory": true,
-        "score": "69"
+        "score": "103"
       },
-      "winnerId": null,
+      "winnerId": "3101",
       "neutral": false,
       "model": null
     },
@@ -1489,15 +1489,15 @@
       "day": "2026-11-04",
       "lockAt": "2026-11-05T02:00:00+00:00",
       "timeKnown": true,
-      "state": "in-progress",
-      "statusLabel": "11:55 - 2nd Half",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "110418",
         "team": "West Coast Baptist",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "31"
+        "score": "53"
       },
       "home": {
         "espnId": "68",
@@ -1505,9 +1505,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/68.png",
         "inDirectory": true,
-        "score": "90"
+        "score": "132"
       },
-      "winnerId": null,
+      "winnerId": "68",
       "neutral": false,
       "model": null
     },
@@ -1518,15 +1518,15 @@
       "day": "2026-11-04",
       "lockAt": "2026-11-05T03:00:00+00:00",
       "timeKnown": true,
-      "state": "in-progress",
-      "statusLabel": "8:26 - 1st Half",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2449",
         "team": "North Dakota State",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2449.png",
         "inDirectory": true,
-        "score": "16"
+        "score": "64"
       },
       "home": {
         "espnId": "2608",
@@ -1534,9 +1534,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2608.png",
         "inDirectory": true,
-        "score": "26"
+        "score": "105"
       },
-      "winnerId": null,
+      "winnerId": "2608",
       "neutral": false,
       "model": null
     },
@@ -1547,15 +1547,15 @@
       "day": "2026-11-04",
       "lockAt": "2026-11-05T03:00:00+00:00",
       "timeKnown": true,
-      "state": "in-progress",
-      "statusLabel": "10:22 - 1st Half",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "270",
         "team": "Milwaukee",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/270.png",
         "inDirectory": true,
-        "score": "7"
+        "score": "72"
       },
       "home": {
         "espnId": "2541",
@@ -1563,9 +1563,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2541.png",
         "inDirectory": true,
-        "score": "20"
+        "score": "95"
       },
-      "winnerId": null,
+      "winnerId": "2541",
       "neutral": false,
       "model": null
     },
@@ -1576,15 +1576,15 @@
       "day": "2026-11-04",
       "lockAt": "2026-11-05T03:00:00+00:00",
       "timeKnown": true,
-      "state": "in-progress",
-      "statusLabel": "10:07 - 1st Half",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2511",
         "team": "Queens University",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png",
-        "inDirectory": true,
-        "score": "30"
+        "inDirectory": false,
+        "score": "96"
       },
       "home": {
         "espnId": "2351",
@@ -1592,9 +1592,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2351.png",
         "inDirectory": true,
-        "score": "24"
+        "score": "95"
       },
-      "winnerId": null,
+      "winnerId": "2511",
       "neutral": false,
       "model": null
     },
@@ -1676,14 +1676,20 @@
       "home": {
         "espnId": "238",
         "team": "Vanderbilt",
-        "rank": 21,
+        "rank": 20,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/238.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "238",
+        "awayScore": 71.6,
+        "homeScore": 78.4,
+        "awayProbability": 0.2762
+      }
     },
     {
       "id": "401912227",
@@ -1734,14 +1740,20 @@
       "home": {
         "espnId": "84",
         "team": "Indiana",
-        "rank": 33,
+        "rank": 31,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "84",
+        "awayScore": 67.9,
+        "homeScore": 81.5,
+        "awayProbability": 0.1257
+      }
     },
     {
       "id": "401917177",
@@ -1770,7 +1782,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "213",
+        "awayScore": 73.3,
+        "homeScore": 83.1,
+        "awayProbability": 0.1968
+      }
     },
     {
       "id": "401919732",
@@ -1799,7 +1817,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2916",
+        "awayScore": 74.2,
+        "homeScore": 80.1,
+        "awayProbability": 0.3009
+      }
     },
     {
       "id": "401924948",
@@ -1857,7 +1881,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2550",
+        "awayScore": 66.0,
+        "homeScore": 73.8,
+        "awayProbability": 0.248
+      }
     },
     {
       "id": "401909706",
@@ -1886,7 +1916,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "221",
+        "awayScore": 73.1,
+        "homeScore": 84.6,
+        "awayProbability": 0.1629
+      }
     },
     {
       "id": "401909717",
@@ -1915,7 +1951,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "183",
+        "awayScore": 66.0,
+        "homeScore": 72.1,
+        "awayProbability": 0.2931
+      }
     },
     {
       "id": "401911273",
@@ -1944,7 +1986,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2612",
+        "awayScore": 64.6,
+        "homeScore": 67.8,
+        "awayProbability": 0.3883
+      }
     },
     {
       "id": "401911375",
@@ -2002,7 +2050,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "87",
+        "awayScore": 67.3,
+        "homeScore": 75.3,
+        "awayProbability": 0.241
+      }
     },
     {
       "id": "401920377",
@@ -2089,7 +2143,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "314",
+        "awayScore": 66.0,
+        "homeScore": 72.5,
+        "awayProbability": 0.2837
+      }
     },
     {
       "id": "401921084",
@@ -2118,7 +2178,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2368",
+        "awayScore": 71.0,
+        "homeScore": 76.1,
+        "awayProbability": 0.3261
+      }
     },
     {
       "id": "401921219",
@@ -2234,7 +2300,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2803",
+        "awayScore": 82.6,
+        "homeScore": 80.2,
+        "awayProbability": 0.5853
+      }
     },
     {
       "id": "401921681",
@@ -2263,7 +2335,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "160",
+        "awayScore": 72.7,
+        "homeScore": 70.0,
+        "awayProbability": 0.597
+      }
     },
     {
       "id": "401921682",
@@ -2379,7 +2457,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2329",
+        "awayScore": 79.9,
+        "homeScore": 80.0,
+        "awayProbability": 0.4969
+      }
     },
     {
       "id": "401924733",
@@ -2437,7 +2521,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "47",
+        "awayScore": 75.6,
+        "homeScore": 74.6,
+        "awayProbability": 0.5358
+      }
     },
     {
       "id": "401925819",
@@ -2466,7 +2556,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2429",
+        "awayScore": 70.9,
+        "homeScore": 76.4,
+        "awayProbability": 0.3148
+      }
     },
     {
       "id": "401926078",
@@ -2577,7 +2673,7 @@
         "team": "Lindenwood",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2815.png",
-        "inDirectory": true,
+        "inDirectory": false,
         "score": "0"
       },
       "winnerId": null,
@@ -2669,7 +2765,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "344",
+        "awayScore": 79.5,
+        "homeScore": 87.3,
+        "awayProbability": 0.2456
+      }
     },
     {
       "id": "401911195",
@@ -2727,7 +2829,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2655",
+        "awayScore": 69.9,
+        "homeScore": 77.1,
+        "awayProbability": 0.2622
+      }
     },
     {
       "id": "401920759",
@@ -2894,14 +3002,20 @@
       "home": {
         "espnId": "251",
         "team": "Texas",
-        "rank": 17,
+        "rank": 16,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "251",
+        "awayScore": 69.1,
+        "homeScore": 84.1,
+        "awayProbability": 0.1043
+      }
     },
     {
       "id": "401909491",
@@ -2923,14 +3037,20 @@
       "home": {
         "espnId": "156",
         "team": "Creighton",
-        "rank": 45,
+        "rank": 46,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/156.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "156",
+        "awayScore": 72.0,
+        "homeScore": 82.3,
+        "awayProbability": 0.187
+      }
     },
     {
       "id": "401909563",
@@ -2959,7 +3079,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "150",
+        "awayScore": 68.7,
+        "homeScore": 76.6,
+        "awayProbability": 0.2447
+      }
     },
     {
       "id": "401911229",
@@ -2988,7 +3114,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2350",
+        "awayScore": 66.3,
+        "homeScore": 74.6,
+        "awayProbability": 0.2352
+      }
     },
     {
       "id": "401918968",
@@ -3010,7 +3142,7 @@
       "home": {
         "espnId": "2567",
         "team": "SMU",
-        "rank": 59,
+        "rank": 61,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png",
         "inDirectory": true,
         "score": "0"
@@ -3126,14 +3258,20 @@
       "home": {
         "espnId": "127",
         "team": "Michigan State",
-        "rank": 10,
+        "rank": 9,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/127.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "127",
+        "awayScore": 74.7,
+        "homeScore": 82.4,
+        "awayProbability": 0.2497
+      }
     },
     {
       "id": "401926780",
@@ -3220,7 +3358,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "305",
+        "awayScore": 78.5,
+        "homeScore": 80.3,
+        "awayProbability": 0.435
+      }
     },
     {
       "id": "401911334",
@@ -3271,7 +3415,7 @@
       "home": {
         "espnId": "356",
         "team": "Illinois",
-        "rank": 4,
+        "rank": 3,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/356.png",
         "inDirectory": true,
         "score": "0"
@@ -3365,7 +3509,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2641",
+        "awayScore": 67.2,
+        "homeScore": 75.8,
+        "awayProbability": 0.2269
+      }
     },
     {
       "id": "401921698",
@@ -3394,7 +3544,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "254",
+        "awayScore": 71.5,
+        "homeScore": 76.7,
+        "awayProbability": 0.3238
+      }
     },
     {
       "id": "401920133",
@@ -3445,7 +3601,7 @@
       "home": {
         "espnId": "12",
         "team": "Arizona",
-        "rank": 3,
+        "rank": 6,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png",
         "inDirectory": true,
         "score": "0"
@@ -3510,7 +3666,13 @@
       },
       "winnerId": null,
       "neutral": true,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "103",
+        "awayScore": 67.2,
+        "homeScore": 68.7,
+        "awayProbability": 0.4472
+      }
     },
     {
       "id": "401909751",
@@ -3532,14 +3694,20 @@
       "home": {
         "espnId": "239",
         "team": "Baylor",
-        "rank": 39,
+        "rank": 38,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/239.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "239",
+        "awayScore": 76.3,
+        "homeScore": 88.0,
+        "awayProbability": 0.1582
+      }
     },
     {
       "id": "401920423",
@@ -3568,7 +3736,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "258",
+        "awayScore": 76.9,
+        "homeScore": 84.2,
+        "awayProbability": 0.2588
+      }
     },
     {
       "id": "401922248",
@@ -3619,14 +3793,20 @@
       "home": {
         "espnId": "2483",
         "team": "Oregon",
-        "rank": 57,
+        "rank": 59,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2483",
+        "awayScore": 68.4,
+        "homeScore": 74.4,
+        "awayProbability": 0.2992
+      }
     },
     {
       "id": "401916314",
@@ -3648,14 +3828,20 @@
       "home": {
         "espnId": "194",
         "team": "Ohio State",
-        "rank": 24,
+        "rank": 26,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/194.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2754",
+        "awayScore": 77.8,
+        "homeScore": 77.7,
+        "awayProbability": 0.5055
+      }
     },
     {
       "id": "401922059",
@@ -3706,14 +3892,20 @@
       "home": {
         "espnId": "2509",
         "team": "Purdue",
-        "rank": 26,
+        "rank": 28,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2509.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2674",
+        "awayScore": 74.2,
+        "homeScore": 73.7,
+        "awayProbability": 0.5205
+      }
     },
     {
       "id": "401906780",
@@ -3742,7 +3934,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "61",
+        "awayScore": 73.8,
+        "homeScore": 80.4,
+        "awayProbability": 0.281
+      }
     },
     {
       "id": "401909542",
@@ -3771,7 +3969,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2752",
+        "awayScore": 73.5,
+        "homeScore": 81.3,
+        "awayProbability": 0.2454
+      }
     },
     {
       "id": "401909695",
@@ -3800,7 +4004,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "52",
+        "awayScore": 73.3,
+        "homeScore": 84.2,
+        "awayProbability": 0.1738
+      }
     },
     {
       "id": "401911005",
@@ -3829,7 +4039,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2050",
+        "awayScore": 69.7,
+        "homeScore": 73.1,
+        "awayProbability": 0.3828
+      }
     },
     {
       "id": "401911006",
@@ -3872,7 +4088,7 @@
       "away": {
         "espnId": "139",
         "team": "Saint Louis",
-        "rank": 52,
+        "rank": 51,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/139.png",
         "inDirectory": true,
         "score": "0"
@@ -3880,14 +4096,20 @@
       "home": {
         "espnId": "142",
         "team": "Missouri",
-        "rank": 35,
+        "rank": 33,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": true,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "142",
+        "awayScore": 73.2,
+        "homeScore": 78.6,
+        "awayProbability": 0.3168
+      }
     },
     {
       "id": "401911305",
@@ -3916,7 +4138,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "225",
+        "awayScore": 72.4,
+        "homeScore": 73.7,
+        "awayProbability": 0.4552
+      }
     },
     {
       "id": "401912208",
@@ -3938,14 +4166,20 @@
       "home": {
         "espnId": "228",
         "team": "Clemson",
-        "rank": 42,
+        "rank": 43,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "228",
+        "awayScore": 70.1,
+        "homeScore": 77.2,
+        "awayProbability": 0.2666
+      }
     },
     {
       "id": "401913100",
@@ -3974,7 +4208,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "153",
+        "awayScore": 72.0,
+        "homeScore": 79.7,
+        "awayProbability": 0.2503
+      }
     },
     {
       "id": "401917949",
@@ -4025,14 +4265,20 @@
       "home": {
         "espnId": "152",
         "team": "NC State",
-        "rank": 43,
+        "rank": 42,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/152.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "152",
+        "awayScore": 67.6,
+        "homeScore": 73.8,
+        "awayProbability": 0.2911
+      }
     },
     {
       "id": "401920072",
@@ -4061,7 +4307,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2244",
+        "awayScore": 69.6,
+        "homeScore": 80.6,
+        "awayProbability": 0.1719
+      }
     },
     {
       "id": "401920305",
@@ -4090,7 +4342,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "59",
+        "awayScore": 72.5,
+        "homeScore": 76.4,
+        "awayProbability": 0.3636
+      }
     },
     {
       "id": "401920920",
@@ -4119,7 +4377,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "116",
+        "awayScore": 76.9,
+        "homeScore": 77.4,
+        "awayProbability": 0.4823
+      }
     },
     {
       "id": "401921140",
@@ -4199,14 +4463,20 @@
       "home": {
         "espnId": "222",
         "team": "Villanova",
-        "rank": 30,
+        "rank": 35,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/222.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "222",
+        "awayScore": 72.8,
+        "homeScore": 81.3,
+        "awayProbability": 0.2298
+      }
     },
     {
       "id": "401921754",
@@ -4228,14 +4498,20 @@
       "home": {
         "espnId": "2116",
         "team": "UCF",
-        "rank": 63,
+        "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2116.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2116",
+        "awayScore": 72.6,
+        "homeScore": 74.3,
+        "awayProbability": 0.4386
+      }
     },
     {
       "id": "401921767",
@@ -4257,14 +4533,20 @@
       "home": {
         "espnId": "277",
         "team": "West Virginia",
-        "rank": 46,
+        "rank": 45,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/277.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "277",
+        "awayScore": 66.0,
+        "homeScore": 79.2,
+        "awayProbability": 0.1324
+      }
     },
     {
       "id": "401921802",
@@ -4286,14 +4568,20 @@
       "home": {
         "espnId": "96",
         "team": "Kentucky",
-        "rank": 25,
+        "rank": 23,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/96.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "96",
+        "awayScore": 71.9,
+        "homeScore": 80.3,
+        "awayProbability": 0.2311
+      }
     },
     {
       "id": "401922210",
@@ -4496,7 +4784,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "333",
+        "awayScore": 79.5,
+        "homeScore": 85.5,
+        "awayProbability": 0.3001
+      }
     },
     {
       "id": "401919015",
@@ -4547,7 +4841,7 @@
       "home": {
         "espnId": "275",
         "team": "Wisconsin",
-        "rank": 38,
+        "rank": 39,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/275.png",
         "inDirectory": true,
         "score": "0"
@@ -4583,7 +4877,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2750",
+        "awayScore": 76.9,
+        "homeScore": 82.4,
+        "awayProbability": 0.3148
+      }
     },
     {
       "id": "401925089",
@@ -4634,7 +4934,7 @@
       "home": {
         "espnId": "201",
         "team": "Oklahoma",
-        "rank": 28,
+        "rank": 32,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
         "inDirectory": true,
         "score": "0"
@@ -4692,7 +4992,7 @@
       "home": {
         "espnId": "66",
         "team": "Iowa State",
-        "rank": 6,
+        "rank": 10,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/66.png",
         "inDirectory": true,
         "score": "0"
@@ -4757,7 +5057,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2628",
+        "awayScore": 75.4,
+        "homeScore": 84.9,
+        "awayProbability": 0.2039
+      }
     },
     {
       "id": "401920685",
@@ -4771,7 +5077,7 @@
       "away": {
         "espnId": "41",
         "team": "UConn",
-        "rank": 9,
+        "rank": 8,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/41.png",
         "inDirectory": true,
         "score": "0"
@@ -4786,7 +5092,13 @@
       },
       "winnerId": null,
       "neutral": true,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "41",
+        "awayScore": 75.9,
+        "homeScore": 72.7,
+        "awayProbability": 0.6143
+      }
     },
     {
       "id": "401920733",
@@ -4837,14 +5149,20 @@
       "home": {
         "espnId": "245",
         "team": "Texas A&M",
-        "rank": 31,
+        "rank": 29,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "245",
+        "awayScore": 83.9,
+        "homeScore": 88.3,
+        "awayProbability": 0.3489
+      }
     },
     {
       "id": "401921809",
@@ -4873,7 +5191,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "99",
+        "awayScore": 79.9,
+        "homeScore": 91.6,
+        "awayProbability": 0.1591
+      }
     },
     {
       "id": "401925097",
@@ -4902,7 +5226,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "309",
+        "awayScore": 66.9,
+        "homeScore": 68.8,
+        "awayProbability": 0.4295
+      }
     },
     {
       "id": "401925641",
@@ -5018,7 +5348,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "145",
+        "awayScore": 75.6,
+        "homeScore": 79.9,
+        "awayProbability": 0.3498
+      }
     },
     {
       "id": "401920726",
@@ -5047,7 +5383,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2294",
+        "awayScore": 68.3,
+        "homeScore": 78.4,
+        "awayProbability": 0.1908
+      }
     },
     {
       "id": "401920952",
@@ -5127,7 +5469,7 @@
       "home": {
         "espnId": "2305",
         "team": "Kansas",
-        "rank": 8,
+        "rank": 5,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2305.png",
         "inDirectory": true,
         "score": "0"
@@ -5163,7 +5505,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2306",
+        "awayScore": 73.4,
+        "homeScore": 76.8,
+        "awayProbability": 0.3795
+      }
     },
     {
       "id": "401919040",
@@ -5179,13 +5527,13 @@
         "team": "Queens University",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2511.png",
-        "inDirectory": true,
+        "inDirectory": false,
         "score": "0"
       },
       "home": {
         "espnId": "197",
         "team": "Oklahoma State",
-        "rank": 58,
+        "rank": 57,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png",
         "inDirectory": true,
         "score": "0"
@@ -5214,14 +5562,20 @@
       "home": {
         "espnId": "2390",
         "team": "Miami",
-        "rank": 20,
+        "rank": 24,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2390",
+        "awayScore": 68.2,
+        "homeScore": 73.3,
+        "awayProbability": 0.3265
+      }
     },
     {
       "id": "401921732",
@@ -5272,7 +5626,7 @@
       "home": {
         "espnId": "252",
         "team": "BYU",
-        "rank": 23,
+        "rank": 22,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png",
         "inDirectory": true,
         "score": "0"
@@ -5366,7 +5720,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "204",
+        "awayScore": 76.4,
+        "homeScore": 86.3,
+        "awayProbability": 0.1958
+      }
     },
     {
       "id": "401929410",
@@ -5482,7 +5842,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "24",
+        "awayScore": 69.5,
+        "homeScore": 75.1,
+        "awayProbability": 0.308
+      }
     },
     {
       "id": "401922219",
@@ -5504,14 +5870,20 @@
       "home": {
         "espnId": "26",
         "team": "UCLA",
-        "rank": 29,
+        "rank": 27,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/26.png",
         "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "26",
+        "awayScore": 77.7,
+        "homeScore": 80.4,
+        "awayProbability": 0.404
+      }
     },
     {
       "id": "401929356",
