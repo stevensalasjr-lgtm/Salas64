@@ -343,6 +343,11 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     ratings = api_get("/ratings/adjusted", {"season": season}, api_key)
     stats = api_get("/stats/team/season", {"season": season}, api_key)
     games = fetch_season_games(season, api_key)
+    print("Ratings returned:", len(ratings))
+    print("Stats returned:", len(stats))
+    print("Games returned:", len(games))
+    print("First rating:", ratings[:1])
+    print("First team stats:", stats[:1])
 
     ratings_by_id = {int(r["teamId"]): r for r in ratings if r.get("teamId") is not None}
     stats_by_id = {int(s["teamId"]): s for s in stats if s.get("teamId") is not None}
