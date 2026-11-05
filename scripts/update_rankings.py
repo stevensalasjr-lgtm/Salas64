@@ -763,8 +763,8 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
 
     hottest = max(top, key=lambda t: t["formScore"], default=None)
     with_previous = [t for t in top if t["previousRank"] is not None]
-    riser = max(with_previous, key=lambda t: t["change"], default=None)
-    faller = min(with_previous, key=lambda t: t["change"], default=None)
+    riser = max((t for t in with_previous if t["change"] > 0), key=lambda t: t["change"], default=None)
+    faller = min((t for t in with_previous if t["change"] < 0), key=lambda t: t["change"], default=None)
 
     excluded_watch = {x["team"] for x in (hottest, riser) if x}
     watch_pool = [t for t in top if 16 <= t["rank"] <= 64 and t["team"] not in excluded_watch]
@@ -775,20 +775,20 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
     elif riser:
         riser_note = "No team moved up from the previous official ranking."
     else:
-        riser_note = "First official ranking of the season."
+        riser_note = "No teams moved up since the previous update." if previous_rank else "Movement starts with the next comparable update."
 
     if faller and faller["change"] < 0:
         faller_note = f"Down {abs(faller['change'])} spots since the previous update."
     elif faller:
         faller_note = "No team moved down from the previous official ranking."
     else:
-        faller_note = "First official ranking of the season."
+        faller_note = "No teams moved down since the previous update." if previous_rank else "Movement starts with the next comparable update."
 
     now = datetime.now(timezone.utc)
     payload = {
         "season": season,
         "updatedAt": now.isoformat().replace("+00:00", "Z"),
-        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} â¢ Salas preseason/live blend",
+        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d at %I:%M %p %Z')}",
         "previousUpdatedAt": previous_payload.get("updatedAt") if previous_payload.get("season") == season else None,
         "modelVersion": PRESEASON_BLEND_VERSION,
         "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
@@ -802,8 +802,8 @@ def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
         "allTeams": teams,
         "weeklySummary": {
             "hottestTeam": summary_entry(hottest, "Best recent adjusted form among today's Salas 64." if hottest else "â"),
-            "biggestRiser": summary_entry(riser, riser_note),
-            "biggestFaller": summary_entry(faller, faller_note),
+            "biggestRiser": summary_entry(riser, riser_note) if riser else {"team": "No movement" if previous_rank else "Pending", "note": riser_note},
+            "biggestFaller": summary_entry(faller, faller_note) if faller else {"team": "No movement" if previous_rank else "Pending", "note": faller_note},
             "teamToWatch": summary_entry(watch, f"#{watch['rank']} with a {watch['salasScore']:.1f} Salas Score and strong recent form." if watch else "â"),
         },
     }
