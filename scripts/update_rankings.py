@@ -408,7 +408,10 @@ def torvik_name(value: Any) -> str:
 
 def fetch_torvik_ratings(season: int, stats: list[dict[str, Any]]) -> list[dict[str, Any]]:
     url = f"https://barttorvik.com/{season}_team_results.csv"
-    request = urllib.request.Request(url, headers={"User-Agent": "Salas64/3.0", "Accept": "text/csv"})
+    request = urllib.request.Request(url, headers={
+    "User-Agent": "Mozilla/5.0 (compatible; Salas64/3.1; +https://salas64rankings.com)",
+    "Accept": "text/csv, */*",
+}
     with urllib.request.urlopen(request, timeout=45) as response:
         text = response.read().decode("utf-8-sig")
     reader = csv.DictReader(io.StringIO(text))
