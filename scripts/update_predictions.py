@@ -1,108 +1,876 @@
-"""Build an auditable, frozen daily challenge; standard library only."""
-import json, math, os, re, urllib.request
-from datetime import datetime, timezone
-from pathlib import Path
+#!/usr/bin/env python3
+"""Generate Salas 64 with independently calculated opponent-adjusted efficiencies.
+
+Required environment variable:
+    CBBD_API_KEY
+
+Optional environment variables:
+    CBBD_SEASON   e.g. 2027 for the 2026-27 season
+    DATA_DIR      defaults to ./data
+
+The script uses only Python's standard library so GitHub Actions needs no pip install.
+"""
+
+from __future__ import annotations
+
+from team_directory import refresh, enrich
+
+import json
+import math
+import os
+import shutil
 from zoneinfo import ZoneInfo
-ROOT = Path(__file__).resolve().parents[1]
-PT = ZoneInfo('America/Los_Angeles')
+import statistics
+import sys
+import urllib.parse
+import urllib.request
+from collections import defaultdict
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
+from typing import Any, Iterable
 
-def instant(s):
-    return datetime.fromisoformat(s.replace('Z', '+00:00'))
+BASE_URL = "https://api.collegebasketballdata.com"
+HOME_COURT_POINTS = 3.0
+POINTS_PER_100_TO_GAME = 0.70
+BUBBLE_REFERENCE_RANK = 45
+WIN_PROB_SCALE = 6.5
+TOP_N = 64
 
-def norm(s):
-    return re.sub(r'[^a-z0-9]', '', str(s).lower().replace(' state', ' st'))
+# ESPN's public team-logo CDN is used only for displaying school logos.
+# The updater also tries ESPN's public teams feed each morning, so teams that
+# enter the Salas 64 later in the season receive their logo automatically.
+ESPN_TEAMS_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/teams?limit=500"
+ESPN_LOGO_BASE = "https://a.espncdn.com/i/teamlogos/ncaa/500"
 
-def team_match(c, rankings):
-    t = c['team']; tid = str(t['id'])
-    for r in rankings:
-        if str(r.get('espnId', r.get('teamId', r.get('id', '')))) == tid or re.search(r'/' + re.escape(tid) + r'\.(?:png|svg)', str(r.get('logo', ''))):
-            return r
-    names = {norm(t.get(k, '')) for k in ('location', 'shortDisplayName', 'displayName', 'abbreviation')} - {''}
-    matches = [r for r in rankings if norm(r['team']) in names]
-    return matches[0] if len(matches) == 1 else None
+# Reliable fallbacks for the published Week 0 teams.
+ESPN_TEAM_ID_OVERRIDES = {
+    "Florida": 57,
+    "Duke": 150,
+    "Illinois": 356,
+    "Texas": 251,
+    "UConn": 41,
+    "Arizona": 12,
+    "Michigan State": 127,
+    "Tennessee": 2633,
+    "Texas Tech": 2641,
+    "Arkansas": 8,
+    "Virginia": 258,
+    "Louisville": 97,
+    "Gonzaga": 2250,
+    "USC": 30,
+    "Houston": 248,
+    "Missouri": 142,
+    "BYU": 252,
+    "Alabama": 333,
+    "Miami": 2390,
+    "Kentucky": 96,
+    "Michigan": 130,
+    "UCLA": 26,
+    "St. John's": 2599,
+    "Iowa State": 66,
+    "Vanderbilt": 238,
+    "Kansas": 2305,
+    "Purdue": 2509,
+    "Villanova": 222,
+    "Nebraska": 158,
+    "Indiana": 84,
+    "North Carolina": 153,
+    "Ohio State": 194,
+    "Texas A&M": 245,
+    "TCU": 2628,
+    "West Virginia": 277,
+    "Oklahoma": 201,
+    "Saint Louis": 139,
+    "Oregon": 2483,
+    "Wisconsin": 275,
+    "VCU": 2670,
+    "Providence": 2507,
+    "Oklahoma State": 197,
+    "Iowa": 2294,
+    "Creighton": 156,
+    "Georgia": 61,
+    "Clemson": 228,
+    "Auburn": 2,
+    "Cincinnati": 2132,
+    "Marquette": 269,
+    "NC State": 152,
+    "SMU": 2567,
+    "Xavier": 2752,
+    "Virginia Tech": 259,
+    "Baylor": 239,
+    "San Diego State": 21,
+    "Florida State": 52,
+    "Syracuse": 183,
+    "California": 25,
+    "Georgia Tech": 59,
+    "Maryland": 120,
+    "Saint Mary's": 2608,
+    "Washington": 264,
+    "Mississippi State": 344,
+    "LSU": 99
+}
 
-def usable(r):
-    return r and all(isinstance(r.get(k), (int, float)) and math.isfinite(r[k]) and r[k] > 0 for k in ('offensiveRating', 'defensiveRating', 'pace'))
 
-def project(a, b, neutral):
-    # a=away, b=home; same efficiency formula as the existing simulator.
-    nat = float(a.get('nationalAverageEfficiency') or b.get('nationalAverageEfficiency') or 110)
-    pace = max(58, min(80, (a['pace'] + b['pace']) / 2))
-    sa = pace * (a['offensiveRating'] + b['defensiveRating'] - nat) / 100
-    sb = pace * (b['offensiveRating'] + a['defensiveRating'] - nat) / 100 + (0 if neutral else 3)
-    return sa, sb, 1 / (1 + math.exp(-(sa-sb)/7))
+def normalize_team_name(value: Any) -> str:
+    text = str(value or "").lower()
+    text = text.replace("&", "and")
+    return "".join(ch for ch in text if ch.isalnum())
 
-def scoreboard(day):
-    url = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&limit=1000&dates=' + day.replace('-', '')
-    with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent':'Salas64/1.0'}), timeout=35) as response:
-        payload = json.load(response)
-    if not isinstance(payload.get('events'), list):
-        raise ValueError('Invalid schedule response; preserving previous challenge data')
-    return payload['events']
 
-def candidates(events, rankings, now, day):
-    games = []
-    for e in events:
-        c = e['competitions'][0]; status = e['status']['type']
-        if status['state'] != 'pre' or status['name'] != 'STATUS_SCHEDULED' or c.get('timeValid') is False: continue
-        tip = instant(e['date'])
-        if tip <= now or tip.astimezone(PT).date().isoformat() != day: continue
-        competitors = c['competitors']
-        if len(competitors) != 2: continue
-        away = next((x for x in competitors if x['homeAway'] == 'away'), None)
-        home = next((x for x in competitors if x['homeAway'] == 'home'), None)
-        if not away or not home: continue
-        a, b = team_match(away, rankings), team_match(home, rankings)
-        if not usable(a) or not usable(b): continue
-        if min(a['rank'], b['rank']) > 25: continue
-        sa, sb, pa = project(a, b, c.get('neutralSite', False))
-        sides = [{'id':str(x['team']['id']), 'name':r['team'], 'rank':r['rank']} for x,r in ((away,a),(home,b))]
-        game = {'id':str(e['id']), 'day':day, 'start':e['date'], 'teams':sides, 'neutral':bool(c.get('neutralSite')), 'status':'scheduled', 'winner':None,
-                'model':{'pick':sides[0 if pa >= .5 else 1]['id'], 'probability':round(max(pa,1-pa)*100,1), 'scores':[round(sa,1),round(sb,1)], 'frozenAt':now.isoformat(), 'version':'efficiency-v1-home3'}}
-        # Both Top 25 first, then highest-ranked pair, then closest matchup.
-        priority = (0 if max(a['rank'],b['rank']) <= 25 else 1, a['rank']+b['rank'], abs(sa-sb), e['date'],str(e['id']))
-        games.append((priority,game))
-    return [g for _,g in sorted(games,key=lambda x:x[0])[:3]]
+def fetch_espn_logo_map() -> dict[str, str]:
+    """Fetch a name -> logo map. Failure is non-fatal; team-ID fallbacks remain."""
+    try:
+        req = urllib.request.Request(
+            ESPN_TEAMS_URL,
+            headers={"Accept": "application/json", "User-Agent": "Salas64/2.1"},
+        )
+        with urllib.request.urlopen(req, timeout=20) as response:
+            payload = json.loads(response.read().decode("utf-8"))
 
-def grade(game, event):
-    c=event['competitions'][0]; status=event['status']['type']; name=status['name']
-    if any(x in name for x in ('CANCEL','POSTPONE')):
-        game['status']='void'; game['winner']=None; return
-    if status.get('completed'):
-        wins=[x for x in c['competitors'] if x.get('winner')]
-        ids={x['id'] for x in game['teams']}
-        if len(wins)==1 and str(wins[0]['team']['id']) in ids:
-            game['status']='final';game['winner']=str(wins[0]['team']['id'])
-            scores={str(x['team']['id']):x.get('score','—') for x in c['competitors']}
-            game['scores']=[scores[t['id']] for t in game['teams']]
-    elif status['state']=='in': game['status']='live'
-    elif event['date'] != game['start']:
-        # Never reopen picks or alter the frozen slate after a schedule change.
-        game['status']='void';game['winner']=None
+        result: dict[str, str] = {}
+        sports = payload.get("sports") or []
+        leagues = (sports[0].get("leagues") or []) if sports else []
+        entries = (leagues[0].get("teams") or []) if leagues else []
 
-def main():
-    now=datetime.now(timezone.utc);day=now.astimezone(PT).date().isoformat()
-    year=now.astimezone(PT).year-(now.astimezone(PT).month<7); season=f'{year}-{str(year+1)[-2:]}'
-    path=ROOT/'data/predictions.json'; path.parent.mkdir(exist_ok=True)
-    data=json.loads(path.read_text()) if path.exists() else {'seasons':{}}
-    bucket=data['seasons'].setdefault(season,{'days':{},'games':{}})
-    cache={}
-    def fetch(d):
-        if d not in cache: cache[d]=scoreboard(d)
-        return cache[d]
-    current=json.loads((ROOT/'data/current.json').read_text())
-    for g in bucket['games'].values():
-        if g['status'] in ('final','void'): continue
-        # An unresolved feed is left pending, never invented as a win/loss.
-        event=next((e for e in fetch(g['day']) if str(e['id'])==g['id']),None)
-        if event: grade(g,event)
-    if day not in bucket['days']:
-        picks=[] if current.get('preseason') else candidates(fetch(day),current.get('rankings',[]),now,day)
-        # Empty slates may be retried later if model data becomes available.
-        if picks:
-            bucket['days'][day]=[g['id'] for g in picks]
-            bucket['games'].update({g['id']:g for g in picks})
-    data.update({'season':season,'day':day,'updatedAt':now.isoformat(),'schemaVersion':1})
-    temp=path.with_suffix('.tmp');temp.write_text(json.dumps(data,indent=2)+'\n');os.replace(temp,path)
-    print(f"{season} / {day}: {len(bucket['days'].get(day,[]))} featured games; {len(bucket['games'])} archived")
-if __name__=='__main__': main()
+        for entry in entries:
+            team = entry.get("team") or {}
+            logos = team.get("logos") or []
+            logo = logos[0].get("href") if logos else None
+            if not logo:
+                continue
+            for key in ("displayName", "shortDisplayName", "location", "name", "abbreviation"):
+                value = team.get(key)
+                if value:
+                    result[normalize_team_name(value)] = str(logo)
+        return result
+    except Exception as exc:
+        print(f"Logo feed warning: {exc}")
+        return {}
+
+
+def team_logo_url(name: str, team_id: int, logo_map: dict[str, str]) -> str:
+    fetched = logo_map.get(normalize_team_name(name))
+    if fetched:
+        return fetched
+
+    espn_id = ESPN_TEAM_ID_OVERRIDES.get(name)
+    if espn_id is None:
+        # Unmapped schools show initials. Never treat a CBBD ID as an ESPN ID.
+        return ""
+    return f"{ESPN_LOGO_BASE}/{espn_id}.png"
+
+
+def clamp(value: float, low: float, high: float) -> float:
+    return max(low, min(high, value))
+
+
+def season_year(today: date) -> int:
+    # CBBD labels a season by the calendar year in which it ends.
+    # Example: the 2026-27 season is season=2027.
+    return today.year + 1 if today.month >= 7 else today.year
+
+
+def api_get(path: str, params: dict[str, Any], api_key: str) -> list[dict[str, Any]]:
+    clean = {k: v for k, v in params.items() if v is not None}
+    query = urllib.parse.urlencode(clean)
+    url = f"{BASE_URL}{path}?{query}" if query else f"{BASE_URL}{path}"
+    req = urllib.request.Request(
+        url,
+        headers={"Authorization": f"Bearer {api_key}", "Accept": "application/json", "User-Agent": "Salas64/2.0"},
+    )
+    with urllib.request.urlopen(req, timeout=45) as response:
+        data = json.loads(response.read().decode("utf-8"))
+    if not isinstance(data, list):
+        raise RuntimeError(f"Unexpected response from {path}: expected a list")
+    return data
+
+
+def fetch_season_games(season: int, api_key: str) -> list[dict[str, Any]]:
+    """Fetch final games in monthly chunks to stay safely under API result caps."""
+    # CBBD season 2027 runs from fall 2026 through spring 2027.
+    start = date(season - 1, 10, 15)
+    end = date(season, 4, 20)
+    today = datetime.now(timezone.utc).date()
+    end = min(end, today + timedelta(days=1))
+    if end < start:
+        return []
+
+    seen: dict[Any, dict[str, Any]] = {}
+    cursor = start
+    while cursor <= end:
+        chunk_end = min(cursor + timedelta(days=27), end)
+        rows = api_get(
+            "/games",
+            {
+                "season": season,
+                "status": "final",
+                "startDateRange": f"{cursor.isoformat()}T00:00:00Z",
+                "endDateRange": f"{chunk_end.isoformat()}T23:59:59Z",
+            },
+            api_key,
+        )
+        for row in rows:
+            seen[row.get("id", f"{row.get('startDate')}-{row.get('homeTeam')}-{row.get('awayTeam')}")] = row
+        cursor = chunk_end + timedelta(days=1)
+    return sorted(seen.values(), key=lambda g: g.get("startDate") or "")
+
+
+def percentile_map(values: dict[int, float], higher_is_better: bool = True) -> dict[int, float]:
+    """Percentile rank on a 1-100 scale with average ranks for ties."""
+    valid = [(team_id, float(v)) for team_id, v in values.items() if v is not None and math.isfinite(float(v))]
+    if not valid:
+        return {}
+    ordered = sorted(valid, key=lambda x: x[1], reverse=not higher_is_better)
+    # ordered is worst -> best regardless of metric direction
+    if higher_is_better:
+        ordered = sorted(valid, key=lambda x: x[1])
+    else:
+        ordered = sorted(valid, key=lambda x: x[1], reverse=True)
+
+    n = len(ordered)
+    result: dict[int, float] = {}
+    i = 0
+    while i < n:
+        j = i
+        while j + 1 < n and ordered[j + 1][1] == ordered[i][1]:
+            j += 1
+        avg_index = (i + j) / 2
+        pct = 100.0 if n == 1 else 1.0 + 99.0 * (avg_index / (n - 1))
+        for k in range(i, j + 1):
+            result[ordered[k][0]] = pct
+        i = j + 1
+    return result
+
+
+def safe_num(value: Any, default: float = 0.0) -> float:
+    try:
+        x = float(value)
+        return x if math.isfinite(x) else default
+    except (TypeError, ValueError):
+        return default
+
+
+def team_game_rows(games: list[dict[str, Any]]) -> dict[int, list[dict[str, Any]]]:
+    by_team: dict[int, list[dict[str, Any]]] = defaultdict(list)
+    for g in games:
+        if g.get("homePoints") is None or g.get("awayPoints") is None:
+            continue
+        for side in ("home", "away"):
+            is_home = side == "home"
+            team_id = g.get("homeTeamId" if is_home else "awayTeamId")
+            if team_id is None:
+                continue
+            points = safe_num(g.get("homePoints" if is_home else "awayPoints"))
+            opp_points = safe_num(g.get("awayPoints" if is_home else "homePoints"))
+            neutral = bool(g.get("neutralSite"))
+            location = "neutral" if neutral else ("home" if is_home else "away")
+            by_team[int(team_id)].append(
+                {
+                    "date": g.get("startDate") or "",
+                    "opponentId": int(g.get("awayTeamId" if is_home else "homeTeamId")),
+                    "opponent": g.get("awayTeam" if is_home else "homeTeam") or "Unknown",
+                    "win": points > opp_points,
+                    "margin": points - opp_points,
+                    "points": points,
+                    "opponentPoints": opp_points,
+                    "location": location,
+                }
+            )
+    for rows in by_team.values():
+        rows.sort(key=lambda r: r["date"])
+    return by_team
+
+
+def location_edge(location: str) -> float:
+    if location == "home":
+        return HOME_COURT_POINTS
+    if location == "away":
+        return -HOME_COURT_POINTS
+    return 0.0
+
+
+def logistic_win_probability(expected_margin: float) -> float:
+    return 1.0 / (1.0 + math.exp(-expected_margin / WIN_PROB_SCALE))
+
+
+def last_ten_record(rows: list[dict[str, Any]]) -> str:
+    recent = rows[-10:]
+    wins = sum(1 for r in recent if r["win"])
+    return f"{wins}-{len(recent)-wins}"
+
+
+def current_streak(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "â"
+    last_result = rows[-1]["win"]
+    count = 0
+    for row in reversed(rows):
+        if row["win"] != last_result:
+            break
+        count += 1
+    return f"{'W' if last_result else 'L'}{count}"
+
+
+def best_win(rows: list[dict[str, Any]], net_by_id: dict[int, float]) -> str:
+    wins = [r for r in rows if r["win"]]
+    if not wins:
+        return "â"
+    def quality(r: dict[str, Any]) -> float:
+        # Opponent quality plus extra credit for winning away from home.
+        site_bonus = 3.0 if r["location"] == "away" else (1.5 if r["location"] == "neutral" else 0.0)
+        return net_by_id.get(r["opponentId"], -50.0) + site_bonus
+    chosen = max(wins, key=quality)
+    if chosen["location"] == "away":
+        return f"at {chosen['opponent']}"
+    if chosen["location"] == "neutral":
+        return f"vs {chosen['opponent']} (neutral)"
+    return f"vs {chosen['opponent']}"
+
+
+def load_manual_adjustments(data_dir: Path) -> dict[str, float]:
+    path = data_dir / "manual_adjustments.json"
+    if not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text())
+        teams = payload.get("teams", {})
+        return {str(k): safe_num(v) for k, v in teams.items()}
+    except Exception:
+        return {}
+
+
+# Independent Salas efficiencies. One game is one observation per offense.
+# Model: points/100 = league mean + offense(team) + defense_allowed(opponent)
+#        + venue effect. Ridge penalty = five average games per team effect.
+# This is Salas's model, not a reproduction of CBBD, Torvik, or KenPom ratings.
+OWN_MODEL_VERSION = 'Salas adjusted efficiency 1.0'
+RIDGE_GAMES = 5.0
+
+
+def fetch_game_boxes(season, api_key):
+    start = date(season - 1, 10, 15)
+    end = min(date(season, 4, 20), datetime.now(timezone.utc).date())
+    rows = {}
+    while start <= end:
+        stop = min(start + timedelta(days=13), end)
+        part = api_get('/games/teams', {'season': season,
+            'startDateRange': f'{start.isoformat()}T00:00:00Z',
+            'endDateRange': f'{stop.isoformat()}T23:59:59Z'}, api_key)
+        if len(part) >= 3000:
+            raise RuntimeError('Box-score response may be truncated; refusing incomplete ratings.')
+        for row in part:
+            if row.get('gameId') is not None and row.get('teamId') is not None:
+                rows[(int(row['gameId']), int(row['teamId']))] = row
+        start = stop + timedelta(days=1)
+    return list(rows.values())
+
+
+def estimated_possessions(stats):
+    recorded = safe_num(stats.get('possessions'))
+    if recorded > 0:
+        return recorded
+    fields = (stats.get('fieldGoals') or {}, stats.get('freeThrows') or {},
+              stats.get('rebounds') or {}, stats.get('turnovers') or {})
+    if not all(key in source for source, key in zip(fields, ('attempted', 'attempted', 'offensive', 'total'))):
+        return 0.0
+    return (safe_num(fields[0]['attempted']) + .475 * safe_num(fields[1]['attempted'])
+            - safe_num(fields[2]['offensive']) + safe_num(fields[3]['total']))
+
+
+def efficiency_observations(games, boxes, stats):
+    # Conference membership excludes unclassified/non-Division-I opponents from
+    # strength estimation; their completed results still count toward records.
+    members = {int(s['teamId']) for s in stats if s.get('teamId') is not None and s.get('conference')}
+    by_game = defaultdict(list)
+    for row in boxes:
+        by_game[int(row['gameId'])].append(row)
+    observations, covered, seen = [], set(), set()
+    for g in sorted(games, key=lambda g: (g.get('startDate') or '', str(g.get('id')))):
+        gid = int(g['id'])
+        if gid in seen or g.get('seasonType') == 'preseason' or g.get('status') != 'final':
+            continue
+        seen.add(gid)
+        home, away = g.get('homeTeamId'), g.get('awayTeamId')
+        if home is None or away is None or int(home) not in members or int(away) not in members:
+            continue
+        hp, ap = g.get('homePoints'), g.get('awayPoints')
+        if hp is None or ap is None or hp == ap:
+            continue
+        candidates = []
+        for row in by_game.get(gid, []):
+            if int(row['teamId']) not in (int(home), int(away)):
+                continue
+            own = estimated_possessions(row.get('teamStats') or {})
+            opp = estimated_possessions(row.get('opponentStats') or {})
+            if own > 0 and opp > 0:
+                candidates.append((own + opp) / 2)
+        if not candidates:
+            continue
+        possessions = statistics.mean(candidates)
+        if not 30 <= possessions <= 160:
+            continue
+        edge = 0 if g.get('neutralSite') else HOME_COURT_POINTS / 2 * 100 / possessions
+        # Observed scoring is venue-neutralized before fitting.
+        observations.extend([(int(home), int(away), float(hp) / possessions * 100 - edge, gid),
+                             (int(away), int(home), float(ap) / possessions * 100 + edge, gid)])
+        covered.update((int(home), int(away)))
+    if len(covered) < TOP_N:
+        raise RuntimeError(f'Only {len(covered)} eligible teams returned with complete Division I box scores; expected at least {TOP_N}.')
+    return observations
+
+
+def solve_efficiencies(observations):
+    if not observations:
+        raise RuntimeError('No complete offensive observations available.')
+    mean = statistics.mean(r[2] for r in observations)
+    offense_rows, defense_rows = defaultdict(list), defaultdict(list)
+    for team, opponent, efficiency, gid in observations:
+        offense_rows[team].append((opponent, efficiency - mean))
+        defense_rows[opponent].append((team, efficiency - mean))
+    ids = set(offense_rows) | set(defense_rows)
+    offense, defense = dict.fromkeys(ids, 0.0), dict.fromkeys(ids, 0.0)
+    # Block coordinate descent for a convex ridge objective. The positive
+    # penalty anchors disconnected early-season schedules to the league mean.
+    for iteration in range(1000):
+        delta = 0.0
+        for tid in sorted(ids):
+            rows = offense_rows[tid]
+            value = sum(y - defense[opp] for opp, y in rows) / (len(rows) + RIDGE_GAMES)
+            delta = max(delta, abs(value - offense[tid])); offense[tid] = value
+        for tid in sorted(ids):
+            rows = defense_rows[tid]
+            value = sum(y - offense[opp] for opp, y in rows) / (len(rows) + RIDGE_GAMES)
+            delta = max(delta, abs(value - defense[tid])); defense[tid] = value
+        if delta < 1e-9:
+            break
+    else:
+        raise RuntimeError('Salas efficiency solver did not converge; keeping published data.')
+    result = {tid: {'offensiveRating': mean + offense[tid],
+                    'defensiveRating': mean + defense[tid],
+                    'netRating': offense[tid] - defense[tid]} for tid in ids}
+    if not all(math.isfinite(t[k]) and (k == 'netRating' or t[k] > 0) for t in result.values() for k in t):
+        raise RuntimeError('Invalid adjusted efficiencies; keeping published data.')
+    return result, mean
+
+
+def build_own_ratings(games, boxes, stats):
+    observations = efficiency_observations(games, boxes, stats)
+    fitted, average = solve_efficiencies(observations)
+    names = {int(t['teamId']): t for t in stats if t.get('teamId') is not None}
+    ratings = [{**values, 'teamId': tid, 'team': names[tid]['team'],
+                'conference': names[tid].get('conference'), 'rankings': {}} for tid, values in fitted.items()]
+    for key, reverse, label in [('offensiveRating', True, 'offense'), ('defensiveRating', False, 'defense'), ('netRating', True, 'net')]:
+        for rank, team in enumerate(sorted(ratings, key=lambda t: t[key], reverse=reverse), 1):
+            team['rankings'][label] = rank
+    diagnostics = {'model': OWN_MODEL_VERSION, 'ridgeGames': RIDGE_GAMES,
+                   'gamesUsed': len(observations) // 2, 'teamsRated': len(ratings),
+                   'leagueEfficiency': round(average, 3), 'validation': 'Small-sample model; predictive accuracy not yet established.'}
+    # Chronological holdout, with no future scoring in fitted coefficients.
+    game_ids = list(dict.fromkeys(r[3] for r in observations))
+    if len(game_ids) >= 100:
+        cutoff = int(len(game_ids) * .8)
+        training_ids = set(game_ids[:cutoff])
+        training = [r for r in observations if r[3] in training_ids]
+        trial, _ = solve_efficiencies(training)
+        pairs = defaultdict(list)
+        for r in observations:
+            if r[3] not in training_ids:
+                pairs[r[3]].append(r)
+        errors, baseline, wins = [], [], []
+        for pair in pairs.values():
+            if len(pair) != 2:
+                continue
+            a, b = pair
+            if a[0] not in trial or b[0] not in trial:
+                continue
+            predicted = trial[a[0]]['netRating'] - trial[b[0]]['netRating']
+            actual = a[2] - b[2]
+            errors.append(abs(predicted - actual)); baseline.append(abs(actual))
+            wins.append((predicted > 0) == (actual > 0))
+        diagnostics['chronologicalHoldout'] = {'trainingGames': cutoff, 'evaluatedGames': len(errors),
+            'neutralMarginMAEPer100': round(statistics.mean(errors), 3) if errors else None,
+            'equalTeamsMAEPer100': round(statistics.mean(baseline), 3) if baseline else None,
+            'neutralMarginSignAccuracy': round(statistics.mean(wins), 3) if wins else None,
+            'note': 'Current-season holdout only, not a validated historical win-probability calibration.'}
+    print(f"Salas own ratings: {len(ratings)} teams from {len(observations)//2} completed Division I games.")
+    print('Model diagnostics: ' + json.dumps(diagnostics))
+    return ratings, diagnostics
+
+
+# Preseason ranks are converted to an ordinal starting score, not presented
+# as measured efficiencies. Baseline #1 starts at 100, #64 at 50; unranked
+# teams start at 45. Influence declines linearly to zero after 12 games.
+PRESEASON_FADE_GAMES = 12
+PRESEASON_BLEND_VERSION = 'Salas 2.1 - preseason blend'
+
+
+def preseason_key(name):
+    aliases = {'connecticut': 'uconn', 'northcarolinastate': 'ncstate',
+               'miamifl': 'miami', 'miamiflorida': 'miami', 'mississippi': 'olemiss',
+               'saintjohns': 'stjohns', 'southerncalifornia': 'usc',
+               'centralflorida': 'ucf', 'southernmethodist': 'smu',
+               'texaschristian': 'tcu', 'brighamyoung': 'byu',
+               'louisianastate': 'lsu', 'virginiacommonwealth': 'vcu'}
+    key = normalize_team_name(name)
+    return aliases.get(key, key)
+
+
+def load_preseason_baseline(data_dir, season):
+    path = data_dir / 'ranking-baseline.json'
+    if not path.exists():
+        raise RuntimeError('Missing data/ranking-baseline.json; refusing to invent preseason strengths.')
+    baseline = json.loads(path.read_text())
+    entries = baseline.get('rankings') or []
+    if baseline.get('season') != season or len(entries) != TOP_N or {t.get('rank') for t in entries} != set(range(1, TOP_N+1)):
+        raise RuntimeError('Invalid current-season preseason baseline; keeping existing publication.')
+    return baseline
+
+
+def blend_preseason(teams, baseline, stats, data_dir):
+    priors = {preseason_key(t['team']): t for t in baseline['rankings']}
+    stat_lookup = {preseason_key(t.get('team')): t for t in stats}
+    # Carry baseline teams awaiting box scores, rather than dropping them merely
+    # because their first game has not been played or fully ingested.
+    present = {preseason_key(t['team']) for t in teams}
+    current_path = data_dir / 'current.json'
+    previous = json.loads(current_path.read_text()) if current_path.exists() else {}
+    metadata = {preseason_key(t['team']): t for t in previous.get('allTeams', []) + previous.get('rankings', [])}
+    for key, prior in priors.items():
+        if key in present:
+            continue
+        stats_row = stat_lookup.get(key, {})
+        old = metadata.get(key, {})
+        teams.append({'team': prior['team'], 'teamId': stats_row.get('teamId'),
+                      'espnId': old.get('espnId'), 'logo': old.get('logo'),
+                      'conference': stats_row.get('conference') or old.get('conference'),
+                      'record': f"{int(safe_num(stats_row.get('wins')))}-{int(safe_num(stats_row.get('losses')))}" if stats_row else (old.get('record') or '0-0'),
+                      'last10': old.get('last10') or '0-0', 'streak': old.get('streak') or 'â',
+                      'bestWin': old.get('bestWin') or 'â', 'recentGames': old.get('recentGames') or [],
+                      'salasScore': None, 'powerScore': 50, 'resumeScore': 50, 'marchScore': 50, 'formScore': 50,
+                      'offensiveRating': None, 'defensiveRating': None, 'pace': None,
+                      'dataStatus': 'awaiting-game-box-scores'})
+    for team in teams:
+        key = preseason_key(team['team'])
+        prior = priors.get(key)
+        starting = 100 - (prior['rank'] - 1) * 50 / (TOP_N - 1) if prior else 45.0
+        raw = team.get('salasScore')
+        stats_row = stat_lookup.get(key, {})
+        games = max(0, int(safe_num(stats_row.get('games'))))
+        live_weight = min(1.0, games / PRESEASON_FADE_GAMES) if raw is not None else 0.0
+        team['liveSalasScore'] = raw
+        team['preseasonRank'] = prior['rank'] if prior else None
+        team['preseasonStartingScore'] = round(starting, 3)
+        team['preseasonWeight'] = round(1-live_weight, 4)
+        team['salasScore'] = round(starting * (1-live_weight) + (raw if raw is not None else starting) * live_weight, 1)
+    return teams
+
+
+def build_rankings(season: int, api_key: str, data_dir: Path) -> dict[str, Any]:
+    preseason_baseline = load_preseason_baseline(data_dir, season)
+    stats = api_get("/stats/team/season", {"season": season}, api_key)
+    games = fetch_season_games(season, api_key)
+    boxes = fetch_game_boxes(season, api_key)
+    ratings, model_diagnostics = build_own_ratings(games, boxes, stats)
+
+    ratings_by_id = {int(r["teamId"]): r for r in ratings if r.get("teamId") is not None}
+    stats_by_id = {int(s["teamId"]): s for s in stats if s.get("teamId") is not None}
+    game_rows = team_game_rows(games)
+
+    eligible_ids = [
+        tid for tid, r in ratings_by_id.items()
+        if tid in stats_by_id and safe_num(stats_by_id[tid].get("games")) > 0
+        and safe_num(r.get("offensiveRating")) > 0
+        and safe_num(r.get("defensiveRating")) > 0
+        and r.get("netRating") is not None
+        and math.isfinite(safe_num(r.get("netRating"), float("nan")))
+    ]
+    if len(eligible_ids) < TOP_N:
+        raise RuntimeError(f"Only {len(eligible_ids)} eligible teams returned; expected at least {TOP_N}.")
+
+    net = {tid: safe_num(ratings_by_id[tid].get("netRating")) for tid in eligible_ids}
+    offense = {tid: safe_num(ratings_by_id[tid].get("offensiveRating")) for tid in eligible_ids}
+    defense = {tid: safe_num(ratings_by_id[tid].get("defensiveRating")) for tid in eligible_ids}
+    power_score = percentile_map(net, higher_is_better=True)
+
+    # Bubble reference uses the 45th-best adjusted net rating.
+    net_sorted = sorted(net.values(), reverse=True)
+    bubble_net = net_sorted[min(BUBBLE_REFERENCE_RANK - 1, len(net_sorted) - 1)]
+
+    swab: dict[int, float] = {}
+    form_rating: dict[int, float] = {}
+    for tid in eligible_ids:
+        rows = game_rows.get(tid, [])
+        expected_wins = 0.0
+        for row in rows:
+            opp_net = net.get(row["opponentId"], 0.0)
+            neutral_margin = POINTS_PER_100_TO_GAME * (bubble_net - opp_net)
+            expected_margin = neutral_margin + location_edge(row["location"])
+            expected_wins += logistic_win_probability(expected_margin)
+        actual_wins = sum(1 for r in rows if r["win"])
+        swab[tid] = actual_wins - expected_wins
+
+        recent = rows[-8:]
+        performances = []
+        for row in recent:
+            opp_net = net.get(row["opponentId"], 0.0)
+            adjusted_game_margin = row["margin"] + POINTS_PER_100_TO_GAME * opp_net - location_edge(row["location"])
+            performances.append(adjusted_game_margin)
+        form_rating[tid] = statistics.mean(performances) if performances else -99.0
+
+    resume_score = percentile_map(swab, higher_is_better=True)
+    form_score = percentile_map(form_rating, higher_is_better=True)
+
+    # March Profile raw inputs.
+    off_efg: dict[int, float] = {}
+    def_efg: dict[int, float] = {}
+    off_tov: dict[int, float] = {}
+    def_tov: dict[int, float] = {}
+    off_orb: dict[int, float] = {}
+    def_orb: dict[int, float] = {}
+    off_ftr: dict[int, float] = {}
+    def_ftr: dict[int, float] = {}
+    ft_pct: dict[int, float] = {}
+
+    for tid in eligible_ids:
+        s = stats_by_id[tid]
+        ts = s.get("teamStats") or {}
+        os_ = s.get("opponentStats") or {}
+        tf = ts.get("fourFactors") or {}
+        of = os_.get("fourFactors") or {}
+        off_efg[tid] = safe_num(tf.get("effectiveFieldGoalPct"))
+        def_efg[tid] = safe_num(of.get("effectiveFieldGoalPct"))
+        off_tov[tid] = safe_num(tf.get("turnoverRatio"))
+        def_tov[tid] = safe_num(of.get("turnoverRatio"))
+        off_orb[tid] = safe_num(tf.get("offensiveReboundPct"))
+        def_orb[tid] = safe_num(of.get("offensiveReboundPct"))
+        off_ftr[tid] = safe_num(tf.get("freeThrowRate"))
+        def_ftr[tid] = safe_num(of.get("freeThrowRate"))
+        ft_pct[tid] = safe_num((ts.get("freeThrows") or {}).get("pct"))
+
+    p_off_efg = percentile_map(off_efg, True)
+    p_def_efg = percentile_map(def_efg, False)
+    p_off_tov = percentile_map(off_tov, False)
+    p_def_tov = percentile_map(def_tov, True)
+    p_off_orb = percentile_map(off_orb, True)
+    p_def_orb = percentile_map(def_orb, False)
+    p_off_ftr = percentile_map(off_ftr, True)
+    p_def_ftr = percentile_map(def_ftr, False)
+    p_ft = percentile_map(ft_pct, True)
+
+    march_score: dict[int, float] = {}
+    for tid in eligible_ids:
+        shooting = 0.50 * p_off_efg.get(tid, 50) + 0.50 * p_def_efg.get(tid, 50)
+        turnovers = 0.50 * p_off_tov.get(tid, 50) + 0.50 * p_def_tov.get(tid, 50)
+        rebounding = 0.50 * p_off_orb.get(tid, 50) + 0.50 * p_def_orb.get(tid, 50)
+        free_throws = 0.40 * p_off_ftr.get(tid, 50) + 0.40 * p_def_ftr.get(tid, 50) + 0.20 * p_ft.get(tid, 50)
+        base = 0.40 * shooting + 0.25 * turnovers + 0.20 * rebounding + 0.15 * free_throws
+
+        ranks = ratings_by_id[tid].get("rankings") or {}
+        off_rank = int(safe_num(ranks.get("offense"), 999))
+        def_rank = int(safe_num(ranks.get("defense"), 999))
+        worst = max(off_rank, def_rank)
+        if off_rank <= 10 and def_rank <= 10:
+            balance = 3.0
+        elif off_rank <= 25 and def_rank <= 25:
+            balance = 2.0
+        elif off_rank <= 40 and def_rank <= 40:
+            balance = 1.0
+        elif worst > 100:
+            balance = -4.0
+        elif worst > 75:
+            balance = -2.0
+        else:
+            balance = 0.0
+        march_score[tid] = clamp(base + balance, 1.0, 100.0)
+
+    manual = load_manual_adjustments(data_dir)
+    national_avg_efficiency = statistics.mean(offense.values()) if offense else 110.0
+    logo_map = fetch_espn_logo_map()
+
+    teams: list[dict[str, Any]] = []
+    for tid in eligible_ids:
+        s = stats_by_id[tid]
+        r = ratings_by_id[tid]
+        name = str(r.get("team") or s.get("team") or tid)
+        adjustment = manual.get(name, 0.0)
+        total = (
+            0.50 * power_score.get(tid, 50.0)
+            + 0.25 * resume_score.get(tid, 50.0)
+            + 0.20 * march_score.get(tid, 50.0)
+            + 0.05 * form_score.get(tid, 50.0)
+            + adjustment
+        )
+        rows = game_rows.get(tid, [])
+        wins = int(round(safe_num(s.get("wins"), sum(1 for x in rows if x["win"]))))
+        losses = int(round(safe_num(s.get("losses"), sum(1 for x in rows if not x["win"]))))
+        teams.append(
+            {
+                "teamId": tid,
+                "team": name,
+                "logo": team_logo_url(name, tid, logo_map),
+                "conference": r.get("conference") or s.get("conference"),
+                "salasScore": round(clamp(total, 1.0, 100.0), 1),
+                "record": f"{wins}-{losses}",
+                "last10": last_ten_record(rows),
+                "streak": current_streak(rows),
+                "bestWin": best_win(rows, net),
+                "recentGames": list(reversed(rows[-10:])),
+                "powerScore": round(power_score.get(tid, 50.0), 2),
+                "resumeScore": round(resume_score.get(tid, 50.0), 2),
+                "marchScore": round(march_score.get(tid, 50.0), 2),
+                "formScore": round(form_score.get(tid, 50.0), 2),
+                "swab": round(swab.get(tid, 0.0), 3),
+                "ratingsSource": OWN_MODEL_VERSION,
+                "offensiveRating": round(offense.get(tid, national_avg_efficiency), 2),
+                "defensiveRating": round(defense.get(tid, national_avg_efficiency), 2),
+                "netRating": round(net.get(tid, 0.0), 2),
+                "pace": round(safe_num(s.get("pace"), 0.0), 2),
+                "nationalAverageEfficiency": round(national_avg_efficiency, 2),
+            }
+        )
+
+    teams = blend_preseason(teams, preseason_baseline, stats, data_dir)
+    teams.sort(key=lambda t: (-t["salasScore"], -t["powerScore"], -t["resumeScore"], t["team"]))
+    top = teams[:TOP_N]
+
+    previous_path = data_dir / "current.json"
+    previous_payload: dict[str, Any] = {}
+    if previous_path.exists():
+        try:
+            previous_payload = json.loads(previous_path.read_text())
+        except Exception:
+            previous_payload = {}
+    previous_rank = {str(t.get("team")): t.get("rank") for t in previous_payload.get("rankings", []) if t.get("rank")} if previous_payload.get("season") == season and previous_payload.get("preseasonBlendVersion") == PRESEASON_BLEND_VERSION and not previous_payload.get("preseason") else {}
+
+    for idx, t in enumerate(teams, start=1):
+        t["rank"] = idx if idx <= TOP_N else None
+        t["modelRank"] = idx
+        prev = previous_rank.get(t["team"])
+        t["previousRank"] = int(prev) if prev is not None else None
+        t["change"] = (int(prev) - idx) if prev is not None and idx <= TOP_N else 0
+
+    # Archive the previous official ranking only when it actually contains rankings.
+    if previous_payload.get("rankings") and not previous_payload.get("preseason") and previous_payload.get("season") == season:
+        history_dir = data_dir / "history"
+        history_dir.mkdir(parents=True, exist_ok=True)
+        previous_date = str(previous_payload.get("updatedAt") or datetime.now(timezone.utc).date().isoformat())[:10]
+        archive = history_dir / f"{previous_date}.json"
+        # Keep the latest published version for a date, including manual reruns.
+        shutil.copy2(previous_path, archive)
+
+    def summary_entry(team: dict[str, Any] | None, note: str) -> dict[str, Any]:
+        return {"team": team["team"] if team else "â", "note": note}
+
+    hottest = max(top, key=lambda t: t["formScore"], default=None)
+    with_previous = [t for t in top if t["previousRank"] is not None]
+    riser = max(with_previous, key=lambda t: t["change"], default=None)
+    faller = min(with_previous, key=lambda t: t["change"], default=None)
+
+    excluded_watch = {x["team"] for x in (hottest, riser) if x}
+    watch_pool = [t for t in top if 16 <= t["rank"] <= 64 and t["team"] not in excluded_watch]
+    watch = max(watch_pool, key=lambda t: 0.58 * t["formScore"] + 0.37 * t["salasScore"] + 0.05 * max(t["change"], 0) * 5, default=None)
+
+    if riser and riser["change"] > 0:
+        riser_note = f"Up {riser['change']} spots since the previous update."
+    elif riser:
+        riser_note = "No team moved up from the previous official ranking."
+    else:
+        riser_note = "First official ranking of the season."
+
+    if faller and faller["change"] < 0:
+        faller_note = f"Down {abs(faller['change'])} spots since the previous update."
+    elif faller:
+        faller_note = "No team moved down from the previous official ranking."
+    else:
+        faller_note = "First official ranking of the season."
+
+    now = datetime.now(timezone.utc)
+    payload = {
+        "season": season,
+        "updatedAt": now.isoformat().replace("+00:00", "Z"),
+        "updatedLabel": f"Updated {now.astimezone(ZoneInfo('America/Los_Angeles')).strftime('%b %d, %Y at %I:%M %p %Z')} â¢ Salas preseason/live blend",
+        "previousUpdatedAt": previous_payload.get("updatedAt") if previous_payload.get("season") == season else None,
+        "modelVersion": PRESEASON_BLEND_VERSION,
+        "weights": {"strength": 0.50, "resume": 0.25, "march": 0.20, "form": 0.05},
+        "preseason": False,
+        "preseasonBlendVersion": PRESEASON_BLEND_VERSION,
+        "preseasonBlend": {"baselineId": preseason_baseline.get("id"), "fadeGames": PRESEASON_FADE_GAMES, "method": "Linear blend of ordinal preseason starting score with live Salas Score; preseason #1=100, #64=50, unranked=45."},
+        "ratingsSource": OWN_MODEL_VERSION,
+        "modelDiagnostics": model_diagnostics,
+        "message": "Early-season rankings blend the published preseason baseline with game results. Preseason influence fades to zero after each team plays 12 games. Predictive accuracy is not yet established.",
+        "rankings": top,
+        "allTeams": teams,
+        "weeklySummary": {
+            "hottestTeam": summary_entry(hottest, "Best recent adjusted form among today's Salas 64." if hottest else "â"),
+            "biggestRiser": summary_entry(riser, riser_note),
+            "biggestFaller": summary_entry(faller, faller_note),
+            "teamToWatch": summary_entry(watch, f"#{watch['rank']} with a {watch['salasScore']:.1f} Salas Score and strong recent form." if watch else "â"),
+        },
+    }
+    return payload
+
+
+def main() -> int:
+    api_key = os.getenv("CBBD_API_KEY", "").strip()
+    if not api_key:
+        print("ERROR: CBBD_API_KEY is not set.", file=sys.stderr)
+        return 2
+
+    today = datetime.now(timezone.utc).date()
+    season = int(os.getenv("CBBD_SEASON") or season_year(today))
+    data_dir = Path(os.getenv("DATA_DIR") or Path(__file__).resolve().parents[1] / "data")
+    data_dir.mkdir(parents=True, exist_ok=True)
+
+    print(f"Generating Salas 64 for season {season}â¦")
+    try:
+        payload = build_rankings(season, api_key, data_dir)
+    except RuntimeError as exc:
+        # Before enough 2026-27 games/ratings exist, keep the public site in
+        # preseason mode instead of falling back to the completed 2025-26 season.
+        if "eligible teams returned" not in str(exc):
+            raise
+        now = datetime.now(timezone.utc)
+        current_path = data_dir / "current.json"
+        existing = {}
+        if current_path.exists():
+            try:
+                existing = json.loads(current_path.read_text())
+            except Exception:
+                existing = {}
+
+        # Preserve the published Week 0 preseason list until the live model has
+        # enough 2026-27 data to produce a real Top 64.
+        if existing.get("preseason") and existing.get("rankings") and existing.get("season") == season:
+            payload = existing
+            payload["season"] = season
+            payload["dataCheckedAt"] = now.isoformat().replace("+00:00", "Z")
+            # Keep the verified consensus label, source audit, and snapshot date.
+            if not payload.get("preseasonConsensus"):
+                payload["updatedLabel"] = "2026-27 Preseason Salas 64 â Week 0"
+                payload["message"] = "Preseason rankings are active. Live Salas Scores and daily movement will begin once enough 2026-27 games have been played."
+            print(f"Preseason mode: preserving published preseason baseline ({exc})")
+        elif existing.get("rankings") and existing.get("season") == season:
+            payload = existing
+            payload["dataCheckedAt"] = now.isoformat().replace("+00:00", "Z")
+            payload["message"] = "Ranking refresh delayed; showing the last successful update."
+        else:
+            raise RuntimeError("No current-season ranking baseline available; refusing empty publication.")
+
+    baseline_path = data_dir / "ranking-baseline.json"
+    if baseline_path.exists():
+        baseline = json.loads(baseline_path.read_text())
+        if baseline.get("season") == season:
+            payload["rankingBaseline"] = baseline
+    if payload.get("preseason") and payload.get("rankings"):
+        checked = datetime.fromisoformat(payload["updatedAt"].replace("Z", "+00:00"))
+        payload["updatedLabel"] = "Updated " + checked.astimezone(ZoneInfo("America/Los_Angeles")).strftime("%b %d, %Y")
+        payload["message"] = ""
+    payload = enrich(payload, refresh(data_dir))
+    out = data_dir / "current.json"
+    out.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
+    print(f"Wrote {out} with {len(payload['rankings'])} ranked teams.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
