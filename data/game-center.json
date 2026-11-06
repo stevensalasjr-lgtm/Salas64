@@ -1,6 +1,6 @@
 {
   "season": 2027,
-  "updatedAt": "2026-11-06T17:25:21.484718+00:00",
+  "updatedAt": "2026-11-06T22:20:37.165591+00:00",
   "dayTimezone": "America/Los_Angeles",
   "games": [
     {
@@ -139,7 +139,7 @@
       "home": {
         "espnId": "259",
         "team": "Virginia Tech",
-        "rank": 55,
+        "rank": 50,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/259.png",
         "inDirectory": true,
         "score": "88"
@@ -155,15 +155,15 @@
       "day": "2026-11-03",
       "lockAt": "2026-11-04T00:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Tue, November 3rd at 7:00 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2684",
         "team": "Warren Wilson",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "0"
+        "score": "53"
       },
       "home": {
         "espnId": "2448",
@@ -171,9 +171,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2448.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "92"
       },
-      "winnerId": null,
+      "winnerId": "2448",
       "neutral": false,
       "model": null
     },
@@ -197,7 +197,7 @@
       "home": {
         "espnId": "96",
         "team": "Kentucky",
-        "rank": 23,
+        "rank": 24,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/96.png",
         "inDirectory": true,
         "score": "85"
@@ -429,7 +429,7 @@
       "home": {
         "espnId": "245",
         "team": "Texas A&M",
-        "rank": 29,
+        "rank": 30,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
         "inDirectory": true,
         "score": "97"
@@ -458,7 +458,7 @@
       "home": {
         "espnId": "142",
         "team": "Missouri",
-        "rank": 33,
+        "rank": 35,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
         "inDirectory": true,
         "score": "111"
@@ -719,7 +719,7 @@
       "home": {
         "espnId": "21",
         "team": "San Diego State",
-        "rank": 64,
+        "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/21.png",
         "inDirectory": true,
         "score": "102"
@@ -951,7 +951,7 @@
       "home": {
         "espnId": "2272",
         "team": "High Point",
-        "rank": 58,
+        "rank": 60,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2272.png",
         "inDirectory": true,
         "score": "63"
@@ -1531,7 +1531,7 @@
       "home": {
         "espnId": "2608",
         "team": "Saint Mary's",
-        "rank": 63,
+        "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2608.png",
         "inDirectory": true,
         "score": "105"
@@ -1740,7 +1740,7 @@
       "home": {
         "espnId": "84",
         "team": "Indiana",
-        "rank": 31,
+        "rank": 29,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/84.png",
         "inDirectory": true,
         "score": "92"
@@ -1909,7 +1909,7 @@
       "home": {
         "espnId": "183",
         "team": "Syracuse",
-        "rank": null,
+        "rank": 63,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/183.png",
         "inDirectory": true,
         "score": "102"
@@ -2078,7 +2078,7 @@
       "home": {
         "espnId": "259",
         "team": "Virginia Tech",
-        "rank": 55,
+        "rank": 50,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/259.png",
         "inDirectory": true,
         "score": "96"
@@ -2392,7 +2392,7 @@
       "home": {
         "espnId": "2132",
         "team": "Cincinnati",
-        "rank": 34,
+        "rank": 31,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2132.png",
         "inDirectory": true,
         "score": "81"
@@ -2758,7 +2758,7 @@
       "home": {
         "espnId": "344",
         "team": "Mississippi State",
-        "rank": null,
+        "rank": 64,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/344.png",
         "inDirectory": true,
         "score": "82"
@@ -3037,7 +3037,7 @@
       "home": {
         "espnId": "156",
         "team": "Creighton",
-        "rank": 46,
+        "rank": 42,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/156.png",
         "inDirectory": true,
         "score": "83"
@@ -3142,7 +3142,7 @@
       "home": {
         "espnId": "2567",
         "team": "SMU",
-        "rank": 61,
+        "rank": 57,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2567.png",
         "inDirectory": true,
         "score": "95"
@@ -3258,7 +3258,7 @@
       "home": {
         "espnId": "127",
         "team": "Michigan State",
-        "rank": 9,
+        "rank": 7,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/127.png",
         "inDirectory": true,
         "score": "91"
@@ -3502,7 +3502,7 @@
       "home": {
         "espnId": "2641",
         "team": "Texas Tech",
-        "rank": 11,
+        "rank": 10,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png",
         "inDirectory": true,
         "score": "76"
@@ -3601,7 +3601,7 @@
       "home": {
         "espnId": "12",
         "team": "Arizona",
-        "rank": 5,
+        "rank": 11,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/12.png",
         "inDirectory": true,
         "score": "104"
@@ -3646,15 +3646,15 @@
       "day": "2026-11-06",
       "lockAt": "2026-11-06T21:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Fri, November 6th at 4:00 PM EST",
+      "state": "in-progress",
+      "statusLabel": "15:55 - 2nd Half",
       "away": {
         "espnId": "113",
         "team": "Massachusetts",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/113.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "37"
       },
       "home": {
         "espnId": "103",
@@ -3662,7 +3662,7 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/103.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "45"
       },
       "winnerId": null,
       "neutral": true,
@@ -3681,23 +3681,23 @@
       "day": "2026-11-06",
       "lockAt": "2026-11-06T22:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Fri, November 6th at 5:00 PM EST",
+      "state": "in-progress",
+      "statusLabel": "11:43 - 1st Half",
       "away": {
         "espnId": "2029",
         "team": "Arkansas-Pine Bluff",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2029.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "4"
       },
       "home": {
         "espnId": "239",
         "team": "Baylor",
-        "rank": 38,
+        "rank": 40,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/239.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "17"
       },
       "winnerId": null,
       "neutral": false,
@@ -3716,15 +3716,15 @@
       "day": "2026-11-06",
       "lockAt": "2026-11-06T22:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Fri, November 6th at 5:00 PM EST",
+      "state": "in-progress",
+      "statusLabel": "11:33 - 1st Half",
       "away": {
         "espnId": "111",
         "team": "Northeastern",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/111.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "12"
       },
       "home": {
         "espnId": "258",
@@ -3732,7 +3732,7 @@
         "rank": 18,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/258.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "9"
       },
       "winnerId": null,
       "neutral": false,
@@ -3751,15 +3751,15 @@
       "day": "2026-11-06",
       "lockAt": "2026-11-06T22:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Fri, November 6th at 5:00 PM EST",
+      "state": "in-progress",
+      "statusLabel": "11:30 - 1st Half",
       "away": {
         "espnId": "2697",
         "team": "West Florida",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2697.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "9"
       },
       "home": {
         "espnId": "2229",
@@ -3767,7 +3767,7 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "17"
       },
       "winnerId": null,
       "neutral": false,
@@ -3793,7 +3793,7 @@
       "home": {
         "espnId": "2483",
         "team": "Oregon",
-        "rank": 59,
+        "rank": 58,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2483.png",
         "inDirectory": true,
         "score": "0"
@@ -4088,7 +4088,7 @@
       "away": {
         "espnId": "139",
         "team": "Saint Louis",
-        "rank": 51,
+        "rank": 52,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/139.png",
         "inDirectory": true,
         "score": "0"
@@ -4096,7 +4096,7 @@
       "home": {
         "espnId": "142",
         "team": "Missouri",
-        "rank": 33,
+        "rank": 35,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/142.png",
         "inDirectory": true,
         "score": "0"
@@ -4166,7 +4166,7 @@
       "home": {
         "espnId": "228",
         "team": "Clemson",
-        "rank": 43,
+        "rank": 44,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png",
         "inDirectory": true,
         "score": "0"
@@ -4265,7 +4265,7 @@
       "home": {
         "espnId": "152",
         "team": "NC State",
-        "rank": 42,
+        "rank": 43,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/152.png",
         "inDirectory": true,
         "score": "0"
@@ -4463,7 +4463,7 @@
       "home": {
         "espnId": "222",
         "team": "Villanova",
-        "rank": 35,
+        "rank": 34,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/222.png",
         "inDirectory": true,
         "score": "0"
@@ -4533,7 +4533,7 @@
       "home": {
         "espnId": "277",
         "team": "West Virginia",
-        "rank": 45,
+        "rank": 46,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/277.png",
         "inDirectory": true,
         "score": "0"
@@ -4568,7 +4568,7 @@
       "home": {
         "espnId": "96",
         "team": "Kentucky",
-        "rank": 23,
+        "rank": 24,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/96.png",
         "inDirectory": true,
         "score": "0"
@@ -4841,7 +4841,7 @@
       "home": {
         "espnId": "275",
         "team": "Wisconsin",
-        "rank": 39,
+        "rank": 38,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/275.png",
         "inDirectory": true,
         "score": "0"
@@ -4934,7 +4934,7 @@
       "home": {
         "espnId": "201",
         "team": "Oklahoma",
-        "rank": 32,
+        "rank": 33,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/201.png",
         "inDirectory": true,
         "score": "0"
@@ -4963,7 +4963,7 @@
       "home": {
         "espnId": "269",
         "team": "Marquette",
-        "rank": 40,
+        "rank": 39,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/269.png",
         "inDirectory": true,
         "score": "0"
@@ -4992,7 +4992,7 @@
       "home": {
         "espnId": "66",
         "team": "Iowa State",
-        "rank": 10,
+        "rank": 9,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/66.png",
         "inDirectory": true,
         "score": "0"
@@ -5050,7 +5050,7 @@
       "home": {
         "espnId": "2628",
         "team": "TCU",
-        "rank": 53,
+        "rank": 54,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2628.png",
         "inDirectory": true,
         "score": "0"
@@ -5149,7 +5149,7 @@
       "home": {
         "espnId": "245",
         "team": "Texas A&M",
-        "rank": 29,
+        "rank": 30,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/245.png",
         "inDirectory": true,
         "score": "0"
@@ -5341,7 +5341,7 @@
       "home": {
         "espnId": "145",
         "team": "Ole Miss",
-        "rank": 54,
+        "rank": 55,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
         "inDirectory": true,
         "score": "0"
@@ -5469,7 +5469,7 @@
       "home": {
         "espnId": "2305",
         "team": "Kansas",
-        "rank": 6,
+        "rank": 5,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2305.png",
         "inDirectory": true,
         "score": "0"
@@ -5533,7 +5533,7 @@
       "home": {
         "espnId": "197",
         "team": "Oklahoma State",
-        "rank": 57,
+        "rank": 59,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png",
         "inDirectory": true,
         "score": "0"
@@ -5562,7 +5562,7 @@
       "home": {
         "espnId": "2390",
         "team": "Miami",
-        "rank": 24,
+        "rank": 23,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2390.png",
         "inDirectory": true,
         "score": "0"
@@ -6339,7 +6339,7 @@
       "away": {
         "espnId": "2670",
         "team": "VCU",
-        "rank": 52,
+        "rank": 53,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2670.png",
         "inDirectory": true,
         "score": "0"
@@ -6444,7 +6444,7 @@
       "away": {
         "espnId": "21",
         "team": "San Diego State",
-        "rank": 64,
+        "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/21.png",
         "inDirectory": true,
         "score": "0"
@@ -6708,7 +6708,7 @@
       "home": {
         "espnId": "328",
         "team": "Utah State",
-        "rank": 50,
+        "rank": 51,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/328.png",
         "inDirectory": true,
         "score": "0"
@@ -6830,7 +6830,7 @@
       "home": {
         "espnId": "2272",
         "team": "High Point",
-        "rank": 58,
+        "rank": 60,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2272.png",
         "inDirectory": true,
         "score": "0"
@@ -6994,7 +6994,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2636",
+        "awayScore": 84.4,
+        "homeScore": 87.6,
+        "awayProbability": 0.3885
+      }
     },
     {
       "id": "401928788",
@@ -7016,7 +7022,7 @@
       "home": {
         "espnId": "2250",
         "team": "Gonzaga",
-        "rank": 7,
+        "rank": 6,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2250.png",
         "inDirectory": true,
         "score": "0"
@@ -7109,7 +7115,7 @@
       "home": {
         "espnId": "167",
         "team": "New Mexico",
-        "rank": 60,
+        "rank": 61,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/167.png",
         "inDirectory": true,
         "score": "0"
@@ -7349,7 +7355,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2166",
+        "awayScore": 71.0,
+        "homeScore": 79.7,
+        "awayProbability": 0.2236
+      }
     },
     {
       "id": "401928817",
@@ -7493,7 +7505,7 @@
       "home": {
         "espnId": "2253",
         "team": "Grand Canyon",
-        "rank": 44,
+        "rank": 45,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2253.png",
         "inDirectory": true,
         "score": "0"
@@ -8023,7 +8035,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2803",
+        "awayScore": 71.5,
+        "homeScore": 75.4,
+        "awayProbability": 0.3642
+      }
     },
     {
       "id": "401921684",
@@ -8087,7 +8105,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "160",
+        "awayScore": 70.9,
+        "homeScore": 77.4,
+        "awayProbability": 0.2827
+      }
     },
     {
       "id": "401921687",
@@ -8116,7 +8140,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2349",
+        "awayScore": 74.1,
+        "homeScore": 79.9,
+        "awayProbability": 0.3015
+      }
     },
     {
       "id": "401921820",
@@ -8180,7 +8210,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2561",
+        "awayScore": 73.7,
+        "homeScore": 76.4,
+        "awayProbability": 0.4068
+      }
     },
     {
       "id": "401926867",
@@ -8436,7 +8472,13 @@
       },
       "winnerId": null,
       "neutral": false,
-      "model": null
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "399",
+        "awayScore": 66.0,
+        "homeScore": 73.1,
+        "awayProbability": 0.2653
+      }
     },
     {
       "id": "401924719",
@@ -8677,7 +8719,7 @@
       "away": {
         "espnId": "2608",
         "team": "Saint Mary's",
-        "rank": 63,
+        "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2608.png",
         "inDirectory": true,
         "score": "0"
@@ -8968,7 +9010,7 @@
       "away": {
         "espnId": "30",
         "team": "USC",
-        "rank": 30,
+        "rank": 32,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png",
         "inDirectory": true,
         "score": "0"
