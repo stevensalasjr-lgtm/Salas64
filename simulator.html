@@ -484,50 +484,80 @@
 
     function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
     function getTeamByName(name){return allTeams.find(t=>t.team===name)}
-    // Link contract: simulator.html?away=AwayTeam&home=HomeTeam&neutral=1
-    // Legacy Game Center links use teamA=home and teamB=away by default.
-    // For legacy pages passing homeAway=A or homeAway=B, positions are corrected.
+    // Explicit away/home links are preferred. Legacy Game Center links use
+    // teamA as HOME and teamB as AWAY. Match names/aliases after data loads.
     function matchupFromUrl(){
-      const q=new URLSearchParams(location.search);
-      const first=(...keys)=>{for(const key of keys){const val=q.get(key);if(val)return val;}return null;};
+      const q=new URLSearchParams(window.location.search);
+      const first=(...keys)=>{
+        for(const key of keys){const value=q.get(key);if(value&&value.trim())return value.trim();}
+        return null;
+      };
       let away=first('away','awayTeam','visitor','visitorTeam','away_team');
       let home=first('home','homeTeam','home_team');
       const legacyA=first('teamA','team1');
       const legacyB=first('teamB','team2');
       const orientation=(first('homeAway','homeSide','homeTeamSide')||'').toLowerCase();
       if(!away&&!home){
-        // Legacy Game Center Explore Matchup links use teamA=home, teamB=away.
-        // An explicit homeSide/homeAway parameter takes precedence.
         if(['b','teamb','right','2'].includes(orientation)){
-          away=legacyA; home=legacyB;
+          away=legacyA;home=legacyB;
         }else{
-          away=legacyB; home=legacyA;
+          away=legacyB;home=legacyA;
         }
       }else{
-        away=away||legacyA||legacyB;
-        home=home|| (legacyB!==away?legacyB:legacyA);
+        away=away||(legacyB!==home?legacyB:legacyA);
+        home=home||(legacyA!==away?legacyA:legacyB);
       }
-      const neutralRaw=first('neutral','neutralSite','isNeutral');
-      const neutral=neutralRaw!==null && ['1','true','yes','on'].includes(neutralRaw.toLowerCase());
-      return {away,home,neutral};
+      const raw=first('neutral','neutralSite','isNeutral');
+      return {away,home,neutral:raw!==null&&['1','true','yes','on'].includes(raw.toLowerCase())};
+    }
+    function locateTeam(input){
+      if(!input)return null;
+      const normalize=s=>String(s||'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]/g,'');
+      const target=normalize(input);
+      return allTeams.find(t=>normalize(t.team)===target ||
+        (t.aliases||[]).some(alias=>normalize(alias)===target))||null;
+    }
+    function refreshSimulatorSearchFields(){
+      for(const [selectId,inputId,hintId] of [
+        ['teamASelect','s64AwaySearch','s64AwayHint'],
+        ['teamBSelect','s64HomeSearch','s64HomeHint']
+      ]){
+        const select=document.getElementById(selectId);
+        const input=document.getElementById(inputId);
+        const hint=document.getElementById(hintId);
+        if(input&&select){
+          input.value=select.value||'';
+          if(hint&&select.value){
+            const team=locateTeam(select.value);
+            hint.textContent=team?`${rankLabel(team)} · ${team.salasScore??'—'} Salas Score`:'Select a team';
+          }
+        }
+      }
     }
     function buildTeamSelects(){
-      const a=document.getElementById('teamASelect'),b=document.getElementById('teamBSelect');
-      a.innerHTML='';b.innerHTML='';
-      const requested=matchupFromUrl();
-      for(const name of [requested.away,requested.home]){
-        if(name&&!getTeamByName(name))allTeams.push({team:name,rank:null,dataStatus:'not-in-directory'});
-      }
-      allTeams.slice().sort((x,y)=>x.team.localeCompare(y.team)).forEach(t=>{
+      const a=document.getElementById('teamASelect');
+      const b=document.getElementById('teamBSelect');
+      a.replaceChildren();b.replaceChildren();
+      for(const t of allTeams.slice().sort((x,y)=>x.team.localeCompare(y.team))){
         const label=`${rankLabel(t)} ${t.team}${hasModel(t)?'':' · Stats pending'}`;
-        for(const sel of [a,b]){const o=document.createElement('option');o.value=t.team;o.textContent=label;sel.appendChild(o);}
-      });
-      a.value=getTeamByName(requested.away)?.team||allTeams[0]?.team||'';
-      b.value=getTeamByName(requested.home)?.team||allTeams.find(t=>t.team!==a.value)?.team||'';
+        for(const sel of [a,b]){
+          const option=document.createElement('option');
+          option.value=t.team;option.textContent=label;sel.appendChild(option);
+        }
+      }
+      const requested=matchupFromUrl();
+      const awayTeam=locateTeam(requested.away);
+      const homeTeam=locateTeam(requested.home);
+      a.value=awayTeam?.team||allTeams[0]?.team||'';
+      b.value=homeTeam?.team||allTeams.find(t=>t.team!==a.value)?.team||'';
       document.getElementById('neutralSiteToggle').checked=requested.neutral;
+      refreshSimulatorSearchFields();
       updateSimulatorAvailability();
-      // An Explore Matchup URL opens a ready forecast when both teams have data.
-      if(requested.away&&requested.home&&!document.getElementById('runSimBtn').disabled)runSimulations();
+      // Let the asynchronous rankings load and all search fields synchronize
+      // before showing the linked matchup forecast.
+      if(awayTeam&&homeTeam&&awayTeam!==homeTeam&&!document.getElementById('runSimBtn').disabled){
+        requestAnimationFrame(()=>runSimulations());
+      }
     }
     function updateSimulatorAvailability(){
       const a=getTeamByName(document.getElementById('teamASelect').value);
@@ -644,7 +674,7 @@
       document.getElementById('simResult').style.display='block';
     }
 
-    function renderAll(){renderRankings();renderWeekly();buildTeamSelects();window.dispatchEvent(new Event("salas64:data"))}
+    function renderAll(){renderRankings();renderWeekly();buildTeamSelects();window.dispatchEvent(new Event("salas64:data"));refreshSimulatorSearchFields();}
 
     // Searchable team fields. The hidden selects keep all existing forecast code working.
     function setupSearchableTeams(){
