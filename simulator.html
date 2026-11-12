@@ -485,7 +485,7 @@
     function randn(){let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
     function getTeamByName(name){return allTeams.find(t=>t.team===name)}
     // Link contract: simulator.html?away=AwayTeam&home=HomeTeam&neutral=1
-    // Legacy teamA/teamB URLs also work (teamA=away, teamB=home).
+    // Legacy Game Center links use teamA=home and teamB=away by default.
     // For legacy pages passing homeAway=A or homeAway=B, positions are corrected.
     function matchupFromUrl(){
       const q=new URLSearchParams(location.search);
@@ -495,15 +495,15 @@
       const legacyA=first('teamA','team1');
       const legacyB=first('teamB','team2');
       const orientation=(first('homeAway','homeSide','homeTeamSide')||'').toLowerCase();
-     if (!away && !home) {
-  if (['b','teamb','right','2'].includes(orientation)) {
-    away = legacyA;
-    home = legacyB;
-  } else {
-    away = legacyB;
-    home = legacyA;
-  }
-}
+      if(!away&&!home){
+        // Legacy Game Center Explore Matchup links use teamA=home, teamB=away.
+        // An explicit homeSide/homeAway parameter takes precedence.
+        if(['b','teamb','right','2'].includes(orientation)){
+          away=legacyA; home=legacyB;
+        }else{
+          away=legacyB; home=legacyA;
+        }
+      }else{
         away=away||legacyA||legacyB;
         home=home|| (legacyB!==away?legacyB:legacyA);
       }
@@ -672,7 +672,7 @@
         };
         input.addEventListener('input',()=>{
           const value=input.value.trim().toLowerCase();
-          const team=allTeams.find(t=>t.team.toLowerCase()===value);
+          const team=allTeams.find(t=>t.team.toLowerCase()===value || (t.aliases||[]).some(a=>String(a).toLowerCase()===value));
           if(team){
             select.value=team.team;
             hint.textContent=`${rankLabel(team)} · ${team.salasScore??'—'} Salas Score`;
@@ -684,7 +684,7 @@
         });
         input.addEventListener('change',()=>{
           const value=input.value.trim().toLowerCase();
-          const team=allTeams.find(t=>t.team.toLowerCase()===value);
+          const team=allTeams.find(t=>t.team.toLowerCase()===value || (t.aliases||[]).some(a=>String(a).toLowerCase()===value));
           if(team){select.value=team.team;input.value=team.team;}
           else {select.value='';hint.textContent='Choose a valid team from the suggestions.';}
           updateSimulatorAvailability();
