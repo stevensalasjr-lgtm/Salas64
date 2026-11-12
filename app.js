@@ -145,23 +145,103 @@
       note.textContent=a===b?'Choose two different teams.':ready?'Both teams have season model data.':'These teams are selected. Simulation unlocks when both have season efficiency and pace data.';
       document.getElementById('simResult').style.display='none';
     }
-    function simulatorProjection(A,B){
-      const natAvg=Number(A.nationalAverageEfficiency||B.nationalAverageEfficiency||110);
-      const pace=clamp(((Number(A.pace)||68)+(Number(B.pace)||68))/2,58,80);
-      const effA=(Number(A.offensiveRating)||natAvg)+((Number(B.defensiveRating)||natAvg)-natAvg);
-      const effB=(Number(B.offensiveRating)||natAvg)+((Number(A.defensiveRating)||natAvg)-natAvg);
-      const expA=pace*effA/100,expB=pace*effB/100,margin=expA-expB;
-      const pA=1/(1+Math.exp(-margin/7));
-      return{pace,expA,expB,pA,margin};
+    // Predictive ratings are separate from the official Salas Score.
+    // The preseason conversion below is a transparent provisional heuristic,
+    // NOT a historically fitted efficiency model. Adjust after backtesting.
+    const SIM_MODEL = "Salas Simulator 2.0 · provisional early-season blend";
+    const PRIOR_FADE_GAMES = 12;
+    const SCORE_SD = 8.4;
+
+    function seasonGames(t){
+      const match = String(t.record || "0-0").replace(/–/g,"-").match(/^(\d+)\s*-\s*(\d+)/);
+      return match ? Number(match[1]) + Number(match[2]) : 0;
     }
+
+    // An ordinal preseason ranking is NOT a measured points-per-100 rating.
+    // These are deliberately modest, disclosed starting assumptions, not
+    // claimed as empirical estimates. Unranked schools share a broad fallback.
+    function preseasonNetPrior(t){
+      const rank = Number(t.preseasonRank);
+      if(Number.isInteger(rank) && rank >= 1 && rank <= 64){
+        return 22 - (rank - 1) * 26 / 63; // #1 +22, #64 -4 / 100 possessions
+      }
+      return -7;
+    }
+
+    function simulatorTeamRating(t){
+      const nat = Number(t.nationalAverageEfficiency) || 106.7;
+      const off = Number(t.offensiveRating);
+      const def = Number(t.defensiveRating);
+      const liveNet = off - def;
+      const games = seasonGames(t);
+      const priorWeight = clamp(1 - games / PRIOR_FADE_GAMES, 0, 1);
+      const predictedNet = liveNet * (1 - priorWeight) + preseasonNetPrior(t) * priorWeight;
+      const adjustment = (predictedNet - liveNet) / 2;
+      return {off:off + adjustment, def:def - adjustment,
+              priorWeight, games, predictedNet, nat};
+    }
+
+    // Normal CDF approximation; matches the independent normal score noise
+    // used in the Monte Carlo simulation below (rather than a second formula).
+    function normalCdf(x){
+      const z = Math.abs(x);
+      const t = 1 / (1 + 0.2316419 * z);
+      const polynomial = t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+      const tail = Math.exp(-z*z/2) / Math.sqrt(2*Math.PI) * polynomial;
+      return clamp(x >= 0 ? 1 - tail : tail, 0, 1);
+    }
+
+    function simulatorProjection(A,B){
+      const a = simulatorTeamRating(A), b = simulatorTeamRating(B);
+      const nat = (a.nat + b.nat) / 2;
+      // Ignore implausible raw pace values instead of allowing them to distort
+      // the projection; use the other team's pace or 69 as the fallback.
+      const validPace = t => {
+        const p = Number(t.pace);
+        return p >= 58 && p <= 85 ? p : null;
+      };
+      const paceA = validPace(A), paceB = validPace(B);
+      const pace = clamp(paceA !== null && paceB !== null ? (paceA + paceB) / 2 : (paceA ?? paceB ?? 69), 58, 80);
+      const expA = Math.max(45, pace * (a.off + b.def - nat) / 100);
+      const expB = Math.max(45, pace * (b.off + a.def - nat) / 100);
+      const margin = expA-expB;
+      const pA = normalCdf(margin / (Math.SQRT2 * SCORE_SD));
+      return {pace,expA,expB,pA,margin,priorA:a.priorWeight,priorB:b.priorWeight};
+    }
+
     function runSimulations(){
-      const A=getTeamByName(document.getElementById("teamASelect").value),B=getTeamByName(document.getElementById("teamBSelect").value);if(!hasModel(A)||!hasModel(B)||A===B)return;
-      const sims=clamp(parseInt(document.getElementById("simsInput").value,10)||100,1,5000),base=simulatorProjection(A,B);let sumA=0,sumB=0,winsA=0,lastA=0,lastB=0;
-      for(let i=0;i<sims;i++){let a=base.expA+randn()*8.4,b=base.expB+randn()*8.4;lastA=Math.round(clamp(a,45,120));lastB=Math.round(clamp(b,45,120));if(lastA===lastB){Math.random()<base.pA?lastA++:lastB++}sumA+=lastA;sumB+=lastB;if(lastA>lastB)winsA++}
-      const avgA=sumA/sims,avgB=sumB/sims,pctA=Math.round(winsA/sims*100),margin=avgA-avgB;
-      document.getElementById("lastScoreline").textContent=`Latest sim: ${A.team} ${lastA} — ${B.team} ${lastB}`;
-      document.getElementById("simMeta").textContent=`Neutral court • ~${Math.round(base.pace)} possessions • model win probability: ${A.team} ${Math.round(base.pA*100)}%`;
-      document.getElementById("simCount").textContent=sims.toLocaleString();document.getElementById("avgScore").textContent=`${A.team} ${avgA.toFixed(1)} — ${B.team} ${avgB.toFixed(1)}`;document.getElementById("winPct").textContent=`${A.team} ${pctA}% / ${B.team} ${100-pctA}%`;document.getElementById("avgMargin").textContent=margin>=0?`${A.team} +${margin.toFixed(1)}`:`${B.team} +${Math.abs(margin).toFixed(1)}`;document.getElementById("barLabelA").textContent=`${A.team} ${pctA}%`;document.getElementById("barLabelB").textContent=`${B.team} ${100-pctA}%`;document.getElementById("barFillA").style.width=`${clamp(pctA,1,99)}%`;document.getElementById("simResult").style.display="block";
+      const A=getTeamByName(document.getElementById("teamASelect").value);
+      const B=getTeamByName(document.getElementById("teamBSelect").value);
+      if(!hasModel(A)||!hasModel(B)||A===B)return;
+      const sims=clamp(parseInt(document.getElementById("simsInput").value,10)||1000,100,5000);
+      document.getElementById("simsInput").value=sims;
+      const base=simulatorProjection(A,B);
+      let sumA=0,sumB=0,winsA=0,lastA=0,lastB=0;
+      for(let i=0;i<sims;i++){
+        lastA=Math.round(clamp(base.expA+randn()*SCORE_SD,45,120));
+        lastB=Math.round(clamp(base.expB+randn()*SCORE_SD,45,120));
+        if(lastA===lastB){if(Math.random()<base.pA)lastA++;else lastB++;}
+        sumA+=lastA;sumB+=lastB;
+        if(lastA>lastB)winsA++;
+      }
+      const avgA=sumA/sims, avgB=sumB/sims, pctA=Math.round(winsA/sims*100);
+      const favorite=base.pA >= .5 ? A.team : B.team;
+      const projectedFavoritePct=Math.round(100*Math.max(base.pA,1-base.pA));
+      const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+      set('projectedTeamA',A.team);set('projectedTeamB',B.team);
+      set('projectedScoreA',Math.round(base.expA));set('projectedScoreB',Math.round(base.expB));
+      set('projectedWinner',`${favorite} favored · ${projectedFavoritePct}% estimated win chance`);
+      set('simContext',`Neutral court · ${Math.round(base.pace)} projected possessions · ${SIM_MODEL}`);
+      set('simCount',sims.toLocaleString());
+      set('avgScore',`${A.team} ${avgA.toFixed(1)} · ${B.team} ${avgB.toFixed(1)}`);
+      set('winPct',`${A.team} ${pctA}% · ${B.team} ${100-pctA}%`);
+      set('avgMargin',`${avgA >= avgB ? A.team : B.team} +${Math.abs(avgA-avgB).toFixed(1)}`);
+      set('lastScoreline',`${A.team} ${lastA} – ${B.team} ${lastB}`);
+      set('barLabelA',`${A.team} ${Math.round(base.pA*100)}%`);
+      set('barLabelB',`${B.team} ${100-Math.round(base.pA*100)}%`);
+      document.getElementById('barFillA').style.width=`${(base.pA*100).toFixed(1)}%`;
+      set('simPriorNote',`Early-season estimate: preseason influence is ${Math.round(base.priorA*100)}% for ${A.team} and ${Math.round(base.priorB*100)}% for ${B.team}, fading to 0% after 12 games. Preseason ranks are mapped to provisional strength assumptions; these win probabilities are not historically calibrated.`);
+      document.getElementById('simResult').style.display='block';
     }
 
     function renderAll(){renderRankings();renderWeekly();buildTeamSelects();window.dispatchEvent(new Event("salas64:data"))}
