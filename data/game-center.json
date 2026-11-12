@@ -1,6 +1,6 @@
 {
   "season": 2027,
-  "updatedAt": "2026-11-12T05:29:19.357406+00:00",
+  "updatedAt": "2026-11-12T07:13:17.395537+00:00",
   "dayTimezone": "America/Los_Angeles",
   "games": [
     {
@@ -14962,15 +14962,15 @@
       "day": "2026-11-11",
       "lockAt": "2026-11-12T04:00:00+00:00",
       "timeKnown": true,
-      "state": "in-progress",
-      "statusLabel": "14:45 - 2nd Half",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "30",
         "team": "USC",
         "rank": 30,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/30.png",
         "inDirectory": true,
-        "score": "47"
+        "score": "77"
       },
       "home": {
         "espnId": "25",
@@ -14978,9 +14978,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/25.png",
         "inDirectory": true,
-        "score": "40"
+        "score": "65"
       },
-      "winnerId": null,
+      "winnerId": "30",
       "neutral": false,
       "model": null
     },
