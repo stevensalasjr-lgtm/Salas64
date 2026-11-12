@@ -2,6 +2,7 @@
 import json
 import math
 import os
+import sys
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -10,6 +11,9 @@ from team_directory import normalized
 
 ROOT = Path(__file__).resolve().parents[1]
 PT = ZoneInfo('America/Los_Angeles')
+
+class GameIdentityChanged(ValueError):
+    pass
 
 def fetch(url, data=None, headers=None):
     req = urllib.request.Request(url, data=json.dumps(data).encode() if data is not None else None,
@@ -60,7 +64,11 @@ def parse(event, teams, season, now, previous=None):
                 'inDirectory': t is not None, 'score':side.get('score')}
     a,b=team(away),team(home)
     if previous and (previous['away']['espnId'],previous['home']['espnId']) != (a['espnId'],b['espnId']):
-        raise ValueError('Game identity changed; refusing to reassign existing picks')
+        raise GameIdentityChanged(
+            f"ESPN game {event['id']} changed from "
+            f"{previous['away']['espnId']} at {previous['home']['espnId']} "
+            f"to {a['espnId']} at {b['espnId']}"
+        )
     status=(c.get('status') or event.get('status') or {}).get('type',{})
     name=status.get('name','')
     state='canceled' if 'CANCEL' in name else 'postponed' if 'POSTPON' in name else 'final' if status.get('completed') else 'in-progress' if status.get('state')=='in' else 'scheduled'
@@ -116,7 +124,11 @@ def main():
         if not isinstance(data.get('events'),list):
             raise ValueError('Invalid scoreboard; existing slate preserved')
         for event in data['events']:
-            g=parse(event,teams,season,now,games.get(str(event['id'])))
+            try:
+                g=parse(event,teams,season,now,games.get(str(event['id'])))
+            except GameIdentityChanged as exc:
+                print(f'Warning: {exc}. Skipping conflicting ESPN entry.', file=sys.stderr)
+                continue
             if g:
                 games[g['id']]=g;touched[g['id']]=g
     sync(list(touched.values()))
