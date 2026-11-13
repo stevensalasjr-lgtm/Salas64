@@ -1,6 +1,6 @@
 {
   "season": 2027,
-  "updatedAt": "2026-11-13T15:39:45.697996+00:00",
+  "updatedAt": "2026-11-13T21:55:49.295817+00:00",
   "dayTimezone": "America/Los_Angeles",
   "games": [
     {
@@ -15970,15 +15970,15 @@
       "day": "2026-11-13",
       "lockAt": "2026-11-13T17:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Fri, November 13th at 12:00 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2677",
         "team": "Viterbo",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "0"
+        "score": "46"
       },
       "home": {
         "espnId": "2739",
@@ -15986,9 +15986,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2739.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "66"
       },
-      "winnerId": null,
+      "winnerId": "2739",
       "neutral": false,
       "model": null
     },
@@ -15999,15 +15999,15 @@
       "day": "2026-11-13",
       "lockAt": "2026-11-13T20:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Fri, November 13th at 3:00 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2697",
         "team": "West Florida",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2697.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "67"
       },
       "home": {
         "espnId": "325",
@@ -16015,9 +16015,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/325.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "69"
       },
-      "winnerId": null,
+      "winnerId": "325",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -17270,41 +17270,6 @@
       }
     },
     {
-      "id": "401920123",
-      "season": 2027,
-      "startAt": "2026-11-14T01:00:00+00:00",
-      "day": "2026-11-13",
-      "lockAt": "2026-11-14T01:00:00+00:00",
-      "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Fri, November 13th at 8:00 PM EST",
-      "away": {
-        "espnId": "13",
-        "team": "Cal Poly",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/13.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "home": {
-        "espnId": "70",
-        "team": "Idaho",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/70.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "winnerId": null,
-      "neutral": false,
-      "model": {
-        "version": "efficiency-1",
-        "winnerId": "70",
-        "awayScore": 82.7,
-        "homeScore": 86.4,
-        "awayProbability": 0.3683
-      }
-    },
-    {
       "id": "401921026",
       "season": 2027,
       "startAt": "2026-11-14T01:00:00+00:00",
@@ -17786,6 +17751,41 @@
         "awayScore": 71.5,
         "homeScore": 83.2,
         "awayProbability": 0.158
+      }
+    },
+    {
+      "id": "401920123",
+      "season": 2027,
+      "startAt": "2026-11-14T02:00:00+00:00",
+      "day": "2026-11-13",
+      "lockAt": "2026-11-14T01:00:00+00:00",
+      "timeKnown": true,
+      "state": "scheduled",
+      "statusLabel": "Fri, November 13th at 9:00 PM EST",
+      "away": {
+        "espnId": "13",
+        "team": "Cal Poly",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/13.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "home": {
+        "espnId": "70",
+        "team": "Idaho",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/70.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "winnerId": null,
+      "neutral": false,
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "70",
+        "awayScore": 82.7,
+        "homeScore": 86.4,
+        "awayProbability": 0.3683
       }
     },
     {
@@ -21694,35 +21694,6 @@
       }
     },
     {
-      "id": "401926733",
-      "season": 2027,
-      "startAt": "2026-11-15T22:30:00+00:00",
-      "day": "2026-11-15",
-      "lockAt": "2026-11-15T22:30:00+00:00",
-      "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Sun, November 15th at 5:30 PM EST",
-      "away": {
-        "espnId": "3120",
-        "team": "Ecclesia",
-        "rank": null,
-        "logo": null,
-        "inDirectory": false,
-        "score": "0"
-      },
-      "home": {
-        "espnId": "2630",
-        "team": "UT Martin",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "winnerId": null,
-      "neutral": false,
-      "model": null
-    },
-    {
       "id": "401920124",
       "season": 2027,
       "startAt": "2026-11-15T23:00:00+00:00",
@@ -21756,6 +21727,35 @@
         "homeScore": 86.9,
         "awayProbability": 0.2614
       }
+    },
+    {
+      "id": "401926733",
+      "season": 2027,
+      "startAt": "2026-11-15T23:00:00+00:00",
+      "day": "2026-11-15",
+      "lockAt": "2026-11-15T22:30:00+00:00",
+      "timeKnown": true,
+      "state": "scheduled",
+      "statusLabel": "Sun, November 15th at 6:00 PM EST",
+      "away": {
+        "espnId": "3120",
+        "team": "Ecclesia",
+        "rank": null,
+        "logo": null,
+        "inDirectory": false,
+        "score": "0"
+      },
+      "home": {
+        "espnId": "2630",
+        "team": "UT Martin",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "winnerId": null,
+      "neutral": false,
+      "model": null
     },
     {
       "id": "401920681",
