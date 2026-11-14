@@ -2,11 +2,11 @@
   "season": 2027,
   "source": "ESPN",
   "refreshHours": 6,
-  "updatedAt": "2026-11-14T06:23:45.976597+00:00",
+  "updatedAt": "2026-11-14T18:01:58.653706+00:00",
   "teams": {
     "Abilene Christian": {
       "espnId": "2000",
-      "updatedAt": "2026-11-14T06:23:41.882850+00:00",
+      "updatedAt": "2026-11-14T18:01:55.092539+00:00",
       "stale": false,
       "games": [
         {
@@ -461,7 +461,7 @@
     },
     "Air Force": {
       "espnId": "2005",
-      "updatedAt": "2026-11-14T06:23:32.588178+00:00",
+      "updatedAt": "2026-11-14T18:01:46.062865+00:00",
       "stale": false,
       "games": [
         {
@@ -916,7 +916,7 @@
     },
     "Akron": {
       "espnId": "2006",
-      "updatedAt": "2026-11-14T06:23:31.938992+00:00",
+      "updatedAt": "2026-11-14T18:01:45.372167+00:00",
       "stale": false,
       "games": [
         {
@@ -955,10 +955,10 @@
           "opponentEspnId": "2655",
           "location": "home",
           "venue": "James A. Rhodes Arena",
-          "status": "scheduled",
-          "statusLabel": "Sat, November 14th at 12:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
+          "status": "in-progress",
+          "statusLabel": "Halftime",
+          "teamScore": "36",
+          "opponentScore": "26",
           "result": null
         },
         {
@@ -1357,7 +1357,7 @@
     },
     "Alabama": {
       "espnId": "333",
-      "updatedAt": "2026-11-14T06:23:25.272712+00:00",
+      "updatedAt": "2026-11-14T18:01:38.706705+00:00",
       "stale": false,
       "games": [
         {
@@ -1784,7 +1784,7 @@
     },
     "Alabama A&M": {
       "espnId": "2010",
-      "updatedAt": "2026-11-14T06:23:36.785102+00:00",
+      "updatedAt": "2026-11-14T18:01:49.972399+00:00",
       "stale": false,
       "games": [
         {
@@ -2239,7 +2239,7 @@
     },
     "Alabama State": {
       "espnId": "2011",
-      "updatedAt": "2026-11-14T06:23:38.755146+00:00",
+      "updatedAt": "2026-11-14T18:01:51.772177+00:00",
       "stale": false,
       "games": [
         {
@@ -2708,7 +2708,7 @@
     },
     "Alcorn State": {
       "espnId": "2016",
-      "updatedAt": "2026-11-14T06:23:44.932526+00:00",
+      "updatedAt": "2026-11-14T18:01:57.923604+00:00",
       "stale": false,
       "games": [
         {
@@ -3163,7 +3163,7 @@
     },
     "American University": {
       "espnId": "44",
-      "updatedAt": "2026-11-14T06:23:39.163948+00:00",
+      "updatedAt": "2026-11-14T18:01:52.094800+00:00",
       "stale": false,
       "games": [
         {
@@ -3618,7 +3618,7 @@
     },
     "App State": {
       "espnId": "2026",
-      "updatedAt": "2026-11-14T06:23:30.679890+00:00",
+      "updatedAt": "2026-11-14T18:01:44.171069+00:00",
       "stale": false,
       "games": [
         {
@@ -4059,7 +4059,7 @@
     },
     "Arizona": {
       "espnId": "12",
-      "updatedAt": "2026-11-14T06:23:24.882538+00:00",
+      "updatedAt": "2026-11-14T18:01:38.365427+00:00",
       "stale": false,
       "games": [
         {
@@ -4486,7 +4486,7 @@
     },
     "Arizona State": {
       "espnId": "9",
-      "updatedAt": "2026-11-14T06:23:27.559458+00:00",
+      "updatedAt": "2026-11-14T18:01:41.070963+00:00",
       "stale": false,
       "games": [
         {
@@ -4941,7 +4941,7 @@
     },
     "Arkansas": {
       "espnId": "8",
-      "updatedAt": "2026-11-14T06:23:25.887688+00:00",
+      "updatedAt": "2026-11-14T18:01:39.333783+00:00",
       "stale": false,
       "games": [
         {
@@ -5396,7 +5396,7 @@
     },
     "Arkansas State": {
       "espnId": "2032",
-      "updatedAt": "2026-11-14T06:23:39.329712+00:00",
+      "updatedAt": "2026-11-14T18:01:52.128539+00:00",
       "stale": false,
       "games": [
         {
@@ -5837,7 +5837,7 @@
     },
     "Arkansas-Pine Bluff": {
       "espnId": "2029",
-      "updatedAt": "2026-11-14T06:23:45.296730+00:00",
+      "updatedAt": "2026-11-14T18:01:58.171763+00:00",
       "stale": false,
       "games": [
         {
@@ -6278,7 +6278,7 @@
     },
     "Army": {
       "espnId": "349",
-      "updatedAt": "2026-11-14T06:23:38.132207+00:00",
+      "updatedAt": "2026-11-14T18:01:51.141867+00:00",
       "stale": false,
       "games": [
         {
@@ -6733,7 +6733,7 @@
     },
     "Auburn": {
       "espnId": "2",
-      "updatedAt": "2026-11-14T06:23:25.877411+00:00",
+      "updatedAt": "2026-11-14T18:01:39.360039+00:00",
       "stale": false,
       "games": [
         {
@@ -7160,7 +7160,7 @@
     },
     "Austin Peay": {
       "espnId": "2046",
-      "updatedAt": "2026-11-14T06:23:33.191197+00:00",
+      "updatedAt": "2026-11-14T18:01:46.672859+00:00",
       "stale": false,
       "games": [
         {
@@ -7615,7 +7615,7 @@
     },
     "BYU": {
       "espnId": "252",
-      "updatedAt": "2026-11-14T06:23:25.692442+00:00",
+      "updatedAt": "2026-11-14T18:01:39.083586+00:00",
       "stale": false,
       "games": [
         {
@@ -8042,7 +8042,7 @@
     },
     "Ball State": {
       "espnId": "2050",
-      "updatedAt": "2026-11-14T06:23:43.262669+00:00",
+      "updatedAt": "2026-11-14T18:01:56.415128+00:00",
       "stale": false,
       "games": [
         {
@@ -8483,7 +8483,7 @@
     },
     "Baylor": {
       "espnId": "239",
-      "updatedAt": "2026-11-14T06:23:26.238335+00:00",
+      "updatedAt": "2026-11-14T18:01:39.732641+00:00",
       "stale": false,
       "games": [
         {
@@ -8910,7 +8910,7 @@
     },
     "Bellarmine": {
       "espnId": "91",
-      "updatedAt": "2026-11-14T06:23:43.715138+00:00",
+      "updatedAt": "2026-11-14T18:01:56.660824+00:00",
       "stale": false,
       "games": [
         {
@@ -9365,7 +9365,7 @@
     },
     "Belmont": {
       "espnId": "2057",
-      "updatedAt": "2026-11-14T06:23:34.180397+00:00",
+      "updatedAt": "2026-11-14T18:01:47.724759+00:00",
       "stale": false,
       "games": [
         {
@@ -9820,7 +9820,7 @@
     },
     "Bethune-Cookman": {
       "espnId": "2065",
-      "updatedAt": "2026-11-14T06:23:43.031487+00:00",
+      "updatedAt": "2026-11-14T18:01:56.185059+00:00",
       "stale": false,
       "games": [
         {
@@ -10275,7 +10275,7 @@
     },
     "Binghamton": {
       "espnId": "2066",
-      "updatedAt": "2026-11-14T06:23:36.175963+00:00",
+      "updatedAt": "2026-11-14T18:01:49.331360+00:00",
       "stale": false,
       "games": [
         {
@@ -10716,7 +10716,7 @@
     },
     "Boise State": {
       "espnId": "68",
-      "updatedAt": "2026-11-14T06:23:28.996523+00:00",
+      "updatedAt": "2026-11-14T18:01:42.701958+00:00",
       "stale": false,
       "games": [
         {
@@ -11157,7 +11157,7 @@
     },
     "Boston College": {
       "espnId": "103",
-      "updatedAt": "2026-11-14T06:23:29.175688+00:00",
+      "updatedAt": "2026-11-14T18:01:42.641326+00:00",
       "stale": false,
       "games": [
         {
@@ -11612,7 +11612,7 @@
     },
     "Boston University": {
       "espnId": "104",
-      "updatedAt": "2026-11-14T06:23:33.068070+00:00",
+      "updatedAt": "2026-11-14T18:01:46.482088+00:00",
       "stale": false,
       "games": [
         {
@@ -12053,7 +12053,7 @@
     },
     "Bowling Green": {
       "espnId": "189",
-      "updatedAt": "2026-11-14T06:23:31.167316+00:00",
+      "updatedAt": "2026-11-14T18:01:44.728829+00:00",
       "stale": false,
       "games": [
         {
@@ -12494,7 +12494,7 @@
     },
     "Bradley": {
       "espnId": "71",
-      "updatedAt": "2026-11-14T06:23:39.871236+00:00",
+      "updatedAt": "2026-11-14T18:01:52.942245+00:00",
       "stale": false,
       "games": [
         {
@@ -12935,7 +12935,7 @@
     },
     "Brown": {
       "espnId": "225",
-      "updatedAt": "2026-11-14T06:23:41.664955+00:00",
+      "updatedAt": "2026-11-14T18:01:54.743766+00:00",
       "stale": false,
       "games": [
         {
@@ -13348,7 +13348,7 @@
     },
     "Bryant": {
       "espnId": "2803",
-      "updatedAt": "2026-11-14T06:23:45.239672+00:00",
+      "updatedAt": "2026-11-14T18:01:58.158310+00:00",
       "stale": false,
       "games": [
         {
@@ -13803,7 +13803,7 @@
     },
     "Bucknell": {
       "espnId": "2083",
-      "updatedAt": "2026-11-14T06:23:45.095996+00:00",
+      "updatedAt": "2026-11-14T18:01:57.991229+00:00",
       "stale": false,
       "games": [
         {
@@ -14258,7 +14258,7 @@
     },
     "Buffalo": {
       "espnId": "2084",
-      "updatedAt": "2026-11-14T06:23:39.677301+00:00",
+      "updatedAt": "2026-11-14T18:01:52.611845+00:00",
       "stale": false,
       "games": [
         {
@@ -14699,7 +14699,7 @@
     },
     "Butler": {
       "espnId": "2086",
-      "updatedAt": "2026-11-14T06:23:32.742312+00:00",
+      "updatedAt": "2026-11-14T18:01:46.083750+00:00",
       "stale": false,
       "games": [
         {
@@ -15154,7 +15154,7 @@
     },
     "Cal Poly": {
       "espnId": "13",
-      "updatedAt": "2026-11-14T06:23:37.566566+00:00",
+      "updatedAt": "2026-11-14T18:01:50.726714+00:00",
       "stale": false,
       "games": [
         {
@@ -15595,7 +15595,7 @@
     },
     "Cal State Bakersfield": {
       "espnId": "2934",
-      "updatedAt": "2026-11-14T06:23:30.956892+00:00",
+      "updatedAt": "2026-11-14T18:01:44.354057+00:00",
       "stale": false,
       "games": [
         {
@@ -16050,7 +16050,7 @@
     },
     "Cal State Fullerton": {
       "espnId": "2239",
-      "updatedAt": "2026-11-14T06:23:35.156928+00:00",
+      "updatedAt": "2026-11-14T18:01:48.456406+00:00",
       "stale": false,
       "games": [
         {
@@ -16505,7 +16505,7 @@
     },
     "Cal State Northridge": {
       "espnId": "2463",
-      "updatedAt": "2026-11-14T06:23:38.471226+00:00",
+      "updatedAt": "2026-11-14T18:01:51.433748+00:00",
       "stale": false,
       "games": [
         {
@@ -16960,7 +16960,7 @@
     },
     "California": {
       "espnId": "25",
-      "updatedAt": "2026-11-14T06:23:36.700082+00:00",
+      "updatedAt": "2026-11-14T18:01:49.848303+00:00",
       "stale": false,
       "games": [
         {
@@ -17415,7 +17415,7 @@
     },
     "California Baptist": {
       "espnId": "2856",
-      "updatedAt": "2026-11-14T06:23:44.707271+00:00",
+      "updatedAt": "2026-11-14T18:01:57.665135+00:00",
       "stale": false,
       "games": [
         {
@@ -17870,7 +17870,7 @@
     },
     "Campbell": {
       "espnId": "2097",
-      "updatedAt": "2026-11-14T06:23:41.494779+00:00",
+      "updatedAt": "2026-11-14T18:01:54.681843+00:00",
       "stale": false,
       "games": [
         {
@@ -18325,7 +18325,7 @@
     },
     "Canisius": {
       "espnId": "2099",
-      "updatedAt": "2026-11-14T06:23:43.131565+00:00",
+      "updatedAt": "2026-11-14T18:01:56.299456+00:00",
       "stale": false,
       "games": [
         {
@@ -18780,7 +18780,7 @@
     },
     "Central Arkansas": {
       "espnId": "2110",
-      "updatedAt": "2026-11-14T06:23:33.608217+00:00",
+      "updatedAt": "2026-11-14T18:01:47.126449+00:00",
       "stale": false,
       "games": [
         {
@@ -19235,7 +19235,7 @@
     },
     "Central Connecticut": {
       "espnId": "2115",
-      "updatedAt": "2026-11-14T06:23:41.146347+00:00",
+      "updatedAt": "2026-11-14T18:01:54.278037+00:00",
       "stale": false,
       "games": [
         {
@@ -19662,7 +19662,7 @@
     },
     "Central Michigan": {
       "espnId": "2117",
-      "updatedAt": "2026-11-14T06:23:30.581851+00:00",
+      "updatedAt": "2026-11-14T18:01:44.084559+00:00",
       "stale": false,
       "games": [
         {
@@ -20103,7 +20103,7 @@
     },
     "Charleston": {
       "espnId": "232",
-      "updatedAt": "2026-11-14T06:23:30.085037+00:00",
+      "updatedAt": "2026-11-14T18:01:43.675572+00:00",
       "stale": false,
       "games": [
         {
@@ -20544,7 +20544,7 @@
     },
     "Charleston Southern": {
       "espnId": "2127",
-      "updatedAt": "2026-11-14T06:23:40.685606+00:00",
+      "updatedAt": "2026-11-14T18:01:53.664852+00:00",
       "stale": false,
       "games": [
         {
@@ -20999,7 +20999,7 @@
     },
     "Charlotte": {
       "espnId": "2429",
-      "updatedAt": "2026-11-14T06:23:36.294920+00:00",
+      "updatedAt": "2026-11-14T18:01:49.512876+00:00",
       "stale": false,
       "games": [
         {
@@ -21454,7 +21454,7 @@
     },
     "Chattanooga": {
       "espnId": "236",
-      "updatedAt": "2026-11-14T06:23:32.699335+00:00",
+      "updatedAt": "2026-11-14T18:01:46.225232+00:00",
       "stale": false,
       "games": [
         {
@@ -21909,7 +21909,7 @@
     },
     "Chicago State": {
       "espnId": "2130",
-      "updatedAt": "2026-11-14T06:23:44.339628+00:00",
+      "updatedAt": "2026-11-14T18:01:57.361670+00:00",
       "stale": false,
       "games": [
         {
@@ -22364,7 +22364,7 @@
     },
     "Cincinnati": {
       "espnId": "2132",
-      "updatedAt": "2026-11-14T06:23:26.332174+00:00",
+      "updatedAt": "2026-11-14T18:01:39.747589+00:00",
       "stale": false,
       "games": [
         {
@@ -22819,7 +22819,7 @@
     },
     "Clemson": {
       "espnId": "228",
-      "updatedAt": "2026-11-14T06:23:27.365694+00:00",
+      "updatedAt": "2026-11-14T18:01:40.899523+00:00",
       "stale": false,
       "games": [
         {
@@ -23246,7 +23246,7 @@
     },
     "Cleveland State": {
       "espnId": "325",
-      "updatedAt": "2026-11-14T06:23:42.473466+00:00",
+      "updatedAt": "2026-11-14T18:01:55.626510+00:00",
       "stale": false,
       "games": [
         {
@@ -23687,7 +23687,7 @@
     },
     "Coastal Carolina": {
       "espnId": "324",
-      "updatedAt": "2026-11-14T06:23:41.928455+00:00",
+      "updatedAt": "2026-11-14T18:01:55.169325+00:00",
       "stale": false,
       "games": [
         {
@@ -24128,7 +24128,7 @@
     },
     "Colgate": {
       "espnId": "2142",
-      "updatedAt": "2026-11-14T06:23:41.680592+00:00",
+      "updatedAt": "2026-11-14T18:01:54.954273+00:00",
       "stale": false,
       "games": [
         {
@@ -24583,7 +24583,7 @@
     },
     "Colorado": {
       "espnId": "38",
-      "updatedAt": "2026-11-14T06:23:31.300470+00:00",
+      "updatedAt": "2026-11-14T18:01:44.663811+00:00",
       "stale": false,
       "games": [
         {
@@ -25024,7 +25024,7 @@
     },
     "Colorado State": {
       "espnId": "36",
-      "updatedAt": "2026-11-14T06:23:30.430125+00:00",
+      "updatedAt": "2026-11-14T18:01:43.909142+00:00",
       "stale": false,
       "games": [
         {
@@ -25451,7 +25451,7 @@
     },
     "Columbia": {
       "espnId": "171",
-      "updatedAt": "2026-11-14T06:23:31.785305+00:00",
+      "updatedAt": "2026-11-14T18:01:45.135118+00:00",
       "stale": false,
       "games": [
         {
@@ -25864,7 +25864,7 @@
     },
     "Coppin State": {
       "espnId": "2154",
-      "updatedAt": "2026-11-14T06:23:42.980195+00:00",
+      "updatedAt": "2026-11-14T18:01:56.220025+00:00",
       "stale": false,
       "games": [
         {
@@ -26319,7 +26319,7 @@
     },
     "Cornell": {
       "espnId": "172",
-      "updatedAt": "2026-11-14T06:23:39.869112+00:00",
+      "updatedAt": "2026-11-14T18:01:52.786801+00:00",
       "stale": false,
       "games": [
         {
@@ -26732,7 +26732,7 @@
     },
     "Creighton": {
       "espnId": "156",
-      "updatedAt": "2026-11-14T06:23:27.284778+00:00",
+      "updatedAt": "2026-11-14T18:01:40.846254+00:00",
       "stale": false,
       "games": [
         {
@@ -27159,7 +27159,7 @@
     },
     "Dartmouth": {
       "espnId": "159",
-      "updatedAt": "2026-11-14T06:23:32.013686+00:00",
+      "updatedAt": "2026-11-14T18:01:45.590025+00:00",
       "stale": false,
       "games": [
         {
@@ -27558,7 +27558,7 @@
     },
     "Davidson": {
       "espnId": "2166",
-      "updatedAt": "2026-11-14T06:23:29.656202+00:00",
+      "updatedAt": "2026-11-14T18:01:43.225579+00:00",
       "stale": false,
       "games": [
         {
@@ -28013,7 +28013,7 @@
     },
     "Dayton": {
       "espnId": "2168",
-      "updatedAt": "2026-11-14T06:23:36.947633+00:00",
+      "updatedAt": "2026-11-14T18:01:50.189642+00:00",
       "stale": false,
       "games": [
         {
@@ -28468,7 +28468,7 @@
     },
     "DePaul": {
       "espnId": "305",
-      "updatedAt": "2026-11-14T06:23:28.131203+00:00",
+      "updatedAt": "2026-11-14T18:01:41.662091+00:00",
       "stale": false,
       "games": [
         {
@@ -28923,7 +28923,7 @@
     },
     "Delaware": {
       "espnId": "48",
-      "updatedAt": "2026-11-14T06:23:37.355323+00:00",
+      "updatedAt": "2026-11-14T18:01:50.396861+00:00",
       "stale": false,
       "games": [
         {
@@ -29378,7 +29378,7 @@
     },
     "Delaware State": {
       "espnId": "2169",
-      "updatedAt": "2026-11-14T06:23:36.580224+00:00",
+      "updatedAt": "2026-11-14T18:01:49.740771+00:00",
       "stale": false,
       "games": [
         {
@@ -29791,7 +29791,7 @@
     },
     "Denver": {
       "espnId": "2172",
-      "updatedAt": "2026-11-14T06:23:36.230563+00:00",
+      "updatedAt": "2026-11-14T18:01:49.400433+00:00",
       "stale": false,
       "games": [
         {
@@ -30246,7 +30246,7 @@
     },
     "Detroit Mercy": {
       "espnId": "2174",
-      "updatedAt": "2026-11-14T06:23:40.574496+00:00",
+      "updatedAt": "2026-11-14T18:01:53.627083+00:00",
       "stale": false,
       "games": [
         {
@@ -30645,7 +30645,7 @@
     },
     "Drake": {
       "espnId": "2181",
-      "updatedAt": "2026-11-14T06:23:32.434395+00:00",
+      "updatedAt": "2026-11-14T18:01:45.985477+00:00",
       "stale": false,
       "games": [
         {
@@ -31100,7 +31100,7 @@
     },
     "Drexel": {
       "espnId": "2182",
-      "updatedAt": "2026-11-14T06:23:40.620496+00:00",
+      "updatedAt": "2026-11-14T18:01:53.666272+00:00",
       "stale": false,
       "games": [
         {
@@ -31541,7 +31541,7 @@
     },
     "Duke": {
       "espnId": "150",
-      "updatedAt": "2026-11-14T06:23:24.499178+00:00",
+      "updatedAt": "2026-11-14T18:01:37.861729+00:00",
       "stale": false,
       "games": [
         {
@@ -31996,7 +31996,7 @@
     },
     "Duquesne": {
       "espnId": "2184",
-      "updatedAt": "2026-11-14T06:23:33.394526+00:00",
+      "updatedAt": "2026-11-14T18:01:46.872063+00:00",
       "stale": false,
       "games": [
         {
@@ -32451,7 +32451,7 @@
     },
     "East Carolina": {
       "espnId": "151",
-      "updatedAt": "2026-11-14T06:23:34.439318+00:00",
+      "updatedAt": "2026-11-14T18:01:47.929588+00:00",
       "stale": false,
       "games": [
         {
@@ -32878,7 +32878,7 @@
     },
     "East Tennessee State": {
       "espnId": "2193",
-      "updatedAt": "2026-11-14T06:23:34.788527+00:00",
+      "updatedAt": "2026-11-14T18:01:48.190710+00:00",
       "stale": false,
       "games": [
         {
@@ -33333,7 +33333,7 @@
     },
     "East Texas A&M": {
       "espnId": "2837",
-      "updatedAt": "2026-11-14T06:23:33.013403+00:00",
+      "updatedAt": "2026-11-14T18:01:46.434741+00:00",
       "stale": false,
       "games": [
         {
@@ -33788,7 +33788,7 @@
     },
     "Eastern Illinois": {
       "espnId": "2197",
-      "updatedAt": "2026-11-14T06:23:43.925872+00:00",
+      "updatedAt": "2026-11-14T18:01:56.923697+00:00",
       "stale": false,
       "games": [
         {
@@ -34243,7 +34243,7 @@
     },
     "Eastern Kentucky": {
       "espnId": "2198",
-      "updatedAt": "2026-11-14T06:23:31.753988+00:00",
+      "updatedAt": "2026-11-14T18:01:45.186736+00:00",
       "stale": false,
       "games": [
         {
@@ -34698,7 +34698,7 @@
     },
     "Eastern Michigan": {
       "espnId": "2199",
-      "updatedAt": "2026-11-14T06:23:34.376495+00:00",
+      "updatedAt": "2026-11-14T18:01:47.749808+00:00",
       "stale": false,
       "games": [
         {
@@ -35125,7 +35125,7 @@
     },
     "Eastern Washington": {
       "espnId": "331",
-      "updatedAt": "2026-11-14T06:23:40.138379+00:00",
+      "updatedAt": "2026-11-14T18:01:53.158924+00:00",
       "stale": false,
       "games": [
         {
@@ -35580,7 +35580,7 @@
     },
     "Elon": {
       "espnId": "2210",
-      "updatedAt": "2026-11-14T06:23:34.085865+00:00",
+      "updatedAt": "2026-11-14T18:01:47.594745+00:00",
       "stale": false,
       "games": [
         {
@@ -36035,7 +36035,7 @@
     },
     "Evansville": {
       "espnId": "339",
-      "updatedAt": "2026-11-14T06:23:35.363794+00:00",
+      "updatedAt": "2026-11-14T18:01:48.545164+00:00",
       "stale": false,
       "games": [
         {
@@ -36476,7 +36476,7 @@
     },
     "Fairfield": {
       "espnId": "2217",
-      "updatedAt": "2026-11-14T06:23:41.363990+00:00",
+      "updatedAt": "2026-11-14T18:01:54.453909+00:00",
       "stale": false,
       "games": [
         {
@@ -36917,7 +36917,7 @@
     },
     "Fairleigh Dickinson": {
       "espnId": "161",
-      "updatedAt": "2026-11-14T06:23:44.732344+00:00",
+      "updatedAt": "2026-11-14T18:01:57.785079+00:00",
       "stale": false,
       "games": [
         {
@@ -37372,7 +37372,7 @@
     },
     "Florida": {
       "espnId": "57",
-      "updatedAt": "2026-11-14T06:23:24.482552+00:00",
+      "updatedAt": "2026-11-14T18:01:37.871787+00:00",
       "stale": false,
       "games": [
         {
@@ -37799,7 +37799,7 @@
     },
     "Florida A&M": {
       "espnId": "50",
-      "updatedAt": "2026-11-14T06:23:45.325129+00:00",
+      "updatedAt": "2026-11-14T18:01:58.194397+00:00",
       "stale": false,
       "games": [
         {
@@ -38254,7 +38254,7 @@
     },
     "Florida Atlantic": {
       "espnId": "2226",
-      "updatedAt": "2026-11-14T06:23:34.613635+00:00",
+      "updatedAt": "2026-11-14T18:01:48.086711+00:00",
       "stale": false,
       "games": [
         {
@@ -38709,7 +38709,7 @@
     },
     "Florida Gulf Coast": {
       "espnId": "526",
-      "updatedAt": "2026-11-14T06:23:37.983923+00:00",
+      "updatedAt": "2026-11-14T18:01:51.100332+00:00",
       "stale": false,
       "games": [
         {
@@ -39164,7 +39164,7 @@
     },
     "Florida International": {
       "espnId": "2229",
-      "updatedAt": "2026-11-14T06:23:29.997417+00:00",
+      "updatedAt": "2026-11-14T18:01:43.521632+00:00",
       "stale": false,
       "games": [
         {
@@ -39605,7 +39605,7 @@
     },
     "Florida State": {
       "espnId": "52",
-      "updatedAt": "2026-11-14T06:23:28.933897+00:00",
+      "updatedAt": "2026-11-14T18:01:42.493325+00:00",
       "stale": false,
       "games": [
         {
@@ -40060,7 +40060,7 @@
     },
     "Fordham": {
       "espnId": "2230",
-      "updatedAt": "2026-11-14T06:23:31.489901+00:00",
+      "updatedAt": "2026-11-14T18:01:44.908126+00:00",
       "stale": false,
       "games": [
         {
@@ -40515,7 +40515,7 @@
     },
     "Fresno State": {
       "espnId": "278",
-      "updatedAt": "2026-11-14T06:23:37.306085+00:00",
+      "updatedAt": "2026-11-14T18:01:50.380688+00:00",
       "stale": false,
       "games": [
         {
@@ -40956,7 +40956,7 @@
     },
     "Furman": {
       "espnId": "231",
-      "updatedAt": "2026-11-14T06:23:28.791219+00:00",
+      "updatedAt": "2026-11-14T18:01:42.413447+00:00",
       "stale": false,
       "games": [
         {
@@ -41411,7 +41411,7 @@
     },
     "Gardner-Webb": {
       "espnId": "2241",
-      "updatedAt": "2026-11-14T06:23:41.457654+00:00",
+      "updatedAt": "2026-11-14T18:01:54.518664+00:00",
       "stale": false,
       "games": [
         {
@@ -41852,7 +41852,7 @@
     },
     "George Mason": {
       "espnId": "2244",
-      "updatedAt": "2026-11-14T06:23:29.457455+00:00",
+      "updatedAt": "2026-11-14T18:01:42.870362+00:00",
       "stale": false,
       "games": [
         {
@@ -42307,7 +42307,7 @@
     },
     "George Washington": {
       "espnId": "45",
-      "updatedAt": "2026-11-14T06:23:27.941443+00:00",
+      "updatedAt": "2026-11-14T18:01:41.446067+00:00",
       "stale": false,
       "games": [
         {
@@ -42762,7 +42762,7 @@
     },
     "Georgetown": {
       "espnId": "46",
-      "updatedAt": "2026-11-14T06:23:28.676099+00:00",
+      "updatedAt": "2026-11-14T18:01:42.287212+00:00",
       "stale": false,
       "games": [
         {
@@ -43203,7 +43203,7 @@
     },
     "Georgia": {
       "espnId": "61",
-      "updatedAt": "2026-11-14T06:23:26.084641+00:00",
+      "updatedAt": "2026-11-14T18:01:39.557404+00:00",
       "stale": false,
       "games": [
         {
@@ -43644,7 +43644,7 @@
     },
     "Georgia Southern": {
       "espnId": "290",
-      "updatedAt": "2026-11-14T06:23:40.397492+00:00",
+      "updatedAt": "2026-11-14T18:01:53.494735+00:00",
       "stale": false,
       "games": [
         {
@@ -44085,7 +44085,7 @@
     },
     "Georgia State": {
       "espnId": "2247",
-      "updatedAt": "2026-11-14T06:23:39.395978+00:00",
+      "updatedAt": "2026-11-14T18:01:52.326352+00:00",
       "stale": false,
       "games": [
         {
@@ -44526,7 +44526,7 @@
     },
     "Georgia Tech": {
       "espnId": "59",
-      "updatedAt": "2026-11-14T06:23:30.573554+00:00",
+      "updatedAt": "2026-11-14T18:01:43.858419+00:00",
       "stale": false,
       "games": [
         {
@@ -44981,7 +44981,7 @@
     },
     "Gonzaga": {
       "espnId": "2250",
-      "updatedAt": "2026-11-14T06:23:24.835757+00:00",
+      "updatedAt": "2026-11-14T18:01:38.107752+00:00",
       "stale": false,
       "games": [
         {
@@ -45394,7 +45394,7 @@
     },
     "Grambling": {
       "espnId": "2755",
-      "updatedAt": "2026-11-14T06:23:36.045500+00:00",
+      "updatedAt": "2026-11-14T18:01:49.200772+00:00",
       "stale": false,
       "games": [
         {
@@ -45849,7 +45849,7 @@
     },
     "Grand Canyon": {
       "espnId": "2253",
-      "updatedAt": "2026-11-14T06:23:27.158700+00:00",
+      "updatedAt": "2026-11-14T18:01:40.524746+00:00",
       "stale": false,
       "games": [
         {
@@ -46290,7 +46290,7 @@
     },
     "Green Bay": {
       "espnId": "2739",
-      "updatedAt": "2026-11-14T06:23:36.014182+00:00",
+      "updatedAt": "2026-11-14T18:01:48.959321+00:00",
       "stale": false,
       "games": [
         {
@@ -46745,7 +46745,7 @@
     },
     "Hampton": {
       "espnId": "2261",
-      "updatedAt": "2026-11-14T06:23:36.928680+00:00",
+      "updatedAt": "2026-11-14T18:01:50.097441+00:00",
       "stale": false,
       "games": [
         {
@@ -47200,7 +47200,7 @@
     },
     "Harvard": {
       "espnId": "108",
-      "updatedAt": "2026-11-14T06:23:37.482095+00:00",
+      "updatedAt": "2026-11-14T18:01:50.558603+00:00",
       "stale": false,
       "games": [
         {
@@ -47599,7 +47599,7 @@
     },
     "Hawai'i": {
       "espnId": "62",
-      "updatedAt": "2026-11-14T06:23:34.002433+00:00",
+      "updatedAt": "2026-11-14T18:01:47.407575+00:00",
       "stale": false,
       "games": [
         {
@@ -48026,7 +48026,7 @@
     },
     "High Point": {
       "espnId": "2272",
-      "updatedAt": "2026-11-14T06:23:27.745187+00:00",
+      "updatedAt": "2026-11-14T18:01:41.262858+00:00",
       "stale": false,
       "games": [
         {
@@ -48481,7 +48481,7 @@
     },
     "Hofstra": {
       "espnId": "2275",
-      "updatedAt": "2026-11-14T06:23:37.272407+00:00",
+      "updatedAt": "2026-11-14T18:01:50.348686+00:00",
       "stale": false,
       "games": [
         {
@@ -48936,7 +48936,7 @@
     },
     "Holy Cross": {
       "espnId": "107",
-      "updatedAt": "2026-11-14T06:23:43.348453+00:00",
+      "updatedAt": "2026-11-14T18:01:56.512708+00:00",
       "stale": false,
       "games": [
         {
@@ -49391,7 +49391,7 @@
     },
     "Houston": {
       "espnId": "248",
-      "updatedAt": "2026-11-14T06:23:24.491109+00:00",
+      "updatedAt": "2026-11-14T18:01:37.887706+00:00",
       "stale": false,
       "games": [
         {
@@ -49818,7 +49818,7 @@
     },
     "Houston Christian": {
       "espnId": "2277",
-      "updatedAt": "2026-11-14T06:23:28.941611+00:00",
+      "updatedAt": "2026-11-14T18:01:42.485850+00:00",
       "stale": false,
       "games": [
         {
@@ -50273,7 +50273,7 @@
     },
     "Howard": {
       "espnId": "47",
-      "updatedAt": "2026-11-14T06:23:38.482944+00:00",
+      "updatedAt": "2026-11-14T18:01:51.309864+00:00",
       "stale": false,
       "games": [
         {
@@ -50714,7 +50714,7 @@
     },
     "IU Indianapolis": {
       "espnId": "85",
-      "updatedAt": "2026-11-14T06:23:32.147390+00:00",
+      "updatedAt": "2026-11-14T18:01:45.707422+00:00",
       "stale": false,
       "games": [
         {
@@ -51169,7 +51169,7 @@
     },
     "Idaho": {
       "espnId": "70",
-      "updatedAt": "2026-11-14T06:23:38.654947+00:00",
+      "updatedAt": "2026-11-14T18:01:51.766163+00:00",
       "stale": false,
       "games": [
         {
@@ -51624,7 +51624,7 @@
     },
     "Idaho State": {
       "espnId": "304",
-      "updatedAt": "2026-11-14T06:23:42.743306+00:00",
+      "updatedAt": "2026-11-14T18:01:55.981057+00:00",
       "stale": false,
       "games": [
         {
@@ -52079,7 +52079,7 @@
     },
     "Illinois": {
       "espnId": "356",
-      "updatedAt": "2026-11-14T06:23:24.666198+00:00",
+      "updatedAt": "2026-11-14T18:01:38.155585+00:00",
       "stale": false,
       "games": [
         {
@@ -52534,7 +52534,7 @@
     },
     "Illinois State": {
       "espnId": "2287",
-      "updatedAt": "2026-11-14T06:23:38.263369+00:00",
+      "updatedAt": "2026-11-14T18:01:51.276681+00:00",
       "stale": false,
       "games": [
         {
@@ -52989,7 +52989,7 @@
     },
     "Incarnate Word": {
       "espnId": "2916",
-      "updatedAt": "2026-11-14T06:23:44.781199+00:00",
+      "updatedAt": "2026-11-14T18:01:57.786478+00:00",
       "stale": false,
       "games": [
         {
@@ -53458,7 +53458,7 @@
     },
     "Indiana": {
       "espnId": "84",
-      "updatedAt": "2026-11-14T06:23:25.864609+00:00",
+      "updatedAt": "2026-11-14T18:01:39.311832+00:00",
       "stale": false,
       "games": [
         {
@@ -53913,7 +53913,7 @@
     },
     "Indiana State": {
       "espnId": "282",
-      "updatedAt": "2026-11-14T06:23:40.464626+00:00",
+      "updatedAt": "2026-11-14T18:01:53.445015+00:00",
       "stale": false,
       "games": [
         {
@@ -54340,7 +54340,7 @@
     },
     "Iona": {
       "espnId": "314",
-      "updatedAt": "2026-11-14T06:23:42.092851+00:00",
+      "updatedAt": "2026-11-14T18:01:55.304880+00:00",
       "stale": false,
       "games": [
         {
@@ -54795,7 +54795,7 @@
     },
     "Iowa": {
       "espnId": "2294",
-      "updatedAt": "2026-11-14T06:23:26.720115+00:00",
+      "updatedAt": "2026-11-14T18:01:40.176559+00:00",
       "stale": false,
       "games": [
         {
@@ -55250,7 +55250,7 @@
     },
     "Iowa State": {
       "espnId": "66",
-      "updatedAt": "2026-11-14T06:23:25.067052+00:00",
+      "updatedAt": "2026-11-14T18:01:38.348527+00:00",
       "stale": false,
       "games": [
         {
@@ -55677,7 +55677,7 @@
     },
     "Jackson State": {
       "espnId": "2296",
-      "updatedAt": "2026-11-14T06:23:44.151924+00:00",
+      "updatedAt": "2026-11-14T18:01:57.244617+00:00",
       "stale": false,
       "games": [
         {
@@ -56146,7 +56146,7 @@
     },
     "Jacksonville": {
       "espnId": "294",
-      "updatedAt": "2026-11-14T06:23:33.803666+00:00",
+      "updatedAt": "2026-11-14T18:01:47.132979+00:00",
       "stale": false,
       "games": [
         {
@@ -56587,7 +56587,7 @@
     },
     "Jacksonville State": {
       "espnId": "55",
-      "updatedAt": "2026-11-14T06:23:39.488220+00:00",
+      "updatedAt": "2026-11-14T18:01:52.389975+00:00",
       "stale": false,
       "games": [
         {
@@ -57042,7 +57042,7 @@
     },
     "James Madison": {
       "espnId": "256",
-      "updatedAt": "2026-11-14T06:23:36.495168+00:00",
+      "updatedAt": "2026-11-14T18:01:49.729836+00:00",
       "stale": false,
       "games": [
         {
@@ -57483,7 +57483,7 @@
     },
     "Kansas": {
       "espnId": "2305",
-      "updatedAt": "2026-11-14T06:23:24.481354+00:00",
+      "updatedAt": "2026-11-14T18:01:37.903568+00:00",
       "stale": false,
       "games": [
         {
@@ -57910,7 +57910,7 @@
     },
     "Kansas City": {
       "espnId": "140",
-      "updatedAt": "2026-11-14T06:23:39.496088+00:00",
+      "updatedAt": "2026-11-14T18:01:52.334996+00:00",
       "stale": false,
       "games": [
         {
@@ -58365,7 +58365,7 @@
     },
     "Kansas State": {
       "espnId": "2306",
-      "updatedAt": "2026-11-14T06:23:33.406095+00:00",
+      "updatedAt": "2026-11-14T18:01:46.681801+00:00",
       "stale": false,
       "games": [
         {
@@ -58792,7 +58792,7 @@
     },
     "Kennesaw State": {
       "espnId": "338",
-      "updatedAt": "2026-11-14T06:23:29.627503+00:00",
+      "updatedAt": "2026-11-14T18:01:43.137015+00:00",
       "stale": false,
       "games": [
         {
@@ -59219,7 +59219,7 @@
     },
     "Kent State": {
       "espnId": "2309",
-      "updatedAt": "2026-11-14T06:23:39.133748+00:00",
+      "updatedAt": "2026-11-14T18:01:51.937175+00:00",
       "stale": false,
       "games": [
         {
@@ -59646,7 +59646,7 @@
     },
     "Kentucky": {
       "espnId": "96",
-      "updatedAt": "2026-11-14T06:23:26.163438+00:00",
+      "updatedAt": "2026-11-14T18:01:39.550872+00:00",
       "stale": false,
       "games": [
         {
@@ -60101,7 +60101,7 @@
     },
     "LSU": {
       "espnId": "99",
-      "updatedAt": "2026-11-14T06:23:26.787992+00:00",
+      "updatedAt": "2026-11-14T18:01:40.432953+00:00",
       "stale": false,
       "games": [
         {
@@ -60556,7 +60556,7 @@
     },
     "LSU New Orleans": {
       "espnId": "2443",
-      "updatedAt": "2026-11-14T06:23:45.788809+00:00",
+      "updatedAt": "2026-11-14T18:01:58.378255+00:00",
       "stale": false,
       "games": [
         {
@@ -61011,7 +61011,7 @@
     },
     "La Salle": {
       "espnId": "2325",
-      "updatedAt": "2026-11-14T06:23:40.764369+00:00",
+      "updatedAt": "2026-11-14T18:01:53.818956+00:00",
       "stale": false,
       "games": [
         {
@@ -61452,7 +61452,7 @@
     },
     "Lafayette": {
       "espnId": "322",
-      "updatedAt": "2026-11-14T06:23:40.119435+00:00",
+      "updatedAt": "2026-11-14T18:01:53.149848+00:00",
       "stale": false,
       "games": [
         {
@@ -61907,7 +61907,7 @@
     },
     "Lamar": {
       "espnId": "2320",
-      "updatedAt": "2026-11-14T06:23:33.628931+00:00",
+      "updatedAt": "2026-11-14T18:01:47.077007+00:00",
       "stale": false,
       "games": [
         {
@@ -62362,7 +62362,7 @@
     },
     "Le Moyne": {
       "espnId": "2330",
-      "updatedAt": "2026-11-14T06:23:40.958007+00:00",
+      "updatedAt": "2026-11-14T18:01:54.112647+00:00",
       "stale": false,
       "games": [
         {
@@ -62817,7 +62817,7 @@
     },
     "Lehigh": {
       "espnId": "2329",
-      "updatedAt": "2026-11-14T06:23:40.354853+00:00",
+      "updatedAt": "2026-11-14T18:01:53.354436+00:00",
       "stale": false,
       "games": [
         {
@@ -63258,7 +63258,7 @@
     },
     "Liberty": {
       "espnId": "2335",
-      "updatedAt": "2026-11-14T06:23:34.204972+00:00",
+      "updatedAt": "2026-11-14T18:01:47.753057+00:00",
       "stale": false,
       "games": [
         {
@@ -63713,7 +63713,7 @@
     },
     "Lindenwood": {
       "espnId": "2815",
-      "updatedAt": "2026-11-14T06:23:43.868758+00:00",
+      "updatedAt": "2026-11-14T18:01:56.943651+00:00",
       "stale": false,
       "games": [
         {
@@ -64154,7 +64154,7 @@
     },
     "Lipscomb": {
       "espnId": "288",
-      "updatedAt": "2026-11-14T06:23:38.449630+00:00",
+      "updatedAt": "2026-11-14T18:01:51.328560+00:00",
       "stale": false,
       "games": [
         {
@@ -64609,7 +64609,7 @@
     },
     "Little Rock": {
       "espnId": "2031",
-      "updatedAt": "2026-11-14T06:23:41.846996+00:00",
+      "updatedAt": "2026-11-14T18:01:54.921858+00:00",
       "stale": false,
       "games": [
         {
@@ -65064,7 +65064,7 @@
     },
     "Long Beach State": {
       "espnId": "299",
-      "updatedAt": "2026-11-14T06:23:36.763829+00:00",
+      "updatedAt": "2026-11-14T18:01:49.978625+00:00",
       "stale": false,
       "games": [
         {
@@ -65519,7 +65519,7 @@
     },
     "Long Island University": {
       "espnId": "112358",
-      "updatedAt": "2026-11-14T06:23:45.430348+00:00",
+      "updatedAt": "2026-11-14T18:01:58.175643+00:00",
       "stale": false,
       "games": [
         {
@@ -65960,7 +65960,7 @@
     },
     "Longwood": {
       "espnId": "2344",
-      "updatedAt": "2026-11-14T06:23:32.140563+00:00",
+      "updatedAt": "2026-11-14T18:01:45.632566+00:00",
       "stale": false,
       "games": [
         {
@@ -66415,7 +66415,7 @@
     },
     "Louisiana": {
       "espnId": "309",
-      "updatedAt": "2026-11-14T06:23:40.262942+00:00",
+      "updatedAt": "2026-11-14T18:01:53.300142+00:00",
       "stale": false,
       "games": [
         {
@@ -66842,7 +66842,7 @@
     },
     "Louisiana Tech": {
       "espnId": "2348",
-      "updatedAt": "2026-11-14T06:23:35.598395+00:00",
+      "updatedAt": "2026-11-14T18:01:48.830060+00:00",
       "stale": false,
       "games": [
         {
@@ -67283,7 +67283,7 @@
     },
     "Louisville": {
       "espnId": "97",
-      "updatedAt": "2026-11-14T06:23:25.033783+00:00",
+      "updatedAt": "2026-11-14T18:01:38.349886+00:00",
       "stale": false,
       "games": [
         {
@@ -67696,7 +67696,7 @@
     },
     "Loyola Chicago": {
       "espnId": "2350",
-      "updatedAt": "2026-11-14T06:23:31.772478+00:00",
+      "updatedAt": "2026-11-14T18:01:45.225083+00:00",
       "stale": false,
       "games": [
         {
@@ -68123,7 +68123,7 @@
     },
     "Loyola Maryland": {
       "espnId": "2352",
-      "updatedAt": "2026-11-14T06:23:43.937768+00:00",
+      "updatedAt": "2026-11-14T18:01:57.006219+00:00",
       "stale": false,
       "games": [
         {
@@ -68564,7 +68564,7 @@
     },
     "Loyola Marymount": {
       "espnId": "2351",
-      "updatedAt": "2026-11-14T06:23:41.234774+00:00",
+      "updatedAt": "2026-11-14T18:01:54.339023+00:00",
       "stale": false,
       "games": [
         {
@@ -69019,7 +69019,7 @@
     },
     "Maine": {
       "espnId": "311",
-      "updatedAt": "2026-11-14T06:23:41.467503+00:00",
+      "updatedAt": "2026-11-14T18:01:54.506566+00:00",
       "stale": false,
       "games": [
         {
@@ -69474,7 +69474,7 @@
     },
     "Manhattan": {
       "espnId": "2363",
-      "updatedAt": "2026-11-14T06:23:40.859518+00:00",
+      "updatedAt": "2026-11-14T18:01:53.841865+00:00",
       "stale": false,
       "games": [
         {
@@ -69929,7 +69929,7 @@
     },
     "Marist": {
       "espnId": "2368",
-      "updatedAt": "2026-11-14T06:23:39.314779+00:00",
+      "updatedAt": "2026-11-14T18:01:52.298448+00:00",
       "stale": false,
       "games": [
         {
@@ -70356,7 +70356,7 @@
     },
     "Marquette": {
       "espnId": "269",
-      "updatedAt": "2026-11-14T06:23:26.575740+00:00",
+      "updatedAt": "2026-11-14T18:01:40.120924+00:00",
       "stale": false,
       "games": [
         {
@@ -70811,7 +70811,7 @@
     },
     "Marshall": {
       "espnId": "276",
-      "updatedAt": "2026-11-14T06:23:35.591505+00:00",
+      "updatedAt": "2026-11-14T18:01:48.878632+00:00",
       "stale": false,
       "games": [
         {
@@ -71238,7 +71238,7 @@
     },
     "Maryland": {
       "espnId": "120",
-      "updatedAt": "2026-11-14T06:23:27.863456+00:00",
+      "updatedAt": "2026-11-14T18:01:41.315863+00:00",
       "stale": false,
       "games": [
         {
@@ -71665,7 +71665,7 @@
     },
     "Maryland Eastern Shore": {
       "espnId": "2379",
-      "updatedAt": "2026-11-14T06:23:45.100975+00:00",
+      "updatedAt": "2026-11-14T18:01:57.971080+00:00",
       "stale": false,
       "games": [
         {
@@ -72106,7 +72106,7 @@
     },
     "Massachusetts": {
       "espnId": "113",
-      "updatedAt": "2026-11-14T06:23:33.993195+00:00",
+      "updatedAt": "2026-11-14T18:01:47.350435+00:00",
       "stale": false,
       "games": [
         {
@@ -72547,7 +72547,7 @@
     },
     "McNeese": {
       "espnId": "2377",
-      "updatedAt": "2026-11-14T06:23:31.555958+00:00",
+      "updatedAt": "2026-11-14T18:01:44.922159+00:00",
       "stale": false,
       "games": [
         {
@@ -72988,7 +72988,7 @@
     },
     "Memphis": {
       "espnId": "235",
-      "updatedAt": "2026-11-14T06:23:33.184468+00:00",
+      "updatedAt": "2026-11-14T18:01:46.639629+00:00",
       "stale": false,
       "games": [
         {
@@ -73429,7 +73429,7 @@
     },
     "Mercer": {
       "espnId": "2382",
-      "updatedAt": "2026-11-14T06:23:38.638867+00:00",
+      "updatedAt": "2026-11-14T18:01:51.549656+00:00",
       "stale": false,
       "games": [
         {
@@ -73884,7 +73884,7 @@
     },
     "Mercyhurst": {
       "espnId": "2385",
-      "updatedAt": "2026-11-14T06:23:43.513399+00:00",
+      "updatedAt": "2026-11-14T18:01:56.589394+00:00",
       "stale": false,
       "games": [
         {
@@ -74339,7 +74339,7 @@
     },
     "Merrimack": {
       "espnId": "2771",
-      "updatedAt": "2026-11-14T06:23:42.594268+00:00",
+      "updatedAt": "2026-11-14T18:01:55.644589+00:00",
       "stale": false,
       "games": [
         {
@@ -74780,7 +74780,7 @@
     },
     "Miami": {
       "espnId": "2390",
-      "updatedAt": "2026-11-14T06:23:25.656617+00:00",
+      "updatedAt": "2026-11-14T18:01:39.076042+00:00",
       "stale": false,
       "games": [
         {
@@ -75207,7 +75207,7 @@
     },
     "Miami (OH)": {
       "espnId": "193",
-      "updatedAt": "2026-11-14T06:23:33.577999+00:00",
+      "updatedAt": "2026-11-14T18:01:46.874386+00:00",
       "stale": false,
       "games": [
         {
@@ -75648,7 +75648,7 @@
     },
     "Michigan": {
       "espnId": "130",
-      "updatedAt": "2026-11-14T06:23:25.481977+00:00",
+      "updatedAt": "2026-11-14T18:01:38.732800+00:00",
       "stale": false,
       "games": [
         {
@@ -76075,7 +76075,7 @@
     },
     "Michigan State": {
       "espnId": "127",
-      "updatedAt": "2026-11-14T06:23:24.711636+00:00",
+      "updatedAt": "2026-11-14T18:01:38.113431+00:00",
       "stale": false,
       "games": [
         {
@@ -76530,7 +76530,7 @@
     },
     "Middle Tennessee": {
       "espnId": "2393",
-      "updatedAt": "2026-11-14T06:23:35.697309+00:00",
+      "updatedAt": "2026-11-14T18:01:48.738001+00:00",
       "stale": false,
       "games": [
         {
@@ -76957,7 +76957,7 @@
     },
     "Milwaukee": {
       "espnId": "270",
-      "updatedAt": "2026-11-14T06:23:40.860351+00:00",
+      "updatedAt": "2026-11-14T18:01:53.892042+00:00",
       "stale": false,
       "games": [
         {
@@ -77412,7 +77412,7 @@
     },
     "Minnesota": {
       "espnId": "135",
-      "updatedAt": "2026-11-14T06:23:28.151331+00:00",
+      "updatedAt": "2026-11-14T18:01:41.826393+00:00",
       "stale": false,
       "games": [
         {
@@ -77867,7 +77867,7 @@
     },
     "Mississippi State": {
       "espnId": "344",
-      "updatedAt": "2026-11-14T06:23:28.715131+00:00",
+      "updatedAt": "2026-11-14T18:01:42.362009+00:00",
       "stale": false,
       "games": [
         {
@@ -78308,7 +78308,7 @@
     },
     "Mississippi Valley State": {
       "espnId": "2400",
-      "updatedAt": "2026-11-14T06:23:45.528157+00:00",
+      "updatedAt": "2026-11-14T18:01:57.627722+00:00",
       "stale": false,
       "games": [
         {
@@ -78777,7 +78777,7 @@
     },
     "Missouri": {
       "espnId": "142",
-      "updatedAt": "2026-11-14T06:23:26.057920+00:00",
+      "updatedAt": "2026-11-14T18:01:39.472964+00:00",
       "stale": false,
       "games": [
         {
@@ -79232,7 +79232,7 @@
     },
     "Missouri State": {
       "espnId": "2623",
-      "updatedAt": "2026-11-14T06:23:45.976066+00:00",
+      "updatedAt": "2026-11-14T18:01:58.572089+00:00",
       "stale": false,
       "games": [
         {
@@ -79659,7 +79659,7 @@
     },
     "Monmouth": {
       "espnId": "2405",
-      "updatedAt": "2026-11-14T06:23:36.493394+00:00",
+      "updatedAt": "2026-11-14T18:01:49.651385+00:00",
       "stale": false,
       "games": [
         {
@@ -80114,7 +80114,7 @@
     },
     "Montana": {
       "espnId": "149",
-      "updatedAt": "2026-11-14T06:23:35.386467+00:00",
+      "updatedAt": "2026-11-14T18:01:48.739078+00:00",
       "stale": false,
       "games": [
         {
@@ -80161,14 +80161,14 @@
         },
         {
           "id": "401922031",
-          "date": "2026-11-14T18:00Z",
+          "date": "2026-11-15T02:00Z",
           "timeKnown": true,
           "opponent": "North Dakota",
           "opponentEspnId": "155",
           "location": "away",
           "venue": "Betty Engelstad Sioux Center",
           "status": "scheduled",
-          "statusLabel": "Sat, November 14th at 1:00 PM EST",
+          "statusLabel": "Sat, November 14th at 9:00 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -80569,7 +80569,7 @@
     },
     "Montana State": {
       "espnId": "147",
-      "updatedAt": "2026-11-14T06:23:35.192306+00:00",
+      "updatedAt": "2026-11-14T18:01:48.652743+00:00",
       "stale": false,
       "games": [
         {
@@ -81024,7 +81024,7 @@
     },
     "Morehead State": {
       "espnId": "2413",
-      "updatedAt": "2026-11-14T06:23:41.873600+00:00",
+      "updatedAt": "2026-11-14T18:01:55.143348+00:00",
       "stale": false,
       "games": [
         {
@@ -81479,7 +81479,7 @@
     },
     "Morgan State": {
       "espnId": "2415",
-      "updatedAt": "2026-11-14T06:23:34.321959+00:00",
+      "updatedAt": "2026-11-14T18:01:47.573711+00:00",
       "stale": false,
       "games": [
         {
@@ -81892,7 +81892,7 @@
     },
     "Mount St. Mary's": {
       "espnId": "116",
-      "updatedAt": "2026-11-14T06:23:40.376221+00:00",
+      "updatedAt": "2026-11-14T18:01:53.256917+00:00",
       "stale": false,
       "games": [
         {
@@ -82333,7 +82333,7 @@
     },
     "Murray State": {
       "espnId": "93",
-      "updatedAt": "2026-11-14T06:23:28.264106+00:00",
+      "updatedAt": "2026-11-14T18:01:42.060920+00:00",
       "stale": false,
       "games": [
         {
@@ -82774,7 +82774,7 @@
     },
     "NC State": {
       "espnId": "152",
-      "updatedAt": "2026-11-14T06:23:26.542213+00:00",
+      "updatedAt": "2026-11-14T18:01:40.304602+00:00",
       "stale": false,
       "games": [
         {
@@ -83215,7 +83215,7 @@
     },
     "NJIT": {
       "espnId": "2885",
-      "updatedAt": "2026-11-14T06:23:45.553855+00:00",
+      "updatedAt": "2026-11-14T18:01:58.418925+00:00",
       "stale": false,
       "games": [
         {
@@ -83670,7 +83670,7 @@
     },
     "Navy": {
       "espnId": "2426",
-      "updatedAt": "2026-11-14T06:23:37.806840+00:00",
+      "updatedAt": "2026-11-14T18:01:50.969734+00:00",
       "stale": false,
       "games": [
         {
@@ -84125,7 +84125,7 @@
     },
     "Nebraska": {
       "espnId": "158",
-      "updatedAt": "2026-11-14T06:23:25.422502+00:00",
+      "updatedAt": "2026-11-14T18:01:38.806710+00:00",
       "stale": false,
       "games": [
         {
@@ -84580,7 +84580,7 @@
     },
     "Nevada": {
       "espnId": "2440",
-      "updatedAt": "2026-11-14T06:23:30.743089+00:00",
+      "updatedAt": "2026-11-14T18:01:44.083144+00:00",
       "stale": false,
       "games": [
         {
@@ -85035,7 +85035,7 @@
     },
     "New Hampshire": {
       "espnId": "160",
-      "updatedAt": "2026-11-14T06:23:31.824914+00:00",
+      "updatedAt": "2026-11-14T18:01:45.397909+00:00",
       "stale": false,
       "games": [
         {
@@ -85490,7 +85490,7 @@
     },
     "New Haven": {
       "espnId": "2441",
-      "updatedAt": "2026-11-14T06:23:39.132400+00:00",
+      "updatedAt": "2026-11-14T18:01:52.076992+00:00",
       "stale": false,
       "games": [
         {
@@ -85931,7 +85931,7 @@
     },
     "New Mexico": {
       "espnId": "167",
-      "updatedAt": "2026-11-14T06:23:27.563207+00:00",
+      "updatedAt": "2026-11-14T18:01:41.129844+00:00",
       "stale": false,
       "games": [
         {
@@ -86372,7 +86372,7 @@
     },
     "New Mexico State": {
       "espnId": "166",
-      "updatedAt": "2026-11-14T06:23:41.273923+00:00",
+      "updatedAt": "2026-11-14T18:01:54.268723+00:00",
       "stale": false,
       "games": [
         {
@@ -86805,7 +86805,7 @@
     },
     "Niagara": {
       "espnId": "315",
-      "updatedAt": "2026-11-14T06:23:42.950658+00:00",
+      "updatedAt": "2026-11-14T18:01:56.227157+00:00",
       "stale": false,
       "games": [
         {
@@ -87246,7 +87246,7 @@
     },
     "Nicholls": {
       "espnId": "2447",
-      "updatedAt": "2026-11-14T06:23:37.698793+00:00",
+      "updatedAt": "2026-11-14T18:01:50.747279+00:00",
       "stale": false,
       "games": [
         {
@@ -87701,7 +87701,7 @@
     },
     "Norfolk State": {
       "espnId": "2450",
-      "updatedAt": "2026-11-14T06:23:42.151404+00:00",
+      "updatedAt": "2026-11-14T18:01:55.403680+00:00",
       "stale": false,
       "games": [
         {
@@ -88156,7 +88156,7 @@
     },
     "North Alabama": {
       "espnId": "2453",
-      "updatedAt": "2026-11-14T06:23:39.510640+00:00",
+      "updatedAt": "2026-11-14T18:01:52.471785+00:00",
       "stale": false,
       "games": [
         {
@@ -88611,7 +88611,7 @@
     },
     "North Carolina": {
       "espnId": "153",
-      "updatedAt": "2026-11-14T06:23:26.612559+00:00",
+      "updatedAt": "2026-11-14T18:01:40.248089+00:00",
       "stale": false,
       "games": [
         {
@@ -89066,7 +89066,7 @@
     },
     "North Carolina A&T": {
       "espnId": "2448",
-      "updatedAt": "2026-11-14T06:23:38.205924+00:00",
+      "updatedAt": "2026-11-14T18:01:51.153657+00:00",
       "stale": false,
       "games": [
         {
@@ -89507,7 +89507,7 @@
     },
     "North Carolina Central": {
       "espnId": "2428",
-      "updatedAt": "2026-11-14T06:23:43.150081+00:00",
+      "updatedAt": "2026-11-14T18:01:56.381698+00:00",
       "stale": false,
       "games": [
         {
@@ -89934,7 +89934,7 @@
     },
     "North Dakota": {
       "espnId": "155",
-      "updatedAt": "2026-11-14T06:23:39.913233+00:00",
+      "updatedAt": "2026-11-14T18:01:52.978025+00:00",
       "stale": false,
       "games": [
         {
@@ -89981,14 +89981,14 @@
         },
         {
           "id": "401922031",
-          "date": "2026-11-14T18:00Z",
+          "date": "2026-11-15T02:00Z",
           "timeKnown": true,
           "opponent": "Montana",
           "opponentEspnId": "149",
           "location": "home",
           "venue": "Betty Engelstad Sioux Center",
           "status": "scheduled",
-          "statusLabel": "Sat, November 14th at 1:00 PM EST",
+          "statusLabel": "Sat, November 14th at 9:00 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -90375,7 +90375,7 @@
     },
     "North Dakota State": {
       "espnId": "2449",
-      "updatedAt": "2026-11-14T06:23:44.186914+00:00",
+      "updatedAt": "2026-11-14T18:01:57.360385+00:00",
       "stale": false,
       "games": [
         {
@@ -90830,7 +90830,7 @@
     },
     "North Florida": {
       "espnId": "2454",
-      "updatedAt": "2026-11-14T06:23:41.668436+00:00",
+      "updatedAt": "2026-11-14T18:01:54.819040+00:00",
       "stale": false,
       "games": [
         {
@@ -91285,7 +91285,7 @@
     },
     "North Texas": {
       "espnId": "249",
-      "updatedAt": "2026-11-14T06:23:32.215967+00:00",
+      "updatedAt": "2026-11-14T18:01:45.791792+00:00",
       "stale": false,
       "games": [
         {
@@ -91740,7 +91740,7 @@
     },
     "Northeastern": {
       "espnId": "111",
-      "updatedAt": "2026-11-14T06:23:37.561155+00:00",
+      "updatedAt": "2026-11-14T18:01:50.624949+00:00",
       "stale": false,
       "games": [
         {
@@ -92195,7 +92195,7 @@
     },
     "Northern Arizona": {
       "espnId": "2464",
-      "updatedAt": "2026-11-14T06:23:44.243887+00:00",
+      "updatedAt": "2026-11-14T18:01:57.163999+00:00",
       "stale": false,
       "games": [
         {
@@ -92650,7 +92650,7 @@
     },
     "Northern Colorado": {
       "espnId": "2458",
-      "updatedAt": "2026-11-14T06:23:35.091551+00:00",
+      "updatedAt": "2026-11-14T18:01:48.356945+00:00",
       "stale": false,
       "games": [
         {
@@ -93091,7 +93091,7 @@
     },
     "Northern Illinois": {
       "espnId": "2459",
-      "updatedAt": "2026-11-14T06:23:37.093743+00:00",
+      "updatedAt": "2026-11-14T18:01:50.162613+00:00",
       "stale": false,
       "games": [
         {
@@ -93546,7 +93546,7 @@
     },
     "Northern Iowa": {
       "espnId": "2460",
-      "updatedAt": "2026-11-14T06:23:37.183750+00:00",
+      "updatedAt": "2026-11-14T18:01:50.446881+00:00",
       "stale": false,
       "games": [
         {
@@ -94001,7 +94001,7 @@
     },
     "Northern Kentucky": {
       "espnId": "94",
-      "updatedAt": "2026-11-14T06:23:41.178094+00:00",
+      "updatedAt": "2026-11-14T18:01:54.069606+00:00",
       "stale": false,
       "games": [
         {
@@ -94456,7 +94456,7 @@
     },
     "Northwestern": {
       "espnId": "77",
-      "updatedAt": "2026-11-14T06:23:29.916769+00:00",
+      "updatedAt": "2026-11-14T18:01:43.327064+00:00",
       "stale": false,
       "games": [
         {
@@ -94911,7 +94911,7 @@
     },
     "Northwestern State": {
       "espnId": "2466",
-      "updatedAt": "2026-11-14T06:23:43.364933+00:00",
+      "updatedAt": "2026-11-14T18:01:56.595641+00:00",
       "stale": false,
       "games": [
         {
@@ -95366,7 +95366,7 @@
     },
     "Notre Dame": {
       "espnId": "87",
-      "updatedAt": "2026-11-14T06:23:27.957191+00:00",
+      "updatedAt": "2026-11-14T18:01:41.497073+00:00",
       "stale": false,
       "games": [
         {
@@ -95793,7 +95793,7 @@
     },
     "Oakland": {
       "espnId": "2473",
-      "updatedAt": "2026-11-14T06:23:45.539306+00:00",
+      "updatedAt": "2026-11-14T18:01:58.376119+00:00",
       "stale": false,
       "games": [
         {
@@ -96248,7 +96248,7 @@
     },
     "Ohio": {
       "espnId": "195",
-      "updatedAt": "2026-11-14T06:23:34.006864+00:00",
+      "updatedAt": "2026-11-14T18:01:47.533531+00:00",
       "stale": false,
       "games": [
         {
@@ -96689,7 +96689,7 @@
     },
     "Ohio State": {
       "espnId": "194",
-      "updatedAt": "2026-11-14T06:23:26.369386+00:00",
+      "updatedAt": "2026-11-14T18:01:39.916160+00:00",
       "stale": false,
       "games": [
         {
@@ -97144,7 +97144,7 @@
     },
     "Oklahoma": {
       "espnId": "201",
-      "updatedAt": "2026-11-14T06:23:26.436889+00:00",
+      "updatedAt": "2026-11-14T18:01:39.989297+00:00",
       "stale": false,
       "games": [
         {
@@ -97599,7 +97599,7 @@
     },
     "Oklahoma State": {
       "espnId": "197",
-      "updatedAt": "2026-11-14T06:23:27.741091+00:00",
+      "updatedAt": "2026-11-14T18:01:41.327514+00:00",
       "stale": false,
       "games": [
         {
@@ -98054,7 +98054,7 @@
     },
     "Old Dominion": {
       "espnId": "295",
-      "updatedAt": "2026-11-14T06:23:28.385427+00:00",
+      "updatedAt": "2026-11-14T18:01:41.874977+00:00",
       "stale": false,
       "games": [
         {
@@ -98495,7 +98495,7 @@
     },
     "Ole Miss": {
       "espnId": "145",
-      "updatedAt": "2026-11-14T06:23:27.373234+00:00",
+      "updatedAt": "2026-11-14T18:01:40.908084+00:00",
       "stale": false,
       "games": [
         {
@@ -98922,7 +98922,7 @@
     },
     "Omaha": {
       "espnId": "2437",
-      "updatedAt": "2026-11-14T06:23:42.301613+00:00",
+      "updatedAt": "2026-11-14T18:01:55.469054+00:00",
       "stale": false,
       "games": [
         {
@@ -99349,7 +99349,7 @@
     },
     "Oral Roberts": {
       "espnId": "198",
-      "updatedAt": "2026-11-14T06:23:40.067100+00:00",
+      "updatedAt": "2026-11-14T18:01:53.075170+00:00",
       "stale": false,
       "games": [
         {
@@ -99776,7 +99776,7 @@
     },
     "Oregon": {
       "espnId": "2483",
-      "updatedAt": "2026-11-14T06:23:27.924059+00:00",
+      "updatedAt": "2026-11-14T18:01:41.119405+00:00",
       "stale": false,
       "games": [
         {
@@ -100203,7 +100203,7 @@
     },
     "Oregon State": {
       "espnId": "204",
-      "updatedAt": "2026-11-14T06:23:28.727645+00:00",
+      "updatedAt": "2026-11-14T18:01:42.317277+00:00",
       "stale": false,
       "games": [
         {
@@ -100658,7 +100658,7 @@
     },
     "Pacific": {
       "espnId": "279",
-      "updatedAt": "2026-11-14T06:23:32.497174+00:00",
+      "updatedAt": "2026-11-14T18:01:45.831561+00:00",
       "stale": false,
       "games": [
         {
@@ -101113,7 +101113,7 @@
     },
     "Penn State": {
       "espnId": "213",
-      "updatedAt": "2026-11-14T06:23:29.692239+00:00",
+      "updatedAt": "2026-11-14T18:01:43.293637+00:00",
       "stale": false,
       "games": [
         {
@@ -101554,7 +101554,7 @@
     },
     "Pennsylvania": {
       "espnId": "219",
-      "updatedAt": "2026-11-14T06:23:38.259943+00:00",
+      "updatedAt": "2026-11-14T18:01:51.207571+00:00",
       "stale": false,
       "games": [
         {
@@ -101953,7 +101953,7 @@
     },
     "Pepperdine": {
       "espnId": "2492",
-      "updatedAt": "2026-11-14T06:23:35.075411+00:00",
+      "updatedAt": "2026-11-14T18:01:48.371662+00:00",
       "stale": false,
       "games": [
         {
@@ -102408,7 +102408,7 @@
     },
     "Pittsburgh": {
       "espnId": "221",
-      "updatedAt": "2026-11-14T06:23:28.094207+00:00",
+      "updatedAt": "2026-11-14T18:01:41.619475+00:00",
       "stale": false,
       "games": [
         {
@@ -102863,7 +102863,7 @@
     },
     "Portland": {
       "espnId": "2501",
-      "updatedAt": "2026-11-14T06:23:34.541640+00:00",
+      "updatedAt": "2026-11-14T18:01:47.965260+00:00",
       "stale": false,
       "games": [
         {
@@ -103318,7 +103318,7 @@
     },
     "Portland State": {
       "espnId": "2502",
-      "updatedAt": "2026-11-14T06:23:40.070937+00:00",
+      "updatedAt": "2026-11-14T18:01:52.987956+00:00",
       "stale": false,
       "games": [
         {
@@ -103773,7 +103773,7 @@
     },
     "Prairie View A&M": {
       "espnId": "2504",
-      "updatedAt": "2026-11-14T06:23:43.737183+00:00",
+      "updatedAt": "2026-11-14T18:01:56.811460+00:00",
       "stale": false,
       "games": [
         {
@@ -104228,7 +104228,7 @@
     },
     "Presbyterian": {
       "espnId": "2506",
-      "updatedAt": "2026-11-14T06:23:42.584618+00:00",
+      "updatedAt": "2026-11-14T18:01:55.819298+00:00",
       "stale": false,
       "games": [
         {
@@ -104669,7 +104669,7 @@
     },
     "Princeton": {
       "espnId": "163",
-      "updatedAt": "2026-11-14T06:23:33.883359+00:00",
+      "updatedAt": "2026-11-14T18:01:47.225327+00:00",
       "stale": false,
       "games": [
         {
@@ -105082,7 +105082,7 @@
     },
     "Providence": {
       "espnId": "2507",
-      "updatedAt": "2026-11-14T06:23:27.504110+00:00",
+      "updatedAt": "2026-11-14T18:01:40.951865+00:00",
       "stale": false,
       "games": [
         {
@@ -105509,7 +105509,7 @@
     },
     "Purdue": {
       "espnId": "2509",
-      "updatedAt": "2026-11-14T06:23:26.606102+00:00",
+      "updatedAt": "2026-11-14T18:01:39.957979+00:00",
       "stale": false,
       "games": [
         {
@@ -105964,7 +105964,7 @@
     },
     "Purdue Fort Wayne": {
       "espnId": "2870",
-      "updatedAt": "2026-11-14T06:23:39.680542+00:00",
+      "updatedAt": "2026-11-14T18:01:52.608117+00:00",
       "stale": false,
       "games": [
         {
@@ -106419,7 +106419,7 @@
     },
     "Queens University": {
       "espnId": "2511",
-      "updatedAt": "2026-11-14T06:23:39.316554+00:00",
+      "updatedAt": "2026-11-14T18:01:52.160565+00:00",
       "stale": false,
       "games": [
         {
@@ -106874,7 +106874,7 @@
     },
     "Quinnipiac": {
       "espnId": "2514",
-      "updatedAt": "2026-11-14T06:23:39.135191+00:00",
+      "updatedAt": "2026-11-14T18:01:51.988718+00:00",
       "stale": false,
       "games": [
         {
@@ -107315,7 +107315,7 @@
     },
     "Radford": {
       "espnId": "2515",
-      "updatedAt": "2026-11-14T06:23:42.346466+00:00",
+      "updatedAt": "2026-11-14T18:01:55.827292+00:00",
       "stale": false,
       "games": [
         {
@@ -107770,7 +107770,7 @@
     },
     "Rhode Island": {
       "espnId": "227",
-      "updatedAt": "2026-11-14T06:23:28.331319+00:00",
+      "updatedAt": "2026-11-14T18:01:41.792688+00:00",
       "stale": false,
       "games": [
         {
@@ -108211,7 +108211,7 @@
     },
     "Rice": {
       "espnId": "242",
-      "updatedAt": "2026-11-14T06:23:38.049668+00:00",
+      "updatedAt": "2026-11-14T18:01:50.986818+00:00",
       "stale": false,
       "games": [
         {
@@ -108666,7 +108666,7 @@
     },
     "Richmond": {
       "espnId": "257",
-      "updatedAt": "2026-11-14T06:23:29.204990+00:00",
+      "updatedAt": "2026-11-14T18:01:42.659575+00:00",
       "stale": false,
       "games": [
         {
@@ -109121,7 +109121,7 @@
     },
     "Rider": {
       "espnId": "2520",
-      "updatedAt": "2026-11-14T06:23:44.081238+00:00",
+      "updatedAt": "2026-11-14T18:01:57.012160+00:00",
       "stale": false,
       "games": [
         {
@@ -109562,7 +109562,7 @@
     },
     "Robert Morris": {
       "espnId": "2523",
-      "updatedAt": "2026-11-14T06:23:43.682624+00:00",
+      "updatedAt": "2026-11-14T18:01:56.846451+00:00",
       "stale": false,
       "games": [
         {
@@ -110017,7 +110017,7 @@
     },
     "Rutgers": {
       "espnId": "164",
-      "updatedAt": "2026-11-14T06:23:29.106505+00:00",
+      "updatedAt": "2026-11-14T18:01:42.678792+00:00",
       "stale": false,
       "games": [
         {
@@ -110444,7 +110444,7 @@
     },
     "SE Louisiana": {
       "espnId": "2545",
-      "updatedAt": "2026-11-14T06:23:41.323912+00:00",
+      "updatedAt": "2026-11-14T18:01:54.393488+00:00",
       "stale": false,
       "games": [
         {
@@ -110899,7 +110899,7 @@
     },
     "SIU Edwardsville": {
       "espnId": "2565",
-      "updatedAt": "2026-11-14T06:23:43.932717+00:00",
+      "updatedAt": "2026-11-14T18:01:56.735419+00:00",
       "stale": false,
       "games": [
         {
@@ -111340,7 +111340,7 @@
     },
     "SMU": {
       "espnId": "2567",
-      "updatedAt": "2026-11-14T06:23:27.493056+00:00",
+      "updatedAt": "2026-11-14T18:01:41.024071+00:00",
       "stale": false,
       "games": [
         {
@@ -111795,7 +111795,7 @@
     },
     "Sacramento State": {
       "espnId": "16",
-      "updatedAt": "2026-11-14T06:23:34.781144+00:00",
+      "updatedAt": "2026-11-14T18:01:48.151611+00:00",
       "stale": false,
       "games": [
         {
@@ -112236,7 +112236,7 @@
     },
     "Sacred Heart": {
       "espnId": "2529",
-      "updatedAt": "2026-11-14T06:23:37.507318+00:00",
+      "updatedAt": "2026-11-14T18:01:50.729767+00:00",
       "stale": false,
       "games": [
         {
@@ -112691,7 +112691,7 @@
     },
     "Saint Joseph's": {
       "espnId": "2603",
-      "updatedAt": "2026-11-14T06:23:30.935108+00:00",
+      "updatedAt": "2026-11-14T18:01:44.320521+00:00",
       "stale": false,
       "games": [
         {
@@ -113118,7 +113118,7 @@
     },
     "Saint Louis": {
       "espnId": "139",
-      "updatedAt": "2026-11-14T06:23:27.069901+00:00",
+      "updatedAt": "2026-11-14T18:01:40.615638+00:00",
       "stale": false,
       "games": [
         {
@@ -113559,7 +113559,7 @@
     },
     "Saint Mary's": {
       "espnId": "2608",
-      "updatedAt": "2026-11-14T06:23:29.483923+00:00",
+      "updatedAt": "2026-11-14T18:01:43.035919+00:00",
       "stale": false,
       "games": [
         {
@@ -114000,7 +114000,7 @@
     },
     "Saint Peter's": {
       "espnId": "2612",
-      "updatedAt": "2026-11-14T06:23:44.533700+00:00",
+      "updatedAt": "2026-11-14T18:01:57.592012+00:00",
       "stale": false,
       "games": [
         {
@@ -114427,7 +114427,7 @@
     },
     "Sam Houston": {
       "espnId": "2534",
-      "updatedAt": "2026-11-14T06:23:36.388805+00:00",
+      "updatedAt": "2026-11-14T18:01:49.552396+00:00",
       "stale": false,
       "games": [
         {
@@ -114882,7 +114882,7 @@
     },
     "Samford": {
       "espnId": "2535",
-      "updatedAt": "2026-11-14T06:23:38.941767+00:00",
+      "updatedAt": "2026-11-14T18:01:51.734945+00:00",
       "stale": false,
       "games": [
         {
@@ -115337,7 +115337,7 @@
     },
     "San Diego": {
       "espnId": "301",
-      "updatedAt": "2026-11-14T06:23:30.697842+00:00",
+      "updatedAt": "2026-11-14T18:01:43.908025+00:00",
       "stale": false,
       "games": [
         {
@@ -115764,7 +115764,7 @@
     },
     "San Diego State": {
       "espnId": "21",
-      "updatedAt": "2026-11-14T06:23:28.365441+00:00",
+      "updatedAt": "2026-11-14T18:01:41.976442+00:00",
       "stale": false,
       "games": [
         {
@@ -116163,7 +116163,7 @@
     },
     "San Francisco": {
       "espnId": "2539",
-      "updatedAt": "2026-11-14T06:23:31.969179+00:00",
+      "updatedAt": "2026-11-14T18:01:45.621432+00:00",
       "stale": false,
       "games": [
         {
@@ -116618,7 +116618,7 @@
     },
     "San Jos\u00e9 State": {
       "espnId": "23",
-      "updatedAt": "2026-11-14T06:23:35.789586+00:00",
+      "updatedAt": "2026-11-14T18:01:49.040750+00:00",
       "stale": false,
       "games": [
         {
@@ -117059,7 +117059,7 @@
     },
     "Santa Clara": {
       "espnId": "2541",
-      "updatedAt": "2026-11-14T06:23:28.590619+00:00",
+      "updatedAt": "2026-11-14T18:01:42.168024+00:00",
       "stale": false,
       "games": [
         {
@@ -117514,7 +117514,7 @@
     },
     "Seattle U": {
       "espnId": "2547",
-      "updatedAt": "2026-11-14T06:23:38.979416+00:00",
+      "updatedAt": "2026-11-14T18:01:51.907084+00:00",
       "stale": false,
       "games": [
         {
@@ -117941,7 +117941,7 @@
     },
     "Seton Hall": {
       "espnId": "2550",
-      "updatedAt": "2026-11-14T06:23:30.148158+00:00",
+      "updatedAt": "2026-11-14T18:01:43.679857+00:00",
       "stale": false,
       "games": [
         {
@@ -118382,7 +118382,7 @@
     },
     "Siena": {
       "espnId": "2561",
-      "updatedAt": "2026-11-14T06:23:32.797817+00:00",
+      "updatedAt": "2026-11-14T18:01:46.273149+00:00",
       "stale": false,
       "games": [
         {
@@ -118837,7 +118837,7 @@
     },
     "South Alabama": {
       "espnId": "6",
-      "updatedAt": "2026-11-14T06:23:38.650415+00:00",
+      "updatedAt": "2026-11-14T18:01:51.533954+00:00",
       "stale": false,
       "games": [
         {
@@ -119278,7 +119278,7 @@
     },
     "South Carolina": {
       "espnId": "2579",
-      "updatedAt": "2026-11-14T06:23:29.176694+00:00",
+      "updatedAt": "2026-11-14T18:01:42.953614+00:00",
       "stale": false,
       "games": [
         {
@@ -119733,7 +119733,7 @@
     },
     "South Carolina State": {
       "espnId": "2569",
-      "updatedAt": "2026-11-14T06:23:33.069606+00:00",
+      "updatedAt": "2026-11-14T18:01:46.573630+00:00",
       "stale": false,
       "games": [
         {
@@ -120174,7 +120174,7 @@
     },
     "South Carolina Upstate": {
       "espnId": "2908",
-      "updatedAt": "2026-11-14T06:23:42.531792+00:00",
+      "updatedAt": "2026-11-14T18:01:55.739780+00:00",
       "stale": false,
       "games": [
         {
@@ -120643,7 +120643,7 @@
     },
     "South Dakota": {
       "espnId": "233",
-      "updatedAt": "2026-11-14T06:23:44.290348+00:00",
+      "updatedAt": "2026-11-14T18:01:57.411684+00:00",
       "stale": false,
       "games": [
         {
@@ -121098,7 +121098,7 @@
     },
     "South Dakota State": {
       "espnId": "2571",
-      "updatedAt": "2026-11-14T06:23:29.776545+00:00",
+      "updatedAt": "2026-11-14T18:01:43.502411+00:00",
       "stale": false,
       "games": [
         {
@@ -121539,7 +121539,7 @@
     },
     "South Florida": {
       "espnId": "58",
-      "updatedAt": "2026-11-14T06:23:33.817238+00:00",
+      "updatedAt": "2026-11-14T18:01:47.376983+00:00",
       "stale": false,
       "games": [
         {
@@ -121994,7 +121994,7 @@
     },
     "Southeast Missouri State": {
       "espnId": "2546",
-      "updatedAt": "2026-11-14T06:23:37.120366+00:00",
+      "updatedAt": "2026-11-14T18:01:50.218825+00:00",
       "stale": false,
       "games": [
         {
@@ -122435,7 +122435,7 @@
     },
     "Southern": {
       "espnId": "2582",
-      "updatedAt": "2026-11-14T06:23:45.645603+00:00",
+      "updatedAt": "2026-11-14T18:01:58.371586+00:00",
       "stale": false,
       "games": [
         {
@@ -122890,7 +122890,7 @@
     },
     "Southern Illinois": {
       "espnId": "79",
-      "updatedAt": "2026-11-14T06:23:32.933458+00:00",
+      "updatedAt": "2026-11-14T18:01:46.437661+00:00",
       "stale": false,
       "games": [
         {
@@ -123317,7 +123317,7 @@
     },
     "Southern Indiana": {
       "espnId": "88",
-      "updatedAt": "2026-11-14T06:23:38.954288+00:00",
+      "updatedAt": "2026-11-14T18:01:51.908381+00:00",
       "stale": false,
       "games": [
         {
@@ -123758,7 +123758,7 @@
     },
     "Southern Miss": {
       "espnId": "2572",
-      "updatedAt": "2026-11-14T06:23:40.800095+00:00",
+      "updatedAt": "2026-11-14T18:01:53.890745+00:00",
       "stale": false,
       "games": [
         {
@@ -124213,7 +124213,7 @@
     },
     "Southern Utah": {
       "espnId": "253",
-      "updatedAt": "2026-11-14T06:23:34.589950+00:00",
+      "updatedAt": "2026-11-14T18:01:48.013105+00:00",
       "stale": false,
       "games": [
         {
@@ -124668,7 +124668,7 @@
     },
     "St. Bonaventure": {
       "espnId": "179",
-      "updatedAt": "2026-11-14T06:23:30.954818+00:00",
+      "updatedAt": "2026-11-14T18:01:44.418820+00:00",
       "stale": false,
       "games": [
         {
@@ -125123,7 +125123,7 @@
     },
     "St. John's": {
       "espnId": "2599",
-      "updatedAt": "2026-11-14T06:23:25.124403+00:00",
+      "updatedAt": "2026-11-14T18:01:38.549693+00:00",
       "stale": false,
       "games": [
         {
@@ -125550,7 +125550,7 @@
     },
     "St. Thomas": {
       "espnId": "2900",
-      "updatedAt": "2026-11-14T06:23:45.764795+00:00",
+      "updatedAt": "2026-11-14T18:01:58.653225+00:00",
       "stale": false,
       "games": [
         {
@@ -126011,7 +126011,7 @@
     },
     "Stanford": {
       "espnId": "24",
-      "updatedAt": "2026-11-14T06:23:31.187065+00:00",
+      "updatedAt": "2026-11-14T18:01:44.710282+00:00",
       "stale": false,
       "games": [
         {
@@ -126452,7 +126452,7 @@
     },
     "Stephen F. Austin": {
       "espnId": "2617",
-      "updatedAt": "2026-11-14T06:23:30.301511+00:00",
+      "updatedAt": "2026-11-14T18:01:43.718347+00:00",
       "stale": false,
       "games": [
         {
@@ -126879,7 +126879,7 @@
     },
     "Stetson": {
       "espnId": "56",
-      "updatedAt": "2026-11-14T06:23:44.883911+00:00",
+      "updatedAt": "2026-11-14T18:01:57.985788+00:00",
       "stale": false,
       "games": [
         {
@@ -127334,7 +127334,7 @@
     },
     "Stonehill": {
       "espnId": "284",
-      "updatedAt": "2026-11-14T06:23:41.046221+00:00",
+      "updatedAt": "2026-11-14T18:01:54.065662+00:00",
       "stale": false,
       "games": [
         {
@@ -127381,14 +127381,14 @@
         },
         {
           "id": "401919847",
-          "date": "2026-11-14T18:00Z",
+          "date": "2026-11-14T19:00Z",
           "timeKnown": true,
           "opponent": "Texas Tech",
           "opponentEspnId": "2641",
           "location": "away",
           "venue": "United Supermarkets Arena",
           "status": "scheduled",
-          "statusLabel": "Sat, November 14th at 1:00 PM EST",
+          "statusLabel": "Sat, November 14th at 2:00 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -127775,7 +127775,7 @@
     },
     "Stony Brook": {
       "espnId": "2619",
-      "updatedAt": "2026-11-14T06:23:37.942162+00:00",
+      "updatedAt": "2026-11-14T18:01:50.814948+00:00",
       "stale": false,
       "games": [
         {
@@ -128230,7 +128230,7 @@
     },
     "Syracuse": {
       "espnId": "183",
-      "updatedAt": "2026-11-14T06:23:29.362286+00:00",
+      "updatedAt": "2026-11-14T18:01:42.935975+00:00",
       "stale": false,
       "games": [
         {
@@ -128685,7 +128685,7 @@
     },
     "TCU": {
       "espnId": "2628",
-      "updatedAt": "2026-11-14T06:23:27.265204+00:00",
+      "updatedAt": "2026-11-14T18:01:40.726837+00:00",
       "stale": false,
       "games": [
         {
@@ -129112,7 +129112,7 @@
     },
     "Tarleton State": {
       "espnId": "2627",
-      "updatedAt": "2026-11-14T06:23:33.820875+00:00",
+      "updatedAt": "2026-11-14T18:01:47.315284+00:00",
       "stale": false,
       "games": [
         {
@@ -129567,7 +129567,7 @@
     },
     "Temple": {
       "espnId": "218",
-      "updatedAt": "2026-11-14T06:23:40.569365+00:00",
+      "updatedAt": "2026-11-14T18:01:53.704536+00:00",
       "stale": false,
       "games": [
         {
@@ -129980,7 +129980,7 @@
     },
     "Tennessee": {
       "espnId": "2633",
-      "updatedAt": "2026-11-14T06:23:25.622842+00:00",
+      "updatedAt": "2026-11-14T18:01:38.915610+00:00",
       "stale": false,
       "games": [
         {
@@ -130407,7 +130407,7 @@
     },
     "Tennessee State": {
       "espnId": "2634",
-      "updatedAt": "2026-11-14T06:23:35.998477+00:00",
+      "updatedAt": "2026-11-14T18:01:49.143434+00:00",
       "stale": false,
       "games": [
         {
@@ -130792,7 +130792,7 @@
     },
     "Tennessee Tech": {
       "espnId": "2635",
-      "updatedAt": "2026-11-14T06:23:36.458071+00:00",
+      "updatedAt": "2026-11-14T18:01:49.738769+00:00",
       "stale": false,
       "games": [
         {
@@ -131247,7 +131247,7 @@
     },
     "Texas": {
       "espnId": "251",
-      "updatedAt": "2026-11-14T06:23:25.100677+00:00",
+      "updatedAt": "2026-11-14T18:01:38.551704+00:00",
       "stale": false,
       "games": [
         {
@@ -131688,7 +131688,7 @@
     },
     "Texas A&M": {
       "espnId": "245",
-      "updatedAt": "2026-11-14T06:23:25.807771+00:00",
+      "updatedAt": "2026-11-14T18:01:39.118059+00:00",
       "stale": false,
       "games": [
         {
@@ -132143,7 +132143,7 @@
     },
     "Texas A&M-Corpus Christi": {
       "espnId": "357",
-      "updatedAt": "2026-11-14T06:23:36.257933+00:00",
+      "updatedAt": "2026-11-14T18:01:49.443099+00:00",
       "stale": false,
       "games": [
         {
@@ -132598,7 +132598,7 @@
     },
     "Texas Southern": {
       "espnId": "2640",
-      "updatedAt": "2026-11-14T06:23:42.959397+00:00",
+      "updatedAt": "2026-11-14T18:01:56.038674+00:00",
       "stale": false,
       "games": [
         {
@@ -133039,7 +133039,7 @@
     },
     "Texas State": {
       "espnId": "326",
-      "updatedAt": "2026-11-14T06:23:28.461098+00:00",
+      "updatedAt": "2026-11-14T18:01:42.076541+00:00",
       "stale": false,
       "games": [
         {
@@ -133494,7 +133494,7 @@
     },
     "Texas Tech": {
       "espnId": "2641",
-      "updatedAt": "2026-11-14T06:23:24.928662+00:00",
+      "updatedAt": "2026-11-14T18:01:38.306377+00:00",
       "stale": false,
       "games": [
         {
@@ -133541,14 +133541,14 @@
         },
         {
           "id": "401919847",
-          "date": "2026-11-14T18:00Z",
+          "date": "2026-11-14T19:00Z",
           "timeKnown": true,
           "opponent": "Stonehill",
           "opponentEspnId": "284",
           "location": "home",
           "venue": "United Supermarkets Arena",
           "status": "scheduled",
-          "statusLabel": "Sat, November 14th at 1:00 PM EST",
+          "statusLabel": "Sat, November 14th at 2:00 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -133907,7 +133907,7 @@
     },
     "The Citadel": {
       "espnId": "2643",
-      "updatedAt": "2026-11-14T06:23:35.739346+00:00",
+      "updatedAt": "2026-11-14T18:01:48.933852+00:00",
       "stale": false,
       "games": [
         {
@@ -134362,7 +134362,7 @@
     },
     "Toledo": {
       "espnId": "2649",
-      "updatedAt": "2026-11-14T06:23:38.023753+00:00",
+      "updatedAt": "2026-11-14T18:01:50.973070+00:00",
       "stale": false,
       "games": [
         {
@@ -134803,7 +134803,7 @@
     },
     "Towson": {
       "espnId": "119",
-      "updatedAt": "2026-11-14T06:23:32.892718+00:00",
+      "updatedAt": "2026-11-14T18:01:46.389788+00:00",
       "stale": false,
       "games": [
         {
@@ -135258,7 +135258,7 @@
     },
     "Troy": {
       "espnId": "2653",
-      "updatedAt": "2026-11-14T06:23:42.775974+00:00",
+      "updatedAt": "2026-11-14T18:01:56.037348+00:00",
       "stale": false,
       "games": [
         {
@@ -135685,7 +135685,7 @@
     },
     "Tulane": {
       "espnId": "2655",
-      "updatedAt": "2026-11-14T06:23:34.905094+00:00",
+      "updatedAt": "2026-11-14T18:01:48.321732+00:00",
       "stale": false,
       "games": [
         {
@@ -135738,8 +135738,8 @@
           "opponentEspnId": "2006",
           "location": "away",
           "venue": "James A. Rhodes Arena",
-          "status": "scheduled",
-          "statusLabel": "Sat, November 14th at 12:00 PM EST",
+          "status": "in-progress",
+          "statusLabel": "20:00 - 2nd Half",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -136140,7 +136140,7 @@
     },
     "Tulsa": {
       "espnId": "202",
-      "updatedAt": "2026-11-14T06:23:29.909144+00:00",
+      "updatedAt": "2026-11-14T18:01:43.487473+00:00",
       "stale": false,
       "games": [
         {
@@ -136595,7 +136595,7 @@
     },
     "UAB": {
       "espnId": "5",
-      "updatedAt": "2026-11-14T06:23:35.536570+00:00",
+      "updatedAt": "2026-11-14T18:01:48.639310+00:00",
       "stale": false,
       "games": [
         {
@@ -137050,7 +137050,7 @@
     },
     "UAlbany": {
       "espnId": "399",
-      "updatedAt": "2026-11-14T06:23:42.106931+00:00",
+      "updatedAt": "2026-11-14T18:01:55.320732+00:00",
       "stale": false,
       "games": [
         {
@@ -137505,7 +137505,7 @@
     },
     "UC Davis": {
       "espnId": "302",
-      "updatedAt": "2026-11-14T06:23:36.091218+00:00",
+      "updatedAt": "2026-11-14T18:01:49.326111+00:00",
       "stale": false,
       "games": [
         {
@@ -137960,7 +137960,7 @@
     },
     "UC Irvine": {
       "espnId": "300",
-      "updatedAt": "2026-11-14T06:23:30.348108+00:00",
+      "updatedAt": "2026-11-14T18:01:43.874164+00:00",
       "stale": false,
       "games": [
         {
@@ -138429,7 +138429,7 @@
     },
     "UC Riverside": {
       "espnId": "27",
-      "updatedAt": "2026-11-14T06:23:30.202018+00:00",
+      "updatedAt": "2026-11-14T18:01:43.672516+00:00",
       "stale": false,
       "games": [
         {
@@ -138884,7 +138884,7 @@
     },
     "UC San Diego": {
       "espnId": "28",
-      "updatedAt": "2026-11-14T06:23:34.841820+00:00",
+      "updatedAt": "2026-11-14T18:01:48.150322+00:00",
       "stale": false,
       "games": [
         {
@@ -139325,7 +139325,7 @@
     },
     "UC Santa Barbara": {
       "espnId": "2540",
-      "updatedAt": "2026-11-14T06:23:29.431753+00:00",
+      "updatedAt": "2026-11-14T18:01:43.100079+00:00",
       "stale": false,
       "games": [
         {
@@ -139780,7 +139780,7 @@
     },
     "UCF": {
       "espnId": "2116",
-      "updatedAt": "2026-11-14T06:23:28.536013+00:00",
+      "updatedAt": "2026-11-14T18:01:42.171519+00:00",
       "stale": false,
       "games": [
         {
@@ -140221,7 +140221,7 @@
     },
     "UCLA": {
       "espnId": "26",
-      "updatedAt": "2026-11-14T06:23:25.676906+00:00",
+      "updatedAt": "2026-11-14T18:01:39.100177+00:00",
       "stale": false,
       "games": [
         {
@@ -140662,7 +140662,7 @@
     },
     "UConn": {
       "espnId": "41",
-      "updatedAt": "2026-11-14T06:23:24.715738+00:00",
+      "updatedAt": "2026-11-14T18:01:38.121362+00:00",
       "stale": false,
       "games": [
         {
@@ -141117,7 +141117,7 @@
     },
     "UIC": {
       "espnId": "82",
-      "updatedAt": "2026-11-14T06:23:31.249632+00:00",
+      "updatedAt": "2026-11-14T18:01:44.527176+00:00",
       "stale": false,
       "games": [
         {
@@ -141572,7 +141572,7 @@
     },
     "UL Monroe": {
       "espnId": "2433",
-      "updatedAt": "2026-11-14T06:23:44.575317+00:00",
+      "updatedAt": "2026-11-14T18:01:57.553130+00:00",
       "stale": false,
       "games": [
         {
@@ -142013,7 +142013,7 @@
     },
     "UMBC": {
       "espnId": "2378",
-      "updatedAt": "2026-11-14T06:23:37.743715+00:00",
+      "updatedAt": "2026-11-14T18:01:50.921168+00:00",
       "stale": false,
       "games": [
         {
@@ -142468,7 +142468,7 @@
     },
     "UMass Lowell": {
       "espnId": "2349",
-      "updatedAt": "2026-11-14T06:23:31.441482+00:00",
+      "updatedAt": "2026-11-14T18:01:44.698974+00:00",
       "stale": false,
       "games": [
         {
@@ -142923,7 +142923,7 @@
     },
     "UNC Asheville": {
       "espnId": "2427",
-      "updatedAt": "2026-11-14T06:23:39.915828+00:00",
+      "updatedAt": "2026-11-14T18:01:52.909842+00:00",
       "stale": false,
       "games": [
         {
@@ -143378,7 +143378,7 @@
     },
     "UNC Greensboro": {
       "espnId": "2430",
-      "updatedAt": "2026-11-14T06:23:37.384885+00:00",
+      "updatedAt": "2026-11-14T18:01:50.567980+00:00",
       "stale": false,
       "games": [
         {
@@ -143833,7 +143833,7 @@
     },
     "UNC Wilmington": {
       "espnId": "350",
-      "updatedAt": "2026-11-14T06:23:29.889557+00:00",
+      "updatedAt": "2026-11-14T18:01:43.437804+00:00",
       "stale": false,
       "games": [
         {
@@ -144302,7 +144302,7 @@
     },
     "UNLV": {
       "espnId": "2439",
-      "updatedAt": "2026-11-14T06:23:31.059635+00:00",
+      "updatedAt": "2026-11-14T18:01:44.477636+00:00",
       "stale": false,
       "games": [
         {
@@ -144743,7 +144743,7 @@
     },
     "USC": {
       "espnId": "30",
-      "updatedAt": "2026-11-14T06:23:25.982847+00:00",
+      "updatedAt": "2026-11-14T18:01:39.287018+00:00",
       "stale": false,
       "games": [
         {
@@ -145198,7 +145198,7 @@
     },
     "UT Arlington": {
       "espnId": "250",
-      "updatedAt": "2026-11-14T06:23:32.373753+00:00",
+      "updatedAt": "2026-11-14T18:01:45.881957+00:00",
       "stale": false,
       "games": [
         {
@@ -145667,7 +145667,7 @@
     },
     "UT Martin": {
       "espnId": "2630",
-      "updatedAt": "2026-11-14T06:23:32.866045+00:00",
+      "updatedAt": "2026-11-14T18:01:46.262134+00:00",
       "stale": false,
       "games": [
         {
@@ -145728,14 +145728,14 @@
         },
         {
           "id": "401926733",
-          "date": "2026-11-15T22:30Z",
+          "date": "2026-11-15T23:00Z",
           "timeKnown": true,
           "opponent": "Ecclesia",
           "opponentEspnId": "3120",
           "location": "home",
           "venue": "Kathleen and Tom Elam Center",
           "status": "scheduled",
-          "statusLabel": "Sun, November 15th at 5:30 PM EST",
+          "statusLabel": "Sun, November 15th at 6:00 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -146094,7 +146094,7 @@
     },
     "UT Rio Grande Valley": {
       "espnId": "292",
-      "updatedAt": "2026-11-14T06:23:35.285546+00:00",
+      "updatedAt": "2026-11-14T18:01:48.547685+00:00",
       "stale": false,
       "games": [
         {
@@ -146549,7 +146549,7 @@
     },
     "UTEP": {
       "espnId": "2638",
-      "updatedAt": "2026-11-14T06:23:35.904865+00:00",
+      "updatedAt": "2026-11-14T18:01:49.260102+00:00",
       "stale": false,
       "games": [
         {
@@ -146962,7 +146962,7 @@
     },
     "UTSA": {
       "espnId": "2636",
-      "updatedAt": "2026-11-14T06:23:33.381092+00:00",
+      "updatedAt": "2026-11-14T18:01:46.746361+00:00",
       "stale": false,
       "games": [
         {
@@ -147417,7 +147417,7 @@
     },
     "Utah": {
       "espnId": "254",
-      "updatedAt": "2026-11-14T06:23:30.753810+00:00",
+      "updatedAt": "2026-11-14T18:01:44.115927+00:00",
       "stale": false,
       "games": [
         {
@@ -147872,7 +147872,7 @@
     },
     "Utah State": {
       "espnId": "328",
-      "updatedAt": "2026-11-14T06:23:26.841692+00:00",
+      "updatedAt": "2026-11-14T18:01:40.305584+00:00",
       "stale": false,
       "games": [
         {
@@ -148327,7 +148327,7 @@
     },
     "Utah Tech": {
       "espnId": "3101",
-      "updatedAt": "2026-11-14T06:23:39.746390+00:00",
+      "updatedAt": "2026-11-14T18:01:52.565669+00:00",
       "stale": false,
       "games": [
         {
@@ -148782,7 +148782,7 @@
     },
     "Utah Valley": {
       "espnId": "3084",
-      "updatedAt": "2026-11-14T06:23:33.604809+00:00",
+      "updatedAt": "2026-11-14T18:01:46.960262+00:00",
       "stale": false,
       "games": [
         {
@@ -149209,7 +149209,7 @@
     },
     "VCU": {
       "espnId": "2670",
-      "updatedAt": "2026-11-14T06:23:27.688681+00:00",
+      "updatedAt": "2026-11-14T18:01:41.236400+00:00",
       "stale": false,
       "games": [
         {
@@ -149622,7 +149622,7 @@
     },
     "VMI": {
       "espnId": "2678",
-      "updatedAt": "2026-11-14T06:23:34.408816+00:00",
+      "updatedAt": "2026-11-14T18:01:47.783789+00:00",
       "stale": false,
       "games": [
         {
@@ -150077,7 +150077,7 @@
     },
     "Valparaiso": {
       "espnId": "2674",
-      "updatedAt": "2026-11-14T06:23:31.551609+00:00",
+      "updatedAt": "2026-11-14T18:01:44.915627+00:00",
       "stale": false,
       "games": [
         {
@@ -150518,7 +150518,7 @@
     },
     "Vanderbilt": {
       "espnId": "238",
-      "updatedAt": "2026-11-14T06:23:25.353605+00:00",
+      "updatedAt": "2026-11-14T18:01:38.855241+00:00",
       "stale": false,
       "games": [
         {
@@ -150973,7 +150973,7 @@
     },
     "Vermont": {
       "espnId": "261",
-      "updatedAt": "2026-11-14T06:23:36.687420+00:00",
+      "updatedAt": "2026-11-14T18:01:49.929599+00:00",
       "stale": false,
       "games": [
         {
@@ -151428,7 +151428,7 @@
     },
     "Villanova": {
       "espnId": "222",
-      "updatedAt": "2026-11-14T06:23:26.053723+00:00",
+      "updatedAt": "2026-11-14T18:01:39.573972+00:00",
       "stale": false,
       "games": [
         {
@@ -151869,7 +151869,7 @@
     },
     "Virginia": {
       "espnId": "258",
-      "updatedAt": "2026-11-14T06:23:25.327220+00:00",
+      "updatedAt": "2026-11-14T18:01:38.562549+00:00",
       "stale": false,
       "games": [
         {
@@ -152310,7 +152310,7 @@
     },
     "Virginia Tech": {
       "espnId": "259",
-      "updatedAt": "2026-11-14T06:23:27.081865+00:00",
+      "updatedAt": "2026-11-14T18:01:40.722100+00:00",
       "stale": false,
       "games": [
         {
@@ -152765,7 +152765,7 @@
     },
     "Wagner": {
       "espnId": "2681",
-      "updatedAt": "2026-11-14T06:23:43.326500+00:00",
+      "updatedAt": "2026-11-14T18:01:56.393016+00:00",
       "stale": false,
       "games": [
         {
@@ -153178,7 +153178,7 @@
     },
     "Wake Forest": {
       "espnId": "154",
-      "updatedAt": "2026-11-14T06:23:32.524815+00:00",
+      "updatedAt": "2026-11-14T18:01:45.990579+00:00",
       "stale": false,
       "games": [
         {
@@ -153619,7 +153619,7 @@
     },
     "Washington": {
       "espnId": "264",
-      "updatedAt": "2026-11-14T06:23:33.396881+00:00",
+      "updatedAt": "2026-11-14T18:01:47.036954+00:00",
       "stale": false,
       "games": [
         {
@@ -154032,7 +154032,7 @@
     },
     "Washington State": {
       "espnId": "265",
-      "updatedAt": "2026-11-14T06:23:39.707399+00:00",
+      "updatedAt": "2026-11-14T18:01:52.694696+00:00",
       "stale": false,
       "games": [
         {
@@ -154487,7 +154487,7 @@
     },
     "Weber State": {
       "espnId": "2692",
-      "updatedAt": "2026-11-14T06:23:42.760721+00:00",
+      "updatedAt": "2026-11-14T18:01:56.093232+00:00",
       "stale": false,
       "games": [
         {
@@ -154928,7 +154928,7 @@
     },
     "West Florida": {
       "espnId": "2697",
-      "updatedAt": "2026-11-14T06:23:38.858094+00:00",
+      "updatedAt": "2026-11-14T18:01:51.733920+00:00",
       "stale": false,
       "games": [
         {
@@ -155383,7 +155383,7 @@
     },
     "West Georgia": {
       "espnId": "2698",
-      "updatedAt": "2026-11-14T06:23:41.717683+00:00",
+      "updatedAt": "2026-11-14T18:01:54.901524+00:00",
       "stale": false,
       "games": [
         {
@@ -155838,7 +155838,7 @@
     },
     "West Virginia": {
       "espnId": "277",
-      "updatedAt": "2026-11-14T06:23:26.857059+00:00",
+      "updatedAt": "2026-11-14T18:01:40.425755+00:00",
       "stale": false,
       "games": [
         {
@@ -156265,7 +156265,7 @@
     },
     "Western Carolina": {
       "espnId": "2717",
-      "updatedAt": "2026-11-14T06:23:31.624863+00:00",
+      "updatedAt": "2026-11-14T18:01:45.140226+00:00",
       "stale": false,
       "games": [
         {
@@ -156706,7 +156706,7 @@
     },
     "Western Illinois": {
       "espnId": "2710",
-      "updatedAt": "2026-11-14T06:23:42.656608+00:00",
+      "updatedAt": "2026-11-14T18:01:55.861598+00:00",
       "stale": false,
       "games": [
         {
@@ -157147,7 +157147,7 @@
     },
     "Western Kentucky": {
       "espnId": "98",
-      "updatedAt": "2026-11-14T06:23:30.873651+00:00",
+      "updatedAt": "2026-11-14T18:01:44.293457+00:00",
       "stale": false,
       "games": [
         {
@@ -157602,7 +157602,7 @@
     },
     "Western Michigan": {
       "espnId": "2711",
-      "updatedAt": "2026-11-14T06:23:29.554786+00:00",
+      "updatedAt": "2026-11-14T18:01:43.113592+00:00",
       "stale": false,
       "games": [
         {
@@ -158043,7 +158043,7 @@
     },
     "Wichita State": {
       "espnId": "2724",
-      "updatedAt": "2026-11-14T06:23:32.714188+00:00",
+      "updatedAt": "2026-11-14T18:01:46.237244+00:00",
       "stale": false,
       "games": [
         {
@@ -158498,7 +158498,7 @@
     },
     "William & Mary": {
       "espnId": "2729",
-      "updatedAt": "2026-11-14T06:23:32.234083+00:00",
+      "updatedAt": "2026-11-14T18:01:45.439368+00:00",
       "stale": false,
       "games": [
         {
@@ -158953,7 +158953,7 @@
     },
     "Winthrop": {
       "espnId": "2737",
-      "updatedAt": "2026-11-14T06:23:41.052600+00:00",
+      "updatedAt": "2026-11-14T18:01:54.137643+00:00",
       "stale": false,
       "games": [
         {
@@ -159408,7 +159408,7 @@
     },
     "Wisconsin": {
       "espnId": "275",
-      "updatedAt": "2026-11-14T06:23:26.353928+00:00",
+      "updatedAt": "2026-11-14T18:01:39.762734+00:00",
       "stale": false,
       "games": [
         {
@@ -159849,7 +159849,7 @@
     },
     "Wofford": {
       "espnId": "2747",
-      "updatedAt": "2026-11-14T06:23:42.066083+00:00",
+      "updatedAt": "2026-11-14T18:01:55.217595+00:00",
       "stale": false,
       "games": [
         {
@@ -160304,7 +160304,7 @@
     },
     "Wright State": {
       "espnId": "2750",
-      "updatedAt": "2026-11-14T06:23:28.054305+00:00",
+      "updatedAt": "2026-11-14T18:01:41.576959+00:00",
       "stale": false,
       "games": [
         {
@@ -160759,7 +160759,7 @@
     },
     "Wyoming": {
       "espnId": "2751",
-      "updatedAt": "2026-11-14T06:23:31.375670+00:00",
+      "updatedAt": "2026-11-14T18:01:44.943937+00:00",
       "stale": false,
       "games": [
         {
@@ -161214,7 +161214,7 @@
     },
     "Xavier": {
       "espnId": "2752",
-      "updatedAt": "2026-11-14T06:23:27.071164+00:00",
+      "updatedAt": "2026-11-14T18:01:40.633851+00:00",
       "stale": false,
       "games": [
         {
@@ -161669,7 +161669,7 @@
     },
     "Yale": {
       "espnId": "43",
-      "updatedAt": "2026-11-14T06:23:42.399441+00:00",
+      "updatedAt": "2026-11-14T18:01:55.544349+00:00",
       "stale": false,
       "games": [
         {
@@ -162082,7 +162082,7 @@
     },
     "Youngstown State": {
       "espnId": "2754",
-      "updatedAt": "2026-11-14T06:23:36.991877+00:00",
+      "updatedAt": "2026-11-14T18:01:50.030997+00:00",
       "stale": false,
       "games": [
         {
