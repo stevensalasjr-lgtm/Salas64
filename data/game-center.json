@@ -1,6 +1,6 @@
 {
   "season": 2027,
-  "updatedAt": "2026-11-14T09:22:05.141639+00:00",
+  "updatedAt": "2026-11-14T16:03:47.749222+00:00",
   "dayTimezone": "America/Los_Angeles",
   "games": [
     {
@@ -18162,41 +18162,6 @@
       "model": null
     },
     {
-      "id": "401919847",
-      "season": 2027,
-      "startAt": "2026-11-14T18:00:00+00:00",
-      "day": "2026-11-14",
-      "lockAt": "2026-11-14T18:00:00+00:00",
-      "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Sat, November 14th at 1:00 PM EST",
-      "away": {
-        "espnId": "284",
-        "team": "Stonehill",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/284.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "home": {
-        "espnId": "2641",
-        "team": "Texas Tech",
-        "rank": 10,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "winnerId": null,
-      "neutral": false,
-      "model": {
-        "version": "efficiency-1",
-        "winnerId": "2641",
-        "awayScore": 66.5,
-        "homeScore": 81.2,
-        "awayProbability": 0.1091
-      }
-    },
-    {
       "id": "401920074",
       "season": 2027,
       "startAt": "2026-11-14T18:00:00+00:00",
@@ -18328,41 +18293,6 @@
         "awayScore": 79.9,
         "homeScore": 80.7,
         "awayProbability": 0.4724
-      }
-    },
-    {
-      "id": "401922031",
-      "season": 2027,
-      "startAt": "2026-11-14T18:00:00+00:00",
-      "day": "2026-11-14",
-      "lockAt": "2026-11-14T18:00:00+00:00",
-      "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Sat, November 14th at 1:00 PM EST",
-      "away": {
-        "espnId": "149",
-        "team": "Montana",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/149.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "home": {
-        "espnId": "155",
-        "team": "North Dakota",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/155.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "winnerId": null,
-      "neutral": false,
-      "model": {
-        "version": "efficiency-1",
-        "winnerId": "155",
-        "awayScore": 77.3,
-        "homeScore": 77.6,
-        "awayProbability": 0.4893
       }
     },
     {
@@ -18567,6 +18497,41 @@
         "awayScore": 71.9,
         "homeScore": 82.5,
         "awayProbability": 0.1805
+      }
+    },
+    {
+      "id": "401919847",
+      "season": 2027,
+      "startAt": "2026-11-14T19:00:00+00:00",
+      "day": "2026-11-14",
+      "lockAt": "2026-11-14T18:00:00+00:00",
+      "timeKnown": true,
+      "state": "scheduled",
+      "statusLabel": "Sat, November 14th at 2:00 PM EST",
+      "away": {
+        "espnId": "284",
+        "team": "Stonehill",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/284.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "home": {
+        "espnId": "2641",
+        "team": "Texas Tech",
+        "rank": 10,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "winnerId": null,
+      "neutral": false,
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "2641",
+        "awayScore": 66.5,
+        "homeScore": 81.2,
+        "awayProbability": 0.1091
       }
     },
     {
@@ -20400,6 +20365,41 @@
       }
     },
     {
+      "id": "401922031",
+      "season": 2027,
+      "startAt": "2026-11-15T02:00:00+00:00",
+      "day": "2026-11-14",
+      "lockAt": "2026-11-14T18:00:00+00:00",
+      "timeKnown": true,
+      "state": "scheduled",
+      "statusLabel": "Sat, November 14th at 9:00 PM EST",
+      "away": {
+        "espnId": "149",
+        "team": "Montana",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/149.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "home": {
+        "espnId": "155",
+        "team": "North Dakota",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/155.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "winnerId": null,
+      "neutral": false,
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "155",
+        "awayScore": 77.3,
+        "homeScore": 77.6,
+        "awayProbability": 0.4893
+      }
+    },
+    {
       "id": "401911455",
       "season": 2027,
       "startAt": "2026-11-15T03:00:00+00:00",
@@ -21694,35 +21694,6 @@
       }
     },
     {
-      "id": "401926733",
-      "season": 2027,
-      "startAt": "2026-11-15T22:30:00+00:00",
-      "day": "2026-11-15",
-      "lockAt": "2026-11-15T22:30:00+00:00",
-      "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Sun, November 15th at 5:30 PM EST",
-      "away": {
-        "espnId": "3120",
-        "team": "Ecclesia",
-        "rank": null,
-        "logo": null,
-        "inDirectory": false,
-        "score": "0"
-      },
-      "home": {
-        "espnId": "2630",
-        "team": "UT Martin",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "winnerId": null,
-      "neutral": false,
-      "model": null
-    },
-    {
       "id": "401920124",
       "season": 2027,
       "startAt": "2026-11-15T23:00:00+00:00",
@@ -21756,6 +21727,35 @@
         "homeScore": 86.9,
         "awayProbability": 0.2614
       }
+    },
+    {
+      "id": "401926733",
+      "season": 2027,
+      "startAt": "2026-11-15T23:00:00+00:00",
+      "day": "2026-11-15",
+      "lockAt": "2026-11-15T22:30:00+00:00",
+      "timeKnown": true,
+      "state": "scheduled",
+      "statusLabel": "Sun, November 15th at 6:00 PM EST",
+      "away": {
+        "espnId": "3120",
+        "team": "Ecclesia",
+        "rank": null,
+        "logo": null,
+        "inDirectory": false,
+        "score": "0"
+      },
+      "home": {
+        "espnId": "2630",
+        "team": "UT Martin",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2630.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "winnerId": null,
+      "neutral": false,
+      "model": null
     },
     {
       "id": "401920681",
