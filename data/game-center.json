@@ -1,6 +1,6 @@
 {
   "season": 2027,
-  "updatedAt": "2026-11-17T09:06:12.763408+00:00",
+  "updatedAt": "2026-11-17T18:30:17.424497+00:00",
   "dayTimezone": "America/Los_Angeles",
   "games": [
     {
@@ -23080,15 +23080,15 @@
       "day": "2026-11-17",
       "lockAt": "2026-11-17T16:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Tue, November 17th at 11:00 AM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "111914",
         "team": "Wilson",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "0"
+        "score": "47"
       },
       "home": {
         "espnId": "48",
@@ -23096,9 +23096,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/48.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "93"
       },
-      "winnerId": null,
+      "winnerId": "48",
       "neutral": false,
       "model": null
     },
@@ -23109,15 +23109,15 @@
       "day": "2026-11-17",
       "lockAt": "2026-11-17T17:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Tue, November 17th at 12:00 PM EST",
+      "state": "in-progress",
+      "statusLabel": "Halftime",
       "away": {
         "espnId": "2275",
         "team": "Hofstra",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2275.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "33"
       },
       "home": {
         "espnId": "93",
@@ -23125,7 +23125,7 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/93.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "43"
       },
       "winnerId": null,
       "neutral": true,
@@ -23144,15 +23144,15 @@
       "day": "2026-11-17",
       "lockAt": "2026-11-17T17:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Tue, November 17th at 12:00 PM EST",
+      "state": "in-progress",
+      "statusLabel": "7:54 - 2nd Half",
       "away": {
         "espnId": "2347",
         "team": "Louisiana Christian",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "0"
+        "score": "46"
       },
       "home": {
         "espnId": "2582",
@@ -23160,7 +23160,7 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2582.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "85"
       },
       "winnerId": null,
       "neutral": false,
@@ -24257,6 +24257,35 @@
       "model": null
     },
     {
+      "id": "401930568",
+      "season": 2027,
+      "startAt": "2026-11-18T00:00:00+00:00",
+      "day": "2026-11-17",
+      "lockAt": "2026-11-18T00:00:00+00:00",
+      "timeKnown": true,
+      "state": "scheduled",
+      "statusLabel": "Tue, November 17th at 7:00 PM EST",
+      "away": {
+        "espnId": "2590",
+        "team": "Spring Hill",
+        "rank": null,
+        "logo": null,
+        "inDirectory": false,
+        "score": "0"
+      },
+      "home": {
+        "espnId": "6",
+        "team": "South Alabama",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/6.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "winnerId": null,
+      "neutral": false,
+      "model": null
+    },
+    {
       "id": "401906761",
       "season": 2027,
       "startAt": "2026-11-18T00:30:00+00:00",
@@ -24902,35 +24931,6 @@
         "homeScore": 79.1,
         "awayProbability": 0.556
       }
-    },
-    {
-      "id": "401930568",
-      "season": 2027,
-      "startAt": "2026-11-18T01:00:00+00:00",
-      "day": "2026-11-17",
-      "lockAt": "2026-11-18T00:00:00+00:00",
-      "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Tue, November 17th at 8:00 PM EST",
-      "away": {
-        "espnId": "2590",
-        "team": "Spring Hill",
-        "rank": null,
-        "logo": null,
-        "inDirectory": false,
-        "score": "0"
-      },
-      "home": {
-        "espnId": "6",
-        "team": "South Alabama",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/6.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "winnerId": null,
-      "neutral": false,
-      "model": null
     },
     {
       "id": "401920720",
