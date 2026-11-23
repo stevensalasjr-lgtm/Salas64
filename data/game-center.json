@@ -1,6 +1,6 @@
 {
   "season": 2027,
-  "updatedAt": "2026-11-23T11:15:07.265214+00:00",
+  "updatedAt": "2026-11-23T22:53:50.701544+00:00",
   "dayTimezone": "America/Los_Angeles",
   "games": [
     {
@@ -34339,15 +34339,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T16:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 11:00 AM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2460",
         "team": "Northern Iowa",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2460.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "48"
       },
       "home": {
         "espnId": "2166",
@@ -34355,9 +34355,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2166.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "79"
       },
-      "winnerId": null,
+      "winnerId": "2166",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -34374,15 +34374,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T16:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 11:00 AM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "179",
         "team": "St. Bonaventure",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/179.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "71"
       },
       "home": {
         "espnId": "2026",
@@ -34390,9 +34390,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2026.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "65"
       },
-      "winnerId": null,
+      "winnerId": "179",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -34438,15 +34438,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T18:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 1:00 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "299",
         "team": "Long Beach State",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/299.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "75"
       },
       "home": {
         "espnId": "2229",
@@ -34454,9 +34454,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2229.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "79"
       },
-      "winnerId": null,
+      "winnerId": "2229",
       "neutral": false,
       "model": {
         "version": "efficiency-1",
@@ -34473,15 +34473,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T18:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 1:00 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2288",
         "team": "IU South Bend",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "0"
+        "score": "66"
       },
       "home": {
         "espnId": "2197",
@@ -34489,9 +34489,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2197.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "83"
       },
-      "winnerId": null,
+      "winnerId": "2197",
       "neutral": false,
       "model": null
     },
@@ -34502,15 +34502,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T18:30:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 1:30 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2429",
         "team": "Charlotte",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2429.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "71"
       },
       "home": {
         "espnId": "526",
@@ -34518,9 +34518,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/526.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "58"
       },
-      "winnerId": null,
+      "winnerId": "2429",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -34537,15 +34537,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T18:30:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 1:30 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2006",
         "team": "Akron",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2006.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "64"
       },
       "home": {
         "espnId": "2750",
@@ -34553,9 +34553,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2750.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "66"
       },
-      "winnerId": null,
+      "winnerId": "2750",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -34572,15 +34572,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T19:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 2:00 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "202",
         "team": "Tulsa",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/202.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "66"
       },
       "home": {
         "espnId": "204",
@@ -34588,9 +34588,9 @@
         "rank": 63,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/204.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "69"
       },
-      "winnerId": null,
+      "winnerId": "204",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -34607,15 +34607,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T19:30:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 2:30 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "145",
         "team": "Ole Miss",
         "rank": 50,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/145.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "82"
       },
       "home": {
         "espnId": "228",
@@ -34623,9 +34623,9 @@
         "rank": 52,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/228.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "62"
       },
-      "winnerId": null,
+      "winnerId": "145",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -34671,15 +34671,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T16:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 3:00 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "3120",
         "team": "Ecclesia",
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "0"
+        "score": "45"
       },
       "home": {
         "espnId": "2755",
@@ -34687,9 +34687,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2755.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "126"
       },
-      "winnerId": null,
+      "winnerId": "2755",
       "neutral": false,
       "model": null
     },
@@ -34700,15 +34700,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T20:30:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 3:30 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "2729",
         "team": "William & Mary",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2729.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "87"
       },
       "home": {
         "espnId": "85",
@@ -34716,9 +34716,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/85.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "82"
       },
-      "winnerId": null,
+      "winnerId": "2729",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -34770,15 +34770,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T21:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 4:00 PM EST",
+      "state": "in-progress",
+      "statusLabel": "2:10 - 2nd Half",
       "away": {
         "espnId": "2655",
         "team": "Tulane",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2655.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "61"
       },
       "home": {
         "espnId": "2247",
@@ -34786,7 +34786,7 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2247.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "68"
       },
       "winnerId": null,
       "neutral": true,
@@ -34801,19 +34801,19 @@
     {
       "id": "401929286",
       "season": 2027,
-      "startAt": "2026-11-23T21:00:00+00:00",
+      "startAt": "2026-11-23T21:15:00+00:00",
       "day": "2026-11-23",
       "lockAt": "2026-11-23T21:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 4:00 PM EST",
+      "state": "final",
+      "statusLabel": "Final",
       "away": {
         "espnId": "43",
         "team": "Yale",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/43.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "60"
       },
       "home": {
         "espnId": "2057",
@@ -34821,9 +34821,9 @@
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/2057.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "68"
       },
-      "winnerId": null,
+      "winnerId": "2057",
       "neutral": true,
       "model": {
         "version": "efficiency-1",
@@ -34875,15 +34875,15 @@
       "day": "2026-11-23",
       "lockAt": "2026-11-23T22:00:00+00:00",
       "timeKnown": true,
-      "state": "scheduled",
-      "statusLabel": "Mon, November 23rd at 5:00 PM EST",
+      "state": "in-progress",
+      "statusLabel": "2:42 - 1st Half",
       "away": {
         "espnId": "264",
         "team": "Washington",
         "rank": null,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/264.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "36"
       },
       "home": {
         "espnId": "252",
@@ -34891,7 +34891,7 @@
         "rank": 22,
         "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/252.png",
         "inDirectory": true,
-        "score": "0"
+        "score": "28"
       },
       "winnerId": null,
       "neutral": true,
@@ -35828,35 +35828,6 @@
         "rank": null,
         "logo": null,
         "inDirectory": false,
-        "score": "0"
-      },
-      "winnerId": null,
-      "neutral": true,
-      "model": null
-    },
-    {
-      "id": "401921030",
-      "season": 2027,
-      "startAt": "2026-11-24T05:00:00+00:00",
-      "day": "2026-11-23",
-      "lockAt": null,
-      "timeKnown": false,
-      "state": "scheduled",
-      "statusLabel": "11/24 - TBD",
-      "away": {
-        "espnId": "91",
-        "team": "Bellarmine",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/91.png",
-        "inDirectory": true,
-        "score": "0"
-      },
-      "home": {
-        "espnId": "290",
-        "team": "Georgia Southern",
-        "rank": null,
-        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/290.png",
-        "inDirectory": true,
         "score": "0"
       },
       "winnerId": null,
@@ -37534,6 +37505,41 @@
         "awayScore": 74.3,
         "homeScore": 83.9,
         "awayProbability": 0.2029
+      }
+    },
+    {
+      "id": "401921030",
+      "season": 2027,
+      "startAt": "2026-11-25T00:00:00+00:00",
+      "day": "2026-11-24",
+      "lockAt": "2026-11-25T00:00:00+00:00",
+      "timeKnown": true,
+      "state": "scheduled",
+      "statusLabel": "Tue, November 24th at 7:00 PM EST",
+      "away": {
+        "espnId": "91",
+        "team": "Bellarmine",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/91.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "home": {
+        "espnId": "290",
+        "team": "Georgia Southern",
+        "rank": null,
+        "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/290.png",
+        "inDirectory": true,
+        "score": "0"
+      },
+      "winnerId": null,
+      "neutral": true,
+      "model": {
+        "version": "efficiency-1",
+        "winnerId": "290",
+        "awayScore": 74.9,
+        "homeScore": 78.8,
+        "awayProbability": 0.3668
       }
     },
     {
