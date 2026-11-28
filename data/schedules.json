@@ -2,11 +2,11 @@
   "season": 2027,
   "source": "ESPN",
   "refreshHours": 6,
-  "updatedAt": "2026-11-27T21:18:10.890608+00:00",
+  "updatedAt": "2026-11-28T07:49:31.291842+00:00",
   "teams": {
     "Abilene Christian": {
       "espnId": "2000",
-      "updatedAt": "2026-11-27T21:17:58.817675+00:00",
+      "updatedAt": "2026-11-28T07:49:18.966105+00:00",
       "stale": false,
       "games": [
         {
@@ -461,7 +461,7 @@
     },
     "Air Force": {
       "espnId": "2005",
-      "updatedAt": "2026-11-27T21:18:00.317399+00:00",
+      "updatedAt": "2026-11-28T07:49:20.111229+00:00",
       "stale": false,
       "games": [
         {
@@ -930,7 +930,7 @@
     },
     "Akron": {
       "espnId": "2006",
-      "updatedAt": "2026-11-27T21:17:50.366059+00:00",
+      "updatedAt": "2026-11-28T07:49:11.833018+00:00",
       "stale": false,
       "games": [
         {
@@ -1371,7 +1371,7 @@
     },
     "Alabama": {
       "espnId": "333",
-      "updatedAt": "2026-11-27T21:17:39.011812+00:00",
+      "updatedAt": "2026-11-28T07:49:03.239247+00:00",
       "stale": false,
       "games": [
         {
@@ -1480,11 +1480,11 @@
           "opponentEspnId": "2390",
           "location": "neutral",
           "venue": "T-Mobile Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "81",
+          "opponentScore": "87",
+          "result": "L"
         },
         {
           "id": "401906763",
@@ -1826,7 +1826,7 @@
     },
     "Alabama A&M": {
       "espnId": "2010",
-      "updatedAt": "2026-11-27T21:17:59.752469+00:00",
+      "updatedAt": "2026-11-28T07:49:19.850987+00:00",
       "stale": false,
       "games": [
         {
@@ -2281,7 +2281,7 @@
     },
     "Alabama State": {
       "espnId": "2011",
-      "updatedAt": "2026-11-27T21:18:06.802194+00:00",
+      "updatedAt": "2026-11-28T07:49:26.448060+00:00",
       "stale": false,
       "games": [
         {
@@ -2750,7 +2750,7 @@
     },
     "Alcorn State": {
       "espnId": "2016",
-      "updatedAt": "2026-11-27T21:18:10.711444+00:00",
+      "updatedAt": "2026-11-28T07:49:30.971398+00:00",
       "stale": false,
       "games": [
         {
@@ -3205,7 +3205,7 @@
     },
     "American University": {
       "espnId": "44",
-      "updatedAt": "2026-11-27T21:17:54.447179+00:00",
+      "updatedAt": "2026-11-28T07:49:13.833524+00:00",
       "stale": false,
       "games": [
         {
@@ -3300,11 +3300,11 @@
           "opponentEspnId": "2515",
           "location": "home",
           "venue": "Bender Arena",
-          "status": "in-progress",
-          "statusLabel": "15:57 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "64",
+          "opponentScore": "62",
+          "result": "W"
         },
         {
           "id": "401912214",
@@ -3660,7 +3660,7 @@
     },
     "App State": {
       "espnId": "2026",
-      "updatedAt": "2026-11-27T21:17:49.735812+00:00",
+      "updatedAt": "2026-11-28T07:49:11.183224+00:00",
       "stale": false,
       "games": [
         {
@@ -4101,7 +4101,7 @@
     },
     "Arizona": {
       "espnId": "12",
-      "updatedAt": "2026-11-27T21:17:37.746247+00:00",
+      "updatedAt": "2026-11-28T07:49:02.281389+00:00",
       "stale": false,
       "games": [
         {
@@ -4556,7 +4556,7 @@
     },
     "Arizona State": {
       "espnId": "9",
-      "updatedAt": "2026-11-27T21:17:46.592438+00:00",
+      "updatedAt": "2026-11-28T07:49:09.311732+00:00",
       "stale": false,
       "games": [
         {
@@ -5011,7 +5011,7 @@
     },
     "Arkansas": {
       "espnId": "8",
-      "updatedAt": "2026-11-27T21:17:40.683019+00:00",
+      "updatedAt": "2026-11-28T07:49:04.836247+00:00",
       "stale": false,
       "games": [
         {
@@ -5466,7 +5466,7 @@
     },
     "Arkansas State": {
       "espnId": "2032",
-      "updatedAt": "2026-11-27T21:17:51.568776+00:00",
+      "updatedAt": "2026-11-28T07:49:12.524175+00:00",
       "stale": false,
       "games": [
         {
@@ -5907,7 +5907,7 @@
     },
     "Arkansas-Pine Bluff": {
       "espnId": "2029",
-      "updatedAt": "2026-11-27T21:18:10.170798+00:00",
+      "updatedAt": "2026-11-28T07:49:30.941264+00:00",
       "stale": false,
       "games": [
         {
@@ -6016,11 +6016,11 @@
           "opponentEspnId": "142",
           "location": "away",
           "venue": "Mizzou Arena",
-          "status": "in-progress",
-          "statusLabel": "14:27 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "61",
+          "opponentScore": "97",
+          "result": "L"
         },
         {
           "id": "401911256",
@@ -6348,7 +6348,7 @@
     },
     "Army": {
       "espnId": "349",
-      "updatedAt": "2026-11-27T21:18:04.848344+00:00",
+      "updatedAt": "2026-11-28T07:49:24.732577+00:00",
       "stale": false,
       "games": [
         {
@@ -6803,7 +6803,7 @@
     },
     "Auburn": {
       "espnId": "2",
-      "updatedAt": "2026-11-27T21:17:40.516478+00:00",
+      "updatedAt": "2026-11-28T07:49:04.676726+00:00",
       "stale": false,
       "games": [
         {
@@ -7258,7 +7258,7 @@
     },
     "Austin Peay": {
       "espnId": "2046",
-      "updatedAt": "2026-11-27T21:17:57.346655+00:00",
+      "updatedAt": "2026-11-28T07:49:17.689592+00:00",
       "stale": false,
       "games": [
         {
@@ -7713,7 +7713,7 @@
     },
     "BYU": {
       "espnId": "252",
-      "updatedAt": "2026-11-27T21:17:39.242124+00:00",
+      "updatedAt": "2026-11-28T07:49:03.775515+00:00",
       "stale": false,
       "games": [
         {
@@ -8168,7 +8168,7 @@
     },
     "Ball State": {
       "espnId": "2050",
-      "updatedAt": "2026-11-27T21:18:02.270228+00:00",
+      "updatedAt": "2026-11-28T07:49:22.049596+00:00",
       "stale": false,
       "games": [
         {
@@ -8609,7 +8609,7 @@
     },
     "Baylor": {
       "espnId": "239",
-      "updatedAt": "2026-11-27T21:17:40.001664+00:00",
+      "updatedAt": "2026-11-28T07:49:04.288301+00:00",
       "stale": false,
       "games": [
         {
@@ -8718,11 +8718,11 @@
           "opponentEspnId": "2628",
           "location": "neutral",
           "venue": "T-Mobile Arena",
-          "status": "in-progress",
-          "statusLabel": "Halftime",
-          "teamScore": "41",
-          "opponentScore": "36",
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "69",
+          "opponentScore": "88",
+          "result": "L"
         },
         {
           "id": "401909754",
@@ -9064,7 +9064,7 @@
     },
     "Bellarmine": {
       "espnId": "91",
-      "updatedAt": "2026-11-27T21:18:02.401425+00:00",
+      "updatedAt": "2026-11-28T07:49:26.825491+00:00",
       "stale": false,
       "games": [
         {
@@ -9201,11 +9201,11 @@
           "opponentEspnId": "2086",
           "location": "away",
           "venue": "Hinkle Fieldhouse",
-          "status": "in-progress",
-          "statusLabel": "12:37 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "56",
+          "opponentScore": "92",
+          "result": "L"
         },
         {
           "id": "401920966",
@@ -9519,7 +9519,7 @@
     },
     "Belmont": {
       "espnId": "2057",
-      "updatedAt": "2026-11-27T21:17:55.734121+00:00",
+      "updatedAt": "2026-11-28T07:49:16.254979+00:00",
       "stale": false,
       "games": [
         {
@@ -9974,7 +9974,7 @@
     },
     "Bethune-Cookman": {
       "espnId": "2065",
-      "updatedAt": "2026-11-27T21:18:03.995277+00:00",
+      "updatedAt": "2026-11-28T07:49:23.762054+00:00",
       "stale": false,
       "games": [
         {
@@ -10429,7 +10429,7 @@
     },
     "Binghamton": {
       "espnId": "2066",
-      "updatedAt": "2026-11-27T21:17:59.083046+00:00",
+      "updatedAt": "2026-11-28T07:49:18.852474+00:00",
       "stale": false,
       "games": [
         {
@@ -10870,7 +10870,7 @@
     },
     "Boise State": {
       "espnId": "68",
-      "updatedAt": "2026-11-27T21:17:49.365047+00:00",
+      "updatedAt": "2026-11-28T07:49:10.774718+00:00",
       "stale": false,
       "games": [
         {
@@ -10965,11 +10965,11 @@
           "opponentEspnId": "2181",
           "location": "neutral",
           "venue": "Mountain America Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "88",
+          "opponentScore": "71",
+          "result": "W"
         },
         {
           "id": "401929172",
@@ -11311,7 +11311,7 @@
     },
     "Boston College": {
       "espnId": "103",
-      "updatedAt": "2026-11-27T21:17:45.102623+00:00",
+      "updatedAt": "2026-11-28T07:49:07.911923+00:00",
       "stale": false,
       "games": [
         {
@@ -11420,11 +11420,11 @@
           "opponentEspnId": "2132",
           "location": "neutral",
           "venue": "State Farm Field House",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 4:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "59",
+          "opponentScore": "70",
+          "result": "L"
         },
         {
           "id": "401906785",
@@ -11766,7 +11766,7 @@
     },
     "Boston University": {
       "espnId": "104",
-      "updatedAt": "2026-11-27T21:17:49.895197+00:00",
+      "updatedAt": "2026-11-28T07:49:11.664389+00:00",
       "stale": false,
       "games": [
         {
@@ -12207,7 +12207,7 @@
     },
     "Bowling Green": {
       "espnId": "189",
-      "updatedAt": "2026-11-27T21:17:54.890748+00:00",
+      "updatedAt": "2026-11-28T07:49:15.300410+00:00",
       "stale": false,
       "games": [
         {
@@ -12302,11 +12302,11 @@
           "opponentEspnId": "84",
           "location": "away",
           "venue": "Simon Skjodt Assembly Hall",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 6:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "57",
+          "opponentScore": "93",
+          "result": "L"
         },
         {
           "id": "401911035",
@@ -12648,7 +12648,7 @@
     },
     "Bradley": {
       "espnId": "71",
-      "updatedAt": "2026-11-27T21:18:00.353677+00:00",
+      "updatedAt": "2026-11-28T07:49:20.781317+00:00",
       "stale": false,
       "games": [
         {
@@ -13089,7 +13089,7 @@
     },
     "Brown": {
       "espnId": "225",
-      "updatedAt": "2026-11-27T21:18:03.024070+00:00",
+      "updatedAt": "2026-11-28T07:49:23.575867+00:00",
       "stale": false,
       "games": [
         {
@@ -13502,7 +13502,7 @@
     },
     "Bryant": {
       "espnId": "2803",
-      "updatedAt": "2026-11-27T21:18:05.253275+00:00",
+      "updatedAt": "2026-11-28T07:49:25.091783+00:00",
       "stale": false,
       "games": [
         {
@@ -13957,7 +13957,7 @@
     },
     "Bucknell": {
       "espnId": "2083",
-      "updatedAt": "2026-11-27T21:18:08.786028+00:00",
+      "updatedAt": "2026-11-28T07:49:29.924623+00:00",
       "stale": false,
       "games": [
         {
@@ -14066,11 +14066,11 @@
           "opponentEspnId": "2325",
           "location": "neutral",
           "venue": "The Palestra",
-          "status": "in-progress",
-          "statusLabel": "2:46 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final/2OT",
+          "teamScore": "86",
+          "opponentScore": "89",
+          "result": "L"
         },
         {
           "id": "401921186",
@@ -14412,7 +14412,7 @@
     },
     "Buffalo": {
       "espnId": "2084",
-      "updatedAt": "2026-11-27T21:17:56.710936+00:00",
+      "updatedAt": "2026-11-28T07:49:16.641227+00:00",
       "stale": false,
       "games": [
         {
@@ -14853,7 +14853,7 @@
     },
     "Butler": {
       "espnId": "2086",
-      "updatedAt": "2026-11-27T21:17:49.596763+00:00",
+      "updatedAt": "2026-11-28T07:49:08.481092+00:00",
       "stale": false,
       "games": [
         {
@@ -14962,11 +14962,11 @@
           "opponentEspnId": "91",
           "location": "home",
           "venue": "Hinkle Fieldhouse",
-          "status": "in-progress",
-          "statusLabel": "12:46 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "92",
+          "opponentScore": "56",
+          "result": "W"
         },
         {
           "id": "401902283",
@@ -15308,7 +15308,7 @@
     },
     "Cal Poly": {
       "espnId": "13",
-      "updatedAt": "2026-11-27T21:18:01.186506+00:00",
+      "updatedAt": "2026-11-28T07:49:21.150611+00:00",
       "stale": false,
       "games": [
         {
@@ -15749,7 +15749,7 @@
     },
     "Cal State Bakersfield": {
       "espnId": "2934",
-      "updatedAt": "2026-11-27T21:17:52.453798+00:00",
+      "updatedAt": "2026-11-28T07:49:13.271357+00:00",
       "stale": false,
       "games": [
         {
@@ -16204,7 +16204,7 @@
     },
     "Cal State Fullerton": {
       "espnId": "2239",
-      "updatedAt": "2026-11-27T21:17:50.778851+00:00",
+      "updatedAt": "2026-11-28T07:49:12.301355+00:00",
       "stale": false,
       "games": [
         {
@@ -16659,7 +16659,7 @@
     },
     "Cal State Northridge": {
       "espnId": "2463",
-      "updatedAt": "2026-11-27T21:18:00.682759+00:00",
+      "updatedAt": "2026-11-28T07:49:20.736859+00:00",
       "stale": false,
       "games": [
         {
@@ -17114,7 +17114,7 @@
     },
     "California": {
       "espnId": "25",
-      "updatedAt": "2026-11-27T21:17:46.482930+00:00",
+      "updatedAt": "2026-11-28T07:49:08.954177+00:00",
       "stale": false,
       "games": [
         {
@@ -17569,7 +17569,7 @@
     },
     "California Baptist": {
       "espnId": "2856",
-      "updatedAt": "2026-11-27T21:18:09.155775+00:00",
+      "updatedAt": "2026-11-28T07:49:29.196592+00:00",
       "stale": false,
       "games": [
         {
@@ -18024,7 +18024,7 @@
     },
     "Campbell": {
       "espnId": "2097",
-      "updatedAt": "2026-11-27T21:17:58.846432+00:00",
+      "updatedAt": "2026-11-28T07:49:19.166122+00:00",
       "stale": false,
       "games": [
         {
@@ -18479,7 +18479,7 @@
     },
     "Canisius": {
       "espnId": "2099",
-      "updatedAt": "2026-11-27T21:18:09.473215+00:00",
+      "updatedAt": "2026-11-28T07:49:28.954353+00:00",
       "stale": false,
       "games": [
         {
@@ -18934,7 +18934,7 @@
     },
     "Central Arkansas": {
       "espnId": "2110",
-      "updatedAt": "2026-11-27T21:17:50.562785+00:00",
+      "updatedAt": "2026-11-28T07:49:12.006966+00:00",
       "stale": false,
       "games": [
         {
@@ -19389,7 +19389,7 @@
     },
     "Central Connecticut": {
       "espnId": "2115",
-      "updatedAt": "2026-11-27T21:17:59.480451+00:00",
+      "updatedAt": "2026-11-28T07:49:19.234342+00:00",
       "stale": false,
       "games": [
         {
@@ -19816,7 +19816,7 @@
     },
     "Central Michigan": {
       "espnId": "2117",
-      "updatedAt": "2026-11-27T21:17:58.352410+00:00",
+      "updatedAt": "2026-11-28T07:49:18.627604+00:00",
       "stale": false,
       "games": [
         {
@@ -20257,7 +20257,7 @@
     },
     "Charleston": {
       "espnId": "232",
-      "updatedAt": "2026-11-27T21:17:48.490988+00:00",
+      "updatedAt": "2026-11-28T07:49:10.395697+00:00",
       "stale": false,
       "games": [
         {
@@ -20712,7 +20712,7 @@
     },
     "Charleston Southern": {
       "espnId": "2127",
-      "updatedAt": "2026-11-27T21:18:05.273584+00:00",
+      "updatedAt": "2026-11-28T07:49:24.957962+00:00",
       "stale": false,
       "games": [
         {
@@ -20821,11 +20821,11 @@
           "opponentEspnId": "2193",
           "location": "away",
           "venue": "Freedom Hall (TN)",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "76",
+          "opponentScore": "67",
+          "result": "W"
         },
         {
           "id": "401911381",
@@ -21167,7 +21167,7 @@
     },
     "Charlotte": {
       "espnId": "2429",
-      "updatedAt": "2026-11-27T21:17:48.478964+00:00",
+      "updatedAt": "2026-11-28T07:49:10.380419+00:00",
       "stale": false,
       "games": [
         {
@@ -21622,7 +21622,7 @@
     },
     "Chattanooga": {
       "espnId": "236",
-      "updatedAt": "2026-11-27T21:17:53.694859+00:00",
+      "updatedAt": "2026-11-28T07:49:14.584750+00:00",
       "stale": false,
       "games": [
         {
@@ -22077,7 +22077,7 @@
     },
     "Chicago State": {
       "espnId": "2130",
-      "updatedAt": "2026-11-27T21:18:10.515110+00:00",
+      "updatedAt": "2026-11-28T07:49:30.400503+00:00",
       "stale": false,
       "games": [
         {
@@ -22532,7 +22532,7 @@
     },
     "Cincinnati": {
       "espnId": "2132",
-      "updatedAt": "2026-11-27T21:17:39.800173+00:00",
+      "updatedAt": "2026-11-28T07:49:03.540628+00:00",
       "stale": false,
       "games": [
         {
@@ -22641,11 +22641,11 @@
           "opponentEspnId": "103",
           "location": "neutral",
           "venue": "State Farm Field House",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 4:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "70",
+          "opponentScore": "59",
+          "result": "W"
         },
         {
           "id": "401921749",
@@ -22987,7 +22987,7 @@
     },
     "Clemson": {
       "espnId": "228",
-      "updatedAt": "2026-11-27T21:17:48.027909+00:00",
+      "updatedAt": "2026-11-28T07:49:09.911537+00:00",
       "stale": false,
       "games": [
         {
@@ -23442,7 +23442,7 @@
     },
     "Cleveland State": {
       "espnId": "325",
-      "updatedAt": "2026-11-27T21:18:05.721358+00:00",
+      "updatedAt": "2026-11-28T07:49:25.718007+00:00",
       "stale": false,
       "games": [
         {
@@ -23883,7 +23883,7 @@
     },
     "Coastal Carolina": {
       "espnId": "324",
-      "updatedAt": "2026-11-27T21:18:06.595112+00:00",
+      "updatedAt": "2026-11-28T07:49:26.177726+00:00",
       "stale": false,
       "games": [
         {
@@ -24324,7 +24324,7 @@
     },
     "Colgate": {
       "espnId": "2142",
-      "updatedAt": "2026-11-27T21:18:01.131826+00:00",
+      "updatedAt": "2026-11-28T07:49:16.558986+00:00",
       "stale": false,
       "games": [
         {
@@ -24419,11 +24419,11 @@
           "opponentEspnId": "2275",
           "location": "away",
           "venue": "David S. Mack Sports and Exhibition Complex",
-          "status": "in-progress",
-          "statusLabel": "Halftime",
-          "teamScore": "41",
-          "opponentScore": "23",
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "75",
+          "opponentScore": "49",
+          "result": "W"
         },
         {
           "id": "401920775",
@@ -24779,7 +24779,7 @@
     },
     "Colorado": {
       "espnId": "38",
-      "updatedAt": "2026-11-27T21:17:53.791753+00:00",
+      "updatedAt": "2026-11-28T07:49:14.089440+00:00",
       "stale": false,
       "games": [
         {
@@ -25234,7 +25234,7 @@
     },
     "Colorado State": {
       "espnId": "36",
-      "updatedAt": "2026-11-27T21:17:52.665794+00:00",
+      "updatedAt": "2026-11-28T07:49:13.711336+00:00",
       "stale": false,
       "games": [
         {
@@ -25689,7 +25689,7 @@
     },
     "Columbia": {
       "espnId": "171",
-      "updatedAt": "2026-11-27T21:17:45.714599+00:00",
+      "updatedAt": "2026-11-28T07:49:08.737309+00:00",
       "stale": false,
       "games": [
         {
@@ -26102,7 +26102,7 @@
     },
     "Coppin State": {
       "espnId": "2154",
-      "updatedAt": "2026-11-27T21:18:09.622976+00:00",
+      "updatedAt": "2026-11-28T07:49:29.535082+00:00",
       "stale": false,
       "games": [
         {
@@ -26557,7 +26557,7 @@
     },
     "Cornell": {
       "espnId": "172",
-      "updatedAt": "2026-11-27T21:17:53.256833+00:00",
+      "updatedAt": "2026-11-28T07:49:14.126700+00:00",
       "stale": false,
       "games": [
         {
@@ -26970,7 +26970,7 @@
     },
     "Creighton": {
       "espnId": "156",
-      "updatedAt": "2026-11-27T21:17:40.280685+00:00",
+      "updatedAt": "2026-11-28T07:49:04.492959+00:00",
       "stale": false,
       "games": [
         {
@@ -27073,14 +27073,28 @@
         },
         {
           "id": "401920544",
-          "date": "2026-11-28T04:00Z",
+          "date": "2026-11-28T04:15Z",
           "timeKnown": true,
           "opponent": "Gonzaga",
           "opponentEspnId": "2250",
           "location": "neutral",
           "venue": "T-Mobile Arena",
+          "status": "final",
+          "statusLabel": "Final/OT",
+          "teamScore": "97",
+          "opponentScore": "89",
+          "result": "W"
+        },
+        {
+          "id": "401920536",
+          "date": "2026-11-29T03:30Z",
+          "timeKnown": true,
+          "opponent": "Louisville",
+          "opponentEspnId": "97",
+          "location": "neutral",
+          "venue": "Michelob ULTRA Arena",
           "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 11:00 PM EST",
+          "statusLabel": "Sat, November 28th at 10:30 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -27425,7 +27439,7 @@
     },
     "Dartmouth": {
       "espnId": "159",
-      "updatedAt": "2026-11-27T21:17:58.284674+00:00",
+      "updatedAt": "2026-11-28T07:49:18.539627+00:00",
       "stale": false,
       "games": [
         {
@@ -27824,7 +27838,7 @@
     },
     "Davidson": {
       "espnId": "2166",
-      "updatedAt": "2026-11-27T21:17:48.058117+00:00",
+      "updatedAt": "2026-11-28T07:49:09.781627+00:00",
       "stale": false,
       "games": [
         {
@@ -28279,7 +28293,7 @@
     },
     "Dayton": {
       "espnId": "2168",
-      "updatedAt": "2026-11-27T21:17:59.858515+00:00",
+      "updatedAt": "2026-11-28T07:49:19.691720+00:00",
       "stale": false,
       "games": [
         {
@@ -28734,7 +28748,7 @@
     },
     "DePaul": {
       "espnId": "305",
-      "updatedAt": "2026-11-27T21:17:43.112297+00:00",
+      "updatedAt": "2026-11-28T07:49:06.528079+00:00",
       "stale": false,
       "games": [
         {
@@ -29189,7 +29203,7 @@
     },
     "Delaware": {
       "espnId": "48",
-      "updatedAt": "2026-11-27T21:17:57.027800+00:00",
+      "updatedAt": "2026-11-28T07:49:16.924051+00:00",
       "stale": false,
       "games": [
         {
@@ -29644,7 +29658,7 @@
     },
     "Delaware State": {
       "espnId": "2169",
-      "updatedAt": "2026-11-27T21:18:06.024259+00:00",
+      "updatedAt": "2026-11-28T07:49:26.421170+00:00",
       "stale": false,
       "games": [
         {
@@ -30057,7 +30071,7 @@
     },
     "Denver": {
       "espnId": "2172",
-      "updatedAt": "2026-11-27T21:18:02.484094+00:00",
+      "updatedAt": "2026-11-28T07:49:22.242754+00:00",
       "stale": false,
       "games": [
         {
@@ -30512,7 +30526,7 @@
     },
     "Detroit Mercy": {
       "espnId": "2174",
-      "updatedAt": "2026-11-27T21:18:09.815562+00:00",
+      "updatedAt": "2026-11-28T07:49:29.972144+00:00",
       "stale": false,
       "games": [
         {
@@ -30925,7 +30939,7 @@
     },
     "Drake": {
       "espnId": "2181",
-      "updatedAt": "2026-11-27T21:17:53.702956+00:00",
+      "updatedAt": "2026-11-28T07:49:14.877784+00:00",
       "stale": false,
       "games": [
         {
@@ -31020,11 +31034,11 @@
           "opponentEspnId": "68",
           "location": "neutral",
           "venue": "Mountain America Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "71",
+          "opponentScore": "88",
+          "result": "L"
         },
         {
           "id": "401927367",
@@ -31380,7 +31394,7 @@
     },
     "Drexel": {
       "espnId": "2182",
-      "updatedAt": "2026-11-27T21:17:59.081761+00:00",
+      "updatedAt": "2026-11-28T07:49:18.656906+00:00",
       "stale": false,
       "games": [
         {
@@ -31821,7 +31835,7 @@
     },
     "Duke": {
       "espnId": "150",
-      "updatedAt": "2026-11-27T21:17:37.461296+00:00",
+      "updatedAt": "2026-11-28T07:49:02.018481+00:00",
       "stale": false,
       "games": [
         {
@@ -32276,7 +32290,7 @@
     },
     "Duquesne": {
       "espnId": "2184",
-      "updatedAt": "2026-11-27T21:17:52.599074+00:00",
+      "updatedAt": "2026-11-28T07:49:13.428012+00:00",
       "stale": false,
       "games": [
         {
@@ -32731,7 +32745,7 @@
     },
     "East Carolina": {
       "espnId": "151",
-      "updatedAt": "2026-11-27T21:18:00.795990+00:00",
+      "updatedAt": "2026-11-28T07:49:21.077634+00:00",
       "stale": false,
       "games": [
         {
@@ -32840,11 +32854,11 @@
           "opponentEspnId": "286",
           "location": "home",
           "venue": "Williams Arena at Minges Coliseum",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "92",
+          "opponentScore": "43",
+          "result": "W"
         },
         {
           "id": "401911243",
@@ -33186,7 +33200,7 @@
     },
     "East Tennessee State": {
       "espnId": "2193",
-      "updatedAt": "2026-11-27T21:17:55.291768+00:00",
+      "updatedAt": "2026-11-28T07:49:15.874240+00:00",
       "stale": false,
       "games": [
         {
@@ -33281,11 +33295,11 @@
           "opponentEspnId": "2127",
           "location": "home",
           "venue": "Freedom Hall (TN)",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "67",
+          "opponentScore": "76",
+          "result": "L"
         },
         {
           "id": "401920965",
@@ -33641,7 +33655,7 @@
     },
     "East Texas A&M": {
       "espnId": "2837",
-      "updatedAt": "2026-11-27T21:18:00.576006+00:00",
+      "updatedAt": "2026-11-28T07:49:20.577787+00:00",
       "stale": false,
       "games": [
         {
@@ -34096,7 +34110,7 @@
     },
     "Eastern Illinois": {
       "espnId": "2197",
-      "updatedAt": "2026-11-27T21:18:09.465857+00:00",
+      "updatedAt": "2026-11-28T07:49:29.419102+00:00",
       "stale": false,
       "games": [
         {
@@ -34551,7 +34565,7 @@
     },
     "Eastern Kentucky": {
       "espnId": "2198",
-      "updatedAt": "2026-11-27T21:17:53.295117+00:00",
+      "updatedAt": "2026-11-28T07:49:14.459453+00:00",
       "stale": false,
       "games": [
         {
@@ -35006,7 +35020,7 @@
     },
     "Eastern Michigan": {
       "espnId": "2199",
-      "updatedAt": "2026-11-27T21:17:53.414455+00:00",
+      "updatedAt": "2026-11-28T07:49:14.293441+00:00",
       "stale": false,
       "games": [
         {
@@ -35447,7 +35461,7 @@
     },
     "Eastern Washington": {
       "espnId": "331",
-      "updatedAt": "2026-11-27T21:18:03.044582+00:00",
+      "updatedAt": "2026-11-28T07:49:22.682832+00:00",
       "stale": false,
       "games": [
         {
@@ -35902,7 +35916,7 @@
     },
     "Elon": {
       "espnId": "2210",
-      "updatedAt": "2026-11-27T21:17:56.023191+00:00",
+      "updatedAt": "2026-11-28T07:49:16.425959+00:00",
       "stale": false,
       "games": [
         {
@@ -36357,7 +36371,7 @@
     },
     "Evansville": {
       "espnId": "339",
-      "updatedAt": "2026-11-27T21:17:59.721851+00:00",
+      "updatedAt": "2026-11-28T07:49:19.763439+00:00",
       "stale": false,
       "games": [
         {
@@ -36798,7 +36812,7 @@
     },
     "Fairfield": {
       "espnId": "2217",
-      "updatedAt": "2026-11-27T21:18:01.230075+00:00",
+      "updatedAt": "2026-11-28T07:49:19.609198+00:00",
       "stale": false,
       "games": [
         {
@@ -37239,7 +37253,7 @@
     },
     "Fairleigh Dickinson": {
       "espnId": "161",
-      "updatedAt": "2026-11-27T21:18:02.809000+00:00",
+      "updatedAt": "2026-11-28T07:49:22.462262+00:00",
       "stale": false,
       "games": [
         {
@@ -37694,7 +37708,7 @@
     },
     "Florida": {
       "espnId": "57",
-      "updatedAt": "2026-11-27T21:17:37.603632+00:00",
+      "updatedAt": "2026-11-28T07:49:02.124350+00:00",
       "stale": false,
       "games": [
         {
@@ -38149,7 +38163,7 @@
     },
     "Florida A&M": {
       "espnId": "50",
-      "updatedAt": "2026-11-27T21:18:10.172604+00:00",
+      "updatedAt": "2026-11-28T07:49:30.360031+00:00",
       "stale": false,
       "games": [
         {
@@ -38604,7 +38618,7 @@
     },
     "Florida Atlantic": {
       "espnId": "2226",
-      "updatedAt": "2026-11-27T21:17:52.760448+00:00",
+      "updatedAt": "2026-11-28T07:49:13.514015+00:00",
       "stale": false,
       "games": [
         {
@@ -39059,7 +39073,7 @@
     },
     "Florida Gulf Coast": {
       "espnId": "526",
-      "updatedAt": "2026-11-27T21:18:01.012355+00:00",
+      "updatedAt": "2026-11-28T07:49:21.068315+00:00",
       "stale": false,
       "games": [
         {
@@ -39514,7 +39528,7 @@
     },
     "Florida International": {
       "espnId": "2229",
-      "updatedAt": "2026-11-27T21:17:53.213880+00:00",
+      "updatedAt": "2026-11-28T07:49:13.879800+00:00",
       "stale": false,
       "games": [
         {
@@ -39955,7 +39969,7 @@
     },
     "Florida State": {
       "espnId": "52",
-      "updatedAt": "2026-11-27T21:17:43.456461+00:00",
+      "updatedAt": "2026-11-28T07:49:06.729634+00:00",
       "stale": false,
       "games": [
         {
@@ -40410,7 +40424,7 @@
     },
     "Fordham": {
       "espnId": "2230",
-      "updatedAt": "2026-11-27T21:17:48.798650+00:00",
+      "updatedAt": "2026-11-28T07:49:10.617648+00:00",
       "stale": false,
       "games": [
         {
@@ -40865,7 +40879,7 @@
     },
     "Fresno State": {
       "espnId": "278",
-      "updatedAt": "2026-11-27T21:17:56.763782+00:00",
+      "updatedAt": "2026-11-28T07:49:16.596891+00:00",
       "stale": false,
       "games": [
         {
@@ -41306,7 +41320,7 @@
     },
     "Furman": {
       "espnId": "231",
-      "updatedAt": "2026-11-27T21:17:44.670422+00:00",
+      "updatedAt": "2026-11-28T07:49:07.669794+00:00",
       "stale": false,
       "games": [
         {
@@ -41761,7 +41775,7 @@
     },
     "Gardner-Webb": {
       "espnId": "2241",
-      "updatedAt": "2026-11-27T21:18:09.112865+00:00",
+      "updatedAt": "2026-11-28T07:49:29.247695+00:00",
       "stale": false,
       "games": [
         {
@@ -42202,7 +42216,7 @@
     },
     "George Mason": {
       "espnId": "2244",
-      "updatedAt": "2026-11-27T21:17:44.777482+00:00",
+      "updatedAt": "2026-11-28T07:49:08.044578+00:00",
       "stale": false,
       "games": [
         {
@@ -42657,7 +42671,7 @@
     },
     "George Washington": {
       "espnId": "45",
-      "updatedAt": "2026-11-27T21:17:46.225375+00:00",
+      "updatedAt": "2026-11-28T07:49:06.861074+00:00",
       "stale": false,
       "games": [
         {
@@ -42766,11 +42780,11 @@
           "opponentEspnId": "2378",
           "location": "home",
           "venue": "Charles E. Smith Center",
-          "status": "in-progress",
-          "statusLabel": "12:11 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "91",
+          "opponentScore": "51",
+          "result": "W"
         },
         {
           "id": "401911213",
@@ -43112,7 +43126,7 @@
     },
     "Georgetown": {
       "espnId": "46",
-      "updatedAt": "2026-11-27T21:17:45.473906+00:00",
+      "updatedAt": "2026-11-28T07:49:08.530968+00:00",
       "stale": false,
       "games": [
         {
@@ -43221,11 +43235,11 @@
           "opponentEspnId": "26",
           "location": "neutral",
           "venue": "Jenny Craig Pavilion",
-          "status": "in-progress",
-          "statusLabel": "8:45 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "63",
+          "opponentScore": "75",
+          "result": "L"
         },
         {
           "id": "401909518",
@@ -43567,7 +43581,7 @@
     },
     "Georgia": {
       "espnId": "61",
-      "updatedAt": "2026-11-27T21:17:40.267336+00:00",
+      "updatedAt": "2026-11-28T07:49:04.068551+00:00",
       "stale": false,
       "games": [
         {
@@ -43676,11 +43690,11 @@
           "opponentEspnId": "2116",
           "location": "neutral",
           "venue": "State Farm Field House",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "76",
+          "opponentScore": "88",
+          "result": "L"
         },
         {
           "id": "401906785",
@@ -44022,7 +44036,7 @@
     },
     "Georgia Southern": {
       "espnId": "290",
-      "updatedAt": "2026-11-27T21:18:04.563396+00:00",
+      "updatedAt": "2026-11-28T07:49:24.752029+00:00",
       "stale": false,
       "games": [
         {
@@ -44463,7 +44477,7 @@
     },
     "Georgia State": {
       "espnId": "2247",
-      "updatedAt": "2026-11-27T21:17:59.196057+00:00",
+      "updatedAt": "2026-11-28T07:49:19.054026+00:00",
       "stale": false,
       "games": [
         {
@@ -44904,7 +44918,7 @@
     },
     "Georgia Tech": {
       "espnId": "59",
-      "updatedAt": "2026-11-27T21:17:55.062066+00:00",
+      "updatedAt": "2026-11-28T07:49:15.887169+00:00",
       "stale": false,
       "games": [
         {
@@ -45359,7 +45373,7 @@
     },
     "Gonzaga": {
       "espnId": "2250",
-      "updatedAt": "2026-11-27T21:17:37.337735+00:00",
+      "updatedAt": "2026-11-28T07:49:01.768799+00:00",
       "stale": false,
       "games": [
         {
@@ -45448,17 +45462,17 @@
         },
         {
           "id": "401920544",
-          "date": "2026-11-28T04:00Z",
+          "date": "2026-11-28T04:15Z",
           "timeKnown": true,
           "opponent": "Creighton",
           "opponentEspnId": "156",
           "location": "neutral",
           "venue": "T-Mobile Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 11:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final/OT",
+          "teamScore": "89",
+          "opponentScore": "97",
+          "result": "L"
         },
         {
           "id": "401929187",
@@ -45800,7 +45814,7 @@
     },
     "Grambling": {
       "espnId": "2755",
-      "updatedAt": "2026-11-27T21:18:00.124933+00:00",
+      "updatedAt": "2026-11-28T07:49:20.469882+00:00",
       "stale": false,
       "games": [
         {
@@ -46255,7 +46269,7 @@
     },
     "Grand Canyon": {
       "espnId": "2253",
-      "updatedAt": "2026-11-27T21:17:41.061631+00:00",
+      "updatedAt": "2026-11-28T07:49:04.951295+00:00",
       "stale": false,
       "games": [
         {
@@ -46710,7 +46724,7 @@
     },
     "Green Bay": {
       "espnId": "2739",
-      "updatedAt": "2026-11-27T21:17:59.425401+00:00",
+      "updatedAt": "2026-11-28T07:49:19.421847+00:00",
       "stale": false,
       "games": [
         {
@@ -47165,7 +47179,7 @@
     },
     "Hampton": {
       "espnId": "2261",
-      "updatedAt": "2026-11-27T21:18:01.917132+00:00",
+      "updatedAt": "2026-11-28T07:49:24.045252+00:00",
       "stale": false,
       "games": [
         {
@@ -47620,7 +47634,7 @@
     },
     "Harvard": {
       "espnId": "108",
-      "updatedAt": "2026-11-27T21:18:04.288008+00:00",
+      "updatedAt": "2026-11-28T07:49:23.911381+00:00",
       "stale": false,
       "games": [
         {
@@ -48019,7 +48033,7 @@
     },
     "Hawai'i": {
       "espnId": "62",
-      "updatedAt": "2026-11-27T21:17:57.596431+00:00",
+      "updatedAt": "2026-11-28T07:49:17.716579+00:00",
       "stale": false,
       "games": [
         {
@@ -48446,7 +48460,7 @@
     },
     "High Point": {
       "espnId": "2272",
-      "updatedAt": "2026-11-27T21:17:43.138684+00:00",
+      "updatedAt": "2026-11-28T07:49:06.288358+00:00",
       "stale": false,
       "games": [
         {
@@ -48901,7 +48915,7 @@
     },
     "Hofstra": {
       "espnId": "2275",
-      "updatedAt": "2026-11-27T21:17:59.431921+00:00",
+      "updatedAt": "2026-11-28T07:49:24.545476+00:00",
       "stale": false,
       "games": [
         {
@@ -48982,11 +48996,11 @@
           "opponentEspnId": "2142",
           "location": "home",
           "venue": "David S. Mack Sports and Exhibition Complex",
-          "status": "in-progress",
-          "statusLabel": "Halftime",
-          "teamScore": "23",
-          "opponentScore": "41",
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "49",
+          "opponentScore": "75",
+          "result": "L"
         },
         {
           "id": "401924811",
@@ -49356,7 +49370,7 @@
     },
     "Holy Cross": {
       "espnId": "107",
-      "updatedAt": "2026-11-27T21:18:09.712418+00:00",
+      "updatedAt": "2026-11-28T07:49:29.733198+00:00",
       "stale": false,
       "games": [
         {
@@ -49811,7 +49825,7 @@
     },
     "Houston": {
       "espnId": "248",
-      "updatedAt": "2026-11-27T21:17:37.417036+00:00",
+      "updatedAt": "2026-11-28T07:49:01.781148+00:00",
       "stale": false,
       "games": [
         {
@@ -49906,11 +49920,11 @@
           "opponentEspnId": "2473",
           "location": "home",
           "venue": "Fertitta Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "77",
+          "opponentScore": "46",
+          "result": "W"
         },
         {
           "id": "401922232",
@@ -50266,7 +50280,7 @@
     },
     "Houston Christian": {
       "espnId": "2277",
-      "updatedAt": "2026-11-27T21:17:48.631095+00:00",
+      "updatedAt": "2026-11-28T07:49:10.540445+00:00",
       "stale": false,
       "games": [
         {
@@ -50721,7 +50735,7 @@
     },
     "Howard": {
       "espnId": "47",
-      "updatedAt": "2026-11-27T21:17:56.785363+00:00",
+      "updatedAt": "2026-11-28T07:49:17.278058+00:00",
       "stale": false,
       "games": [
         {
@@ -51162,7 +51176,7 @@
     },
     "IU Indianapolis": {
       "espnId": "85",
-      "updatedAt": "2026-11-27T21:17:56.758180+00:00",
+      "updatedAt": "2026-11-28T07:49:17.281269+00:00",
       "stale": false,
       "games": [
         {
@@ -51617,7 +51631,7 @@
     },
     "Idaho": {
       "espnId": "70",
-      "updatedAt": "2026-11-27T21:17:58.730711+00:00",
+      "updatedAt": "2026-11-28T07:49:18.955503+00:00",
       "stale": false,
       "games": [
         {
@@ -51726,11 +51740,11 @@
           "opponentEspnId": "265",
           "location": "away",
           "venue": "Beasley Coliseum",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "61",
+          "opponentScore": "69",
+          "result": "L"
         },
         {
           "id": "401913417",
@@ -52072,7 +52086,7 @@
     },
     "Idaho State": {
       "espnId": "304",
-      "updatedAt": "2026-11-27T21:18:04.271192+00:00",
+      "updatedAt": "2026-11-28T07:49:23.798363+00:00",
       "stale": false,
       "games": [
         {
@@ -52527,7 +52541,7 @@
     },
     "Illinois": {
       "espnId": "356",
-      "updatedAt": "2026-11-27T21:17:37.333635+00:00",
+      "updatedAt": "2026-11-28T07:49:01.835225+00:00",
       "stale": false,
       "games": [
         {
@@ -52636,11 +52650,11 @@
           "opponentEspnId": "98",
           "location": "home",
           "venue": "State Farm Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 6:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "116",
+          "opponentScore": "76",
+          "result": "W"
         },
         {
           "id": "401913532",
@@ -52982,7 +52996,7 @@
     },
     "Illinois State": {
       "espnId": "2287",
-      "updatedAt": "2026-11-27T21:17:50.669141+00:00",
+      "updatedAt": "2026-11-28T07:49:12.729910+00:00",
       "stale": false,
       "games": [
         {
@@ -53437,7 +53451,7 @@
     },
     "Incarnate Word": {
       "espnId": "2916",
-      "updatedAt": "2026-11-27T21:18:08.896912+00:00",
+      "updatedAt": "2026-11-28T07:49:28.812921+00:00",
       "stale": false,
       "games": [
         {
@@ -53906,7 +53920,7 @@
     },
     "Indiana": {
       "espnId": "84",
-      "updatedAt": "2026-11-27T21:17:39.557084+00:00",
+      "updatedAt": "2026-11-28T07:49:03.870501+00:00",
       "stale": false,
       "games": [
         {
@@ -54015,11 +54029,11 @@
           "opponentEspnId": "189",
           "location": "home",
           "venue": "Simon Skjodt Assembly Hall",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 6:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "93",
+          "opponentScore": "57",
+          "result": "W"
         },
         {
           "id": "401921873",
@@ -54361,7 +54375,7 @@
     },
     "Indiana State": {
       "espnId": "282",
-      "updatedAt": "2026-11-27T21:18:02.865944+00:00",
+      "updatedAt": "2026-11-28T07:49:22.872964+00:00",
       "stale": false,
       "games": [
         {
@@ -54816,7 +54830,7 @@
     },
     "Iona": {
       "espnId": "314",
-      "updatedAt": "2026-11-27T21:18:06.574935+00:00",
+      "updatedAt": "2026-11-28T07:49:27.184244+00:00",
       "stale": false,
       "games": [
         {
@@ -55271,7 +55285,7 @@
     },
     "Iowa": {
       "espnId": "2294",
-      "updatedAt": "2026-11-27T21:17:40.775634+00:00",
+      "updatedAt": "2026-11-28T07:49:04.990730+00:00",
       "stale": false,
       "games": [
         {
@@ -55726,7 +55740,7 @@
     },
     "Iowa State": {
       "espnId": "66",
-      "updatedAt": "2026-11-27T21:17:39.220539+00:00",
+      "updatedAt": "2026-11-28T07:49:03.835899+00:00",
       "stale": false,
       "games": [
         {
@@ -56181,7 +56195,7 @@
     },
     "Jackson State": {
       "espnId": "2296",
-      "updatedAt": "2026-11-27T21:18:07.522698+00:00",
+      "updatedAt": "2026-11-28T07:49:27.547088+00:00",
       "stale": false,
       "games": [
         {
@@ -56650,7 +56664,7 @@
     },
     "Jacksonville": {
       "espnId": "294",
-      "updatedAt": "2026-11-27T21:18:07.308632+00:00",
+      "updatedAt": "2026-11-28T07:49:26.999344+00:00",
       "stale": false,
       "games": [
         {
@@ -57091,7 +57105,7 @@
     },
     "Jacksonville State": {
       "espnId": "55",
-      "updatedAt": "2026-11-27T21:18:00.193185+00:00",
+      "updatedAt": "2026-11-28T07:49:20.347513+00:00",
       "stale": false,
       "games": [
         {
@@ -57214,11 +57228,11 @@
           "opponentEspnId": "2437",
           "location": "neutral",
           "venue": "Resorts World Event Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 10:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "69",
+          "opponentScore": "78",
+          "result": "L"
         },
         {
           "id": "401926784",
@@ -57546,7 +57560,7 @@
     },
     "James Madison": {
       "espnId": "256",
-      "updatedAt": "2026-11-27T21:17:47.722328+00:00",
+      "updatedAt": "2026-11-28T07:49:09.510772+00:00",
       "stale": false,
       "games": [
         {
@@ -57987,7 +58001,7 @@
     },
     "Kansas": {
       "espnId": "2305",
-      "updatedAt": "2026-11-27T21:17:37.574850+00:00",
+      "updatedAt": "2026-11-28T07:49:01.760833+00:00",
       "stale": false,
       "games": [
         {
@@ -58096,11 +58110,11 @@
           "opponentEspnId": "222",
           "location": "home",
           "venue": "Allen Fieldhouse",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "65",
+          "opponentScore": "50",
+          "result": "W"
         },
         {
           "id": "401909790",
@@ -58442,7 +58456,7 @@
     },
     "Kansas City": {
       "espnId": "140",
-      "updatedAt": "2026-11-27T21:18:03.865581+00:00",
+      "updatedAt": "2026-11-28T07:49:24.056175+00:00",
       "stale": false,
       "games": [
         {
@@ -58897,7 +58911,7 @@
     },
     "Kansas State": {
       "espnId": "2306",
-      "updatedAt": "2026-11-27T21:17:56.394084+00:00",
+      "updatedAt": "2026-11-28T07:49:16.954477+00:00",
       "stale": false,
       "games": [
         {
@@ -59000,17 +59014,17 @@
         },
         {
           "id": "401920541",
-          "date": "2026-11-27T22:30Z",
+          "date": "2026-11-27T22:41Z",
           "timeKnown": true,
           "opponent": "Michigan",
           "opponentEspnId": "130",
           "location": "neutral",
           "venue": "T-Mobile Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "69",
+          "opponentScore": "98",
+          "result": "L"
         },
         {
           "id": "401909801",
@@ -59352,7 +59366,7 @@
     },
     "Kennesaw State": {
       "espnId": "338",
-      "updatedAt": "2026-11-27T21:17:54.023495+00:00",
+      "updatedAt": "2026-11-28T07:49:14.144613+00:00",
       "stale": false,
       "games": [
         {
@@ -59793,7 +59807,7 @@
     },
     "Kent State": {
       "espnId": "2309",
-      "updatedAt": "2026-11-27T21:17:59.153118+00:00",
+      "updatedAt": "2026-11-28T07:49:19.436671+00:00",
       "stale": false,
       "games": [
         {
@@ -60220,7 +60234,7 @@
     },
     "Kentucky": {
       "espnId": "96",
-      "updatedAt": "2026-11-27T21:17:41.469545+00:00",
+      "updatedAt": "2026-11-28T07:49:05.558984+00:00",
       "stale": false,
       "games": [
         {
@@ -60315,11 +60329,11 @@
           "opponentEspnId": "2724",
           "location": "home",
           "venue": "Rupp Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 9:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final/OT",
+          "teamScore": "71",
+          "opponentScore": "73",
+          "result": "L"
         },
         {
           "id": "401920430",
@@ -60675,7 +60689,7 @@
     },
     "LSU": {
       "espnId": "99",
-      "updatedAt": "2026-11-27T21:17:39.676995+00:00",
+      "updatedAt": "2026-11-28T07:49:03.885014+00:00",
       "stale": false,
       "games": [
         {
@@ -61130,7 +61144,7 @@
     },
     "LSU New Orleans": {
       "espnId": "2443",
-      "updatedAt": "2026-11-27T21:18:10.847784+00:00",
+      "updatedAt": "2026-11-28T07:49:30.917110+00:00",
       "stale": false,
       "games": [
         {
@@ -61585,7 +61599,7 @@
     },
     "La Salle": {
       "espnId": "2325",
-      "updatedAt": "2026-11-27T21:18:03.606790+00:00",
+      "updatedAt": "2026-11-28T07:49:24.239079+00:00",
       "stale": false,
       "games": [
         {
@@ -61694,11 +61708,11 @@
           "opponentEspnId": "2083",
           "location": "neutral",
           "venue": "The Palestra",
-          "status": "in-progress",
-          "statusLabel": "2:46 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final/2OT",
+          "teamScore": "89",
+          "opponentScore": "86",
+          "result": "W"
         },
         {
           "id": "401925814",
@@ -62026,7 +62040,7 @@
     },
     "Lafayette": {
       "espnId": "322",
-      "updatedAt": "2026-11-27T21:17:59.487470+00:00",
+      "updatedAt": "2026-11-28T07:49:16.616243+00:00",
       "stale": false,
       "games": [
         {
@@ -62135,11 +62149,11 @@
           "opponentEspnId": "315",
           "location": "home",
           "venue": "Kirby Sports Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 4:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "82",
+          "opponentScore": "54",
+          "result": "W"
         },
         {
           "id": "401923305",
@@ -62481,7 +62495,7 @@
     },
     "Lamar": {
       "espnId": "2320",
-      "updatedAt": "2026-11-27T21:17:49.002804+00:00",
+      "updatedAt": "2026-11-28T07:49:10.871976+00:00",
       "stale": false,
       "games": [
         {
@@ -62936,7 +62950,7 @@
     },
     "Le Moyne": {
       "espnId": "2330",
-      "updatedAt": "2026-11-27T21:18:04.190878+00:00",
+      "updatedAt": "2026-11-28T07:49:26.742962+00:00",
       "stale": false,
       "games": [
         {
@@ -63045,11 +63059,11 @@
           "opponentEspnId": "311",
           "location": "neutral",
           "venue": "Kirby Sports Center",
-          "status": "in-progress",
-          "statusLabel": "3:43 - OT",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final/OT",
+          "teamScore": "86",
+          "opponentScore": "90",
+          "result": "L"
         },
         {
           "id": "401919787",
@@ -63391,7 +63405,7 @@
     },
     "Lehigh": {
       "espnId": "2329",
-      "updatedAt": "2026-11-27T21:17:57.023366+00:00",
+      "updatedAt": "2026-11-28T07:49:17.720751+00:00",
       "stale": false,
       "games": [
         {
@@ -63500,11 +63514,11 @@
           "opponentEspnId": "2540",
           "location": "neutral",
           "venue": "Gilbert Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "43",
+          "opponentScore": "75",
+          "result": "L"
         },
         {
           "id": "401926757",
@@ -63832,7 +63846,7 @@
     },
     "Liberty": {
       "espnId": "2335",
-      "updatedAt": "2026-11-27T21:17:54.292093+00:00",
+      "updatedAt": "2026-11-28T07:49:11.527018+00:00",
       "stale": false,
       "games": [
         {
@@ -64287,7 +64301,7 @@
     },
     "Lindenwood": {
       "espnId": "2815",
-      "updatedAt": "2026-11-27T21:18:08.015134+00:00",
+      "updatedAt": "2026-11-28T07:49:28.063205+00:00",
       "stale": false,
       "games": [
         {
@@ -64728,7 +64742,7 @@
     },
     "Lipscomb": {
       "espnId": "288",
-      "updatedAt": "2026-11-27T21:18:06.123103+00:00",
+      "updatedAt": "2026-11-28T07:49:25.893192+00:00",
       "stale": false,
       "games": [
         {
@@ -65183,7 +65197,7 @@
     },
     "Little Rock": {
       "espnId": "2031",
-      "updatedAt": "2026-11-27T21:18:04.945473+00:00",
+      "updatedAt": "2026-11-28T07:49:24.755701+00:00",
       "stale": false,
       "games": [
         {
@@ -65292,11 +65306,11 @@
           "opponentEspnId": "6371",
           "location": "home",
           "venue": "Jack Stephens Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "88",
+          "opponentScore": "58",
+          "result": "W"
         },
         {
           "id": "401926784",
@@ -65638,7 +65652,7 @@
     },
     "Long Beach State": {
       "espnId": "299",
-      "updatedAt": "2026-11-27T21:18:06.845248+00:00",
+      "updatedAt": "2026-11-28T07:49:26.371255+00:00",
       "stale": false,
       "games": [
         {
@@ -66093,7 +66107,7 @@
     },
     "Long Island University": {
       "espnId": "112358",
-      "updatedAt": "2026-11-27T21:18:09.081707+00:00",
+      "updatedAt": "2026-11-28T07:49:29.093483+00:00",
       "stale": false,
       "games": [
         {
@@ -66534,7 +66548,7 @@
     },
     "Longwood": {
       "espnId": "2344",
-      "updatedAt": "2026-11-27T21:18:00.386793+00:00",
+      "updatedAt": "2026-11-28T07:49:20.398348+00:00",
       "stale": false,
       "games": [
         {
@@ -66989,7 +67003,7 @@
     },
     "Louisiana": {
       "espnId": "309",
-      "updatedAt": "2026-11-27T21:18:04.234610+00:00",
+      "updatedAt": "2026-11-28T07:49:23.870122+00:00",
       "stale": false,
       "games": [
         {
@@ -67416,7 +67430,7 @@
     },
     "Louisiana Tech": {
       "espnId": "2348",
-      "updatedAt": "2026-11-27T21:17:52.921232+00:00",
+      "updatedAt": "2026-11-28T07:49:15.459282+00:00",
       "stale": false,
       "games": [
         {
@@ -67525,11 +67539,11 @@
           "opponentEspnId": "326",
           "location": "home",
           "venue": "Thomas Assembly Center",
-          "status": "in-progress",
-          "statusLabel": "15:49 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "70",
+          "opponentScore": "78",
+          "result": "L"
         },
         {
           "id": "401928469",
@@ -67857,7 +67871,7 @@
     },
     "Louisville": {
       "espnId": "97",
-      "updatedAt": "2026-11-27T21:17:39.147357+00:00",
+      "updatedAt": "2026-11-28T07:49:03.501560+00:00",
       "stale": false,
       "games": [
         {
@@ -67952,8 +67966,22 @@
           "opponentEspnId": "2633",
           "location": "neutral",
           "venue": "Michelob ULTRA Arena",
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "84",
+          "opponentScore": "64",
+          "result": "W"
+        },
+        {
+          "id": "401920536",
+          "date": "2026-11-29T03:30Z",
+          "timeKnown": true,
+          "opponent": "Creighton",
+          "opponentEspnId": "156",
+          "location": "neutral",
+          "venue": "Michelob ULTRA Arena",
           "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 9:00 PM EST",
+          "statusLabel": "Sat, November 28th at 10:30 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -68298,7 +68326,7 @@
     },
     "Loyola Chicago": {
       "espnId": "2350",
-      "updatedAt": "2026-11-27T21:17:52.104499+00:00",
+      "updatedAt": "2026-11-28T07:49:12.897455+00:00",
       "stale": false,
       "games": [
         {
@@ -68739,7 +68767,7 @@
     },
     "Loyola Maryland": {
       "espnId": "2352",
-      "updatedAt": "2026-11-27T21:18:08.105316+00:00",
+      "updatedAt": "2026-11-28T07:49:28.291179+00:00",
       "stale": false,
       "games": [
         {
@@ -69180,7 +69208,7 @@
     },
     "Loyola Marymount": {
       "espnId": "2351",
-      "updatedAt": "2026-11-27T21:17:54.543442+00:00",
+      "updatedAt": "2026-11-28T07:49:14.697058+00:00",
       "stale": false,
       "games": [
         {
@@ -69635,7 +69663,7 @@
     },
     "Maine": {
       "espnId": "311",
-      "updatedAt": "2026-11-27T21:18:06.901710+00:00",
+      "updatedAt": "2026-11-28T07:49:27.609737+00:00",
       "stale": false,
       "games": [
         {
@@ -69744,11 +69772,11 @@
           "opponentEspnId": "2330",
           "location": "neutral",
           "venue": "Kirby Sports Center",
-          "status": "in-progress",
-          "statusLabel": "3:43 - OT",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final/OT",
+          "teamScore": "90",
+          "opponentScore": "86",
+          "result": "W"
         },
         {
           "id": "401923305",
@@ -70090,7 +70118,7 @@
     },
     "Manhattan": {
       "espnId": "2363",
-      "updatedAt": "2026-11-27T21:18:08.861726+00:00",
+      "updatedAt": "2026-11-28T07:49:28.829178+00:00",
       "stale": false,
       "games": [
         {
@@ -70545,7 +70573,7 @@
     },
     "Marist": {
       "espnId": "2368",
-      "updatedAt": "2026-11-27T21:18:00.123219+00:00",
+      "updatedAt": "2026-11-28T07:49:20.235837+00:00",
       "stale": false,
       "games": [
         {
@@ -70972,7 +71000,7 @@
     },
     "Marquette": {
       "espnId": "269",
-      "updatedAt": "2026-11-27T21:17:41.284623+00:00",
+      "updatedAt": "2026-11-28T07:49:05.245316+00:00",
       "stale": false,
       "games": [
         {
@@ -71081,11 +71109,11 @@
           "opponentEspnId": "245",
           "location": "neutral",
           "venue": "Imperial Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "76",
+          "opponentScore": "78",
+          "result": "L"
         },
         {
           "id": "401909528",
@@ -71427,7 +71455,7 @@
     },
     "Marshall": {
       "espnId": "276",
-      "updatedAt": "2026-11-27T21:17:57.856089+00:00",
+      "updatedAt": "2026-11-28T07:49:17.936828+00:00",
       "stale": false,
       "games": [
         {
@@ -71854,7 +71882,7 @@
     },
     "Maryland": {
       "espnId": "120",
-      "updatedAt": "2026-11-27T21:17:46.068549+00:00",
+      "updatedAt": "2026-11-28T07:49:09.961466+00:00",
       "stale": false,
       "games": [
         {
@@ -71963,11 +71991,11 @@
           "opponentEspnId": "2483",
           "location": "neutral",
           "venue": "Michelob ULTRA Arena",
-          "status": "in-progress",
-          "statusLabel": "8:39 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "73",
+          "opponentScore": "88",
+          "result": "L"
         },
         {
           "id": "401912216",
@@ -72309,7 +72337,7 @@
     },
     "Maryland Eastern Shore": {
       "espnId": "2379",
-      "updatedAt": "2026-11-27T21:18:10.520302+00:00",
+      "updatedAt": "2026-11-28T07:49:30.680899+00:00",
       "stale": false,
       "games": [
         {
@@ -72750,7 +72778,7 @@
     },
     "Massachusetts": {
       "espnId": "113",
-      "updatedAt": "2026-11-27T21:17:54.151929+00:00",
+      "updatedAt": "2026-11-28T07:49:14.535573+00:00",
       "stale": false,
       "games": [
         {
@@ -73191,7 +73219,7 @@
     },
     "McNeese": {
       "espnId": "2377",
-      "updatedAt": "2026-11-27T21:17:55.295759+00:00",
+      "updatedAt": "2026-11-28T07:49:15.557866+00:00",
       "stale": false,
       "games": [
         {
@@ -73632,7 +73660,7 @@
     },
     "Memphis": {
       "espnId": "235",
-      "updatedAt": "2026-11-27T21:17:46.904260+00:00",
+      "updatedAt": "2026-11-28T07:49:08.226305+00:00",
       "stale": false,
       "games": [
         {
@@ -74087,7 +74115,7 @@
     },
     "Mercer": {
       "espnId": "2382",
-      "updatedAt": "2026-11-27T21:18:02.631895+00:00",
+      "updatedAt": "2026-11-28T07:49:22.387688+00:00",
       "stale": false,
       "games": [
         {
@@ -74542,7 +74570,7 @@
     },
     "Mercyhurst": {
       "espnId": "2385",
-      "updatedAt": "2026-11-27T21:18:06.306081+00:00",
+      "updatedAt": "2026-11-28T07:49:26.305978+00:00",
       "stale": false,
       "games": [
         {
@@ -74997,7 +75025,7 @@
     },
     "Merrimack": {
       "espnId": "2771",
-      "updatedAt": "2026-11-27T21:18:02.580426+00:00",
+      "updatedAt": "2026-11-28T07:49:20.697845+00:00",
       "stale": false,
       "games": [
         {
@@ -75438,7 +75466,7 @@
     },
     "Miami": {
       "espnId": "2390",
-      "updatedAt": "2026-11-27T21:17:38.834993+00:00",
+      "updatedAt": "2026-11-28T07:49:03.230272+00:00",
       "stale": false,
       "games": [
         {
@@ -75561,11 +75589,11 @@
           "opponentEspnId": "333",
           "location": "neutral",
           "venue": "T-Mobile Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "87",
+          "opponentScore": "81",
+          "result": "W"
         },
         {
           "id": "401906763",
@@ -75893,7 +75921,7 @@
     },
     "Miami (OH)": {
       "espnId": "193",
-      "updatedAt": "2026-11-27T21:17:47.703953+00:00",
+      "updatedAt": "2026-11-28T07:49:09.594521+00:00",
       "stale": false,
       "games": [
         {
@@ -76334,7 +76362,7 @@
     },
     "Michigan": {
       "espnId": "130",
-      "updatedAt": "2026-11-27T21:17:41.918581+00:00",
+      "updatedAt": "2026-11-28T07:49:05.874930+00:00",
       "stale": false,
       "games": [
         {
@@ -76437,17 +76465,17 @@
         },
         {
           "id": "401920541",
-          "date": "2026-11-27T22:30Z",
+          "date": "2026-11-27T22:41Z",
           "timeKnown": true,
           "opponent": "Kansas St",
           "opponentEspnId": "2306",
           "location": "neutral",
           "venue": "T-Mobile Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "98",
+          "opponentScore": "69",
+          "result": "W"
         },
         {
           "id": "401925734",
@@ -76789,7 +76817,7 @@
     },
     "Michigan State": {
       "espnId": "127",
-      "updatedAt": "2026-11-27T21:17:38.414868+00:00",
+      "updatedAt": "2026-11-28T07:49:02.922500+00:00",
       "stale": false,
       "games": [
         {
@@ -77244,7 +77272,7 @@
     },
     "Middle Tennessee": {
       "espnId": "2393",
-      "updatedAt": "2026-11-27T21:17:54.716891+00:00",
+      "updatedAt": "2026-11-28T07:49:15.036691+00:00",
       "stale": false,
       "games": [
         {
@@ -77699,7 +77727,7 @@
     },
     "Milwaukee": {
       "espnId": "270",
-      "updatedAt": "2026-11-27T21:18:03.613440+00:00",
+      "updatedAt": "2026-11-28T07:49:23.375784+00:00",
       "stale": false,
       "games": [
         {
@@ -77802,14 +77830,14 @@
         },
         {
           "id": "401926869",
-          "date": "2026-11-29T19:00Z",
+          "date": "2026-11-29T19:30Z",
           "timeKnown": true,
           "opponent": "Oregon St",
           "opponentEspnId": "204",
           "location": "away",
           "venue": "Gill Coliseum",
           "status": "scheduled",
-          "statusLabel": "Sun, November 29th at 2:00 PM EST",
+          "statusLabel": "Sun, November 29th at 2:30 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -78154,7 +78182,7 @@
     },
     "Minnesota": {
       "espnId": "135",
-      "updatedAt": "2026-11-27T21:17:42.215641+00:00",
+      "updatedAt": "2026-11-28T07:49:06.010078+00:00",
       "stale": false,
       "games": [
         {
@@ -78609,7 +78637,7 @@
     },
     "Mississippi State": {
       "espnId": "344",
-      "updatedAt": "2026-11-27T21:17:44.801191+00:00",
+      "updatedAt": "2026-11-28T07:49:08.003065+00:00",
       "stale": false,
       "games": [
         {
@@ -78718,11 +78746,11 @@
           "opponentEspnId": "213",
           "location": "neutral",
           "venue": "Imperial Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "63",
+          "opponentScore": "68",
+          "result": "L"
         },
         {
           "id": "401906795",
@@ -79064,7 +79092,7 @@
     },
     "Mississippi Valley State": {
       "espnId": "2400",
-      "updatedAt": "2026-11-27T21:18:07.916307+00:00",
+      "updatedAt": "2026-11-28T07:49:27.796419+00:00",
       "stale": false,
       "games": [
         {
@@ -79533,7 +79561,7 @@
     },
     "Missouri": {
       "espnId": "142",
-      "updatedAt": "2026-11-27T21:17:39.498773+00:00",
+      "updatedAt": "2026-11-28T07:49:03.613779+00:00",
       "stale": false,
       "games": [
         {
@@ -79642,11 +79670,11 @@
           "opponentEspnId": "2029",
           "location": "home",
           "venue": "Mizzou Arena",
-          "status": "in-progress",
-          "statusLabel": "14:29 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "97",
+          "opponentScore": "61",
+          "result": "W"
         },
         {
           "id": "401909710",
@@ -79988,7 +80016,7 @@
     },
     "Missouri State": {
       "espnId": "2623",
-      "updatedAt": "2026-11-27T21:17:52.123512+00:00",
+      "updatedAt": "2026-11-28T07:49:12.988207+00:00",
       "stale": false,
       "games": [
         {
@@ -80069,11 +80097,11 @@
           "opponentEspnId": "198",
           "location": "away",
           "venue": "Mabee Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "66",
+          "opponentScore": "72",
+          "result": "L"
         },
         {
           "id": "401928625",
@@ -80415,7 +80443,7 @@
     },
     "Monmouth": {
       "espnId": "2405",
-      "updatedAt": "2026-11-27T21:18:02.723496+00:00",
+      "updatedAt": "2026-11-28T07:49:22.846879+00:00",
       "stale": false,
       "games": [
         {
@@ -80870,7 +80898,7 @@
     },
     "Montana": {
       "espnId": "149",
-      "updatedAt": "2026-11-27T21:18:01.610721+00:00",
+      "updatedAt": "2026-11-28T07:49:21.418669+00:00",
       "stale": false,
       "games": [
         {
@@ -81325,7 +81353,7 @@
     },
     "Montana State": {
       "espnId": "147",
-      "updatedAt": "2026-11-27T21:17:52.396256+00:00",
+      "updatedAt": "2026-11-28T07:49:13.183036+00:00",
       "stale": false,
       "games": [
         {
@@ -81780,7 +81808,7 @@
     },
     "Morehead State": {
       "espnId": "2413",
-      "updatedAt": "2026-11-27T21:18:06.593751+00:00",
+      "updatedAt": "2026-11-28T07:49:25.957542+00:00",
       "stale": false,
       "games": [
         {
@@ -82235,7 +82263,7 @@
     },
     "Morgan State": {
       "espnId": "2415",
-      "updatedAt": "2026-11-27T21:18:06.440998+00:00",
+      "updatedAt": "2026-11-28T07:49:26.658914+00:00",
       "stale": false,
       "games": [
         {
@@ -82648,7 +82676,7 @@
     },
     "Mount St. Mary's": {
       "espnId": "116",
-      "updatedAt": "2026-11-27T21:18:06.173766+00:00",
+      "updatedAt": "2026-11-28T07:49:25.942868+00:00",
       "stale": false,
       "games": [
         {
@@ -83089,7 +83117,7 @@
     },
     "Murray State": {
       "espnId": "93",
-      "updatedAt": "2026-11-27T21:17:43.943026+00:00",
+      "updatedAt": "2026-11-28T07:49:07.531664+00:00",
       "stale": false,
       "games": [
         {
@@ -83544,7 +83572,7 @@
     },
     "NC State": {
       "espnId": "152",
-      "updatedAt": "2026-11-27T21:17:40.246109+00:00",
+      "updatedAt": "2026-11-28T07:49:04.270818+00:00",
       "stale": false,
       "games": [
         {
@@ -83999,7 +84027,7 @@
     },
     "NJIT": {
       "espnId": "2885",
-      "updatedAt": "2026-11-27T21:18:10.846496+00:00",
+      "updatedAt": "2026-11-28T07:49:30.959797+00:00",
       "stale": false,
       "games": [
         {
@@ -84454,7 +84482,7 @@
     },
     "Navy": {
       "espnId": "2426",
-      "updatedAt": "2026-11-27T21:18:07.206866+00:00",
+      "updatedAt": "2026-11-28T07:49:30.036336+00:00",
       "stale": false,
       "games": [
         {
@@ -84909,7 +84937,7 @@
     },
     "Nebraska": {
       "espnId": "158",
-      "updatedAt": "2026-11-27T21:17:38.182913+00:00",
+      "updatedAt": "2026-11-28T07:49:02.756670+00:00",
       "stale": false,
       "games": [
         {
@@ -85364,7 +85392,7 @@
     },
     "Nevada": {
       "espnId": "2440",
-      "updatedAt": "2026-11-27T21:17:45.634698+00:00",
+      "updatedAt": "2026-11-28T07:49:08.744781+00:00",
       "stale": false,
       "games": [
         {
@@ -85819,7 +85847,7 @@
     },
     "New Hampshire": {
       "espnId": "160",
-      "updatedAt": "2026-11-27T21:18:01.752270+00:00",
+      "updatedAt": "2026-11-28T07:49:21.873220+00:00",
       "stale": false,
       "games": [
         {
@@ -86274,7 +86302,7 @@
     },
     "New Haven": {
       "espnId": "2441",
-      "updatedAt": "2026-11-27T21:18:02.003950+00:00",
+      "updatedAt": "2026-11-28T07:49:22.053654+00:00",
       "stale": false,
       "games": [
         {
@@ -86715,7 +86743,7 @@
     },
     "New Mexico": {
       "espnId": "167",
-      "updatedAt": "2026-11-27T21:17:46.311800+00:00",
+      "updatedAt": "2026-11-28T07:49:09.091301+00:00",
       "stale": false,
       "games": [
         {
@@ -87156,7 +87184,7 @@
     },
     "New Mexico State": {
       "espnId": "166",
-      "updatedAt": "2026-11-27T21:18:07.106723+00:00",
+      "updatedAt": "2026-11-28T07:49:27.129109+00:00",
       "stale": false,
       "games": [
         {
@@ -87589,7 +87617,7 @@
     },
     "Niagara": {
       "espnId": "315",
-      "updatedAt": "2026-11-27T21:18:04.623468+00:00",
+      "updatedAt": "2026-11-28T07:49:28.200371+00:00",
       "stale": false,
       "games": [
         {
@@ -87670,11 +87698,11 @@
           "opponentEspnId": "322",
           "location": "away",
           "venue": "Kirby Sports Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 4:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "54",
+          "opponentScore": "82",
+          "result": "L"
         },
         {
           "id": "401919787",
@@ -88030,7 +88058,7 @@
     },
     "Nicholls": {
       "espnId": "2447",
-      "updatedAt": "2026-11-27T21:18:05.643596+00:00",
+      "updatedAt": "2026-11-28T07:49:25.434402+00:00",
       "stale": false,
       "games": [
         {
@@ -88485,7 +88513,7 @@
     },
     "Norfolk State": {
       "espnId": "2450",
-      "updatedAt": "2026-11-27T21:18:09.927125+00:00",
+      "updatedAt": "2026-11-28T07:49:30.073933+00:00",
       "stale": false,
       "games": [
         {
@@ -88940,7 +88968,7 @@
     },
     "North Alabama": {
       "espnId": "2453",
-      "updatedAt": "2026-11-27T21:17:55.751697+00:00",
+      "updatedAt": "2026-11-28T07:49:16.340841+00:00",
       "stale": false,
       "games": [
         {
@@ -89395,7 +89423,7 @@
     },
     "North Carolina": {
       "espnId": "153",
-      "updatedAt": "2026-11-27T21:17:40.549268+00:00",
+      "updatedAt": "2026-11-28T07:49:04.663361+00:00",
       "stale": false,
       "games": [
         {
@@ -89490,11 +89518,11 @@
           "opponentEspnId": "277",
           "location": "neutral",
           "venue": "Spectrum Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "59",
+          "opponentScore": "72",
+          "result": "L"
         },
         {
           "id": "401912712",
@@ -89850,7 +89878,7 @@
     },
     "North Carolina A&T": {
       "espnId": "2448",
-      "updatedAt": "2026-11-27T21:17:57.911903+00:00",
+      "updatedAt": "2026-11-28T07:49:18.307888+00:00",
       "stale": false,
       "games": [
         {
@@ -90291,7 +90319,7 @@
     },
     "North Carolina Central": {
       "espnId": "2428",
-      "updatedAt": "2026-11-27T21:18:03.529208+00:00",
+      "updatedAt": "2026-11-28T07:49:23.110863+00:00",
       "stale": false,
       "games": [
         {
@@ -90718,7 +90746,7 @@
     },
     "North Dakota": {
       "espnId": "155",
-      "updatedAt": "2026-11-27T21:18:06.301939+00:00",
+      "updatedAt": "2026-11-28T07:49:26.176149+00:00",
       "stale": false,
       "games": [
         {
@@ -91173,7 +91201,7 @@
     },
     "North Dakota State": {
       "espnId": "2449",
-      "updatedAt": "2026-11-27T21:18:05.317775+00:00",
+      "updatedAt": "2026-11-28T07:49:25.196042+00:00",
       "stale": false,
       "games": [
         {
@@ -91296,11 +91324,11 @@
           "opponentEspnId": "249",
           "location": "neutral",
           "venue": "Mountain America Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "73",
+          "opponentScore": "75",
+          "result": "L"
         },
         {
           "id": "401927367",
@@ -91628,7 +91656,7 @@
     },
     "North Florida": {
       "espnId": "2454",
-      "updatedAt": "2026-11-27T21:18:05.504544+00:00",
+      "updatedAt": "2026-11-28T07:49:25.529734+00:00",
       "stale": false,
       "games": [
         {
@@ -92083,7 +92111,7 @@
     },
     "North Texas": {
       "espnId": "249",
-      "updatedAt": "2026-11-27T21:17:55.328200+00:00",
+      "updatedAt": "2026-11-28T07:49:15.524107+00:00",
       "stale": false,
       "games": [
         {
@@ -92164,11 +92192,11 @@
           "opponentEspnId": "2449",
           "location": "neutral",
           "venue": "Mountain America Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "75",
+          "opponentScore": "73",
+          "result": "W"
         },
         {
           "id": "401929172",
@@ -92538,7 +92566,7 @@
     },
     "Northeastern": {
       "espnId": "111",
-      "updatedAt": "2026-11-27T21:18:05.441035+00:00",
+      "updatedAt": "2026-11-28T07:49:24.896244+00:00",
       "stale": false,
       "games": [
         {
@@ -92647,11 +92675,11 @@
           "opponentEspnId": "77",
           "location": "away",
           "venue": "Welsh-Ryan Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "61",
+          "opponentScore": "65",
+          "result": "L"
         },
         {
           "id": "401920748",
@@ -92993,7 +93021,7 @@
     },
     "Northern Arizona": {
       "espnId": "2464",
-      "updatedAt": "2026-11-27T21:18:04.729341+00:00",
+      "updatedAt": "2026-11-28T07:49:24.392082+00:00",
       "stale": false,
       "games": [
         {
@@ -93448,7 +93476,7 @@
     },
     "Northern Colorado": {
       "espnId": "2458",
-      "updatedAt": "2026-11-27T21:18:07.599486+00:00",
+      "updatedAt": "2026-11-28T07:49:27.686916+00:00",
       "stale": false,
       "games": [
         {
@@ -93903,7 +93931,7 @@
     },
     "Northern Illinois": {
       "espnId": "2459",
-      "updatedAt": "2026-11-27T21:17:49.743469+00:00",
+      "updatedAt": "2026-11-28T07:49:11.834513+00:00",
       "stale": false,
       "games": [
         {
@@ -94358,7 +94386,7 @@
     },
     "Northern Iowa": {
       "espnId": "2460",
-      "updatedAt": "2026-11-27T21:18:07.395094+00:00",
+      "updatedAt": "2026-11-28T07:49:27.311439+00:00",
       "stale": false,
       "games": [
         {
@@ -94813,7 +94841,7 @@
     },
     "Northern Kentucky": {
       "espnId": "94",
-      "updatedAt": "2026-11-27T21:18:08.624867+00:00",
+      "updatedAt": "2026-11-28T07:49:28.642742+00:00",
       "stale": false,
       "games": [
         {
@@ -95268,7 +95296,7 @@
     },
     "Northwestern": {
       "espnId": "77",
-      "updatedAt": "2026-11-27T21:17:51.869214+00:00",
+      "updatedAt": "2026-11-28T07:49:12.055383+00:00",
       "stale": false,
       "games": [
         {
@@ -95377,11 +95405,11 @@
           "opponentEspnId": "111",
           "location": "home",
           "venue": "Welsh-Ryan Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "65",
+          "opponentScore": "61",
+          "result": "W"
         },
         {
           "id": "401921876",
@@ -95723,7 +95751,7 @@
     },
     "Northwestern State": {
       "espnId": "2466",
-      "updatedAt": "2026-11-27T21:18:04.933753+00:00",
+      "updatedAt": "2026-11-28T07:49:25.321870+00:00",
       "stale": false,
       "games": [
         {
@@ -96178,7 +96206,7 @@
     },
     "Notre Dame": {
       "espnId": "87",
-      "updatedAt": "2026-11-27T21:17:42.327752+00:00",
+      "updatedAt": "2026-11-28T07:49:06.125198+00:00",
       "stale": false,
       "games": [
         {
@@ -96633,7 +96661,7 @@
     },
     "Oakland": {
       "espnId": "2473",
-      "updatedAt": "2026-11-27T21:18:10.450414+00:00",
+      "updatedAt": "2026-11-28T07:49:30.590384+00:00",
       "stale": false,
       "games": [
         {
@@ -96756,11 +96784,11 @@
           "opponentEspnId": "248",
           "location": "away",
           "venue": "Fertitta Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "46",
+          "opponentScore": "77",
+          "result": "L"
         },
         {
           "id": "401919202",
@@ -97088,7 +97116,7 @@
     },
     "Ohio": {
       "espnId": "195",
-      "updatedAt": "2026-11-27T21:17:55.641316+00:00",
+      "updatedAt": "2026-11-28T07:49:16.042358+00:00",
       "stale": false,
       "games": [
         {
@@ -97529,7 +97557,7 @@
     },
     "Ohio State": {
       "espnId": "194",
-      "updatedAt": "2026-11-27T21:17:41.487917+00:00",
+      "updatedAt": "2026-11-28T07:49:05.268045+00:00",
       "stale": false,
       "games": [
         {
@@ -97984,7 +98012,7 @@
     },
     "Oklahoma": {
       "espnId": "201",
-      "updatedAt": "2026-11-27T21:17:42.725832+00:00",
+      "updatedAt": "2026-11-28T07:49:05.825675+00:00",
       "stale": false,
       "games": [
         {
@@ -98439,7 +98467,7 @@
     },
     "Oklahoma State": {
       "espnId": "197",
-      "updatedAt": "2026-11-27T21:17:41.216388+00:00",
+      "updatedAt": "2026-11-28T07:49:05.370639+00:00",
       "stale": false,
       "games": [
         {
@@ -98894,7 +98922,7 @@
     },
     "Old Dominion": {
       "espnId": "295",
-      "updatedAt": "2026-11-27T21:17:46.802224+00:00",
+      "updatedAt": "2026-11-28T07:49:09.044683+00:00",
       "stale": false,
       "games": [
         {
@@ -99003,11 +99031,11 @@
           "opponentEspnId": "259",
           "location": "away",
           "venue": "Cassell Coliseum",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "61",
+          "opponentScore": "70",
+          "result": "L"
         },
         {
           "id": "401926822",
@@ -99335,7 +99363,7 @@
     },
     "Ole Miss": {
       "espnId": "145",
-      "updatedAt": "2026-11-27T21:17:40.357369+00:00",
+      "updatedAt": "2026-11-28T07:49:04.370813+00:00",
       "stale": false,
       "games": [
         {
@@ -99790,7 +99818,7 @@
     },
     "Omaha": {
       "espnId": "2437",
-      "updatedAt": "2026-11-27T21:18:08.471021+00:00",
+      "updatedAt": "2026-11-28T07:49:28.318114+00:00",
       "stale": false,
       "games": [
         {
@@ -99913,11 +99941,11 @@
           "opponentEspnId": "55",
           "location": "neutral",
           "venue": "Resorts World Event Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 10:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "78",
+          "opponentScore": "69",
+          "result": "W"
         },
         {
           "id": "401929396",
@@ -100217,7 +100245,7 @@
     },
     "Oral Roberts": {
       "espnId": "198",
-      "updatedAt": "2026-11-27T21:17:55.668274+00:00",
+      "updatedAt": "2026-11-28T07:49:16.118725+00:00",
       "stale": false,
       "games": [
         {
@@ -100326,11 +100354,11 @@
           "opponentEspnId": "2623",
           "location": "home",
           "venue": "Mabee Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "72",
+          "opponentScore": "66",
+          "result": "W"
         },
         {
           "id": "401909496",
@@ -100644,7 +100672,7 @@
     },
     "Oregon": {
       "espnId": "2483",
-      "updatedAt": "2026-11-27T21:17:47.322247+00:00",
+      "updatedAt": "2026-11-28T07:49:08.205614+00:00",
       "stale": false,
       "games": [
         {
@@ -100753,11 +100781,11 @@
           "opponentEspnId": "120",
           "location": "neutral",
           "venue": "Michelob ULTRA Arena",
-          "status": "in-progress",
-          "statusLabel": "8:39 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "88",
+          "opponentScore": "73",
+          "result": "W"
         },
         {
           "id": "401921875",
@@ -101099,7 +101127,7 @@
     },
     "Oregon State": {
       "espnId": "204",
-      "updatedAt": "2026-11-27T21:17:42.168387+00:00",
+      "updatedAt": "2026-11-28T07:49:05.830122+00:00",
       "stale": false,
       "games": [
         {
@@ -101216,14 +101244,14 @@
         },
         {
           "id": "401926869",
-          "date": "2026-11-29T19:00Z",
+          "date": "2026-11-29T19:30Z",
           "timeKnown": true,
           "opponent": "Milwaukee",
           "opponentEspnId": "270",
           "location": "home",
           "venue": "Gill Coliseum",
           "status": "scheduled",
-          "statusLabel": "Sun, November 29th at 2:00 PM EST",
+          "statusLabel": "Sun, November 29th at 2:30 PM EST",
           "teamScore": null,
           "opponentScore": null,
           "result": null
@@ -101554,7 +101582,7 @@
     },
     "Pacific": {
       "espnId": "279",
-      "updatedAt": "2026-11-27T21:17:49.160783+00:00",
+      "updatedAt": "2026-11-28T07:49:11.487213+00:00",
       "stale": false,
       "games": [
         {
@@ -101691,11 +101719,11 @@
           "opponentEspnId": "302",
           "location": "neutral",
           "venue": "Resorts World Event Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "78",
+          "opponentScore": "61",
+          "result": "W"
         },
         {
           "id": "401911460",
@@ -102023,7 +102051,7 @@
     },
     "Penn State": {
       "espnId": "213",
-      "updatedAt": "2026-11-27T21:17:48.567261+00:00",
+      "updatedAt": "2026-11-28T07:49:10.303906+00:00",
       "stale": false,
       "games": [
         {
@@ -102132,11 +102160,11 @@
           "opponentEspnId": "344",
           "location": "neutral",
           "venue": "Imperial Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "68",
+          "opponentScore": "63",
+          "result": "W"
         },
         {
           "id": "401917178",
@@ -102478,7 +102506,7 @@
     },
     "Pennsylvania": {
       "espnId": "219",
-      "updatedAt": "2026-11-27T21:17:54.042631+00:00",
+      "updatedAt": "2026-11-28T07:49:14.691495+00:00",
       "stale": false,
       "games": [
         {
@@ -102581,17 +102609,17 @@
         },
         {
           "id": "401921185",
-          "date": "2026-11-27T23:00Z",
+          "date": "2026-11-27T23:40Z",
           "timeKnown": true,
           "opponent": "Towson",
           "opponentEspnId": "119",
           "location": "home",
           "venue": "The Palestra",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 6:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "61",
+          "opponentScore": "72",
+          "result": "L"
         },
         {
           "id": "401921186",
@@ -102877,7 +102905,7 @@
     },
     "Pepperdine": {
       "espnId": "2492",
-      "updatedAt": "2026-11-27T21:17:49.332136+00:00",
+      "updatedAt": "2026-11-28T07:49:11.471506+00:00",
       "stale": false,
       "games": [
         {
@@ -103346,7 +103374,7 @@
     },
     "Pittsburgh": {
       "espnId": "221",
-      "updatedAt": "2026-11-27T21:17:40.917098+00:00",
+      "updatedAt": "2026-11-28T07:49:04.988316+00:00",
       "stale": false,
       "games": [
         {
@@ -103801,7 +103829,7 @@
     },
     "Portland": {
       "espnId": "2501",
-      "updatedAt": "2026-11-27T21:18:02.001670+00:00",
+      "updatedAt": "2026-11-28T07:49:21.877233+00:00",
       "stale": false,
       "games": [
         {
@@ -104256,7 +104284,7 @@
     },
     "Portland State": {
       "espnId": "2502",
-      "updatedAt": "2026-11-27T21:17:56.282355+00:00",
+      "updatedAt": "2026-11-28T07:49:16.884256+00:00",
       "stale": false,
       "games": [
         {
@@ -104711,7 +104739,7 @@
     },
     "Prairie View A&M": {
       "espnId": "2504",
-      "updatedAt": "2026-11-27T21:18:05.719922+00:00",
+      "updatedAt": "2026-11-28T07:49:25.426568+00:00",
       "stale": false,
       "games": [
         {
@@ -105166,7 +105194,7 @@
     },
     "Presbyterian": {
       "espnId": "2506",
-      "updatedAt": "2026-11-27T21:18:03.424040+00:00",
+      "updatedAt": "2026-11-28T07:49:23.396284+00:00",
       "stale": false,
       "games": [
         {
@@ -105607,7 +105635,7 @@
     },
     "Princeton": {
       "espnId": "163",
-      "updatedAt": "2026-11-27T21:17:51.577884+00:00",
+      "updatedAt": "2026-11-28T07:49:13.307961+00:00",
       "stale": false,
       "games": [
         {
@@ -105716,11 +105744,11 @@
           "opponentEspnId": "350",
           "location": "away",
           "venue": "Trask Coliseum",
-          "status": "in-progress",
-          "statusLabel": "14:42 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "66",
+          "opponentScore": "68",
+          "result": "L"
         },
         {
           "id": "401920849",
@@ -106020,7 +106048,7 @@
     },
     "Providence": {
       "espnId": "2507",
-      "updatedAt": "2026-11-27T21:17:43.808466+00:00",
+      "updatedAt": "2026-11-28T07:49:06.976611+00:00",
       "stale": false,
       "games": [
         {
@@ -106475,7 +106503,7 @@
     },
     "Purdue": {
       "espnId": "2509",
-      "updatedAt": "2026-11-27T21:17:43.679267+00:00",
+      "updatedAt": "2026-11-28T07:49:06.816383+00:00",
       "stale": false,
       "games": [
         {
@@ -106930,7 +106958,7 @@
     },
     "Purdue Fort Wayne": {
       "espnId": "2870",
-      "updatedAt": "2026-11-27T21:17:54.087486+00:00",
+      "updatedAt": "2026-11-28T07:49:14.342893+00:00",
       "stale": false,
       "games": [
         {
@@ -107385,7 +107413,7 @@
     },
     "Queens University": {
       "espnId": "2511",
-      "updatedAt": "2026-11-27T21:18:02.123948+00:00",
+      "updatedAt": "2026-11-28T07:49:22.099114+00:00",
       "stale": false,
       "games": [
         {
@@ -107840,7 +107868,7 @@
     },
     "Quinnipiac": {
       "espnId": "2514",
-      "updatedAt": "2026-11-27T21:18:03.856533+00:00",
+      "updatedAt": "2026-11-28T07:49:24.181938+00:00",
       "stale": false,
       "games": [
         {
@@ -108281,7 +108309,7 @@
     },
     "Radford": {
       "espnId": "2515",
-      "updatedAt": "2026-11-27T21:18:00.014711+00:00",
+      "updatedAt": "2026-11-28T07:49:21.728109+00:00",
       "stale": false,
       "games": [
         {
@@ -108376,11 +108404,11 @@
           "opponentEspnId": "44",
           "location": "away",
           "venue": "Bender Arena",
-          "status": "in-progress",
-          "statusLabel": "15:57 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "62",
+          "opponentScore": "64",
+          "result": "L"
         },
         {
           "id": "401921414",
@@ -108736,7 +108764,7 @@
     },
     "Rhode Island": {
       "espnId": "227",
-      "updatedAt": "2026-11-27T21:17:44.296586+00:00",
+      "updatedAt": "2026-11-28T07:49:07.399502+00:00",
       "stale": false,
       "games": [
         {
@@ -109177,7 +109205,7 @@
     },
     "Rice": {
       "espnId": "242",
-      "updatedAt": "2026-11-27T21:17:50.221282+00:00",
+      "updatedAt": "2026-11-28T07:49:11.770017+00:00",
       "stale": false,
       "games": [
         {
@@ -109632,7 +109660,7 @@
     },
     "Richmond": {
       "espnId": "257",
-      "updatedAt": "2026-11-27T21:17:50.312246+00:00",
+      "updatedAt": "2026-11-28T07:49:11.163364+00:00",
       "stale": false,
       "games": [
         {
@@ -110087,7 +110115,7 @@
     },
     "Rider": {
       "espnId": "2520",
-      "updatedAt": "2026-11-27T21:18:10.414125+00:00",
+      "updatedAt": "2026-11-28T07:49:30.644502+00:00",
       "stale": false,
       "games": [
         {
@@ -110528,7 +110556,7 @@
     },
     "Robert Morris": {
       "espnId": "2523",
-      "updatedAt": "2026-11-27T21:18:08.283339+00:00",
+      "updatedAt": "2026-11-28T07:49:28.379307+00:00",
       "stale": false,
       "games": [
         {
@@ -110983,7 +111011,7 @@
     },
     "Rutgers": {
       "espnId": "164",
-      "updatedAt": "2026-11-27T21:17:44.346000+00:00",
+      "updatedAt": "2026-11-28T07:49:07.660693+00:00",
       "stale": false,
       "games": [
         {
@@ -111438,7 +111466,7 @@
     },
     "SE Louisiana": {
       "espnId": "2545",
-      "updatedAt": "2026-11-27T21:18:05.886627+00:00",
+      "updatedAt": "2026-11-28T07:49:25.675211+00:00",
       "stale": false,
       "games": [
         {
@@ -111907,7 +111935,7 @@
     },
     "SIU Edwardsville": {
       "espnId": "2565",
-      "updatedAt": "2026-11-27T21:18:06.899998+00:00",
+      "updatedAt": "2026-11-28T07:49:26.758811+00:00",
       "stale": false,
       "games": [
         {
@@ -112348,7 +112376,7 @@
     },
     "SMU": {
       "espnId": "2567",
-      "updatedAt": "2026-11-27T21:17:43.095587+00:00",
+      "updatedAt": "2026-11-28T07:49:06.531864+00:00",
       "stale": false,
       "games": [
         {
@@ -112803,7 +112831,7 @@
     },
     "Sacramento State": {
       "espnId": "16",
-      "updatedAt": "2026-11-27T21:18:00.876198+00:00",
+      "updatedAt": "2026-11-28T07:49:20.841129+00:00",
       "stale": false,
       "games": [
         {
@@ -113244,7 +113272,7 @@
     },
     "Sacred Heart": {
       "espnId": "2529",
-      "updatedAt": "2026-11-27T21:18:03.635050+00:00",
+      "updatedAt": "2026-11-28T07:49:23.608950+00:00",
       "stale": false,
       "games": [
         {
@@ -113699,7 +113727,7 @@
     },
     "Saint Joseph's": {
       "espnId": "2603",
-      "updatedAt": "2026-11-27T21:17:48.314979+00:00",
+      "updatedAt": "2026-11-28T07:49:10.187222+00:00",
       "stale": false,
       "games": [
         {
@@ -114126,7 +114154,7 @@
     },
     "Saint Louis": {
       "espnId": "139",
-      "updatedAt": "2026-11-27T21:17:43.024750+00:00",
+      "updatedAt": "2026-11-28T07:49:06.468839+00:00",
       "stale": false,
       "games": [
         {
@@ -114581,7 +114609,7 @@
     },
     "Saint Mary's": {
       "espnId": "2608",
-      "updatedAt": "2026-11-27T21:17:41.876458+00:00",
+      "updatedAt": "2026-11-28T07:49:05.750851+00:00",
       "stale": false,
       "games": [
         {
@@ -114704,11 +114732,11 @@
           "opponentEspnId": "251",
           "location": "neutral",
           "venue": "Jenny Craig Pavilion",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "73",
+          "opponentScore": "76",
+          "result": "L"
         },
         {
           "id": "401917554",
@@ -115036,7 +115064,7 @@
     },
     "Saint Peter's": {
       "espnId": "2612",
-      "updatedAt": "2026-11-27T21:18:09.377613+00:00",
+      "updatedAt": "2026-11-28T07:49:29.460654+00:00",
       "stale": false,
       "games": [
         {
@@ -115463,7 +115491,7 @@
     },
     "Sam Houston": {
       "espnId": "2534",
-      "updatedAt": "2026-11-27T21:17:52.199755+00:00",
+      "updatedAt": "2026-11-28T07:49:13.282368+00:00",
       "stale": false,
       "games": [
         {
@@ -115918,7 +115946,7 @@
     },
     "Samford": {
       "espnId": "2535",
-      "updatedAt": "2026-11-27T21:17:55.367359+00:00",
+      "updatedAt": "2026-11-28T07:49:16.027079+00:00",
       "stale": false,
       "games": [
         {
@@ -116373,7 +116401,7 @@
     },
     "San Diego": {
       "espnId": "301",
-      "updatedAt": "2026-11-27T21:17:47.791484+00:00",
+      "updatedAt": "2026-11-28T07:49:09.707018+00:00",
       "stale": false,
       "games": [
         {
@@ -116800,7 +116828,7 @@
     },
     "San Diego State": {
       "espnId": "21",
-      "updatedAt": "2026-11-27T21:17:43.359368+00:00",
+      "updatedAt": "2026-11-28T07:49:06.566116+00:00",
       "stale": false,
       "games": [
         {
@@ -116909,11 +116937,11 @@
           "opponentEspnId": "2641",
           "location": "neutral",
           "venue": "Michelob ULTRA Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 11:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "75",
+          "opponentScore": "78",
+          "result": "L"
         },
         {
           "id": "401924914",
@@ -117227,7 +117255,7 @@
     },
     "San Francisco": {
       "espnId": "2539",
-      "updatedAt": "2026-11-27T21:17:57.960095+00:00",
+      "updatedAt": "2026-11-28T07:49:17.984453+00:00",
       "stale": false,
       "games": [
         {
@@ -117682,7 +117710,7 @@
     },
     "San Jos\u00e9 State": {
       "espnId": "23",
-      "updatedAt": "2026-11-27T21:17:56.097075+00:00",
+      "updatedAt": "2026-11-28T07:49:16.270063+00:00",
       "stale": false,
       "games": [
         {
@@ -118137,7 +118165,7 @@
     },
     "Santa Clara": {
       "espnId": "2541",
-      "updatedAt": "2026-11-27T21:17:48.133634+00:00",
+      "updatedAt": "2026-11-28T07:49:10.097879+00:00",
       "stale": false,
       "games": [
         {
@@ -118592,7 +118620,7 @@
     },
     "Seattle U": {
       "espnId": "2547",
-      "updatedAt": "2026-11-27T21:17:48.979527+00:00",
+      "updatedAt": "2026-11-28T07:49:10.862456+00:00",
       "stale": false,
       "games": [
         {
@@ -119033,7 +119061,7 @@
     },
     "Seton Hall": {
       "espnId": "2550",
-      "updatedAt": "2026-11-27T21:17:44.046845+00:00",
+      "updatedAt": "2026-11-28T07:49:07.165620+00:00",
       "stale": false,
       "games": [
         {
@@ -119488,7 +119516,7 @@
     },
     "Siena": {
       "espnId": "2561",
-      "updatedAt": "2026-11-27T21:17:54.422950+00:00",
+      "updatedAt": "2026-11-28T07:49:14.929448+00:00",
       "stale": false,
       "games": [
         {
@@ -119943,7 +119971,7 @@
     },
     "South Alabama": {
       "espnId": "6",
-      "updatedAt": "2026-11-27T21:18:01.079213+00:00",
+      "updatedAt": "2026-11-28T07:49:23.308103+00:00",
       "stale": false,
       "games": [
         {
@@ -120384,7 +120412,7 @@
     },
     "South Carolina": {
       "espnId": "2579",
-      "updatedAt": "2026-11-27T21:17:47.399057+00:00",
+      "updatedAt": "2026-11-28T07:49:07.755576+00:00",
       "stale": false,
       "games": [
         {
@@ -120839,7 +120867,7 @@
     },
     "South Carolina State": {
       "espnId": "2569",
-      "updatedAt": "2026-11-27T21:18:04.999976+00:00",
+      "updatedAt": "2026-11-28T07:49:25.077175+00:00",
       "stale": false,
       "games": [
         {
@@ -121280,7 +121308,7 @@
     },
     "South Carolina Upstate": {
       "espnId": "2908",
-      "updatedAt": "2026-11-27T21:18:10.136874+00:00",
+      "updatedAt": "2026-11-28T07:49:30.287875+00:00",
       "stale": false,
       "games": [
         {
@@ -121403,11 +121431,11 @@
           "opponentEspnId": "2576",
           "location": "home",
           "venue": "G.B. Hodge Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 6:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "87",
+          "opponentScore": "78",
+          "result": "W"
         },
         {
           "id": "401917905",
@@ -121749,7 +121777,7 @@
     },
     "South Dakota": {
       "espnId": "233",
-      "updatedAt": "2026-11-27T21:18:05.169559+00:00",
+      "updatedAt": "2026-11-28T07:49:24.478442+00:00",
       "stale": false,
       "games": [
         {
@@ -122204,7 +122232,7 @@
     },
     "South Dakota State": {
       "espnId": "2571",
-      "updatedAt": "2026-11-27T21:17:51.352455+00:00",
+      "updatedAt": "2026-11-28T07:49:12.354060+00:00",
       "stale": false,
       "games": [
         {
@@ -122645,7 +122673,7 @@
     },
     "South Florida": {
       "espnId": "58",
-      "updatedAt": "2026-11-27T21:17:49.460377+00:00",
+      "updatedAt": "2026-11-28T07:49:11.114223+00:00",
       "stale": false,
       "games": [
         {
@@ -123100,7 +123128,7 @@
     },
     "Southeast Missouri State": {
       "espnId": "2546",
-      "updatedAt": "2026-11-27T21:18:03.176850+00:00",
+      "updatedAt": "2026-11-28T07:49:23.230372+00:00",
       "stale": false,
       "games": [
         {
@@ -123541,7 +123569,7 @@
     },
     "Southern": {
       "espnId": "2582",
-      "updatedAt": "2026-11-27T21:18:08.263096+00:00",
+      "updatedAt": "2026-11-28T07:49:29.759151+00:00",
       "stale": false,
       "games": [
         {
@@ -123996,7 +124024,7 @@
     },
     "Southern Illinois": {
       "espnId": "79",
-      "updatedAt": "2026-11-27T21:17:57.480539+00:00",
+      "updatedAt": "2026-11-28T07:49:17.458214+00:00",
       "stale": false,
       "games": [
         {
@@ -124451,7 +124479,7 @@
     },
     "Southern Indiana": {
       "espnId": "88",
-      "updatedAt": "2026-11-27T21:18:07.635419+00:00",
+      "updatedAt": "2026-11-28T07:49:27.707844+00:00",
       "stale": false,
       "games": [
         {
@@ -124892,7 +124920,7 @@
     },
     "Southern Miss": {
       "espnId": "2572",
-      "updatedAt": "2026-11-27T21:17:57.585294+00:00",
+      "updatedAt": "2026-11-28T07:49:18.009418+00:00",
       "stale": false,
       "games": [
         {
@@ -125347,7 +125375,7 @@
     },
     "Southern Utah": {
       "espnId": "253",
-      "updatedAt": "2026-11-27T21:18:07.872004+00:00",
+      "updatedAt": "2026-11-28T07:49:28.011670+00:00",
       "stale": false,
       "games": [
         {
@@ -125802,7 +125830,7 @@
     },
     "St. Bonaventure": {
       "espnId": "179",
-      "updatedAt": "2026-11-27T21:17:43.430405+00:00",
+      "updatedAt": "2026-11-28T07:49:06.847892+00:00",
       "stale": false,
       "games": [
         {
@@ -126257,7 +126285,7 @@
     },
     "St. John's": {
       "espnId": "2599",
-      "updatedAt": "2026-11-27T21:17:38.232034+00:00",
+      "updatedAt": "2026-11-28T07:49:02.543392+00:00",
       "stale": false,
       "games": [
         {
@@ -126712,7 +126740,7 @@
     },
     "St. Thomas": {
       "espnId": "2900",
-      "updatedAt": "2026-11-27T21:18:10.890197+00:00",
+      "updatedAt": "2026-11-28T07:49:31.291473+00:00",
       "stale": false,
       "games": [
         {
@@ -127173,7 +127201,7 @@
     },
     "Stanford": {
       "espnId": "24",
-      "updatedAt": "2026-11-27T21:17:52.004756+00:00",
+      "updatedAt": "2026-11-28T07:49:12.944796+00:00",
       "stale": false,
       "games": [
         {
@@ -127628,7 +127656,7 @@
     },
     "Stephen F. Austin": {
       "espnId": "2617",
-      "updatedAt": "2026-11-27T21:17:47.883365+00:00",
+      "updatedAt": "2026-11-28T07:49:09.948889+00:00",
       "stale": false,
       "games": [
         {
@@ -128083,7 +128111,7 @@
     },
     "Stetson": {
       "espnId": "56",
-      "updatedAt": "2026-11-27T21:18:08.503886+00:00",
+      "updatedAt": "2026-11-28T07:49:28.711450+00:00",
       "stale": false,
       "games": [
         {
@@ -128538,7 +128566,7 @@
     },
     "Stonehill": {
       "espnId": "284",
-      "updatedAt": "2026-11-27T21:18:06.004113+00:00",
+      "updatedAt": "2026-11-28T07:49:25.741581+00:00",
       "stale": false,
       "games": [
         {
@@ -128979,7 +129007,7 @@
     },
     "Stony Brook": {
       "espnId": "2619",
-      "updatedAt": "2026-11-27T21:17:53.811538+00:00",
+      "updatedAt": "2026-11-28T07:49:13.828545+00:00",
       "stale": false,
       "games": [
         {
@@ -129434,7 +129462,7 @@
     },
     "Syracuse": {
       "espnId": "183",
-      "updatedAt": "2026-11-27T21:17:46.065855+00:00",
+      "updatedAt": "2026-11-28T07:49:08.763139+00:00",
       "stale": false,
       "games": [
         {
@@ -129889,7 +129917,7 @@
     },
     "TCU": {
       "espnId": "2628",
-      "updatedAt": "2026-11-27T21:17:42.583565+00:00",
+      "updatedAt": "2026-11-28T07:49:04.631368+00:00",
       "stale": false,
       "games": [
         {
@@ -129998,11 +130026,11 @@
           "opponentEspnId": "239",
           "location": "neutral",
           "venue": "T-Mobile Arena",
-          "status": "in-progress",
-          "statusLabel": "Halftime",
-          "teamScore": "36",
-          "opponentScore": "41",
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "88",
+          "opponentScore": "69",
+          "result": "W"
         },
         {
           "id": "401919051",
@@ -130344,7 +130372,7 @@
     },
     "Tarleton State": {
       "espnId": "2627",
-      "updatedAt": "2026-11-27T21:18:01.442412+00:00",
+      "updatedAt": "2026-11-28T07:49:21.329505+00:00",
       "stale": false,
       "games": [
         {
@@ -130799,7 +130827,7 @@
     },
     "Temple": {
       "espnId": "218",
-      "updatedAt": "2026-11-27T21:17:58.589374+00:00",
+      "updatedAt": "2026-11-28T07:49:18.286570+00:00",
       "stale": false,
       "games": [
         {
@@ -131240,7 +131268,7 @@
     },
     "Tennessee": {
       "espnId": "2633",
-      "updatedAt": "2026-11-27T21:17:38.914762+00:00",
+      "updatedAt": "2026-11-28T07:49:03.291210+00:00",
       "stale": false,
       "games": [
         {
@@ -131349,11 +131377,11 @@
           "opponentEspnId": "97",
           "location": "neutral",
           "venue": "Michelob ULTRA Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 9:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "64",
+          "opponentScore": "84",
+          "result": "L"
         },
         {
           "id": "401906854",
@@ -131695,7 +131723,7 @@
     },
     "Tennessee State": {
       "espnId": "2634",
-      "updatedAt": "2026-11-27T21:17:57.989149+00:00",
+      "updatedAt": "2026-11-28T07:49:18.445361+00:00",
       "stale": false,
       "games": [
         {
@@ -132080,7 +132108,7 @@
     },
     "Tennessee Tech": {
       "espnId": "2635",
-      "updatedAt": "2026-11-27T21:17:45.166487+00:00",
+      "updatedAt": "2026-11-28T07:49:08.136353+00:00",
       "stale": false,
       "games": [
         {
@@ -132535,7 +132563,7 @@
     },
     "Texas": {
       "espnId": "251",
-      "updatedAt": "2026-11-27T21:17:37.918539+00:00",
+      "updatedAt": "2026-11-28T07:49:02.527658+00:00",
       "stale": false,
       "games": [
         {
@@ -132644,11 +132672,11 @@
           "opponentEspnId": "2608",
           "location": "neutral",
           "venue": "Jenny Craig Pavilion",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "76",
+          "opponentScore": "73",
+          "result": "W"
         },
         {
           "id": "401906870",
@@ -132990,7 +133018,7 @@
     },
     "Texas A&M": {
       "espnId": "245",
-      "updatedAt": "2026-11-27T21:17:39.891910+00:00",
+      "updatedAt": "2026-11-28T07:49:03.406759+00:00",
       "stale": false,
       "games": [
         {
@@ -133099,11 +133127,11 @@
           "opponentEspnId": "269",
           "location": "neutral",
           "venue": "Imperial Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "78",
+          "opponentScore": "76",
+          "result": "W"
         },
         {
           "id": "401920811",
@@ -133445,7 +133473,7 @@
     },
     "Texas A&M-Corpus Christi": {
       "espnId": "357",
-      "updatedAt": "2026-11-27T21:18:01.530823+00:00",
+      "updatedAt": "2026-11-28T07:49:21.351428+00:00",
       "stale": false,
       "games": [
         {
@@ -133900,7 +133928,7 @@
     },
     "Texas Southern": {
       "espnId": "2640",
-      "updatedAt": "2026-11-27T21:18:09.096926+00:00",
+      "updatedAt": "2026-11-28T07:49:29.135184+00:00",
       "stale": false,
       "games": [
         {
@@ -134341,7 +134369,7 @@
     },
     "Texas State": {
       "espnId": "326",
-      "updatedAt": "2026-11-27T21:17:41.192196+00:00",
+      "updatedAt": "2026-11-28T07:49:04.190379+00:00",
       "stale": false,
       "games": [
         {
@@ -134464,11 +134492,11 @@
           "opponentEspnId": "2348",
           "location": "away",
           "venue": "Thomas Assembly Center",
-          "status": "in-progress",
-          "statusLabel": "15:49 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "78",
+          "opponentScore": "70",
+          "result": "W"
         },
         {
           "id": "401925067",
@@ -134796,7 +134824,7 @@
     },
     "Texas Tech": {
       "espnId": "2641",
-      "updatedAt": "2026-11-27T21:17:38.060500+00:00",
+      "updatedAt": "2026-11-28T07:49:02.503043+00:00",
       "stale": false,
       "games": [
         {
@@ -134905,11 +134933,11 @@
           "opponentEspnId": "21",
           "location": "neutral",
           "venue": "Michelob ULTRA Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 11:30 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "78",
+          "opponentScore": "75",
+          "result": "W"
         },
         {
           "id": "401921135",
@@ -135237,7 +135265,7 @@
     },
     "The Citadel": {
       "espnId": "2643",
-      "updatedAt": "2026-11-27T21:17:57.296952+00:00",
+      "updatedAt": "2026-11-28T07:49:17.673961+00:00",
       "stale": false,
       "games": [
         {
@@ -135692,7 +135720,7 @@
     },
     "Toledo": {
       "espnId": "2649",
-      "updatedAt": "2026-11-27T21:17:58.127804+00:00",
+      "updatedAt": "2026-11-28T07:49:18.260666+00:00",
       "stale": false,
       "games": [
         {
@@ -136133,7 +136161,7 @@
     },
     "Towson": {
       "espnId": "119",
-      "updatedAt": "2026-11-27T21:17:58.480408+00:00",
+      "updatedAt": "2026-11-28T07:49:18.678078+00:00",
       "stale": false,
       "games": [
         {
@@ -136236,17 +136264,17 @@
         },
         {
           "id": "401921185",
-          "date": "2026-11-27T23:00Z",
+          "date": "2026-11-27T23:40Z",
           "timeKnown": true,
           "opponent": "Penn",
           "opponentEspnId": "219",
           "location": "away",
           "venue": "The Palestra",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 6:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "72",
+          "opponentScore": "61",
+          "result": "W"
         },
         {
           "id": "401911032",
@@ -136588,7 +136616,7 @@
     },
     "Troy": {
       "espnId": "2653",
-      "updatedAt": "2026-11-27T21:18:01.661653+00:00",
+      "updatedAt": "2026-11-28T07:49:21.618366+00:00",
       "stale": false,
       "games": [
         {
@@ -137015,7 +137043,7 @@
     },
     "Tulane": {
       "espnId": "2655",
-      "updatedAt": "2026-11-27T21:18:04.659662+00:00",
+      "updatedAt": "2026-11-28T07:49:24.390162+00:00",
       "stale": false,
       "games": [
         {
@@ -137470,7 +137498,7 @@
     },
     "Tulsa": {
       "espnId": "202",
-      "updatedAt": "2026-11-27T21:17:51.542548+00:00",
+      "updatedAt": "2026-11-28T07:49:12.613774+00:00",
       "stale": false,
       "games": [
         {
@@ -137925,7 +137953,7 @@
     },
     "UAB": {
       "espnId": "5",
-      "updatedAt": "2026-11-27T21:17:56.408813+00:00",
+      "updatedAt": "2026-11-28T07:49:15.680407+00:00",
       "stale": false,
       "games": [
         {
@@ -138034,11 +138062,11 @@
           "opponentEspnId": "2040",
           "location": "home",
           "venue": "Bartow Arena",
-          "status": "in-progress",
-          "statusLabel": "16:03 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "102",
+          "opponentScore": "62",
+          "result": "W"
         },
         {
           "id": "401919022",
@@ -138380,7 +138408,7 @@
     },
     "UAlbany": {
       "espnId": "399",
-      "updatedAt": "2026-11-27T21:18:09.789403+00:00",
+      "updatedAt": "2026-11-28T07:49:29.634294+00:00",
       "stale": false,
       "games": [
         {
@@ -138835,7 +138863,7 @@
     },
     "UC Davis": {
       "espnId": "302",
-      "updatedAt": "2026-11-27T21:17:57.293394+00:00",
+      "updatedAt": "2026-11-28T07:49:17.485216+00:00",
       "stale": false,
       "games": [
         {
@@ -138944,11 +138972,11 @@
           "opponentEspnId": "279",
           "location": "neutral",
           "venue": "Resorts World Event Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "61",
+          "opponentScore": "78",
+          "result": "L"
         },
         {
           "id": "401911525",
@@ -139290,7 +139318,7 @@
     },
     "UC Irvine": {
       "espnId": "300",
-      "updatedAt": "2026-11-27T21:17:54.800144+00:00",
+      "updatedAt": "2026-11-28T07:49:15.010338+00:00",
       "stale": false,
       "games": [
         {
@@ -139759,7 +139787,7 @@
     },
     "UC Riverside": {
       "espnId": "27",
-      "updatedAt": "2026-11-27T21:17:57.240760+00:00",
+      "updatedAt": "2026-11-28T07:49:17.308989+00:00",
       "stale": false,
       "games": [
         {
@@ -140214,7 +140242,7 @@
     },
     "UC San Diego": {
       "espnId": "28",
-      "updatedAt": "2026-11-27T21:18:01.378260+00:00",
+      "updatedAt": "2026-11-28T07:49:21.296247+00:00",
       "stale": false,
       "games": [
         {
@@ -140669,7 +140697,7 @@
     },
     "UC Santa Barbara": {
       "espnId": "2540",
-      "updatedAt": "2026-11-27T21:17:45.363740+00:00",
+      "updatedAt": "2026-11-28T07:49:08.430334+00:00",
       "stale": false,
       "games": [
         {
@@ -140764,11 +140792,11 @@
           "opponentEspnId": "2329",
           "location": "neutral",
           "venue": "Gilbert Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "75",
+          "opponentScore": "43",
+          "result": "W"
         },
         {
           "id": "401917378",
@@ -141124,7 +141152,7 @@
     },
     "UCF": {
       "espnId": "2116",
-      "updatedAt": "2026-11-27T21:17:49.126458+00:00",
+      "updatedAt": "2026-11-28T07:49:10.850553+00:00",
       "stale": false,
       "games": [
         {
@@ -141233,11 +141261,11 @@
           "opponentEspnId": "61",
           "location": "neutral",
           "venue": "State Farm Field House",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "88",
+          "opponentScore": "76",
+          "result": "W"
         },
         {
           "id": "401920880",
@@ -141579,7 +141607,7 @@
     },
     "UCLA": {
       "espnId": "26",
-      "updatedAt": "2026-11-27T21:17:38.533505+00:00",
+      "updatedAt": "2026-11-28T07:49:03.168518+00:00",
       "stale": false,
       "games": [
         {
@@ -141688,11 +141716,11 @@
           "opponentEspnId": "46",
           "location": "neutral",
           "venue": "Jenny Craig Pavilion",
-          "status": "in-progress",
-          "statusLabel": "8:45 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "75",
+          "opponentScore": "63",
+          "result": "W"
         },
         {
           "id": "401921875",
@@ -142034,7 +142062,7 @@
     },
     "UConn": {
       "espnId": "41",
-      "updatedAt": "2026-11-27T21:17:38.515565+00:00",
+      "updatedAt": "2026-11-28T07:49:02.957258+00:00",
       "stale": false,
       "games": [
         {
@@ -142489,7 +142517,7 @@
     },
     "UIC": {
       "espnId": "82",
-      "updatedAt": "2026-11-27T21:17:55.940809+00:00",
+      "updatedAt": "2026-11-28T07:49:16.921527+00:00",
       "stale": false,
       "games": [
         {
@@ -142944,7 +142972,7 @@
     },
     "UL Monroe": {
       "espnId": "2433",
-      "updatedAt": "2026-11-27T21:18:10.252072+00:00",
+      "updatedAt": "2026-11-28T07:49:30.346477+00:00",
       "stale": false,
       "games": [
         {
@@ -143385,7 +143413,7 @@
     },
     "UMBC": {
       "espnId": "2378",
-      "updatedAt": "2026-11-27T21:18:08.804955+00:00",
+      "updatedAt": "2026-11-28T07:49:30.648043+00:00",
       "stale": false,
       "games": [
         {
@@ -143522,11 +143550,11 @@
           "opponentEspnId": "45",
           "location": "away",
           "venue": "Charles E. Smith Center",
-          "status": "in-progress",
-          "statusLabel": "11:14 - 1st Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "51",
+          "opponentScore": "91",
+          "result": "L"
         },
         {
           "id": "401912233",
@@ -143840,7 +143868,7 @@
     },
     "UMass Lowell": {
       "espnId": "2349",
-      "updatedAt": "2026-11-27T21:17:51.113248+00:00",
+      "updatedAt": "2026-11-28T07:49:10.223587+00:00",
       "stale": false,
       "games": [
         {
@@ -144295,7 +144323,7 @@
     },
     "UNC Asheville": {
       "espnId": "2427",
-      "updatedAt": "2026-11-27T21:18:09.481483+00:00",
+      "updatedAt": "2026-11-28T07:49:29.402814+00:00",
       "stale": false,
       "games": [
         {
@@ -144750,7 +144778,7 @@
     },
     "UNC Greensboro": {
       "espnId": "2430",
-      "updatedAt": "2026-11-27T21:18:03.367851+00:00",
+      "updatedAt": "2026-11-28T07:49:23.043055+00:00",
       "stale": false,
       "games": [
         {
@@ -145205,7 +145233,7 @@
     },
     "UNC Wilmington": {
       "espnId": "350",
-      "updatedAt": "2026-11-27T21:17:47.090958+00:00",
+      "updatedAt": "2026-11-28T07:49:09.203472+00:00",
       "stale": false,
       "games": [
         {
@@ -145328,11 +145356,11 @@
           "opponentEspnId": "163",
           "location": "home",
           "venue": "Trask Coliseum",
-          "status": "in-progress",
-          "statusLabel": "14:42 - 2nd Half",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "68",
+          "opponentScore": "66",
+          "result": "W"
         },
         {
           "id": "401926796",
@@ -145674,7 +145702,7 @@
     },
     "UNLV": {
       "espnId": "2439",
-      "updatedAt": "2026-11-27T21:17:55.116284+00:00",
+      "updatedAt": "2026-11-28T07:49:15.339415+00:00",
       "stale": false,
       "games": [
         {
@@ -146143,7 +146171,7 @@
     },
     "USC": {
       "espnId": "30",
-      "updatedAt": "2026-11-27T21:17:38.682593+00:00",
+      "updatedAt": "2026-11-28T07:49:02.792677+00:00",
       "stale": false,
       "games": [
         {
@@ -146598,7 +146626,7 @@
     },
     "UT Arlington": {
       "espnId": "250",
-      "updatedAt": "2026-11-27T21:17:51.768408+00:00",
+      "updatedAt": "2026-11-28T07:49:12.973675+00:00",
       "stale": false,
       "games": [
         {
@@ -147067,7 +147095,7 @@
     },
     "UT Martin": {
       "espnId": "2630",
-      "updatedAt": "2026-11-27T21:17:50.932343+00:00",
+      "updatedAt": "2026-11-28T07:49:12.248903+00:00",
       "stale": false,
       "games": [
         {
@@ -147522,7 +147550,7 @@
     },
     "UT Rio Grande Valley": {
       "espnId": "292",
-      "updatedAt": "2026-11-27T21:17:52.901432+00:00",
+      "updatedAt": "2026-11-28T07:49:13.642821+00:00",
       "stale": false,
       "games": [
         {
@@ -147977,7 +148005,7 @@
     },
     "UTEP": {
       "espnId": "2638",
-      "updatedAt": "2026-11-27T21:17:47.510095+00:00",
+      "updatedAt": "2026-11-28T07:49:09.580451+00:00",
       "stale": false,
       "games": [
         {
@@ -148404,7 +148432,7 @@
     },
     "UTSA": {
       "espnId": "2636",
-      "updatedAt": "2026-11-27T21:17:57.581204+00:00",
+      "updatedAt": "2026-11-28T07:49:17.994136+00:00",
       "stale": false,
       "games": [
         {
@@ -148859,7 +148887,7 @@
     },
     "Utah": {
       "espnId": "254",
-      "updatedAt": "2026-11-27T21:17:59.810812+00:00",
+      "updatedAt": "2026-11-28T07:49:20.033252+00:00",
       "stale": false,
       "games": [
         {
@@ -149314,7 +149342,7 @@
     },
     "Utah State": {
       "espnId": "328",
-      "updatedAt": "2026-11-27T21:17:39.922180+00:00",
+      "updatedAt": "2026-11-28T07:49:04.047570+00:00",
       "stale": false,
       "games": [
         {
@@ -149769,7 +149797,7 @@
     },
     "Utah Tech": {
       "espnId": "3101",
-      "updatedAt": "2026-11-27T21:18:03.165087+00:00",
+      "updatedAt": "2026-11-28T07:49:23.016624+00:00",
       "stale": false,
       "games": [
         {
@@ -150224,7 +150252,7 @@
     },
     "Utah Valley": {
       "espnId": "3084",
-      "updatedAt": "2026-11-27T21:17:48.910875+00:00",
+      "updatedAt": "2026-11-28T07:49:10.608361+00:00",
       "stale": false,
       "games": [
         {
@@ -150679,7 +150707,7 @@
     },
     "VCU": {
       "espnId": "2670",
-      "updatedAt": "2026-11-27T21:17:43.634785+00:00",
+      "updatedAt": "2026-11-28T07:49:07.132020+00:00",
       "stale": false,
       "games": [
         {
@@ -151120,7 +151148,7 @@
     },
     "VMI": {
       "espnId": "2678",
-      "updatedAt": "2026-11-27T21:17:58.727087+00:00",
+      "updatedAt": "2026-11-28T07:49:19.194127+00:00",
       "stale": false,
       "games": [
         {
@@ -151575,7 +151603,7 @@
     },
     "Valparaiso": {
       "espnId": "2674",
-      "updatedAt": "2026-11-27T21:17:51.135489+00:00",
+      "updatedAt": "2026-11-28T07:49:12.385777+00:00",
       "stale": false,
       "games": [
         {
@@ -152016,7 +152044,7 @@
     },
     "Vanderbilt": {
       "espnId": "238",
-      "updatedAt": "2026-11-27T21:17:38.166494+00:00",
+      "updatedAt": "2026-11-28T07:49:02.508694+00:00",
       "stale": false,
       "games": [
         {
@@ -152471,7 +152499,7 @@
     },
     "Vermont": {
       "espnId": "261",
-      "updatedAt": "2026-11-27T21:17:58.244685+00:00",
+      "updatedAt": "2026-11-28T07:49:22.653349+00:00",
       "stale": false,
       "games": [
         {
@@ -152926,7 +152954,7 @@
     },
     "Villanova": {
       "espnId": "222",
-      "updatedAt": "2026-11-27T21:17:41.546985+00:00",
+      "updatedAt": "2026-11-28T07:49:06.178540+00:00",
       "stale": false,
       "games": [
         {
@@ -153035,11 +153063,11 @@
           "opponentEspnId": "2305",
           "location": "away",
           "venue": "Allen Fieldhouse",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "50",
+          "opponentScore": "65",
+          "result": "L"
         },
         {
           "id": "401921778",
@@ -153367,7 +153395,7 @@
     },
     "Virginia": {
       "espnId": "258",
-      "updatedAt": "2026-11-27T21:17:37.795384+00:00",
+      "updatedAt": "2026-11-28T07:49:02.125586+00:00",
       "stale": false,
       "games": [
         {
@@ -153808,7 +153836,7 @@
     },
     "Virginia Tech": {
       "espnId": "259",
-      "updatedAt": "2026-11-27T21:17:42.284263+00:00",
+      "updatedAt": "2026-11-28T07:49:05.310827+00:00",
       "stale": false,
       "games": [
         {
@@ -153917,11 +153945,11 @@
           "opponentEspnId": "295",
           "location": "home",
           "venue": "Cassell Coliseum",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 5:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "70",
+          "opponentScore": "61",
+          "result": "W"
         },
         {
           "id": "401920383",
@@ -154263,7 +154291,7 @@
     },
     "Wagner": {
       "espnId": "2681",
-      "updatedAt": "2026-11-27T21:18:05.841872+00:00",
+      "updatedAt": "2026-11-28T07:49:26.102445+00:00",
       "stale": false,
       "games": [
         {
@@ -154676,7 +154704,7 @@
     },
     "Wake Forest": {
       "espnId": "154",
-      "updatedAt": "2026-11-27T21:17:45.120069+00:00",
+      "updatedAt": "2026-11-28T07:49:07.300167+00:00",
       "stale": false,
       "games": [
         {
@@ -155131,7 +155159,7 @@
     },
     "Washington": {
       "espnId": "264",
-      "updatedAt": "2026-11-27T21:17:50.277091+00:00",
+      "updatedAt": "2026-11-28T07:49:11.123855+00:00",
       "stale": false,
       "games": [
         {
@@ -155586,7 +155614,7 @@
     },
     "Washington State": {
       "espnId": "265",
-      "updatedAt": "2026-11-27T21:17:54.907305+00:00",
+      "updatedAt": "2026-11-28T07:49:15.189583+00:00",
       "stale": false,
       "games": [
         {
@@ -155695,11 +155723,11 @@
           "opponentEspnId": "70",
           "location": "home",
           "venue": "Beasley Coliseum",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 8:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "69",
+          "opponentScore": "61",
+          "result": "W"
         },
         {
           "id": "401927383",
@@ -156041,7 +156069,7 @@
     },
     "Weber State": {
       "espnId": "2692",
-      "updatedAt": "2026-11-27T21:18:08.231806+00:00",
+      "updatedAt": "2026-11-28T07:49:27.985648+00:00",
       "stale": false,
       "games": [
         {
@@ -156482,7 +156510,7 @@
     },
     "West Florida": {
       "espnId": "2697",
-      "updatedAt": "2026-11-27T21:18:02.266910+00:00",
+      "updatedAt": "2026-11-28T07:49:22.458658+00:00",
       "stale": false,
       "games": [
         {
@@ -156937,7 +156965,7 @@
     },
     "West Georgia": {
       "espnId": "2698",
-      "updatedAt": "2026-11-27T21:18:07.261227+00:00",
+      "updatedAt": "2026-11-28T07:49:27.302698+00:00",
       "stale": false,
       "games": [
         {
@@ -157392,7 +157420,7 @@
     },
     "West Virginia": {
       "espnId": "277",
-      "updatedAt": "2026-11-27T21:17:41.619091+00:00",
+      "updatedAt": "2026-11-28T07:49:05.545953+00:00",
       "stale": false,
       "games": [
         {
@@ -157487,11 +157515,11 @@
           "opponentEspnId": "153",
           "location": "neutral",
           "venue": "Spectrum Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 7:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "72",
+          "opponentScore": "59",
+          "result": "W"
         },
         {
           "id": "401919830",
@@ -157847,7 +157875,7 @@
     },
     "Western Carolina": {
       "espnId": "2717",
-      "updatedAt": "2026-11-27T21:18:00.709470+00:00",
+      "updatedAt": "2026-11-28T07:49:20.131782+00:00",
       "stale": false,
       "games": [
         {
@@ -158288,7 +158316,7 @@
     },
     "Western Illinois": {
       "espnId": "2710",
-      "updatedAt": "2026-11-27T21:18:07.817450+00:00",
+      "updatedAt": "2026-11-28T07:49:27.930979+00:00",
       "stale": false,
       "games": [
         {
@@ -158729,7 +158757,7 @@
     },
     "Western Kentucky": {
       "espnId": "98",
-      "updatedAt": "2026-11-27T21:17:46.765006+00:00",
+      "updatedAt": "2026-11-28T07:49:09.108733+00:00",
       "stale": false,
       "games": [
         {
@@ -158838,11 +158866,11 @@
           "opponentEspnId": "356",
           "location": "away",
           "venue": "State Farm Center",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 6:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final",
+          "teamScore": "76",
+          "opponentScore": "116",
+          "result": "L"
         },
         {
           "id": "401920762",
@@ -159184,7 +159212,7 @@
     },
     "Western Michigan": {
       "espnId": "2711",
-      "updatedAt": "2026-11-27T21:17:45.781346+00:00",
+      "updatedAt": "2026-11-28T07:49:08.576714+00:00",
       "stale": false,
       "games": [
         {
@@ -159625,7 +159653,7 @@
     },
     "Wichita State": {
       "espnId": "2724",
-      "updatedAt": "2026-11-27T21:17:43.960010+00:00",
+      "updatedAt": "2026-11-28T07:49:07.129410+00:00",
       "stale": false,
       "games": [
         {
@@ -159734,11 +159762,11 @@
           "opponentEspnId": "96",
           "location": "away",
           "venue": "Rupp Arena",
-          "status": "scheduled",
-          "statusLabel": "Fri, November 27th at 9:00 PM EST",
-          "teamScore": null,
-          "opponentScore": null,
-          "result": null
+          "status": "final",
+          "statusLabel": "Final/OT",
+          "teamScore": "73",
+          "opponentScore": "71",
+          "result": "W"
         },
         {
           "id": "401919034",
@@ -160080,7 +160108,7 @@
     },
     "William & Mary": {
       "espnId": "2729",
-      "updatedAt": "2026-11-27T21:17:51.020121+00:00",
+      "updatedAt": "2026-11-28T07:49:12.154528+00:00",
       "stale": false,
       "games": [
         {
@@ -160535,7 +160563,7 @@
     },
     "Winthrop": {
       "espnId": "2737",
-      "updatedAt": "2026-11-27T21:18:08.523347+00:00",
+      "updatedAt": "2026-11-28T07:49:28.519203+00:00",
       "stale": false,
       "games": [
         {
@@ -160990,7 +161018,7 @@
     },
     "Wisconsin": {
       "espnId": "275",
-      "updatedAt": "2026-11-27T21:17:42.652216+00:00",
+      "updatedAt": "2026-11-28T07:49:06.208748+00:00",
       "stale": false,
       "games": [
         {
@@ -161445,7 +161473,7 @@
     },
     "Wofford": {
       "espnId": "2747",
-      "updatedAt": "2026-11-27T21:18:01.886524+00:00",
+      "updatedAt": "2026-11-28T07:49:21.712308+00:00",
       "stale": false,
       "games": [
         {
@@ -161900,7 +161928,7 @@
     },
     "Wright State": {
       "espnId": "2750",
-      "updatedAt": "2026-11-27T21:17:44.142356+00:00",
+      "updatedAt": "2026-11-28T07:49:07.448932+00:00",
       "stale": false,
       "games": [
         {
@@ -162355,7 +162383,7 @@
     },
     "Wyoming": {
       "espnId": "2751",
-      "updatedAt": "2026-11-27T21:17:47.159390+00:00",
+      "updatedAt": "2026-11-28T07:49:09.345901+00:00",
       "stale": false,
       "games": [
         {
@@ -162810,7 +162838,7 @@
     },
     "Xavier": {
       "espnId": "2752",
-      "updatedAt": "2026-11-27T21:17:41.793816+00:00",
+      "updatedAt": "2026-11-28T07:49:05.531534+00:00",
       "stale": false,
       "games": [
         {
@@ -163265,7 +163293,7 @@
     },
     "Yale": {
       "espnId": "43",
-      "updatedAt": "2026-11-27T21:17:58.515871+00:00",
+      "updatedAt": "2026-11-28T07:49:19.435331+00:00",
       "stale": false,
       "games": [
         {
@@ -163678,7 +163706,7 @@
     },
     "Youngstown State": {
       "espnId": "2754",
-      "updatedAt": "2026-11-27T21:18:04.000766+00:00",
+      "updatedAt": "2026-11-28T07:49:23.580471+00:00",
       "stale": false,
       "games": [
         {
